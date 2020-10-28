@@ -25,7 +25,10 @@ SECRET_KEY = 'dv1qcb=38l1xxc46xpp#qi(hz548)2o+2#z*0@xof=dkvl+ahk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = ['HOST IP', 'DOMAIN NAIM', 'localhost']
 
 
 # Application definition
@@ -119,6 +122,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+if DEBUG:
+    STATIC_DIR = os.path.join(BASE_DIR, 'static')
+    STATICFILES_DIRS = [
+        STATIC_DIR,
+
+    ]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    STATICFILES_FINDERS = (
+        'django.contrib.staticfiles.finders.FileSystemFinder',
+        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    )
+MEDIA_URL = '/media/'
+
+
 SMART_HOME_ACCESS_TOKEN = os.getenv('SMART_HOME_ACCESS_TOKEN')
 SMART_HOME_API_URL = os.getenv('SMART_HOME_API_URL', 'https://smarthome.webpython.graders.eldf.ru/api/user.controller')
 EMAIL_HOST  = os.getenv('EMAIL_HOST', 'EMAIL_HOST')

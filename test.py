@@ -10,3 +10,7 @@ ser.baudrate = 9600
 while True:
     read_ser=ser.readline()
     print(read_ser)
+    time.sleep(3)
+    ser.write(b'0')
+    time.sleep(3)
+    ser.write(b'1')
