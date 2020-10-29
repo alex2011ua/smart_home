@@ -8,6 +8,6 @@ requests
 celery
 redis
 marshmallow
-
+python-dotenv
 
 
