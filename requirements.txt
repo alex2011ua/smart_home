@@ -1,13 +1,12 @@
-python == 3.7.3
-Django
+Django == 3.1.2
 pytest
 pytest-django
 pytest-cov
 factory-boy
 responses
 requests
-celery
-redis
+celery==5.0.1
+redis==3.5.3
 marshmallow
 python-dotenv
 
