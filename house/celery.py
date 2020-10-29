@@ -22,7 +22,7 @@ def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(5, smart_home_manager.s(), name='Check Smart Home')
 
 
-@app.task()
+
 def smart_home_manager():
     print('Yesss')
 '''

@@ -3,6 +3,8 @@ from django.views.generic import FormView
 
 from .models import Setting
 from .form import ControllerForm
+from ..celery import add
+from django.http import HttpResponse
 
 
 class ControllerView(FormView):
@@ -20,3 +22,7 @@ class ControllerView(FormView):
 
     def form_valid(self, form):
         return super(ControllerView, self).form_valid(form)
+
+    def get(self, request, *args, **kwargs):
+        w = add.delay(4, 4)
+        return HttpResponse(content = w)
