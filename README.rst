@@ -42,7 +42,7 @@ pipCoursera House
 
 Для запуска периодического опроса состояния дома, используется celery.
 
-Она запускается как celery -A house.celery worker -l info -B
+Она запускается как celery celery -A house.celery worker -l info -B
 
 Celery использует Redis как брокер, инструкция по установке Redis: https://redis.io/topics/quickstart
 
