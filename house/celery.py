@@ -17,6 +17,20 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 def add(x, y):
     return x + y
 
+
+app.autodiscover_tasks()
+
+from house.core.tasks import smart_home_manager
+
+
+@app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    sender.add_periodic_task(5, smart_home_manager.s(), name = 'Check Smart Home')
+
+
+
+'''
+
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     # Calls test('hello') every 10 seconds.
@@ -31,16 +45,7 @@ def setup_periodic_tasks(sender, **kwargs):
         test.s('Happy Mondays!'),
     )
 
-
 @app.task
 def test(arg):
     print(arg)
-'''
-app.autodiscover_tasks()
-
-from house.core.tasks import smart_home_manager
-
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(5, smart_home_manager.s(), name='Check Smart Home')
 '''

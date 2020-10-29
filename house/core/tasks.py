@@ -2,8 +2,10 @@ from __future__ import absolute_import, unicode_literals
 from celery import task
 
 from .models import Setting
+from ..celery import app
 
-@task()
+
+@app.task()
 def smart_home_manager():
     # Здесь ваш код для проверки условий
     print('Celery - work')
