@@ -24,5 +24,5 @@ class ControllerView(FormView):
         return super(ControllerView, self).form_valid(form)
 
     def get(self, request, *args, **kwargs):
-        w = add.delay(4, 4)
+        w = add.delay(4, 1)
         return HttpResponse(content = w)
