@@ -26,7 +26,7 @@ from house.core.tasks import smart_home_manager
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute = 30),
+        crontab(minute = 1),
         smart_home_manager.s(),
         name = 'Check Smart Home')
 
