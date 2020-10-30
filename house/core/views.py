@@ -6,7 +6,8 @@ from .form import ControllerForm
 from ..celery import add
 from django.http import HttpResponse
 from vcgencmd import Vcgencmd
-
+import time
+import serial
 
 
 
@@ -43,6 +44,14 @@ class ControllerView(FormView):
         temp = vcgm.measure_temp()
         context['data']['temp'] = temp
         print(temp)
+        ser = serial.Serial("/dev/ttyUSB0",
+                            9600)  # change ACM number as found from ls /dev/tty/ACM*
+        ser.baudrate = 9600
+        time.sleep(3)
+        ser.write(b'0')
+        time.sleep(3)
+        ser.write(b'1')
+
 
         return context
 
