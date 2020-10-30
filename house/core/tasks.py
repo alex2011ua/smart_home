@@ -5,10 +5,10 @@ import serial
 import time
 
 from .models import Setting
-from ..celery import app
+from ..celery import cellery_app
 
 
-@app.task()
+@cellery_app.task()
 def smart_home_manager():
     # Здесь ваш код для проверки условий
     print('Celery - work')

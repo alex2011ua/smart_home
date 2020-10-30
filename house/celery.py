@@ -9,24 +9,24 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'house.settings')
 django.setup()
 
 
-app = Celery('proj')
-app.config_from_object('django.conf:settings', namespace='CELERY')
+cellery_app = Celery('proj')
+cellery_app.config_from_object('django.conf:settings', namespace='CELERY')
 
 
-@app.task
+@cellery_app.task
 def add(x, y):
     return x + y
 
 
-app.autodiscover_tasks()
+cellery_app.autodiscover_tasks()
 
 from house.core.tasks import smart_home_manager
 
 
-@app.on_after_configure.connect
+@cellery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute = 1),
+        30,
         smart_home_manager.s(),
         name = 'Check Smart Home')
 
