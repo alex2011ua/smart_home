@@ -12,7 +12,7 @@ from ..celery import cellery_app
 def smart_home_manager():
     # Здесь ваш код для проверки условий
     print('Celery - work')
-    ser = serial.Serial("/dev/ttyACM0",
+    ser = serial.Serial("/dev/ttyUSB0",
                         9600)  # change ACM number as found from ls /dev/tty/ACM*
     ser.baudrate = 9600
     time.sleep(3)
