@@ -44,6 +44,12 @@ pipCoursera House
 
 Она запускается как  celery -A house.celery worker -l info -B
 
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn
+sudo supervisorctl restart house-celery
+
+
+
 Celery использует Redis как брокер, инструкция по установке Redis: https://redis.io/topics/quickstart
 
 

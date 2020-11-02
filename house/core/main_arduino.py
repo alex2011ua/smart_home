@@ -16,6 +16,9 @@ def read_ser(flag):
                             9600)  # change ACM number as found from ls /dev/tty/ACM*
         ser.baudrate = 9600
         read_ser = ser.readline()
-        return read_ser
+
     else:
-        return 'test str'
+        read_ser = b'Humidity:29.00:Temperature:25.00;\r\n'
+    a = read_ser.decode().strip().split(':')
+    status = {a[0]: a[1], a[2]:a[3]}
+    return status
