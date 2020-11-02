@@ -10,4 +10,4 @@ redis==3.5.3
 marshmallow
 python-dotenv
 vcgencmd
-
+pyserial

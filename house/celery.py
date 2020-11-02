@@ -3,52 +3,29 @@ import os
 import django
 from celery import Celery
 from celery.schedules import crontab
-from house.settings import DEBUG
+
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'house.settings')
 django.setup()
 
-
 cellery_app = Celery('proj')
 cellery_app.config_from_object('django.conf:settings', namespace='CELERY')
-
-
-@cellery_app.task
-def add(x, y):
-    return x + y
-
-
 cellery_app.autodiscover_tasks()
 
-from house.core.tasks import smart_home_manager
+from house.core.tasks import restart_cam_task, weather_task
 
-
+# запуск рестарта камер
 @cellery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     sender.add_periodic_task(
-        30,
-        smart_home_manager.s(),
-        name = 'Check Smart Home')
+        crontab(minute = 0,
+                hour = '6,15,21'),
+        restart_cam_task.s(),
+        name = 'Restart cam')
 
-
-
-'''
-
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
-    sender.add_periodic_task(10.0, test.s('hello'), name = 'add every 10')
-
-    # Calls test('world') every 30 seconds
-    sender.add_periodic_task(30.0, test.s(DEBUG), expires = 10)
-
-    # Executes every Monday morning at 7:30 a.m.
+# запуск обновления ино о погоде
+def setup_periodic_tasks_weather(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(hour = 7, minute = 30, day_of_week = 1),
-        test.s('Happy Mondays!'),
-    )
-
-@app.task
-def test(arg):
-    print(arg)
-'''
+        crontab(minute=0, hour=0),
+        weather_task.s(),
+        name = 'Weather')

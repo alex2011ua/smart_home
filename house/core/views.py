@@ -4,14 +4,15 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.views import View
 from django.shortcuts import render, redirect
-
+from django.conf import settings
 from .models import Setting
 from .form import ControllerForm
-from ..celery import add
+
 from django.http import HttpResponse
 
-import time
-from django.conf import settings
+from .main_arduino import restart_cam, read_ser
+from .raspberry import raspberry
+DEBUG = settings.DEBUG
 
 
 
@@ -24,36 +25,8 @@ class ControllerView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ControllerView, self).get_context_data()
-        context['data'] = {}
-        list_alarm = {
-            '0': 'В настоящий момент производительность процессора снижена из-за проблем с питанием, низкое напряжение',
-            '1': 'В настоящий момент производительность процессора снижена из-за ручного ограничения частоты',
-            '2': 'В настоящий момент производительность процессора снижена',
-            '3': 'В настоящий момент производительность процессора снижена из-за перегрева процессора',
-            '16': 'Производительность процессора в этом сеансе работы была когда-то снижена из-за проблем с питанием, низкое напряжение',
-            '17': 'Производительность процессора в этом сеансе работы была когда-то снижена&amp;из-за ручного ограничения частоты',
-            '18': 'Производительность процессора в этом сеансе работы была когда-то снижена',
-            '19': 'Производительность процессора в этом сеансе работы была когда-то снижена&amp;из-за перегрева процессора'}
-        from vcgencmd import Vcgencmd
-        vcgm = Vcgencmd()
-        output = vcgm.get_throttled()
-        if output['binary'] != '00000000000000000000':
-            for item, value in output['breakdown'].items():
-                if value == True:
-                    context['data'][item]=value
-                    print(list_alarm[str(item)])
-        else:
-            context['data']['OK'] = 'Ошибок не обнаружено!'
-            print('Ошибок не обнаружено!')
-
-        temp = vcgm.measure_temp()
-        context['data']['temp'] = temp
-        DEBUG = settings.DEBUG
-        context['data']['DEBUG'] = DEBUG
-        print(temp)
-
-
-
+        context['data'] = raspberry(DEBUG)  # state raspberry
+        context['data']['arduino_status'] = read_ser(DEBUG)
         return context
 
     def get_initial(self):
@@ -66,21 +39,12 @@ class ControllerView(FormView):
 class RestartCam(View):
     @staticmethod
     def get(request):
-        import serial
-        ser = serial.Serial("/dev/ttyUSB0",
-                            9600)  # change ACM number as found from ls /dev/tty/ACM*
-        ser.baudrate = 9600
-        time.sleep(3)
-        ser.write(b'0')
-        time.sleep(3)
-        ser.write(b'1')
+        restart_cam(DEBUG)   # отключение реле на 10 сек
         return redirect(reverse_lazy('form'))
 
 class Env(View):
     @staticmethod
     def get(request):
-
         env = os.environ.get('test_env')
-        DEBUG = settings.DEBUG
 
         return HttpResponse(content = f'--{env}-- запись в переменной, --{DEBUG}-- значение дебаг', status = 200)
