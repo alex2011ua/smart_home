@@ -22,7 +22,7 @@
   <component name="TemplatesService">
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/cursera_house/core/templates" />
+        <option value="$MODULE_DIR$/house/core/templates" />
       </list>
     </option>
   </component>

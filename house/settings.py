@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
 
 import os
 from dotenv import load_dotenv
@@ -32,8 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('myDEBUG'))
-print(DEBUG)
-print(type(DEBUG))
+
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:

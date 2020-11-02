@@ -1,13 +1,17 @@
+import os
+
 from django.urls import reverse_lazy
 from django.views.generic import FormView
+from django.views import View
+from django.shortcuts import render, redirect
 
 from .models import Setting
 from .form import ControllerForm
 from ..celery import add
 from django.http import HttpResponse
-from vcgencmd import Vcgencmd
+
 import time
-import serial
+
 
 
 
@@ -29,7 +33,7 @@ class ControllerView(FormView):
             '17': 'Производительность процессора в этом сеансе работы была когда-то снижена&amp;из-за ручного ограничения частоты',
             '18': 'Производительность процессора в этом сеансе работы была когда-то снижена',
             '19': 'Производительность процессора в этом сеансе работы была когда-то снижена&amp;из-за перегрева процессора'}
-
+        from vcgencmd import Vcgencmd
         vcgm = Vcgencmd()
         output = vcgm.get_throttled()
         if output['binary'] != '00000000000000000000':
@@ -43,14 +47,10 @@ class ControllerView(FormView):
 
         temp = vcgm.measure_temp()
         context['data']['temp'] = temp
+        DEBUG = bool(os.environ.get('myDEBUG'))
+        context['data']['DEBUG'] = DEBUG
         print(temp)
-        ser = serial.Serial("/dev/ttyUSB0",
-                            9600)  # change ACM number as found from ls /dev/tty/ACM*
-        ser.baudrate = 9600
-        time.sleep(3)
-        ser.write(b'0')
-        time.sleep(3)
-        ser.write(b'1')
+
 
 
         return context
@@ -62,3 +62,28 @@ class ControllerView(FormView):
         return super(ControllerView, self).form_valid(form)
 
 
+class RestartCam(View):
+    @staticmethod
+    def get(request):
+        import serial
+        ser = serial.Serial("/dev/ttyUSB0",
+                            9600)  # change ACM number as found from ls /dev/tty/ACM*
+        ser.baudrate = 9600
+        time.sleep(3)
+        ser.write(b'0')
+        time.sleep(3)
+        ser.write(b'1')
+        return redirect(reverse_lazy('form'))
+
+class Env(View):
+    @staticmethod
+    def get(request):
+
+        env = os.environ.get('test_env')
+        DEBUG = bool(os.environ.get('myDEBUG'))
+        if DEBUG:
+            s = 'TRUE'
+        else:
+            s = 'FALSE'
+        print(s)
+        return HttpResponse(content = f'--{env}-- запись в переменной, --{DEBUG}-- значение дебаг, --{s}-- тип дебаг', status = 200)
