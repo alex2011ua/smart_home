@@ -11,6 +11,7 @@ from ..celery import add
 from django.http import HttpResponse
 
 import time
+from django.conf import settings
 
 
 
@@ -47,7 +48,7 @@ class ControllerView(FormView):
 
         temp = vcgm.measure_temp()
         context['data']['temp'] = temp
-        DEBUG = bool(os.environ.get('myDEBUG'))
+        DEBUG = settings.DEBUG
         context['data']['DEBUG'] = DEBUG
         print(temp)
 
@@ -80,10 +81,6 @@ class Env(View):
     def get(request):
 
         env = os.environ.get('test_env')
-        DEBUG = bool(os.environ.get('myDEBUG'))
-        if DEBUG:
-            s = 'TRUE'
-        else:
-            s = 'FALSE'
-        print(s)
-        return HttpResponse(content = f'--{env}-- запись в переменной, --{DEBUG}-- значение дебаг, --{s}-- тип дебаг', status = 200)
+        DEBUG = settings.DEBUG
+
+        return HttpResponse(content = f'--{env}-- запись в переменной, --{DEBUG}-- значение дебаг', status = 200)
