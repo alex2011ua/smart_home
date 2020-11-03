@@ -12,7 +12,7 @@ cellery_app = Celery('proj')
 cellery_app.config_from_object('django.conf:settings', namespace='CELERY')
 cellery_app.autodiscover_tasks()
 
-from house.core.tasks import restart_cam_task, weather_task
+from house.core.tasks import restart_cam_task, weather_task, arduino_task
 
 # запуск рестарта камер
 @cellery_app.on_after_configure.connect
@@ -26,6 +26,13 @@ def setup_periodic_tasks(sender, **kwargs):
 # запуск обновления ино о погоде
 def setup_periodic_tasks_weather(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute=0, hour=0),
+        crontab(minute=0, hour=1),
         weather_task.s(),
         name = 'Weather')
+
+# запуск обновления ино arduino
+def setup_periodic_task_arduino(sender, **kwargs):
+    sender.add_periodic_task(
+        crontab(minute=5),
+        arduino_task.s(),
+        name = 'arduino')

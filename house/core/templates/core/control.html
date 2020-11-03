@@ -19,8 +19,13 @@
 <body>
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="{% url 'form' %}">
-      <h1>My smart_home</h1>
-  </a>
+      <h1>УМНЫЙ ДОМ</h1></a>
+
+<p align="right">Погода сегодня:  - {{temp}}градусов, {{description}}, ветер - {{wind}}м/c</p>
+        <p align="right">{{time}}</p>
+      <a class="navbar-brand" href="{% url 'form' %}">
+          <img src="http://openweathermap.org/img/wn/{{ icon }}@2x.png">
+      </a>
 </nav>
 <div class="container-fluid">
     <div class="row">

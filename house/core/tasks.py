@@ -8,13 +8,17 @@ from ..celery import cellery_app
 
 @cellery_app.task()
 def restart_cam_task():
-    # Здесь ваш код для проверки условий
     print('Start restart_cam_task')
     restart_cam()
 
 @cellery_app.task()
 def weather_task():
     print('weather_task')
-    #  todo
-    # Здесь ваш код для проверки условий
+    #  todo запись инфо о погоде на завтра
 
+
+
+@cellery_app.task()
+def arduino_task():
+    print('arduino_task')
+    #  todo
