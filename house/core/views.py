@@ -15,7 +15,7 @@ from django.http import HttpResponse
 from .main_arduino import restart_cam, read_ser
 from .raspberry import raspberry
 from .weather_rain import weather_now
-
+from house.core.tasks import restart_cam_task
 import datetime
 
 
@@ -44,7 +44,8 @@ class ControllerView(FormView):
 class RestartCam(View):
     @staticmethod
     def get(request):
-        restart_cam(DEBUG)   # отключение реле на 10 сек
+        restart_cam_task.delay()
+           # отключение реле на 10 сек
         return redirect(reverse_lazy('form'))
 
 class Env(View):
