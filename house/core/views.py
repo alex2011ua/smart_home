@@ -15,7 +15,7 @@ from django.http import HttpResponse
 from .main_arduino import restart_cam, read_ser
 from .raspberry import raspberry
 from .weather_rain import weather_now
-from house.core.tasks import restart_cam_task
+from house.core.tasks import restart_cam_task, weather_task
 import datetime
 
 
@@ -54,6 +54,7 @@ class RestartCam(View):
 class Env(View):
     @staticmethod
     def get(request):
+        weather_task.delay()
         env = os.environ.get('test_env')
 
         return HttpResponse(content = f'--{env}-- запись в переменной, --{DEBUG}-- значение дебаг', status = 200)
