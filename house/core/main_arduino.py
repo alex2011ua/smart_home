@@ -8,11 +8,11 @@ def restart_cam():
                         9600)  # change ACM number as found from ls /dev/tty/ACM*
     ser.baudrate = 9600
     ser.write(b'0')
-    if ser.readline() != "rele off":
+    if ser.readline().strip().decode() != "rele off":
         status = False
     time.sleep(10)
     ser.write(b'1')
-    if ser.readline() != "rele on":
+    if ser.readline().strip().decode() != "rele on":
         status = False
     ser.close()
     return status
