@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 DEBUG = settings.DEBUG
 
-from .models import Setting
+from .models import Setting, Temp1
 from .form import ControllerForm
 
 from django.http import HttpResponse
@@ -29,7 +29,10 @@ class ControllerView(FormView):
     def get_context_data(self, **kwargs):
         context = super(ControllerView, self).get_context_data()
         context['data'] = raspberry(DEBUG)  # state raspberry
-        context['data'].update(read_ser(DEBUG))   # arduino state
+        temp = Temp1.objects.all().order_by('-id')[:1]  # arduino state
+        context['data']['temp'] = temp.temp
+        context['data']['humidity'] = temp.humidity
+        context['data']['date_temp'] = temp.date_temp
         context['time'] = datetime.datetime.now()
         context.update(weather_now())
         return context
@@ -44,9 +47,9 @@ class ControllerView(FormView):
 class RestartCam(View):
     @staticmethod
     def get(request):
-        restart_cam_task.delay()
+        q = restart_cam_task.delay()
            # отключение реле на 10 сек
-        return redirect(reverse_lazy('form'))
+        return HttpResponse(q, status = 200)
 
 class Env(View):
     @staticmethod

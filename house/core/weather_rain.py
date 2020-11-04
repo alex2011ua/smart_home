@@ -4,6 +4,8 @@ https://openweathermap.org/
 
 import requests
 
+from datetime import date, timedelta
+import time
 
 import os
 APPID_Weather = os.environ.get('APPID_Weather')
@@ -26,11 +28,17 @@ def weather_rain_summ():
     for i in d["daily"]:
         if i.get('rain'):
             summ += float(i['rain'])
-    return summ
+    start_Date = date.today()  # год, месяц, число
+    tomorrow_date = start_Date + timedelta(days = 1)
+    return summ, tomorrow_date
 
 
 #  погода на сегодня
 def weather_now():
+    '''
+    погода на сегодня
+    :return:
+    '''
     payload = {'lat': 50.40,
                'lon': 30.31,
                'appid': APPID_Weather,
@@ -57,23 +65,37 @@ def weather_now():
 
     return context
 
-def weather():
+
+def rain_yesterday():
+    '''
+    сумму воды и вчерашнюю дату
+    :return: float sum_rain, datetime.date
+    '''
+    start_Date = date.today()  # год, месяц, число
+    result_date = start_Date - timedelta(days = 1)
+    timestamp = time.mktime(start_Date.timetuple())
     payload = {'lat': 50.40,
                'lon': 30.31,
                'appid': APPID_Weather,
                'units': 'metric',
+               'dt': int(timestamp),
                'lang': 'ru',
-               'exclude': 'current,minutely,hourly,alerts'
+               'exclude': 'current'
                }
-    url = 'https://api.openweathermap.org/data/2.5/onecall'
+    url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine'
     r = requests.get(url, params = payload)
     d = r.json()
-    summ = 0.0
-    print(len(d["daily"][0:3]))
-    for i in d["daily"]:
-        if i.get('rain'):
-            summ += float(i['rain'])
-    return summ
+    sum_rain = 0
+    count = 0
+    for item in d['hourly']:
+        count += 1
+        if item.get('rain'):
+            sum_rain += item['rain']
+
+
+    return sum_rain, result_date
+
+
 if __name__ == "__main__":
     import pprint
-    pprint.pprint(weather())
+    pprint.pprint(rain_yesterday())

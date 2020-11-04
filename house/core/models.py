@@ -7,6 +7,19 @@ class Setting(models.Model):
     label = models.CharField(max_length=100)
     value = models.IntegerField(default=20)
 
-class Weather(models.Model):
-    date = models.DateTimeField()
+
+class WeatherRain(models.Model):
+    date = models.DateField(unique = True)
+    rain = models.IntegerField()
+
+
+class Logs(models.Model):
+    date_log = models.DateTimeField()
+    title_log = models.CharField(max_length=50)
+    description_log = models.CharField(max_length=150)
+
+
+class Temp1(models.Model):
+    date_temp = models.DateTimeField()
     temp = models.IntegerField()
+    humidity = models.IntegerField()

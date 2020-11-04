@@ -21,8 +21,10 @@
   <a class="navbar-brand" href="{% url 'form' %}">
       <h1>УМНЫЙ ДОМ</h1></a>
 
-<p align="right">Погода сегодня:  - {{temp}}градусов, {{description}}, ветер - {{wind}}м/c</p>
-        <p align="right">{{time}}</p>
+    <p>Погода сегодня:  - {{temp}}градусов,</p>
+    <p>{{description}},c</p>
+    <p>ветер - {{wind}}м/c</p>
+    <p>{{time}}</p>
       <a class="navbar-brand" href="{% url 'form' %}">
           <img src="http://openweathermap.org/img/wn/{{ icon }}@2x.png">
       </a>
