@@ -57,4 +57,4 @@ class Env(View):
         weather_task.delay()
         env = os.environ.get('test_env')
 
-        return HttpResponse(content = f'--{env}-- запись в переменной, --{DEBUG}-- значение дебаг', status = 200)
+        return HttpResponse(content = f'11--{env}-- запись в переменной, --{DEBUG}-- значение дебаг', status = 200)
