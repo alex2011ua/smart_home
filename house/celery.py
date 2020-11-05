@@ -16,7 +16,7 @@ from house.core.tasks import restart_cam_task, weather_task, arduino_task
 from celery.exceptions import SoftTimeLimitExceeded
 
 # запуск рестарта камер
-@cellery_app.on_after_configure.connect(time_limit=20)
+@cellery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     try:
         sender.add_periodic_task(
@@ -27,7 +27,7 @@ def setup_periodic_tasks(sender, **kwargs):
     except SoftTimeLimitExceeded as err:
         print(err)
 # запуск обновления ино о погоде
-@cellery_app.on_after_configure.connect(time_limit=20)
+@cellery_app.on_after_configure.connect
 def setup_periodic_tasks_weather(sender, **kwargs):
     try:
         sender.add_periodic_task(
@@ -37,8 +37,11 @@ def setup_periodic_tasks_weather(sender, **kwargs):
     except SoftTimeLimitExceeded as err:
         print(err)
 
+
 # запуск обновления ино arduino
-@cellery_app.on_after_configure.connect(time_limit=60)
+@cellery_app.on_after_configure.connect(default_retry_delay=30,
+                                        max_retries=3,
+                                        soft_time_limit=10000)
 def setup_periodic_task_arduino(sender, **kwargs):
     try:
         sender.add_periodic_task(
