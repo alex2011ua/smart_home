@@ -39,11 +39,12 @@ def setup_periodic_tasks_weather(sender, **kwargs):
 
 
 # запуск обновления ино arduino
+
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_arduino(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(),
+            crontab(minute='*/5'),
             arduino_task.s(),
             name = 'arduino')
     except SoftTimeLimitExceeded as err:
