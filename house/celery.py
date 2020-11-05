@@ -45,7 +45,7 @@ cellery_app.control.time_limit('arduino',
 def setup_periodic_task_arduino(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute='*/5'),
+            crontab(minute='*/1'),
             arduino_task.s(),
             name = 'arduino')
     except SoftTimeLimitExceeded as err:
