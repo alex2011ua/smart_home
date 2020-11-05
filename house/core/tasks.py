@@ -10,11 +10,17 @@ from datetime import datetime
 def restart_cam_task():
     print('Start restart_cam_task')
     status = restart_cam()
-    if status:
-        print('reset OK')
-    else:
-        print('reset Fail')
-    return 200
+    try:
+        if status:
+            log = Logs.objects.create(date_log = datetime.now(),
+                                      title_log = 'Камеры',
+                                      description_log = 'Удачно перезагружены')
+        else:
+            log = Logs.objects.create(date_log = datetime.now(),
+                                      title_log = 'Камеры',
+                                      description_log = 'Не перезагружены')
+    except Exception as err:
+        print(err)
 
 @cellery_app.task()
 def weather_task():
@@ -37,12 +43,16 @@ def weather_task():
                         title_log='Weather',
                         description_log=f'{r_tomorrow}, {r_yesterday}')
 
+
 @cellery_app.task()
 def arduino_task():
     print('arduino_task')
     try:
         dic_param = read_ser()
     except Exception:
+        log = Logs.objects.create(date_log = datetime.now(),
+                                  title_log = 'temp_1',
+                                  description_log = 'Ошибка ардуино')
         dic_param = {'Temperature': 111, 'Humidity': 111}
     print(dic_param)
     if not dic_param:
@@ -55,12 +65,4 @@ def arduino_task():
     except Exception as err:
         print(err)
     print('add temp')
-    try:
-        log = Logs.objects.create(date_log = datetime.now(),
-                            title_log = 'temp_1',
-                            description_log = f'{temp} - запись в базу')
-    except Exception as err:
-        print(err)
-    print(log)
-
     print('arduino_task Close')
