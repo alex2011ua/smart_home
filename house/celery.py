@@ -39,9 +39,7 @@ def setup_periodic_tasks_weather(sender, **kwargs):
 
 
 # запуск обновления ино arduino
-@cellery_app.on_after_configure.connect(default_retry_delay=30,
-                                        max_retries=3,
-                                        soft_time_limit=10000)
+@cellery_app.on_after_configure.connect(soft_time_limit=10000)
 def setup_periodic_task_arduino(sender, **kwargs):
     try:
         sender.add_periodic_task(
