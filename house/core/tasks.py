@@ -42,6 +42,9 @@ def arduino_task():
     print('arduino_task')
     dic_param = read_ser()
     print(dic_param)
+    if not dic_param:
+        print("Пустой словарь")
+        return None
     try:
         temp = Temp1.objects.create(date_temp=datetime.now(),
                              temp=dic_param['Temperature'],
