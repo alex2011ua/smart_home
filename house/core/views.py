@@ -29,7 +29,8 @@ class ControllerView(FormView):
     def get_context_data(self, **kwargs):
         context = super(ControllerView, self).get_context_data()
         context['data'] = raspberry(DEBUG)  # state raspberry
-        temp = Temp1.objects.all().order_by('-id')[:1]  # arduino state
+        temp = Temp1.objects.all().order_by('-id')[0]  # arduino state
+
         context['data']['temp'] = temp.temp
         context['data']['humidity'] = temp.humidity
         context['data']['date_temp'] = temp.date_temp

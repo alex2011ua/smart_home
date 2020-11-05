@@ -10,7 +10,10 @@ from datetime import datetime
 def restart_cam_task():
     print('Start restart_cam_task')
     status = restart_cam()
-
+    if status:
+        print('reset OK')
+    else:
+        print('reset Fail')
     return 200
 
 @cellery_app.task()
