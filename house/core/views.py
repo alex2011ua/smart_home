@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 DEBUG = settings.DEBUG
 
-from .models import Setting, Temp1
+from .models import Setting, Temp1, Logs
 from .form import ControllerForm
 
 from django.http import HttpResponse
@@ -15,7 +15,7 @@ from django.http import HttpResponse
 from .main_arduino import restart_cam, read_ser
 from .raspberry import raspberry
 from .weather_rain import weather_now
-from house.core.tasks import restart_cam_task, weather_task
+from house.core.tasks import restart_cam_task, weather_task, arduino_task
 import datetime
 
 
@@ -34,8 +34,12 @@ class ControllerView(FormView):
         context['data']['temp'] = temp.temp
         context['data']['humidity'] = temp.humidity
         context['data']['date_temp'] = temp.date_temp
+
         context['time'] = datetime.datetime.now()
         context.update(weather_now())
+
+        logs = Logs.objects.all().order_by('-date_log')[0:20]
+        context['logs'] = logs
         return context
 
     def get_initial(self):
@@ -50,12 +54,12 @@ class RestartCam(View):
     def get(request):
         q = restart_cam_task.delay()
            # отключение реле на 10 сек
-        return HttpResponse(q, status = 200)
+        return redirect(reverse_lazy('form'))
 
 class Env(View):
     @staticmethod
     def get(request):
-        weather_task.delay()
+        arduino_task()
         env = os.environ.get('test_env')
 
         return HttpResponse(content = f'11--{env}-- запись в переменной, --{DEBUG}-- значение дебаг', status = 200)

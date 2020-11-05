@@ -40,7 +40,10 @@ def weather_task():
 @cellery_app.task()
 def arduino_task():
     print('arduino_task')
-    dic_param = read_ser()
+    try:
+        dic_param = read_ser()
+    except Exception:
+        dic_param = {'Temperature': 111, 'Humidity': 111}
     print(dic_param)
     if not dic_param:
         print("Пустой словарь")

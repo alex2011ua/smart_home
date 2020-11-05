@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-info">
   <a class="navbar-brand" href="{% url 'form' %}">
       <h1>УМНЫЙ ДОМ</h1></a>
 
@@ -38,11 +38,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <input type="submit" class="btn btn-primary" value="Сохранить"/>
-                    </form>
+                    <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-warning" >Перезагрузка камер</button></a>
                 </div>
             </div>
         </div>
@@ -68,7 +64,26 @@
         </div>
     </div>
 </div>
-
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">дата</th>
+      <th scope="col">Заголовок</th>
+      <th scope="col">Описание</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for log in logs %}
+    <tr>
+      <th scope="row">{{ log.id }}</th>
+      <td>{{ log.date_log }}</td>
+      <td>{{ log.title_log }}</td>
+      <td>{{ log.description_log }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
