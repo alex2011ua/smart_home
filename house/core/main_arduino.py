@@ -18,17 +18,20 @@ def restart_cam():
     ser.close()
     return status
 
+
 def read_ser():
     ser = serial.Serial("/dev/ttyUSB0",
                         9600)  # change ACM number as found from ls /dev/tty/ACM*
     ser.baudrate = 9600
     data = ser.read(ser.inWaiting())
+    print(data)
     ser.write(b'2')
     s = ser.readline().strip().decode()
     print(s)
     if s == "get data":
         print('get dada - true')
-        read_ser = ser.readline()
+        time.sleep(1)
+        read_ser = ser.read(ser.inWaiting())
         print(read_ser)
         a = read_ser.decode().strip().split(':')
         context = {'Humidity': a[1], 'Temperature': a[3]}
