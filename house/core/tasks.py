@@ -28,9 +28,10 @@ def weather_task():
     try:
         summ_tomorrow, date_tomorrow = weather_rain_summ()
         summ_yesterday, date_yesterday = rain_yesterday()
-    except Exception as err:
-        print(err)
-        # Todo
+    except Exception:
+        log = Logs.objects.create(date_log = datetime.now(),
+                                  title_log = 'temp_1',
+                                  description_log = 'Ошибка ардуино')
         return None
     r_tomorrow = WeatherRain.objects.create(date=date_tomorrow, rain = summ_tomorrow)
     try:
