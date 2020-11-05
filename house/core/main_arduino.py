@@ -24,8 +24,11 @@ def read_ser():
     ser.baudrate = 9600
     data = ser.read(ser.inWaiting())
     ser.write(b'2')
-    if ser.readline().strip().decode() == "get data":
+    s = ser.readline().strip().decode()
+    print(s)
+    if s == "get data":
         read_ser = ser.readline()
+        print(read_ser)
         a = read_ser.decode().strip().split(':')
         context = {'Humidity': a[1], 'Temperature': a[3]}
         return context
