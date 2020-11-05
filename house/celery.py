@@ -44,7 +44,7 @@ def setup_periodic_tasks_weather(sender, **kwargs):
 def setup_periodic_task_arduino(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(),
+            crontab(minute='*/5'),
             arduino_task.s(),
             name = 'arduino')
     except SoftTimeLimitExceeded as err:
