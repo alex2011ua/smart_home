@@ -48,5 +48,5 @@ def arduino_task():
     log = Logs.objects.create(date_log = datetime.now(),
                         title_log = 'temp_1',
                         description_log = f'{temp} - запись в базу')
-
-
+    print(log)
+    print('arduino_task Close')
