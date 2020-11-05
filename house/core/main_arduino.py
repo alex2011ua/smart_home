@@ -27,9 +27,11 @@ def read_ser():
     s = ser.readline().strip().decode()
     print(s)
     if s == "get data":
+        print('get dada - true')
         read_ser = ser.readline()
         print(read_ser)
         a = read_ser.decode().strip().split(':')
         context = {'Humidity': a[1], 'Temperature': a[3]}
         return context
+    print('get dada - false')
     ser.close()
