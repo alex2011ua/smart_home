@@ -41,12 +41,20 @@ def weather_task():
 def arduino_task():
     print('arduino_task')
     dic_param = read_ser()
-    temp = Temp1.objects.create(date_temp=datetime.now(),
-                         temp=dic_param['Temperature'],
-                         humidity= dic_param['Humidity'])
-
-    log = Logs.objects.create(date_log = datetime.now(),
-                        title_log = 'temp_1',
-                        description_log = f'{temp} - запись в базу')
+    print(dic_param)
+    try:
+        temp = Temp1.objects.create(date_temp=datetime.now(),
+                             temp=dic_param['Temperature'],
+                             humidity= dic_param['Humidity'])
+    except Exception as err:
+        print(err)
+    print('add temp')
+    try:
+        log = Logs.objects.create(date_log = datetime.now(),
+                            title_log = 'temp_1',
+                            description_log = f'{temp} - запись в базу')
+    except Exception as err:
+        print(err)
     print(log)
+
     print('arduino_task Close')
