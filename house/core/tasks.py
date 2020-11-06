@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from .main_arduino import restart_cam, read_ser
-from .weather_rain import weather_rain_summ, rain_yesterday
+from .weather_rain import weather_6_day, rain_yesterday
 from .models import Setting, Logs, WeatherRain, Temp1
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
@@ -39,23 +39,38 @@ def restart_cam_task():
 def weather_task():
     print('weather_task')
     try:
-        summ_tomorrow, date_tomorrow = weather_rain_summ()
-        summ_yesterday, date_yesterday = rain_yesterday()
-    except Exception:
+        six_day = weather_6_day()
+        yesterday = rain_yesterday()
+    except Exception as err:
         log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'temp_1',
-                                  description_log = 'Ошибка ардуино Exeption')
+                                  title_log = 'WeatherRain',
+                                  description_log = 'Ошибка openweathermap.org Exeption')
+        print(err)
         return None
-    r_tomorrow = WeatherRain.objects.create(date=date_tomorrow, rain = summ_tomorrow)
+    if six_day['status_code'] != 200 or yesterday['status_code'] != 200:
+        Logs.objects.create(date_log = datetime.now(),
+                            title_log = 'WeatherRain',
+                            description_log = f'{six_day["status_code"]}, {yesterday["status_code"]} - status_code')
+    r_tomorrow = WeatherRain.objects.create(date=six_day['tomorrow_date'],
+                                            rain= six_day['summ_rain_3_day'],
+                                            temp_min= six_day['min_temp'],
+                                            temp_max=six_day['max_temp'],
+                                            snow= six_day['summ_snow_3_day'],
+                                            )
+
     try:
-        r_yesterday = WeatherRain.objects.get(date = date_yesterday)
-        r_yesterday.rain = date_yesterday
-        r_yesterday.save()
+        r_yesterday = WeatherRain.objects.get(date = yesterday['result_date'])
     except ObjectDoesNotExist:
-        r_yesterday = WeatherRain.objects.create(date=date_yesterday, rain=summ_yesterday)
+        r_yesterday = WeatherRain.objects.create(date=yesterday['result_date'])
+    r_yesterday.rain = yesterday['sum_rain']
+    r_yesterday.snow = yesterday['sum_snow']
+    r_yesterday.temp_min = yesterday['min_temp']
+    r_yesterday.temp_max = yesterday['max_temp']
+    r_yesterday.save()
+
     Logs.objects.create(date_log =datetime.now(),
-                        title_log='Weather',
-                        description_log=f'{r_tomorrow}, {r_yesterday}')
+                    title_log='Weather',
+                    description_log=f'{r_tomorrow}, {r_yesterday}')
 
 
 @cellery_app.task()
@@ -66,7 +81,7 @@ def arduino_task():
     except Exception:
         log = Logs.objects.create(date_log = datetime.now(),
                                   title_log = 'temp_1',
-                                  description_log = 'Ошибка ардуино')
+                                  description_log = 'Ошибка ардуино Exeption')
         return
     if dic_param['status'] == 'Error_reading_from_DHT':
         log = Logs.objects.create(date_log = datetime.now(),

@@ -10,8 +10,10 @@ class Setting(models.Model):
 
 class WeatherRain(models.Model):
     date = models.DateField(unique = True)
-    rain = models.IntegerField()
-
+    rain = models.IntegerField(default=0)
+    temp_min = models.IntegerField(default=0)
+    temp_max = models.IntegerField(default=0)
+    snow = models.IntegerField(default=0)
 
 class Logs(models.Model):
     date_log = models.DateTimeField()

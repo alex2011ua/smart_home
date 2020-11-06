@@ -49,7 +49,8 @@ def read_ser():
         return context
     ser.close()
     return{'status': 'Error Arduino test'}
-    # Error_reading_from_DHT
+
+
 def reset():
     ser = serial.Serial("/dev/ttyUSB0",
                         9600)  # change ACM number as found from ls /dev/tty/ACM*
