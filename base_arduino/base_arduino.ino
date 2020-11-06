@@ -76,7 +76,7 @@ void loop(){
     } // при 9 вызываем reset
     if (val == TEST){  // при t  возврат OK
         digitalWrite(led, HIGH);
-        delay(10)
+        delay(10);
         digitalWrite(led, LOW);
         Serial.println("OK");
     }
