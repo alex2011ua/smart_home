@@ -10,6 +10,7 @@
 #define RELE_OFF '0'
 #define SEND_DATA_TEMP '2'
 #define RESET '9'
+#define TEST 't'
 
 int led = 13; // led   как пин 13
 //инициализация датчика
@@ -26,74 +27,58 @@ void setup(){
 
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
-
-float temp(){
-  // чтение температуры и влажности займет примерно 250 миллисекунд
-  dht.begin();
-  float t = dht.readTemperature();
-  // проверяем правильные ли данные получили
-  if (isnan(t) ){
-    Serial.println("Error_reading_from_DHT;");
-  } else {
-    return t;
-  }
-}
-
-float Humidity() {
-  // чтение температуры и влажности займет примерно 250 миллисекунд
-  dht.begin();
+void send_data_to_pi(){
+  dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
   float h = dht.readHumidity();
-  // проверяем правильные ли данные получили
-  if ( isnan(h)) {
-    Serial.println("Error_reading_from_DHT;");
-  } 
-  else {
-    return h;
+  float t = dht.readTemperature();
+  if (isnan(t) ||  ( isnan(h)) ){
+    Serial.println("Error_reading_from_DHT");
   }
+  else {
+  Serial.print("Humidity:");
+  Serial.print(h);
+  Serial.print(":");
+  Serial.print("Temperature:");
+  Serial.println(t);
+  }
+
 }
 
 void rele(int status){
   if (status == 0){
     digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
-
+    Serial.println("rele off");
+    digitalWrite(led, HIGH);        // при 1 включаем светодиод
   }
   if (status == 1){
     digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    Serial.println("rele on");
+    digitalWrite(led, LOW);       // при 0 выключаем светодиод
   }
 }
 
-void send_data_to_pi(){
-  float tt;
-  float hh;
-  tt = temp();
-  hh = Humidity();
-  Serial.print("Humidity:");
-  Serial.print(hh);
-  Serial.print(":");
-  Serial.print("Temperature:");
-  Serial.print(tt);
-}
 void loop(){
   char val;
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
     if (val == RELE_OFF) {
-      Serial.println("rele off");
-      digitalWrite(13, HIGH);
       rele(1);
-    } // при 1 включаем светодиод
+    }
     if (val == RELE_ON){
-      Serial.println("rele on");
-      digitalWrite(13, LOW);
       rele(0);
-    } // при 0 выключаем светодиод
+    }
     if (val == SEND_DATA_TEMP){
-      Serial.println("get data");
       send_data_to_pi();
     } // при 2 посылаем данные в raspbery
     if (val == RESET){
       Serial.println("get data");
       resetFunc(); //вызываем reset
     } // при 9 вызываем reset
+    if (val == TEST){  // при t  возврат OK
+        digitalWrite(led, HIGH);
+        delay(10)
+        digitalWrite(led, LOW);
+        Serial.println("OK");
+    }
   }
 }

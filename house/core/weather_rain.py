@@ -26,6 +26,7 @@ def weather_rain_summ():
     summ = 0.0
     print(len(d["daily"][0:3]))
     for i in d["daily"]:
+
         if i.get('rain'):
             summ += float(i['rain'])
     start_Date = date.today()  # год, месяц, число
@@ -96,6 +97,38 @@ def rain_yesterday():
     return sum_rain, result_date
 
 
+def weather_min():
+    '''
+    :return: summ of rain (Сумма воды которая выпадет за 3 дней)
+    '''
+    payload = {'lat': 50.40,
+               'lon': 30.31,
+               'appid': 'd16e0dacb5474e43829b385c7102e12d',
+               'units': 'metric',
+               'lang': 'ru',
+               'exclude': 'current,minutely,hourly,alerts'
+               }
+    url = 'https://api.openweathermap.org/data/2.5/onecall'
+    r = requests.get(url, params = payload)
+    d = r.json()
+    summ = 0.0
+    for i in d["daily"][0:3]:
+        if i.get('rain'):
+            summ += float(i['rain'])
+
+    min_temp = 0
+    for i in d["daily"]:
+        print(i['temp']['min'])
+
+
+
+    start_Date = date.today()  # год, месяц, число
+    tomorrow_date = start_Date + timedelta(days = 1)
+    return summ, tomorrow_date
+
+
+
+
 if __name__ == "__main__":
     import pprint
-    pprint.pprint(rain_yesterday())
+    pprint.pprint(weather_())

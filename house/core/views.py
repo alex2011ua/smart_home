@@ -52,7 +52,7 @@ class ControllerView(FormView):
 class RestartCam(View):
     @staticmethod
     def get(request):
-        q = restart_cam_task.delay()
+        restart_cam_task()
            # отключение реле на 10 сек
         return redirect(reverse_lazy('form'))
 
