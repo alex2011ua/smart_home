@@ -12,7 +12,7 @@ def restart_cam():
     time.sleep(0.3)
     if test == "OK":  # Связь есть, получаем данные
         ser.write(b'0')
-        time.sleep(0.5)
+        time.sleep(1)
         if (ser.read(ser.inWaiting())).decode().strip() != "rele off":
             ser.close()
             return 'error rele off'

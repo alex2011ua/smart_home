@@ -62,10 +62,10 @@ void loop(){
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
     if (val == RELE_OFF) {
-      rele(1);
+      rele(0);
     }
     if (val == RELE_ON){
-      rele(0);
+      rele(1);
     }
     if (val == SEND_DATA_TEMP){
       send_data_to_pi();
