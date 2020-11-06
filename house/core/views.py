@@ -60,6 +60,4 @@ class Env(View):
     @staticmethod
     def get(request):
         arduino_task()
-        env = os.environ.get('test_env')
-
-        return HttpResponse(content = f'11--{env}-- запись в переменной, --{DEBUG}-- значение дебаг', status = 200)
+        return redirect(reverse_lazy('form'))

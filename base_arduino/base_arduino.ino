@@ -9,16 +9,24 @@
 #define RELE_ON '1'
 #define RELE_OFF '0'
 #define SEND_DATA_TEMP '2'
+#define RESET '9'
 
+int led = 13; // led   как пин 13
 //инициализация датчика
 DHT dht(DHTPIN, DHTTYPE);
 
+
 void setup(){
+  delay(10000); // ждем секунду
   Serial.begin(9600);
   pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
   digitalWrite(PIN_RELAY, HIGH); // Выключаем реле - посылаем высокий сигнал
-  pinMode(13, OUTPUT); // объявляем пин 13 как выход
+  pinMode(led, OUTPUT); // объявляем пин 13 как выход
 }
+
+void(* resetFunc) (void) = 0; // объявляем функцию reset
+
+
 float temp(){
   // чтение температуры и влажности займет примерно 250 миллисекунд
   dht.begin();
@@ -83,5 +91,9 @@ void loop(){
       Serial.println("get data");
       send_data_to_pi();
     } // при 2 посылаем данные в raspbery
+    if (val == RESET){
+      Serial.println("get data");
+      resetFunc(); //вызываем reset
+    } // при 9 вызываем reset
   }
 }
