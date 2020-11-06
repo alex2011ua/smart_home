@@ -44,7 +44,7 @@ def read_ser():
             ser.close()
             return {'status': 'Error_reading_from_DHT'}
         a = read_ser.split(':')
-        context = {'satus': "OK",
+        context = {'status': "OK",
                    'Humidity': int(a[1][0:-3]),
                    'Temperature': int(a[3][0:-3])}
         ser.close()
