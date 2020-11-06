@@ -14,10 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from house.core.views import ControllerView, RestartCam, Env
+from house.core.views import ControllerView, RestartCam, Env, ResetArduino
 
 urlpatterns = [
     url(r'^$', ControllerView.as_view(), name='form'),
     url(r'^restart/$', RestartCam.as_view(), name='restart_cam'),
     url(r'^env/$', Env.as_view(), name = 'env'),
+    url(r'^reset_arduino/$', ResetArduino.as_view(), name = 'reset_arduino'),
 ]

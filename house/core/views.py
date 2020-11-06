@@ -12,7 +12,7 @@ from .form import ControllerForm
 
 from django.http import HttpResponse
 
-from .main_arduino import restart_cam, read_ser
+from .main_arduino import restart_cam, read_ser, reset
 from .raspberry import raspberry
 from .weather_rain import weather_now
 from house.core.tasks import restart_cam_task, weather_task, arduino_task
@@ -60,4 +60,20 @@ class Env(View):
     @staticmethod
     def get(request):
         arduino_task()
+        return redirect(reverse_lazy('form'))
+
+
+class ResetArduino(View):
+    @staticmethod
+    def get(request):
+        try:
+            reset()
+            log = Logs.objects.create(date_log = datetime.datetime.now(),
+                                      title_log = 'arduino',
+                                      description_log = 'Aрдуино reset')
+        except Exception:
+            log = Logs.objects.create(date_log = datetime.datetime.now(),
+                                  title_log = 'arduino',
+                                  description_log = 'Ошибка ардуино reset')
+
         return redirect(reverse_lazy('form'))

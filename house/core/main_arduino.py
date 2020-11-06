@@ -37,3 +37,11 @@ def read_ser():
         context = {'Humidity': int(a[1][0:-3]), 'Temperature': int(a[3][0:-3])}
         return context
     ser.close()
+
+def reset():
+    ser = serial.Serial("/dev/ttyUSB0",
+                        9600)  # change ACM number as found from ls /dev/tty/ACM*
+    ser.baudrate = 9600
+
+    ser.write(b'9')
+    ser.close()
