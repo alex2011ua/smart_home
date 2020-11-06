@@ -1,3 +1,5 @@
 /house/.env
 /venv/
 /db.sqlite3
+/venv/
+/venv_home/
