@@ -37,6 +37,8 @@ def read_ser():
     test = (ser.read(ser.inWaiting())).decode().strip()
     if test == "OK":  # Связь есть, получаем данные
         time.sleep(0.3)
+        ser.write(b'2')
+        time.sleep(0.3)
         read_ser = (ser.read(ser.inWaiting())).decode().strip()
         if read_ser == 'Error_reading_from_DHT':  # ошибка чтения датчика
             ser.close()
