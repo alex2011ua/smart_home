@@ -29,6 +29,7 @@ def read_ser():
     data = ser.read(ser.inWaiting())
     time.sleep(0.5)
     ser.write(b'2')
+    time.sleep(0.5)
     s = ser.readline().strip().decode()
     if s == "get data":
         time.sleep(0.5)
