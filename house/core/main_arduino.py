@@ -33,9 +33,9 @@ def read_ser():
                         9600)  # change ACM number as found from ls /dev/tty/ACM*
     ser.baudrate = 9600
     for i in range(10):
-        time.sleep(1)
+        time.sleep(0.5)
         ser.write(b't')  # send TEST signal
-        time.sleep(1)
+        time.sleep(0.5)
         test = (ser.read(ser.inWaiting())).decode().strip()
         if test == "OK":  # Связь есть, получаем данные
             print(i)

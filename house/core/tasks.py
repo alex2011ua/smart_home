@@ -95,6 +95,6 @@ def arduino_task():
                                   description_log = 'Error Arduino test')
     elif dic_param['status'] == 'OK':
         temp = Temp1.objects.create(date_temp = datetime.now(),
-                                    temp = dic_param['Temperature'],
-                                    humidity = dic_param['Humidity'])
+                                    temp = dic_param['Temperature_out'],
+                                    humidity = dic_param['Humidity_out'])
     print('arduino_task Close')
