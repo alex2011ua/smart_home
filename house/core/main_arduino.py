@@ -40,31 +40,33 @@ def read_ser():
         if test == "OK":  # Связь есть, получаем данные
             print(i)
             break
-        time.sleep(1)
-        ser.write(b'2')
-        time.sleep(1)
-        read_ser = (ser.read(ser.inWaiting())).decode().strip()
-        if read_ser == 'Error_reading_from_DHT':  # ошибка чтения датчика
+        elif i == 9:
             ser.close()
-            return {'status': 'Error_reading_from_DHT'}
-        a = read_ser.split(':')
-        ser.write(b'3')
-        time.sleep(1)
-        read_ser = (ser.read(ser.inWaiting())).decode().strip()
-        if read_ser == 'Error_reading_from_DHT':  # ошибка чтения датчика
-            ser.close()
-            return {'status': 'Error_reading_from_DHT'}
-        b = read_ser.split(':')
-        context = {'status': "OK",
+            return{'status': 'Error Arduino test'}
+    time.sleep(1)
+    ser.write(b'2')
+    time.sleep(1)
+    read_ser = (ser.read(ser.inWaiting())).decode().strip()
+    if read_ser == 'Error_reading_from_DHT':  # ошибка чтения датчика
+        ser.close()
+        return {'status': 'Error_reading_from_DHT'}
+    a = read_ser.split(':')
+    ser.write(b'3')
+    time.sleep(1)
+    read_ser = (ser.read(ser.inWaiting())).decode().strip()
+    if read_ser == 'Error_reading_from_DHT':  # ошибка чтения датчика
+        ser.close()
+        return {'status': 'Error_reading_from_DHT'}
+    b = read_ser.split(':')
+    context = {'status': "OK",
                    'Humidity_in': int(a[1][0:-3]),
                    'Temperature_in': int(a[3][0:-3]),
                    'Humidity_out': int(b[1][0:-3]),
                    'Temperature_out': int(b[3][0:-3]),
                    }
-        ser.close()
-        return context
     ser.close()
-    return{'status': 'Error Arduino test'}
+    return context
+    
 
 def reset():
     ser = serial.Serial("/dev/ttyUSB0",
