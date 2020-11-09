@@ -1,12 +1,12 @@
 #include "DHT.h"
-#define DHTPIN 3     // к какому пину будет подключен вывод Data dht 11
-#define PIN_RELAY 2 // Определяем пин, используемый для подключения реле
-#define DHT22PIN 4
-//выбор используемого датчика
-#define DHTTYPE DHT11   // DHT 11 
-#define DHTTYPE22 DHT22   // DHT 22  (AM2302)
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
+// список пинов:
 
+#define PIN_RELAY 2 // Определяем пин, используемый для подключения реле
+#define DHTPIN 3     // к какому пину будет подключен вывод Data dht 11
+#define DHT22PIN 4
+int led = 13; // led   как пин 13
+
+// список команд с serial port
 #define RELE_ON '1'
 #define RELE_OFF '0'
 #define SEND_DATA_TEMP '2'
@@ -14,14 +14,18 @@
 #define RESET '9'
 #define TEST 't'
 
-int led = 13; // led   как пин 13
+
+//выбор используемого датчика
+#define DHTTYPE DHT11   // DHT 11 
+#define DHTTYPE22 DHT22   // DHT 22  (AM2302)
+//#define DHTTYPE DHT21   // DHT 21 (AM2301)
 //инициализация датчика
 DHT dht(DHTPIN, DHTTYPE);
 DHT dht22(DHT22PIN, DHTTYPE22);
 
 
 void setup(){
-  delay(10000); // ждем секунду
+  delay(10000); // ждем 10 секунду
   Serial.begin(9600);
   pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
   digitalWrite(PIN_RELAY, HIGH); // Выключаем реле - посылаем высокий сигнал
