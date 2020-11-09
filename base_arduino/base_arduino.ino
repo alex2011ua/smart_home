@@ -7,11 +7,11 @@
 int led = 13; // led   как пин 13
 
 // список команд с serial port
-#define RELE_ON '1'
 #define RELE_OFF '0'
+#define RELE_ON '1'
 #define SEND_DATA_TEMP '2'
 #define SEND_DATA_TEMP22 '3'
-#define RESET '9'
+#define RESET 'r'
 #define TEST 't'
 
 
@@ -22,6 +22,8 @@ int led = 13; // led   как пин 13
 //инициализация датчика
 DHT dht(DHTPIN, DHTTYPE);
 DHT dht22(DHT22PIN, DHTTYPE22);
+int temp_street = 0;
+int temp_podval = 1;
 
 
 void setup(){
@@ -34,10 +36,17 @@ void setup(){
 
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
-void send_data_to_pi(){  // чтение температуры dh11
-  dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
+void read_dht_param(place){  // чтение температуры dh11
+  if (place == 0){
+        dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+        float h = dht22.readHumidity();
+        float t = dht22.readTemperature();
+  }
+  if (place == 1){
+        dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+        float h = dht.readHumidity();
+        float t = dht.readTemperature();
+  }
   if (isnan(t) ||  ( isnan(h)) ){
     Serial.println("Error_reading_from_DHT");
   }
@@ -50,21 +59,15 @@ void send_data_to_pi(){  // чтение температуры dh11
   }
 }
 
-void send_temp22_to_pi(){  // чтение температуры dh22
-  dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-  if (isnan(t) ||  ( isnan(h)) ){
-    Serial.println("Error_reading_from_DHT22");
-  }
-  else {
-  Serial.print("Humidity:");
-  Serial.print(h);
-  Serial.print(":");
-  Serial.print("Temperature:");
-  Serial.println(t);
-  }
+void Test(){  // во время теста 6 раз мигнем светодиодом
+    for (int i = 0; i < 6; i++) {
+        digitalWrite(led, HIGH);
+        delay(100);
+        digitalWrite(led, LOW);
+    }
+    Serial.println("OK");
 }
+
 
 void rele(int status){
   if (status == 1){
@@ -83,27 +86,24 @@ void loop(){
   char val;
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
-    if (val == RELE_OFF) {
+    if (val == RELE_OFF) { //  если 0 выключаем реле
       rele(0);
     }
-    if (val == RELE_ON){
+    if (val == RELE_ON){//  если 1 включаем реле
       rele(1);
     }
-    if (val == SEND_DATA_TEMP){
-      send_data_to_pi();
-    } // при 2 посылаем данные в raspbery
-    if (val == SEND_DATA_TEMP22){
-      send_temp22_to_pi();
-    } // при 2 посылаем данные в raspbery
-    if (val == RESET){
+    if (val == SEND_DATA_TEMP){ //  если 2 смотрим домашний датчик
+      read_dht_param(temp_podval);
+    }
+    if (val == SEND_DATA_TEMP22){ //  если 3 смотрим уличный датчик
+      read_dht_param(temp_street);
+    }
+    if (val == RESET){ //  если r  перезапускаем Arduino
       Serial.println("get data");
       resetFunc(); //вызываем reset
-    } // при 9 вызываем reset
-    if (val == TEST){  // при t  возврат OK
-        digitalWrite(led, HIGH);
-        delay(10);
-        digitalWrite(led, LOW);
-        Serial.println("OK");
+    }
+    if (val == TEST){  // при  t 6 раз мигнем диодом возврат OK
+        Test();
     }
   }
 }

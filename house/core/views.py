@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 DEBUG = settings.DEBUG
 
-from .models import Setting, Temp1, Logs
+from .models import Setting, Temp1, Logs, Temp_out
 from .form import ControllerForm
 
 from django.http import HttpResponse
@@ -29,11 +29,24 @@ class ControllerView(FormView):
     def get_context_data(self, **kwargs):
         context = super(ControllerView, self).get_context_data()
         context['data'] = raspberry(DEBUG)  # state raspberry
-        temp = Temp1.objects.all().order_by('-id')[0]  # arduino state
+        try:
+            temp_in = Temp1.objects.all().order_by('-id')[0]  # arduino state
+            temp_out = Temp_out.objects.all().order_by('-id')[0]  # arduino state
+        except IndexError:
 
-        context['data']['temp'] = temp.temp
-        context['data']['humidity'] = temp.humidity
-        context['data']['date_temp'] = temp.date_temp
+            temp_in = Temp1.objects.create(date_temp = datetime.datetime.now(),
+                                           temp = 111,
+                                           humidity = 222)
+            temp_out = Temp_out.objects.create(date_temp = datetime.datetime.now(),
+                                           temp = 111,
+                                           humidity = 222)
+
+        context['data']['temp_in'] = temp_in.temp
+        context['data']['humidity_in'] = temp_in.humidity
+        context['data']['date_temp_in'] = temp_in.date_temp
+        context['data']['temp_out'] = temp_out.temp
+        context['data']['humidity_out'] = temp_out.humidity
+        context['data']['date_temp_out'] = temp_out.date_temp
 
         context['time'] = datetime.datetime.now()
         context.update(weather_now())
@@ -56,7 +69,7 @@ class RestartCam(View):
            # отключение реле на 10 сек
         return redirect(reverse_lazy('form'))
 
-class Env(View):
+class Temp(View):
     @staticmethod
     def get(request):
         arduino_task()

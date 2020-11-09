@@ -25,3 +25,8 @@ class Temp1(models.Model):
     date_temp = models.DateTimeField()
     temp = models.IntegerField()
     humidity = models.IntegerField()
+
+class Temp_out(models.Model):
+    date_temp = models.DateTimeField()
+    temp = models.IntegerField()
+    humidity = models.IntegerField()

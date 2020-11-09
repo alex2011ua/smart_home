@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from .main_arduino import restart_cam, read_ser
 from .weather_rain import weather_6_day, rain_yesterday
-from .models import Setting, Logs, WeatherRain, Temp1
+from .models import Setting, Logs, WeatherRain, Temp1, Temp_out
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
@@ -13,31 +13,24 @@ def restart_cam_task():
     print('Start restart_cam_task')
 
     try:
-        status = restart_cam()
+        context = restart_cam()
     except Exception as err:
         print(err)
         log = Logs.objects.create(date_log = datetime.now(),
                                   title_log = 'Камеры',
                                   description_log = 'Не перезагружены Exeption')
         return
-    if status == 'error rele off' or 'error rele on' or 'Error Arduino test':
-        log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'Камеры',
-                                  description_log = status)
-    elif status == 'restart cam OK':
-        log = Logs.objects.create(date_log = datetime.now(),
-                                      title_log = 'Камеры',
-                                      description_log = 'Удачно перезагружены')
-    else:
-        log = Logs.objects.create(date_log = datetime.now(),
-                                      title_log = 'Камеры',
-                                      description_log = 'Не перезагружены')
+
+    log = Logs.objects.create(date_log = datetime.now(),
+                              title_log = 'Камеры',
+                              description_log = str(context['status']))
+
     print('restart_cam_task Close')
 
 
 @cellery_app.task()
 def weather_task():
-    print('weather_task')
+    print('weather_task start')
     try:
         six_day = weather_6_day()
         yesterday = rain_yesterday()
@@ -71,6 +64,7 @@ def weather_task():
     Logs.objects.create(date_log =datetime.now(),
                     title_log='Weather',
                     description_log=f'{r_tomorrow}, {r_yesterday}')
+    print('weather_task end')
 
 
 @cellery_app.task()
@@ -78,23 +72,25 @@ def arduino_task():
     print('arduino_task add temp')
     try:
         dic_param = read_ser()
-    except Exception as arr:
+    except Exception as err:
         print(err)
         log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'temp_1',
+                                  title_log = 'temp Arduino',
                                   description_log = 'Ошибка ардуино Exeption')
-        return err.txt
+        return err
 
-    if dic_param['status'] == 'Error_reading_from_DHT':
-        log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'temp_1',
-                                  description_log = 'Error reading from DHT')
-    elif dic_param['status'] == 'Error Arduino test':
-        log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'temp_1',
-                                  description_log = 'Error Arduino test')
-    elif dic_param['status'] == 'OK':
-        temp = Temp1.objects.create(date_temp = datetime.now(),
+    if dic_param['status'][0] == 'Test-OK':
+        if dic_param.get('Humidity_out'):
+            temp_out = Temp_out.objects.create(date_temp = datetime.now(),
                                     temp = dic_param['Temperature_out'],
                                     humidity = dic_param['Humidity_out'])
+        if dic_param.get('Humidity_in'):
+            temp_in = Temp1.objects.create(date_temp = datetime.now(),
+                                           temp = dic_param['Temperature_in'],
+                                           humidity = dic_param['Humidity_in'])
+
+    if (dic_param['status'][0] != 'Test-OK') or (len(dic_param['status']) > 1):
+        log = Logs.objects.create(date_log = datetime.now(),
+                          title_log = 'temp Arduino',
+                          description_log = str(dic_param['status']))
     print('arduino_task Close')
