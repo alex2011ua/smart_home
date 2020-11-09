@@ -3,3 +3,7 @@
 /db.sqlite3
 /venv/
 /venv_home/
+__pycache__
+/.idea/
+/.pytest_cache/
+/venv/
