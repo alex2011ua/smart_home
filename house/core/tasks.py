@@ -78,11 +78,13 @@ def arduino_task():
     print('arduino_task add temp')
     try:
         dic_param = read_ser()
-    except Exception:
+    except Exception as arr:
+        print(err)
         log = Logs.objects.create(date_log = datetime.now(),
                                   title_log = 'temp_1',
                                   description_log = 'Ошибка ардуино Exeption')
-        return
+        return err.txt
+
     if dic_param['status'] == 'Error_reading_from_DHT':
         log = Logs.objects.create(date_log = datetime.now(),
                                   title_log = 'temp_1',
@@ -93,6 +95,6 @@ def arduino_task():
                                   description_log = 'Error Arduino test')
     elif dic_param['status'] == 'OK':
         temp = Temp1.objects.create(date_temp = datetime.now(),
-                                    temp = dic_param['Temperature'],
-                                    humidity = dic_param['Humidity'])
+                                    temp = dic_param['Temperature_out'],
+                                    humidity = dic_param['Humidity_out'])
     print('arduino_task Close')
