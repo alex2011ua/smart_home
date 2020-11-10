@@ -1,4 +1,3 @@
-
 .my-center {
 
     margin-right: auto;
@@ -8,3 +7,11 @@
     width: 250px;
     border-radius: 12px;
 }
+.time_center{
+text-align: center;
+}
+#layer1 {
+    text-align: center;
+   	background: #3eabad;
+    padding: 3px;
+   }
