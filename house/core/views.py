@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 DEBUG = settings.DEBUG
 
-from .models import Setting, Temp1, Logs, Temp_out
+from .models import Setting, Temp1, Logs, Temp_out, WeatherRain
 from .form import ControllerForm
 
 from django.http import HttpResponse
@@ -28,12 +28,18 @@ class ControllerView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ControllerView, self).get_context_data()
+        date_now = datetime.datetime.now()
+        weather_6 = WeatherRain.objects.filter(date__gt=date_now)
+        context['weather_6'] = {'rain6': weather_6[0].rain,
+                                'temp_min6': weather_6[0].temp_min,
+                                'temp_max6': weather_6[0].temp_max,
+                                'snow6': weather_6[0].snow,
+                                }
         context['data'] = raspberry(DEBUG)  # state raspberry
         try:
             temp_in = Temp1.objects.all().order_by('-id')[0]  # arduino state
             temp_out = Temp_out.objects.all().order_by('-id')[0]  # arduino state
         except IndexError:
-
             temp_in = Temp1.objects.create(date_temp = datetime.datetime.now(),
                                            temp = 111,
                                            humidity = 222)
@@ -47,8 +53,9 @@ class ControllerView(FormView):
         context['data']['temp_out'] = temp_out.temp
         context['data']['humidity_out'] = temp_out.humidity
         context['data']['date_temp_out'] = temp_out.date_temp
+        date_now = datetime.datetime.now()
+        context['time'] = date_now
 
-        context['time'] = datetime.datetime.now()
         context.update(weather_now())
 
         logs = Logs.objects.all().order_by('-date_log')[0:20]
@@ -73,6 +80,7 @@ class Temp(View):
     @staticmethod
     def get(request):
         arduino_task()
+        weather_task()
         return redirect(reverse_lazy('form'))
 
 

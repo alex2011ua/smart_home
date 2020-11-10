@@ -6,7 +6,7 @@ from .models import Setting, Logs, WeatherRain, Temp1, Temp_out
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
-
+import django.db
 
 @cellery_app.task()
 def restart_cam_task():
@@ -43,14 +43,18 @@ def weather_task():
     if six_day['status_code'] != 200 or yesterday['status_code'] != 200:
         Logs.objects.create(date_log = datetime.now(),
                             title_log = 'WeatherRain',
-                            description_log = f'{six_day["status_code"]}, {yesterday["status_code"]} - status_code')
-    r_tomorrow = WeatherRain.objects.create(date=six_day['tomorrow_date'],
-                                            rain= six_day['summ_rain_3_day'],
-                                            temp_min= six_day['min_temp'],
-                                            temp_max=six_day['max_temp'],
-                                            snow= six_day['summ_snow_3_day'],
-                                            )
-
+                            description_log = f'{six_day["status_code"]}, '
+                                              f'{yesterday["status_code"]} - status_code')
+    try:
+        r_tomorrow = WeatherRain.objects.create(date=six_day['tomorrow_date'],
+                                                rain= six_day['summ_rain_3_day'],
+                                                temp_min= six_day['min_temp'],
+                                                temp_max=six_day['max_temp'],
+                                                snow= six_day['summ_snow_3_day'],
+                                                )
+    except django.db.utils.IntegrityError:
+        r_tomorrow = WeatherRain.objects.get(date=six_day['tomorrow_date'])
+        print('Already exist')
     try:
         r_yesterday = WeatherRain.objects.get(date = yesterday['result_date'])
     except ObjectDoesNotExist:

@@ -21,7 +21,7 @@ def weather_now(): #  погода на сегодня
     погода на сегодня
     :return:
     '''
-    payload['exclude'] = 'minutely,hourly,daily'
+    payload['exclude'] = 'minutely,hourly'
     url = 'https://api.openweathermap.org/data/2.5/onecall'
     r = requests.get(url, params = payload)
     if r.status_code != 200:
@@ -33,6 +33,15 @@ def weather_now(): #  погода на сегодня
         'description':  d['current']['weather'][0]['description'],
         'temp':         d['current']['temp'],
         'wind':         d['current']['wind_speed'],
+        'humidity':     d['current']['humidity'],
+        'description_next':     d['daily'][0]['weather'][0]['description'],
+        'icon_next_day':        d['daily'][0]['weather'][0]['icon'],
+        'temp_next_morn':       d['daily'][0]['temp']['morn'],
+        'temp_next_day':        d['daily'][0]['temp']['day'],
+        'temp_next_eve':        d['daily'][0]['temp']['eve'],
+        'pop_next':             d['daily'][0]['pop'],
+        'wind_speed_next':       d['daily'][0]['wind_speed'],
+
         'status_code':  r.status_code
     }
     #  создаем спидок правительственных придупреждений
@@ -91,7 +100,7 @@ def rain_yesterday():
     '''
     timestamp = time.mktime(start_Date.timetuple())
     payload['exclude'] = 'current'
-    payload['dt']: int(timestamp)
+    payload['dt'] = int(timestamp)
     url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine'
     r = requests.get(url, params = payload)
     if r.status_code != 200:
@@ -132,18 +141,15 @@ def weather_min():
 
     payload = {'lat': 50.40,
                'lon': 30.31,
-
+               'appid': 'd16e0dacb5474e43829b385c7102e12d',
                'units': 'metric',
                'lang': 'ru',
-               'exclude': 'current',
-
                }
-
-    url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine'
+    url = 'https://api.openweathermap.org/data/2.5/onecall'
     r = requests.get(url, params = payload)
 
     d = r.json()
-    print(d)
+    return d
 
 
 

@@ -27,7 +27,7 @@ int temp_podval = 1;
 
 
 void setup(){
-  delay(10000); // ждем 10 секунду
+  delay(1000); // ждем 1 секунду
   Serial.begin(9600);
   pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
   digitalWrite(PIN_RELAY, HIGH); // Выключаем реле - посылаем высокий сигнал
@@ -36,16 +36,18 @@ void setup(){
 
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
-void read_dht_param(place){  // чтение температуры dh11
+void read_dht_param(int place){  // чтение температуры dh11
+  float h;
+  float t;
   if (place == 0){
         dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-        float h = dht22.readHumidity();
-        float t = dht22.readTemperature();
+        h = dht22.readHumidity();
+        t = dht22.readTemperature();
   }
   if (place == 1){
         dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-        float h = dht.readHumidity();
-        float t = dht.readTemperature();
+        h = dht.readHumidity();
+        t = dht.readTemperature();
   }
   if (isnan(t) ||  ( isnan(h)) ){
     Serial.println("Error_reading_from_DHT");

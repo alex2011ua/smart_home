@@ -15,6 +15,7 @@ class WeatherRain(models.Model):
     temp_max = models.IntegerField(default=0)
     snow = models.IntegerField(default=0)
 
+
 class Logs(models.Model):
     date_log = models.DateTimeField()
     title_log = models.CharField(max_length=50)
@@ -25,6 +26,7 @@ class Temp1(models.Model):
     date_temp = models.DateTimeField()
     temp = models.IntegerField()
     humidity = models.IntegerField()
+
 
 class Temp_out(models.Model):
     date_temp = models.DateTimeField()
