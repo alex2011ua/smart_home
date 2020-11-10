@@ -8,9 +8,10 @@
     border-radius: 12px;
 }
 .time_center{
-    align: center;
+text-align: center;
 }
 #layer1 {
-   	background: #fc0;
-    padding: 5px;
+    text-align: center;
+   	background: #3eabad;
+    padding: 3px;
    }
