@@ -44,7 +44,7 @@ def boiler(flag):
             status = {'Бойлер': "Включен"}
         else:
             print("boiler OFF")
-            status = {'Бойлер': "Выключен2"}
+            status = {'Бойлер': "Выключен"}
     else:
         status = {'Boiler': 'Non Connect'}
     return status

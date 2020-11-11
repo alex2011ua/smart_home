@@ -83,12 +83,13 @@
                 </div>
 
 
-                <div class="card-body ">
+                <div class="card-body">
                     <ul>
-                    <li><a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-success b"  >Перезагрузка камер</button></a></li>
-                    <li><a href="{% url 'temp'%} ">  <button type="button" class="btn btn-success b" >Обновление датчиков </button></a></li>
-                    <li><a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a></li>
-                    <li><a href="{% url 'Boiler'%} ">  <button type="button" class="btn btn-danger b" >Включение бойлера </button></a></li>
+                    <li class="pad"><a href="{% url 'test'%} ">  <button type="button" class="btn btn-success b"  >Тест Ардуино</button></a></li>
+                    <li class="pad"><a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-success b"  >Перезагрузка камер</button></a></li>
+                    <li class="pad"><a href="{% url 'temp'%} ">  <button type="button" class="btn btn-success b" >Обновление датчиков </button></a></li>
+                    <li class="pad"><a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a></li>
+                    <li class="pad"><a href="{% url 'Boiler'%} ">  <button type="button" class="btn btn-danger b" >Включение бойлера </button></a></li>
                     </ul>
                 </div>
             </div>
