@@ -14,3 +14,4 @@ vcgencmd
 pyserial
 django-celery
 gpiozero
+RPi.GPIO

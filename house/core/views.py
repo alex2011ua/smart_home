@@ -48,17 +48,17 @@ class ControllerView(FormView):
                                            temp = 111,
                                            humidity = 222)
 
-        context['data']['temp_in'] = temp_in.temp
-        context['data']['humidity_in'] = temp_in.humidity
-        context['data']['date_temp_in'] = temp_in.date_temp
-        context['data']['temp_out'] = temp_out.temp
-        context['data']['humidity_out'] = temp_out.humidity
-        context['data']['date_temp_out'] = temp_out.date_temp
-        context['data']['rain6'] = weather_6.rain
-        context['data']['temp_min6'] = weather_6.temp_min
-        context['data']['temp_max6'] = weather_6.temp_max
-        context['data']['snow6'] = weather_6.snow
-        context['data']['data_6'] = weather_6.date
+        context['data']['Температура  комнаты 1'] = temp_in.temp
+        context['data']['Влажность комнаты 1'] = temp_in.humidity
+        context['data']['Дата измерения'] = temp_in.date_temp
+        context['data']['Температура уличног датчика'] = temp_out.temp
+        context['data']['Влажность на улице'] = temp_out.humidity
+        context['data']['Дата измерения улица'] = temp_out.date_temp
+        context['data']['Сумма осадков в следующие 6 дней'] = weather_6.rain
+        context['data']['Количество снега в следующие 6 дней'] = weather_6.snow
+        context['data']['минимальная температура за 6 дней'] = weather_6.temp_min
+        context['data']['максимальная температура за 6 дней'] = weather_6.temp_max
+        context['data']['Завтра'] = weather_6.date
 
         context['time'] = date_now
 

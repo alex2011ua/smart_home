@@ -21,11 +21,11 @@ def raspberry(flag):
                     status[item] = value
                     print(list_alarm[str(item)])
         else:
-            status['OK'] = 'Ошибок не обнаружено!'
+            status['Raspberry'] = 'Ошибок не обнаружено!'
             print('Ошибок не обнаружено!')
 
         temp = vcgm.measure_temp()
-        status['temp'] = temp
+        status['Температура процессора'] = temp
         return status
     else:
         status = {'test Raspbery': 'Non Connect', 'test Raspbery2': 'Non Connect'}
@@ -35,14 +35,16 @@ def boiler(flag):
         # Connections:
         # GPIO2 is button input
     if not flag:
-        from gpiozero import Button
-        button = Button(2)
-        if button.is_pressed:
-            print("boiler ON")
-            status = {'boiler': "ON"}
+        import RPi.GPIO as GPIO
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(2, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+        input_state = GPIO.input(2)
+        if input_state == False:
+            print('boiler ON')
+            status = {'Бойлер': "Включен"}
         else:
             print("boiler OFF")
-            status = {'boiler': "ON"}
+            status = {'Бойлер': "Выключен2"}
     else:
         status = {'Boiler': 'Non Connect'}
     return status
