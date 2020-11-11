@@ -66,3 +66,18 @@ def reset():
     ser.write(b'r')
     ser.close()
     return context
+
+def boiler():
+    ser, context = testing()
+    ser.write(b'B')
+    time.sleep(1)
+    print((ser.read(ser.inWaiting())).decode().strip())
+    time.sleep(300)
+    ser.write(b'b')
+    time.sleep(1)
+    print((ser.read(ser.inWaiting())).decode().strip())
+    context['status'].append('Boiler on')
+    ser.close()
+    return context
+
+

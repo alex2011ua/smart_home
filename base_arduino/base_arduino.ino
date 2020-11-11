@@ -3,8 +3,10 @@
 
 #define PIN_RELAY 2 // Определяем пин, используемый для подключения реле
 #define DHTPIN 3     // к какому пину будет подключен вывод Data dht 11
-#define DHT22PIN 4
-int led = 13; // led   как пин 13
+#define DHT22PIN 4 // уличный dht 22
+#define PIN_RELAY_BOILER  5 // реле включения бойлера
+
+int led = 13; // led как пин 13
 
 // список команд с serial port
 #define RELE_OFF '0'
@@ -13,6 +15,8 @@ int led = 13; // led   как пин 13
 #define SEND_DATA_TEMP22 '3'
 #define RESET 'r'
 #define TEST 't'
+#define BOILER_ON 'B'
+#define BOILER_OFF 'b'
 
 
 //выбор используемого датчика
@@ -73,15 +77,25 @@ void Test(){  // во время теста 6 раз мигнем светоди
 
 void rele(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY_BOILER, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
     digitalWrite(led, HIGH);        // при 1 включаем светодиод
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY_BOILER, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
     digitalWrite(led, LOW);       // при 0 выключаем светодиод
   }
+}
+
+void Boiler(int status){ //управление бойлером
+    if (status == 1){
+    digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    Serial.println("bouiler on");
+  }
+  if (status == 0){
+    digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    Serial.println("boiler off");
 }
 
 void loop(){
@@ -106,6 +120,12 @@ void loop(){
     }
     if (val == TEST){  // при  t 6 раз мигнем диодом возврат OK
         Test();
+    }
+    if (val == BOILER_ON){ // управление бойлером Включаем
+        Boiler(1);
+    }
+    if (val == BOILER_OFF){ // управление бойлером Выключаем
+        Boiler(0);
     }
   }
 }

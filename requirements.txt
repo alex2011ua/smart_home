@@ -13,3 +13,4 @@ python-dotenv
 vcgencmd
 pyserial
 django-celery
+gpiozero

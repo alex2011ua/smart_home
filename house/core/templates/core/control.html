@@ -29,9 +29,9 @@
             <div class="card bg-info align-items-center " style="height: 100%; padding: 0px">
                 <div class="card-body bg-info" style="padding: 0px">
                     <a class="navbar-brand text-center" href="{% url 'form' %}">
-                    <img  src="http://openweathermap.org/img/wn/{{ icon }}@2x.png">
+                    <img  src="http://openweathermap.org/img/wn/{{ icon }}.png">
                     <br />
-                    <img  src="{% static 'img/home.gif' %}" height="75">
+                    <img  src="{% static 'img/home.gif' %}" height="65">
                     </a>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="card bg-info align-items-center" style="height: 100%;">
 
                 <div class="card-body bg-info" style="padding: 0px">
-                    <p>Завтра:</p>
+                    <p>Завтра:{{data_6}}</p>
               {{description_next}}<br />
                вероятность осадков - {{pop_next}},<br />
               температура утром - {{temp_next_morn}}<br />
@@ -85,9 +85,10 @@
 
                 <div class="card-body ">
                     <ul>
-                    <li><a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-warning b"  >Перезагрузка камер</button></a> - Перезагрузка камер</li>
-                    <li><a href="{% url 'temp'%} ">  <button type="button" class="btn btn-warning b" >Обновление датчиков </button></a> - Обновление датчиков</li>
-                    <li><a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-danger b" >Перезагрузка Ардуино </button></a> - Перезагрузка Ардуино</li>
+                    <li><a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-success b"  >Перезагрузка камер</button></a></li>
+                    <li><a href="{% url 'temp'%} ">  <button type="button" class="btn btn-success b" >Обновление датчиков </button></a></li>
+                    <li><a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a></li>
+                    <li><a href="{% url 'Boiler'%} ">  <button type="button" class="btn btn-danger b" >Включение бойлера </button></a></li>
                     </ul>
                 </div>
             </div>

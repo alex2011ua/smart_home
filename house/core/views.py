@@ -9,11 +9,11 @@ DEBUG = settings.DEBUG
 
 from .models import Setting, Temp1, Logs, Temp_out, WeatherRain
 from .form import ControllerForm
-
+from .tasks import Boiler_on
 from django.http import HttpResponse
 
 from .main_arduino import restart_cam, read_ser, reset
-from .raspberry import raspberry
+from .raspberry import raspberry, boiler
 from .weather_rain import weather_now
 from house.core.tasks import restart_cam_task, weather_task, arduino_task
 import datetime
@@ -29,13 +29,14 @@ class ControllerView(FormView):
     def get_context_data(self, **kwargs):
         context = super(ControllerView, self).get_context_data()
         date_now = datetime.datetime.now()
-        weather_6 = WeatherRain.objects.filter(date__gt=date_now)
-        context['weather_6'] = {'rain6': weather_6[0].rain,
-                                'temp_min6': weather_6[0].temp_min,
-                                'temp_max6': weather_6[0].temp_max,
-                                'snow6': weather_6[0].snow,
-                                }
+
+        weather_6 = WeatherRain.objects.all().order_by('-date')[0]
+
+
+
         context['data'] = raspberry(DEBUG)  # state raspberry
+        context['data'].update(boiler(DEBUG))  # state boiler
+
         try:
             temp_in = Temp1.objects.all().order_by('-id')[0]  # arduino state
             temp_out = Temp_out.objects.all().order_by('-id')[0]  # arduino state
@@ -53,7 +54,12 @@ class ControllerView(FormView):
         context['data']['temp_out'] = temp_out.temp
         context['data']['humidity_out'] = temp_out.humidity
         context['data']['date_temp_out'] = temp_out.date_temp
-        date_now = datetime.datetime.now()
+        context['data']['rain6'] = weather_6.rain
+        context['data']['temp_min6'] = weather_6.temp_min
+        context['data']['temp_max6'] = weather_6.temp_max
+        context['data']['snow6'] = weather_6.snow
+        context['data']['data_6'] = weather_6.date
+
         context['time'] = date_now
 
         context.update(weather_now())
@@ -89,6 +95,21 @@ class ResetArduino(View):
     def get(request):
         try:
             reset()
+            log = Logs.objects.create(date_log = datetime.datetime.now(),
+                                      title_log = 'arduino',
+                                      description_log = 'Aрдуино reset')
+        except Exception:
+            log = Logs.objects.create(date_log = datetime.datetime.now(),
+                                  title_log = 'arduino',
+                                  description_log = 'Ошибка ардуино reset')
+
+        return redirect(reverse_lazy('form'))
+
+class Boiler(View):
+    @staticmethod
+    def get(request):
+        try:
+            Boiler_on.delay()
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                       title_log = 'arduino',
                                       description_log = 'Aрдуино reset')

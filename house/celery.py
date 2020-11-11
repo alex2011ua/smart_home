@@ -20,7 +20,7 @@ from celery.exceptions import SoftTimeLimitExceeded
 def setup_periodic_tasks(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute = 0,
+            crontab(minute = 3,
                     hour = '6,15,21'),
             restart_cam_task.s(),
             name = 'Restart cam')
@@ -31,7 +31,7 @@ def setup_periodic_tasks(sender, **kwargs):
 def setup_periodic_tasks_weather(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute=0, hour=1),
+            crontab(minute=2, hour=1),
             weather_task.s(),
             name = 'Weather')
     except SoftTimeLimitExceeded as err:

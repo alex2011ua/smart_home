@@ -1,6 +1,6 @@
-'''
+"""
 https://openweathermap.org/
-'''
+"""
 import requests
 from datetime import date, timedelta
 import time
@@ -16,11 +16,12 @@ payload = {'lat': 50.40,
            }
 start_Date = date.today()  # год, месяц, число
 
-def weather_now(): #  погода на сегодня
-    '''
-    погода на сегодня
+
+def weather_now():  # погода на сегодня и завтра
+    """
+    погода на сегодня и завтра
     :return:
-    '''
+    """
     payload['exclude'] = 'minutely,hourly'
     url = 'https://api.openweathermap.org/data/2.5/onecall'
     r = requests.get(url, params = payload)
@@ -46,7 +47,7 @@ def weather_now(): #  погода на сегодня
     }
     #  создаем спидок правительственных придупреждений
     if d.get('alerts'):
-        context['alerts'] =[]
+        context['alerts'] = []
         for item in d['alerts']:
             context['alerts'].append(item['description'])
 
@@ -54,10 +55,10 @@ def weather_now(): #  погода на сегодня
 
 
 def weather_6_day():
-    '''
+    """
     Погода на  6 дней
     :return: summ of rain (Сумма воды которая выпадет за 3 дней)
-    '''
+    """
     payload['exclude'] = 'current,minutely,hourly,alerts'
     url = 'https://api.openweathermap.org/data/2.5/onecall'
     r = requests.get(url, params = payload)
@@ -134,9 +135,9 @@ def rain_yesterday():
 
 
 def weather_min():
-    '''
+    """
     :return: summ of rain (Сумма воды которая выпадет за 3 дней)
-    '''
+    """
     timestamp = time.mktime(start_Date.timetuple())
 
     payload = {'lat': 50.40,

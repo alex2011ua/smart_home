@@ -1,6 +1,4 @@
 
-
-
 def raspberry(flag):
     if not flag:
         from vcgencmd import Vcgencmd
@@ -30,5 +28,21 @@ def raspberry(flag):
         status['temp'] = temp
         return status
     else:
-        status = {'test': 'test1', 'test2': 'test2'}
+        status = {'test Raspbery': 'Non Connect', 'test Raspbery2': 'Non Connect'}
         return status
+
+def boiler(flag):
+        # Connections:
+        # GPIO2 is button input
+    if not flag:
+        from gpiozero import Button
+        button = Button(2)
+        if button.is_pressed:
+            print("boiler ON")
+            status = {'boiler': "ON"}
+        else:
+            print("boiler OFF")
+            status = {'boiler': "ON"}
+    else:
+        status = {'Boiler': 'Non Connect'}
+    return status
