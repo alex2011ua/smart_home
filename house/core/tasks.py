@@ -84,6 +84,9 @@ def arduino_task():
         return err
 
     if dic_param['status'][0] == 'Test-OK':
+        Logs.objects.create(date_log = datetime.now(),
+                            title_log = 'Status',
+                            description_log = f'{dic_param["status"]}')
         if dic_param.get('Humidity_out'):
             temp_out = Temp_out.objects.create(date_temp = datetime.now(),
                                     temp = dic_param['Temperature_out'],
@@ -92,7 +95,9 @@ def arduino_task():
             temp_in = Temp1.objects.create(date_temp = datetime.now(),
                                            temp = dic_param['Temperature_in'],
                                            humidity = dic_param['Humidity_in'])
-
+        Logs.objects.create(date_log = datetime.now(),
+                            title_log = 'TEMP',
+                            description_log = f'{temp_in}, {temp_out}')
     if (dic_param['status'][0] != 'Test-OK') or (len(dic_param['status']) > 1):
         log = Logs.objects.create(date_log = datetime.now(),
                           title_log = 'temp Arduino',
