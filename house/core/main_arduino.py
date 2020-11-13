@@ -41,7 +41,7 @@ def read_ser():
     if context['status'][0] == 'Test-Fail':
         return context
 
-    arduino.write(b'2')
+    arduino.write(b'p')
     time.sleep(1)
     read_dht11 = arduino.read()
     if read_dht11 == 'Error_reading_from_DHT':  # ошибка чтения датчика
