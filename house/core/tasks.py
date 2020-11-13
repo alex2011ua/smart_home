@@ -106,7 +106,7 @@ def arduino_task():
 
 
 @cellery_app.task()
-def Boiler_task_on():
+def boiler_task_on():
     print('Start boiler on')
     try:
         context = boiler_on()
@@ -122,8 +122,9 @@ def Boiler_task_on():
 
     print('Start boiler Close on')
 
+
 @cellery_app.task()
-def Boiler_task_off():
+def boiler_task_off():
     print('Start boiler off')
     try:
         context = boiler_off()

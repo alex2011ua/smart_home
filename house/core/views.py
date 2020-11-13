@@ -9,7 +9,7 @@ DEBUG = settings.DEBUG
 
 from .models import Setting, Temp1, Logs, Temp_out, WeatherRain
 from .form import ControllerForm
-from .tasks import Boiler_task_on, Boiler_task_off
+from .tasks import boiler_task_on, boiler_task_off
 from django.http import HttpResponse
 
 from .main_arduino import restart_cam, read_ser, reset, testing
@@ -109,7 +109,7 @@ class Boiler(View):
     @staticmethod
     def get(request):
         try:
-            Boiler_task_on()
+            boiler_task_on().delay()
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                       title_log = 'Boiler',
                                       description_log = 'Включение бойлера')
@@ -118,7 +118,7 @@ class Boiler(View):
                                   title_log = 'Boiler',
                                   description_log = 'Ошибка ардуино Boiler'+ str(exx))
         try:
-            Boiler_task_off().apply_async(countdown=60*5)
+            boiler_task_off().apply_async(countdown=60*5)
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                       title_log = 'Boiler',
                                       description_log = 'ВЫключение бойлера')
