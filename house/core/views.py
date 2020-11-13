@@ -38,8 +38,8 @@ class ControllerView(FormView):
         context['data'].update(boiler(DEBUG))  # state boiler
 
         try:
-            temp_in = Temp1.objects.all().order_by('-id')[0]  # arduino state
-            temp_out = Temp_out.objects.all().order_by('-id')[0]  # arduino state
+            temp_in = Temp1.objects.all().order_by('-date_temp')[0]  # arduino state
+            temp_out = Temp_out.objects.all().order_by('-date_temp')[0]  # arduino state
         except IndexError:
             temp_in = Temp1.objects.create(date_temp = datetime.datetime.now(),
                                            temp = 111,

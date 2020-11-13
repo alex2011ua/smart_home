@@ -105,6 +105,7 @@ void Boiler(int status){ //управление бойлером
   if (status == 0){
     digitalWrite(PIN_RELAY_BOILER, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("boiler off");
+    }
 }
 
 void loop(){
