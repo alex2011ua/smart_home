@@ -106,8 +106,8 @@ def arduino_task():
 
 
 @cellery_app.task()
-def Boiler_task():
-    print('Start boiler')
+def Boiler_task_on():
+    print('Start boiler on')
     try:
         context = boiler_on()
     except Exception as err:
@@ -119,8 +119,22 @@ def Boiler_task():
     Logs.objects.create(date_log = datetime.now(),
                               title_log = 'Бойлер',
                               description_log = str(context['status']))
-    context = boiler_off().apply_async(countdown=60*5)
+
+    print('Start boiler Close on')
+
+@cellery_app.task()
+def Boiler_task_off():
+    print('Start boiler off')
+    try:
+        context = boiler_off()
+    except Exception as err:
+        Logs.objects.create(date_log = datetime.now(),
+                            title_log = 'Бойлер',
+                            description_log = 'Не выключен Exeption' + err)
+        return
+
     Logs.objects.create(date_log = datetime.now(),
-                              title_log = 'Бойлер',
-                              description_log = str(context['status']))
-    print('Start boiler Close')
+                        title_log = 'Бойлер',
+                        description_log = str(context['status']))
+
+    print('Start boiler Close off')
