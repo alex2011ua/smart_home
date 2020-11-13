@@ -71,15 +71,6 @@ void read_dht_param(int place){  // чтение температуры dh11
 }
 
 void Test(){  // во время теста 6 раз мигнем светодиодом
-    for (int i = 0; i < 6; i++) {
-        digitalWrite(led, HIGH);
-        delay(400);
-        digitalWrite(led, LOW);
-        delay(400);
-        digitalWrite(led, HIGH);
-        delay(400);
-        digitalWrite(led, LOW);
-    }
     Serial.println("OK");
 }
 

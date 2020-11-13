@@ -16,7 +16,7 @@ def testing():  # test answer Arduino
         time.sleep(1)
         test = arduino.read()
         if test == "OK":  # Связь есть, получаем данные
-            return {'status': ['Test-OK']}
+            return {'status': ['Test-OK', i]}
     return {'status': ['Test-Fail']}
 
 
