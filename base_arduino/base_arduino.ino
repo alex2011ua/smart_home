@@ -6,6 +6,8 @@
 #define DHT22PIN 4 // уличный dht 22
 #define PIN_RELAY_BOILER  5 // реле включения бойлера
 
+
+
 int led = 13; // led как пин 13
 
 // список команд с serial port
@@ -17,6 +19,7 @@ int led = 13; // led как пин 13
 #define TEST 't'
 #define BOILER_ON 'B'
 #define BOILER_OFF 'b'
+
 
 
 //выбор используемого датчика
@@ -34,7 +37,9 @@ void setup(){
   delay(1000); // ждем 1 секунду
   Serial.begin(9600);
   pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
-  digitalWrite(PIN_RELAY, HIGH); // Выключаем реле - посылаем высокий сигнал
+  pinMode(PIN_RELAY_BOILER, OUTPUT);
+  digitalWrite(PIN_RELAY, LOW); // Выключаем реле - посылаем высокий сигнал
+  digitalWrite(PIN_RELAY_BOILER, LOW);
   pinMode(led, OUTPUT); // объявляем пин 13 как выход
 }
 
@@ -68,7 +73,11 @@ void read_dht_param(int place){  // чтение температуры dh11
 void Test(){  // во время теста 6 раз мигнем светодиодом
     for (int i = 0; i < 6; i++) {
         digitalWrite(led, HIGH);
-        delay(100);
+        delay(400);
+        digitalWrite(led, LOW);
+        delay(400);
+        digitalWrite(led, HIGH);
+        delay(400);
         digitalWrite(led, LOW);
     }
     Serial.println("OK");
@@ -77,12 +86,12 @@ void Test(){  // во время теста 6 раз мигнем светоди
 
 void rele(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY_BOILER, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
     digitalWrite(led, HIGH);        // при 1 включаем светодиод
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY_BOILER, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
     digitalWrite(led, LOW);       // при 0 выключаем светодиод
   }
@@ -90,11 +99,11 @@ void rele(int status){
 
 void Boiler(int status){ //управление бойлером
     if (status == 1){
-    digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY_BOILER, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("bouiler on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY_BOILER, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("boiler off");
 }
 

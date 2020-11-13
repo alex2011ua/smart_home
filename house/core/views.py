@@ -51,7 +51,7 @@ class ControllerView(FormView):
         context['data']['Температура  комнаты 1'] = temp_in.temp
         context['data']['Влажность комнаты 1'] = temp_in.humidity
         context['data']['Дата измерения'] = temp_in.date_temp
-        context['data']['Температура уличног датчика'] = temp_out.temp
+        context['data']['Температура уличного датчика'] = temp_out.temp
         context['data']['Влажность на улице'] = temp_out.humidity
         context['data']['Дата измерения улица'] = temp_out.date_temp
         context['data']['Сумма осадков в следующие 6 дней'] = weather_6.rain
@@ -111,12 +111,12 @@ class Boiler(View):
         try:
             Boiler_on.delay()
             log = Logs.objects.create(date_log = datetime.datetime.now(),
-                                      title_log = 'arduino',
-                                      description_log = 'Aрдуино reset')
+                                      title_log = 'Boiler',
+                                      description_log = 'Включение бойлера')
         except Exception:
             log = Logs.objects.create(date_log = datetime.datetime.now(),
-                                  title_log = 'arduino',
-                                  description_log = 'Ошибка ардуино reset')
+                                  title_log = 'Boiler',
+                                  description_log = 'Ошибка ардуино Boiler')
 
         return redirect(reverse_lazy('form'))
 
@@ -133,6 +133,6 @@ class Test(View):
         except Exception:
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                   title_log = 'arduino',
-                                  description_log = 'Ошибка ардуино reset')
+                                  description_log = 'Ошибка ардуино TEST')
 
         return redirect(reverse_lazy('form'))

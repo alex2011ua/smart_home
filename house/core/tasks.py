@@ -109,7 +109,7 @@ def Boiler_on():
         print(err)
         log = Logs.objects.create(date_log = datetime.now(),
                                   title_log = 'Бойлер',
-                                  description_log = 'Не включен Exeption' + str(err))
+                                  description_log = 'Не включен Exeption' + err)
         return
 
     log = Logs.objects.create(date_log = datetime.now(),

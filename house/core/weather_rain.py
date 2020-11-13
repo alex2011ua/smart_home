@@ -79,7 +79,7 @@ def weather_6_day():
     for i in d["daily"][0:6]:
         if i['temp']['min'] < min_temp:
             min_temp = i['temp']['min']
-        if i['temp']['min'] > max_temp:
+        if i['temp']['max'] > max_temp:
             max_temp = i['temp']['min']
 
     tomorrow_date = start_Date + timedelta(days = 1)
