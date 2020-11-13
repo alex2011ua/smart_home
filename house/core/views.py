@@ -109,7 +109,7 @@ class Boiler(View):
     @staticmethod
     def get(request):
         try:
-            boiler_task_on().delay()
+            boiler_task_on.delay()
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                       title_log = 'Boiler',
                                       description_log = 'Включение бойлера')
@@ -118,7 +118,7 @@ class Boiler(View):
                                   title_log = 'Boiler',
                                   description_log = 'Ошибка ардуино Boiler'+ str(exx))
         try:
-            boiler_task_off().apply_async(countdown=60*5)
+            boiler_task_off.apply_async(countdown=60*5)
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                       title_log = 'Boiler',
                                       description_log = 'ВЫключение бойлера')
