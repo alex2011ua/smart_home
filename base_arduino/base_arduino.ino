@@ -5,6 +5,8 @@
 #define DHTPIN 3     // к какому пину будет подключен вывод Data dht 11
 #define DHT22PIN 4 // уличный dht 22
 #define PIN_RELAY_BOILER  5 // реле включения бойлера
+#define PIN_SOUND  6 // пищалка
+#define PIN_DHT11_GAZ 7//Температура воздуха возле вытяжки
 
 
 
@@ -13,22 +15,25 @@ int led = 13; // led как пин 13
 // список команд с serial port
 #define RELE_OFF '0'
 #define RELE_ON '1'
-#define SEND_DATA_TEMP '2'
-#define SEND_DATA_TEMP22 '3'
+#define SEND_PARAM 'P'
+
 #define RESET 'r'
 #define TEST 't'
 #define BOILER_ON 'B'
 #define BOILER_OFF 'b'
-
+#define SOUND_ON 'S'
+#define SOUND_OFF 's'
 
 
 //выбор используемого датчика
-#define DHTTYPE DHT11   // DHT 11 
+#define DHTTYPE DHT11   // DHT 11
+
 #define DHTTYPE22 DHT22   // DHT 22  (AM2302)
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 //инициализация датчика
 DHT dht(DHTPIN, DHTTYPE);
 DHT dht22(DHT22PIN, DHTTYPE22);
+DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха возле вытяжки
 int temp_street = 0;
 int temp_podval = 1;
 
@@ -40,34 +45,45 @@ void setup(){
   pinMode(PIN_RELAY_BOILER, OUTPUT);
   digitalWrite(PIN_RELAY, LOW); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY_BOILER, LOW);
+  pinMode(PIN_SOUND, OUTPUT);
   pinMode(led, OUTPUT); // объявляем пин 13 как выход
 }
 
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
-void read_dht_param(int place){  // чтение температуры dh11
+void read_dht_param(){  // чтение температуры dh11
   float h;
   float t;
-  if (place == 0){
-        dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-        h = dht22.readHumidity();
-        t = dht22.readTemperature();
-  }
-  if (place == 1){
-        dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-        h = dht.readHumidity();
-        t = dht.readTemperature();
-  }
-  if (isnan(t) ||  ( isnan(h)) ){
-    Serial.println("Error_reading_from_DHT");
-  }
-  else {
-  Serial.print("Humidity:");
-  Serial.print(h);
-  Serial.print(":");
-  Serial.print("Temperature:");
-  Serial.println(t);
-  }
+  String json = " {";
+  dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+  
+  h = dht22.readHumidity();
+  t = dht22.readTemperature();
+  json += "'temp_street': ";
+  json += t;
+  json += ", 'Humidity_street': ";
+  json += h;
+
+    dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+    h = dht.readHumidity();
+    t = dht.readTemperature();
+    json += ",'temp_voda': ";
+    json += t;
+    json += ", 'Humidity_voda': ";
+    json += h;
+
+  dht_gaz.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+    h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
+    t = dht_gaz.readTemperature();
+    json += ",'temp_gaz': ";
+    json += t;
+    json += ", 'Humidity_gaz': ";
+    json += h;
+    json += "}";
+
+    Serial.println(json);
+
+  
 }
 
 void Test(){  // во время теста 6 раз мигнем светодиодом
@@ -109,12 +125,10 @@ void loop(){
     if (val == RELE_ON){//  если 1 включаем реле
       rele(1);
     }
-    if (val == SEND_DATA_TEMP){ //  если 2 смотрим домашний датчик
-      read_dht_param(temp_podval);
+    if (val == SEND_PARAM){ //  если P шлем параметры
+      read_dht_param();
     }
-    if (val == SEND_DATA_TEMP22){ //  если 3 смотрим уличный датчик
-      read_dht_param(temp_street);
-    }
+    
     if (val == RESET){ //  если r  перезапускаем Arduino
       Serial.println("get data");
       resetFunc(); //вызываем reset
@@ -128,5 +142,22 @@ void loop(){
     if (val == BOILER_OFF){ // управление бойлером Выключаем
         Boiler(0);
     }
+    if (val == SOUND_ON){ // управление бойлером Включаем
+        Sound(1);
+    }
+    if (val == SOUND_OFF){ // управление бойлером Выключаем
+        Sound(0);
+    }
+  }
+}
+
+void Sound(int status){
+  if (status == 1){
+    analogWrite(PIN_SOUND, 50); // включаем пьезоизлучатель
+    Serial.println("Sound on");
+  }
+  if (status == 0){
+    analogWrite(PIN_SOUND, 0); // выключаем звук
+    Serial.println("Sound off");
   }
 }
