@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from .main_arduino import restart_cam, read_ser, boiler
+from .main_arduino import restart_cam, read_ser, boiler_on, boiler_off
 from .weather_rain import weather_6_day, rain_yesterday
 from .models import Setting, Logs, WeatherRain, Temp1, Temp_out
 from ..celery import cellery_app
@@ -106,19 +106,21 @@ def arduino_task():
 
 
 @cellery_app.task()
-def Boiler_on():
+def Boiler_task():
     print('Start boiler')
     try:
-        context = boiler()
+        context = boiler_on()
     except Exception as err:
-        print(err)
-        log = Logs.objects.create(date_log = datetime.now(),
+        Logs.objects.create(date_log = datetime.now(),
                                   title_log = 'Бойлер',
                                   description_log = 'Не включен Exeption' + err)
         return
 
-    log = Logs.objects.create(date_log = datetime.now(),
+    Logs.objects.create(date_log = datetime.now(),
                               title_log = 'Бойлер',
                               description_log = str(context['status']))
-
+    context = boiler_off().apply_async(countdown=60*5)
+    Logs.objects.create(date_log = datetime.now(),
+                              title_log = 'Бойлер',
+                              description_log = str(context['status']))
     print('Start boiler Close')
