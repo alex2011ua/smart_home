@@ -82,7 +82,7 @@ def weather_6_day():
         if i['temp']['max'] > max_temp:
             max_temp = i['temp']['min']
 
-    tomorrow_date = start_Date + timedelta(days = 1)
+    tomorrow_date = start_Date + timedelta(days=1)
     context = {
         'tomorrow_date':    tomorrow_date,
         'summ_rain_3_day':  summ_rain_3_day,
@@ -122,7 +122,7 @@ def rain_yesterday():
         if item['temp'] < min_temp:
             min_temp = item['temp']
 
-    result_date = start_Date - timedelta(days = 1)
+    result_date = start_Date - timedelta(days=1)
     context = {
         'result_date': result_date,
         'sum_rain': sum_rain,

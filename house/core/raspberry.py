@@ -31,20 +31,39 @@ def raspberry(flag):
         status = {'test Raspbery': 'Non Connect', 'test Raspbery2': 'Non Connect'}
         return status
 
-def boiler(flag):
+def button(flag):
         # Connections:
-        # GPIO2 is button input
+        # GPIO5 is button input
     if not flag:
         import RPi.GPIO as GPIO
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(2, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-        input_state = GPIO.input(2)
-        if input_state == False:
+        GPIO.setup(5, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+        GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        boiler = GPIO.input(2)
+        garaz = GPIO.input(6)
+        dvor = GPIO.input(13)
+
+        if boiler == False:
             print('boiler ON')
             status = {'Бойлер': "Включен"}
         else:
             print("boiler OFF")
             status = {'Бойлер': "Выключен"}
+        if garaz == False:
+            print('garaz ON')
+            status = {'Гараж': "Открыт"}
+        else:
+            print("boiler OFF")
+            status = {'Бойлер': "Закрыт"}
+        if dvor == False:
+            print('dvor ON')
+            status = {'Дверь': "Открыт"}
+        else:
+            print("boiler OFF")
+            status = {'Дверь': "Закрыт"}
     else:
-        status = {'Boiler': 'Non Connect'}
+        status = {'Raspbery': 'Non Connect'}
     return status

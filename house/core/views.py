@@ -13,7 +13,7 @@ from .tasks import boiler_task_on, boiler_task_off
 from django.http import HttpResponse
 
 from .main_arduino import restart_cam, read_ser, reset, testing
-from .raspberry import raspberry, boiler
+from .raspberry import raspberry, button
 from .weather_rain import weather_now
 from house.core.tasks import restart_cam_task, weather_task, arduino_task
 import datetime
@@ -35,7 +35,7 @@ class ControllerView(FormView):
 
 
         context['data'] = raspberry(DEBUG)  # state raspberry
-        context['data'].update(boiler(DEBUG))  # state boiler
+        context['data'].update(button(DEBUG))  # state boiler
 
         try:
             temp_in = Temp1.objects.all().order_by('-date_temp')[0]  # arduino state

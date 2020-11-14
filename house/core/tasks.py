@@ -67,7 +67,7 @@ def weather_task():
 
     Logs.objects.create(date_log =datetime.now(),
                     title_log='Weather',
-                    description_log=f'{r_tomorrow}, {r_yesterday}')
+                    description_log=f'{r_tomorrow.date} -завтра, {r_yesterday.date} - вчеоа')
     print('weather_task end')
 
 
