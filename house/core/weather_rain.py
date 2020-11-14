@@ -80,7 +80,7 @@ def weather_6_day():
         if i['temp']['min'] < min_temp:
             min_temp = i['temp']['min']
         if i['temp']['max'] > max_temp:
-            max_temp = i['temp']['min']
+            max_temp = i['temp']['max']
 
     tomorrow_date = start_Date + timedelta(days=1)
     context = {
