@@ -45,25 +45,25 @@ def button(flag):
         boiler = GPIO.input(5)
         garaz = GPIO.input(6)
         dvor = GPIO.input(13)
-
+        status = {}
         if boiler == False:
             print('boiler ON')
-            status = {'Бойлер': "Включен"}
+            status.update({'Бойлер': "Включен"})
         else:
             print("boiler OFF")
-            status = {'Бойлер': "Выключен"}
+            status.update({'Бойлер': "Выключен"})
         if garaz == False:
             print('garaz ON')
-            status = {'Гараж': "Открыт"}
+            status.update({'Гараж': "Открыт"})
         else:
             print("boiler OFF")
-            status = {'Бойлер': "Закрыт"}
+            status.update({'Бойлер': "Закрыт"})
         if dvor == False:
             print('dvor ON')
-            status = {'Дверь': "Открыт"}
+            status.update({'Дверь': "Открыт"})
         else:
             print("boiler OFF")
-            status = {'Дверь': "Закрыт"}
+            status.update({'Дверь': "Закрыт"})
     else:
         status = {'Raspbery': 'Non Connect'}
     return status
