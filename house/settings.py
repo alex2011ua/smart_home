@@ -35,6 +35,10 @@ if os.environ.get('myDEBUG') == 'True':
 else:
     DEBUG = False
 
+if os.environ.get('PLACE') == 'raspberry':
+    PLACE = False
+else:
+    PLACE = True
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:

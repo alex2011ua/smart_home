@@ -3,7 +3,7 @@ from .Arduino import Arduino
 from .DebagArduino import DebagArduino
 
 from django.conf import settings
-DEBUG = settings.DEBUG
+DEBUG = settings.PLACE
 if DEBUG:  # если Дебаг то на компе нет Ардуино
     arduino = DebagArduino()  # используем эмулятор
 else:

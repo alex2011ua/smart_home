@@ -5,7 +5,7 @@ from django.views.generic import FormView
 from django.views import View
 from django.shortcuts import render, redirect
 from django.conf import settings
-DEBUG = settings.DEBUG
+DEBUG = settings.PLACE
 
 from .models import Setting, Temp1, Logs, Temp_out, WeatherRain
 from .form import ControllerForm
