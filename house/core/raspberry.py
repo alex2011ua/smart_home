@@ -57,7 +57,7 @@ def button(flag):
             status.update({'Гараж': "Открыт"})
         else:
             print("boiler OFF")
-            status.update({'Бойлер': "Закрыт"})
+            status.update({'Гараж': "Закрыт"})
         if dvor == False:
             print('dvor ON')
             status.update({'Дверь': "Открыт"})
