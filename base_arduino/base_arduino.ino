@@ -132,9 +132,6 @@ void Sound(int status){
 }
 
 
-
-}
-
 void Test(){  // во время теста 6 раз мигнем светодиодом
     Serial.println("OK");
 }
