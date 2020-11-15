@@ -38,8 +38,8 @@ void setup(){
   Serial.begin(9600);
   pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY_BOILER, OUTPUT);
-  digitalWrite(PIN_RELAY, HIGH); // Выключаем реле - посылаем высокий сигнал
-  digitalWrite(PIN_RELAY_BOILER, HIGH);
+  digitalWrite(PIN_RELAY, LOW); // Выключаем реле - посылаем высокий сигнал
+  digitalWrite(PIN_RELAY_BOILER, LOW);
   pinMode(PIN_SOUND, OUTPUT);
   pinMode(led, OUTPUT); // объявляем пин 13 как выход
 }
@@ -142,24 +142,24 @@ void Test(){  // во время теста 6 раз мигнем светоди
 
 void rele(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY, LOW); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
-    digitalWrite(led, HIGH);        // при 1 включаем светодиод
+    digitalWrite(led, LOW);        // при 1 включаем светодиод
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY, HIGH); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
-    digitalWrite(led, LOW);       // при 0 выключаем светодиод
+    digitalWrite(led, HIGH);       // при 0 выключаем светодиод
   }
 }
 
 void Boiler(int status){ //управление бойлером
     if (status == 1){
-    digitalWrite(PIN_RELAY_BOILER, LOW); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY_BOILER, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("bouiler on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY_BOILER, HIGH); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY_BOILER, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("boiler off");
     }
 }
