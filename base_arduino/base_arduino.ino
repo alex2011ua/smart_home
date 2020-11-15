@@ -51,32 +51,40 @@ void read_dht_param(){  // чтение температуры dh11
   float t;
   String json = " {";
   dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-  
+
   h = dht22.readHumidity();
   t = dht22.readTemperature();
   json += "'temp_street': ";
-  json += t;
+  char myStr[5];  // текстовый массив
+  dtostrf(t, 2,2,myStr);
+  json += myStr;
   json += ", 'Humidity_street': ";
-  json += h;
+  dtostrf(h, 2,2,myStr);
+  json += myStr;
+
 
     dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
     h = dht.readHumidity();
     t = dht.readTemperature();
     json += ",'temp_voda': ";
-    json += t;
+    dtostrf(t, 2,2,myStr);
+    json += myStr;
     json += ", 'Humidity_voda': ";
-    json += h;
+    dtostrf(h, 2,2,myStr);
+    json += myStr;
   dht_gaz.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
     h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
     t = dht_gaz.readTemperature();
     json += ",'temp_gaz': ";
-    json += t;
+    dtostrf(t, 2,2,myStr);
+    json += myStr;
     json += ", 'Humidity_gaz': ";
-    json += h;
+    dtostrf(h, 2,2,myStr);
+    json += myStr;
     json += "}";
 
     Serial.println(json);
-
+}
 void loop(){
   char val;
   if (Serial.available()){
