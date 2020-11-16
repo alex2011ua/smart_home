@@ -21,7 +21,7 @@ def testing():  # test answer Arduino
 
         test = arduino.read()
         if test == "OK":  # Связь есть, получаем данные
-            return {'status': ['Test-OK', i]}
+            return {'status': ['Test-OK']}
     return {'status': ['Test-Fail']}
 
 
