@@ -19,10 +19,8 @@ def raspberry(flag):
             for item, value in output['breakdown'].items():
                 if value is True:
                     status[item] = value
-                    print(list_alarm[str(item)])
         else:
-            status['Raspberry'] = 'Ошибок не обнаружено!'
-            print('Ошибок не обнаружено!')
+            status['Состояние Raspberry'] = 'Ошибок не обнаружено!'
 
         temp = vcgm.measure_temp()
         status['Температура процессора'] = temp

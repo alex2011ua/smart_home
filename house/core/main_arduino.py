@@ -8,7 +8,11 @@ DEBUG = settings.PLACE
 if DEBUG:  # если Дебаг то на компе нет Ардуино
     arduino = DebagArduino()  # используем эмулятор
 else:
-    arduino = Arduino()
+    try:
+        arduino = Arduino()
+    except Exception as err:
+        print('Error Serial port')
+
 
 
 def testing():  # test answer Arduino
@@ -41,19 +45,19 @@ def read_ser():
         return context
 
     arduino.write(b'p')
-    read_arduino = arduino.read().split('#')
-    a = read_arduino[-1]
-    b = a.replace("\'",'"')
-    print(b)
+    read_arduino = arduino.read()
     try:
-        json_answer = json.loads(b)
-    except Exception as asd:
-        print(asd)
-
-    print(json_answer)
-    context['read_arduino'] = read_arduino
-
-
+        errors, param = read_arduino.split('#')
+        param = param.replace("\'",'"')
+    except:
+        context['status'].append('Error parce Arduino answer')
+        return context
+    try:
+        json_answer = json.loads(param)
+    except json.JSONDecodeError as asd:
+        context['status'].append('JSONDecodeError')
+        return context
+    context.update(json_answer)
     return context
     
 

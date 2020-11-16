@@ -8,7 +8,7 @@ class Setting(models.Model):
     value = models.IntegerField(default=20)
 
 
-class WeatherRain(models.Model):
+class Weather(models.Model):
     date = models.DateField(unique = True)
     rain = models.IntegerField(default=0)
     temp_min = models.IntegerField(default=0)
@@ -22,13 +22,25 @@ class Logs(models.Model):
     description_log = models.CharField(max_length=150)
 
 
-class Temp1(models.Model):
-    date_temp = models.DateTimeField()
-    temp = models.IntegerField()
-    humidity = models.IntegerField()
+class DHT_MQ(models.Model):
+    date_t_h = models.DateTimeField()
+
+    temp_street = models.FloatField(null=True)
+    humidity_street = models.FloatField(null=True)
+
+    temp_voda = models.FloatField(null=True)
+    humidity_voda = models.FloatField(null=True)
+
+    temp_gaz = models.FloatField(null=True)
+    humidity_gaz = models.FloatField(null=True)
+
+    temp_teplica = models.FloatField(null=True)
+    humidity_teplica = models.FloatField(null=True)
+
+    temp_room = models.IntegerField(null=True)
+    humidity_room = models.IntegerField(null=True)
+
+    gaz_MQ4 = models.IntegerField(null=True)
+    gaz_MQ135 = models.IntegerField(null=True)
 
 
-class Temp_out(models.Model):
-    date_temp = models.DateTimeField()
-    temp = models.IntegerField()
-    humidity = models.IntegerField()

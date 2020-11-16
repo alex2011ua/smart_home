@@ -49,18 +49,16 @@ void(* resetFunc) (void) = 0; // объявляем функцию reset
 void read_dht_param(){  // чтение температуры dh11
   float h;
   float t;
-
-  dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+  char myStr[5];  // текстовый массив
   String json = "#{";
+  dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
   h = dht22.readHumidity();
   t = dht22.readTemperature();
   if (isnan(h) || isnan(t) ) {
-    Serial.println("Ошибка чтения датчика STREET");
-    return;
+    Serial.print(";street");
   }
   else {
     json += "'temp_street': ";
-    char myStr[5];  // текстовый массив
     dtostrf(t, 2,2,myStr);
     json += myStr;
     json += ", 'Humidity_street': ";
@@ -69,13 +67,13 @@ void read_dht_param(){  // чтение температуры dh11
   }
 
     dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-    if (isnan(h) || isnan(t) {
-        Serial.println("Ошибка чтения датчика voda");
-        return;
+    h = dht.readHumidity();
+    t = dht.readTemperature();
+    if (isnan(h) || isnan(t)) {
+        Serial.print(";voda ");
     }
     else {
-      h = dht.readHumidity();
-      t = dht.readTemperature();
+
       json += ",'temp_voda': ";
       dtostrf(t, 2,2,myStr);
       json += myStr;
@@ -84,21 +82,22 @@ void read_dht_param(){  // чтение температуры dh11
       json += myStr;
     }
   dht_gaz.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
-  if (isnan(h) || isnan(t) {
-        Serial.println("Ошибка чтения датчика voda");
-        return;
+  h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
+  t = dht_gaz.readTemperature();
+  if (isnan(h) || isnan(t)) {
+        Serial.print(";gaz");
     }
   else {
-    h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
-    t = dht_gaz.readTemperature();
+
     json += ",'temp_gaz': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
     json += ", 'Humidity_gaz': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
-    json += "}";
+
   }
+    json += "}";
     Serial.println(json);
 }
 void loop(){

@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from .main_arduino import restart_cam, read_ser, boiler_on, boiler_off
 from .weather_rain import weather_6_day, rain_yesterday
-from .models import Setting, Logs, WeatherRain, Temp1, Temp_out
+from .models import  Logs, Weather, DHT_MQ
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
@@ -55,21 +55,21 @@ def weather_task():
                                             f'код ответа запроса "вчера" - {yesterday["status_code"]}')
     try:
 
-        r_tomorrow = WeatherRain.objects.create(date=six_day['tomorrow_date'],
-                                                rain=six_day['summ_rain_3_day'],
-                                                temp_min=six_day['min_temp'],
-                                                temp_max=six_day['max_temp'],
-                                                snow=six_day['summ_snow_3_day'],
-                                                )
+        r_tomorrow = Weather.objects.create(date=six_day['tomorrow_date'],
+                                            rain=six_day['summ_rain_3_day'],
+                                            temp_min=six_day['min_temp'],
+                                            temp_max=six_day['max_temp'],
+                                            snow=six_day['summ_snow_3_day'],
+                                            )
     except django.db.utils.IntegrityError:
-        r_tomorrow = WeatherRain.objects.get(date=six_day['tomorrow_date'])
+        r_tomorrow = Weather.objects.get(date=six_day['tomorrow_date'])
         Logs.objects.create(date_log=datetime.now(),
                             title_log='Weather',
-                            description_log='Ошибка записи в БД, '+ str(r_tomorrow))
+                            description_log='Ошибка записи в БД, ' + str(r_tomorrow))
     try:
-        r_yesterday = WeatherRain.objects.get(date = yesterday['result_date'])
+        r_yesterday = Weather.objects.get(date = yesterday['result_date'])
     except ObjectDoesNotExist:
-        r_yesterday = WeatherRain.objects.create(date=yesterday['result_date'])
+        r_yesterday = Weather.objects.create(date=yesterday['result_date'])
     r_yesterday.rain = yesterday['sum_rain']
     r_yesterday.snow = yesterday['sum_snow']
     r_yesterday.temp_min = yesterday['min_temp']
@@ -92,30 +92,31 @@ def arduino_task():
         log = Logs.objects.create(date_log=datetime.now(),
                                   title_log='temp Arduino',
                                   description_log='Ошибка ардуино Exeption')
-        return err
+        return
 
-    if dic_param['status'][0] == 'Test-OK':
-        Logs.objects.create(date_log=datetime.now(),
-                            title_log='Ответ ардуино',
-                            description_log=dic_param['read_arduino'])
-'''
-        if dic_param.get('Humidity_out'):
-            temp_out = Temp_out.objects.create(date_temp = datetime.now(),
-                                    temp = dic_param['Temperature_out'],
-                                    humidity = dic_param['Humidity_out'])
-        if dic_param.get('Humidity_in'):
-            temp_in = Temp1.objects.create(date_temp = datetime.now(),
-                                           temp = dic_param['Temperature_in'],
-                                           humidity = dic_param['Humidity_in'])
-        Logs.objects.create(date_log = datetime.now(),
-                            title_log = 'TEMP',
-                            description_log = f'{temp_in}, {temp_out}')
-    if (dic_param['status'][0] != 'Test-OK') or (len(dic_param['status']) > 1):
-        log = Logs.objects.create(date_log = datetime.now(),
-                          title_log = 'temp Arduino',
-                          description_log = str(dic_param['status']))
+    if dic_param['status'][-1] == 'Test-OK':
+        temp = DHT_MQ.objects.create(date_t_h=datetime.now())
+
+        if dic_param.get('temp_voda'):
+            temp.temp_voda = dic_param['temp_voda']
+            temp.humidity_voda = dic_param['humidity_voda']
+        if dic_param.get('temp_gaz'):
+            temp.temp_gaz = dic_param['temp_gaz']
+            temp.humidity_gaz = dic_param['humidity_gaz']
+        if dic_param.get('temp_street'):
+            temp.temp_street = dic_param['temp_street']
+            temp.humidity_street = dic_param['humidity_street']
+        if dic_param.get('gaz_MQ4'):
+            temp.gaz_MQ4 = dic_param['gaz_MQ4']
+        if dic_param.get('gaz_MQ135'):
+            temp.gaz_MQ4 = dic_param['gaz_MQ135']
+
+    else:
+        log = Logs.objects.create(date_log=datetime.now(),
+                          title_log='DHT_MQ Arduino',
+                          description_log=str(dic_param['status'])+'Error')
     print('arduino_task Close')
-'''
+
 
 @cellery_app.task()
 def boiler_task_on():
@@ -123,14 +124,14 @@ def boiler_task_on():
     try:
         context = boiler_on()
     except Exception as err:
-        Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'Бойлер',
-                                  description_log = 'Не включен Exeption' + err)
+        Logs.objects.create(date_log=datetime.now(),
+                            title_log='Бойлер',
+                            description_log='Не включен Exeption' + str(err))
         return
 
-    Logs.objects.create(date_log = datetime.now(),
-                              title_log = 'Бойлер',
-                              description_log = str(context['status']))
+    Logs.objects.create(date_log=datetime.now(),
+                        title_log='Бойлер',
+                        description_log=str(context['status']))
 
     print('Start boiler Close on')
 
@@ -141,13 +142,13 @@ def boiler_task_off():
     try:
         context = boiler_off()
     except Exception as err:
-        Logs.objects.create(date_log = datetime.now(),
-                            title_log = 'Бойлер',
-                            description_log = 'Не выключен Exeption' + err)
+        Logs.objects.create(date_log=datetime.now(),
+                            title_log='Бойлер',
+                            description_log='Не выключен Exeption' + str(err))
         return
 
-    Logs.objects.create(date_log = datetime.now(),
-                        title_log = 'Бойлер',
-                        description_log = str(context['status']))
+    Logs.objects.create(date_log=datetime.now(),
+                        title_log='Бойлер',
+                        description_log=str(context['status']))
 
     print('Start boiler Close off')

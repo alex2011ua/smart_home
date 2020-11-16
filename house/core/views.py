@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 DEBUG = settings.PLACE
 
-from .models import Setting, Temp1, Logs, Temp_out, WeatherRain
+from .models import Logs, DHT_MQ, Weather
 from .form import ControllerForm
 from .tasks import boiler_task_on, boiler_task_off
 from django.http import HttpResponse
@@ -21,39 +21,38 @@ import datetime
 
 
 
-class ControllerView(FormView):
-    form_class = ControllerForm
-    template_name = 'core/control.html'
-    success_url = reverse_lazy('form')
-
-    def get_context_data(self, **kwargs):
-        context = super(ControllerView, self).get_context_data()
+class ControllerView(View):
+    @staticmethod
+    def get(request):
+        context = {}
         date_now = datetime.datetime.now()
-
-        weather_6 = WeatherRain.objects.all().order_by('-date')[0]
-
-
 
         context['data'] = raspberry(DEBUG)  # state raspberry
         context['data'].update(button(DEBUG))  # state boiler
 
         try:
-            temp_in = Temp1.objects.all().order_by('-date_temp')[0]  # arduino state
-            temp_out = Temp_out.objects.all().order_by('-date_temp')[0]  # arduino state
+            temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
         except IndexError:
-            temp_in = Temp1.objects.create(date_temp = datetime.datetime.now(),
-                                           temp = 111,
-                                           humidity = 222)
-            temp_out = Temp_out.objects.create(date_temp = datetime.datetime.now(),
-                                           temp = 111,
-                                           humidity = 222)
+            temp = DHT_MQ.objects.create(date_t_h=datetime.datetime.now())
+        context['data']['Дата измерения'] = temp.date_t_h
+        context['data']['Температура уличного датчика'] = temp.temp_street
+        context['data']['Влажность на улице'] = temp.humidity_street
 
-        context['data']['Температура  комнаты 1'] = temp_in.temp
-        context['data']['Влажность комнаты 1'] = temp_in.humidity
-        context['data']['Дата измерения'] = temp_in.date_temp
-        context['data']['Температура уличного датчика'] = temp_out.temp
-        context['data']['Влажность на улице'] = temp_out.humidity
-        context['data']['Дата измерения улица'] = temp_out.date_temp
+        context['data']['Температура входящей воды'] = temp.temp_voda
+        context['data']['Влажность возле котла'] = temp.humidity_voda
+
+        context['data']['Температура котельной'] = temp.temp_gaz
+        context['data']['Влажность котельной'] = temp.humidity_gaz
+
+        context['data']['Температура теплицы'] = temp.temp_teplica
+        context['data']['Влажность теплицы'] = temp.humidity_teplica
+
+        context['data']['Показания датчика MQ4'] = temp.gaz_MQ4
+        context['data']['Влажность датчика MQ135'] = temp.gaz_MQ135
+        try:
+            weather_6 = Weather.objects.all().order_by('-date')[0]
+        except:
+            return redirect(reverse_lazy('temp'))
         context['data']['Сумма осадков в следующие 6 дней'] = weather_6.rain
         context['data']['Количество снега в следующие 6 дней'] = weather_6.snow
         context['data']['минимальная температура за 6 дней'] = weather_6.temp_min
@@ -66,14 +65,7 @@ class ControllerView(FormView):
 
         logs = Logs.objects.all().order_by('-date_log')[0:20]
         context['logs'] = logs
-        return context
-
-    def get_initial(self):
-        return {}
-
-    def form_valid(self, form):
-        return super(ControllerView, self).form_valid(form)
-
+        return render(request, "core/control.html", context)
 
 class RestartCam(View):
     @staticmethod
