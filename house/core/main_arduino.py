@@ -1,4 +1,5 @@
 import time
+import json
 from .Arduino import Arduino
 from .DebagArduino import DebagArduino
 
@@ -40,7 +41,16 @@ def read_ser():
         return context
 
     arduino.write(b'p')
-    read_arduino = arduino.read()
+    read_arduino = arduino.read().split('#')
+    a = read_arduino[-1]
+    b = a.replace("\'",'"')
+    print(b)
+    try:
+        json_answer = json.loads(b)
+    except Exception as asd:
+        print(asd)
+
+    print(json_answer)
     context['read_arduino'] = read_arduino
 
 
