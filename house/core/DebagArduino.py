@@ -9,7 +9,8 @@ class DebagArduino:
             b'3': 'Humidity:64.00:Temperature:4.20',
             b't': 'OK',
             b'B': 'bouiler on',
-            b'b': 'boiler off',
+
+            b'p': 'string',
 
         }
     def write(self, param):

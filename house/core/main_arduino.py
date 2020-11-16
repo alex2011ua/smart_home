@@ -13,7 +13,7 @@ else:
 def testing():  # test answer Arduino
     for i in range(3):
         arduino.write(b't')
-        time.sleep(1)
+
         test = arduino.read()
         if test == "OK":  # Связь есть, получаем данные
             return {'status': ['Test-OK', i]}
@@ -24,12 +24,10 @@ def restart_cam():
     context = testing()
 
     arduino.write(b'0')
-    time.sleep(1)
     print(arduino.read())
     time.sleep(10)
 
     arduino.write(b'1')
-    time.sleep(1)
     print(arduino.read())
 
     context['status'].append('restart cam OK')
@@ -42,7 +40,6 @@ def read_ser():
         return context
 
     arduino.write(b'p')
-    time.sleep(1)
     read_arduino = arduino.read()
     context['read_arduino'] = read_arduino
 
@@ -60,7 +57,6 @@ def reset():
 def boiler_on():
     context = testing()
     arduino.write(b'B')
-    time.sleep(1)
     print(arduino.read())
     context['status'].append('Boiler on')
     return context
@@ -68,7 +64,6 @@ def boiler_on():
 def boiler_off():
     context = testing()
     arduino.write(b'b')
-    time.sleep(1)
     print(arduino.read())
     context['status'].append('Boiler off')
     return context

@@ -12,6 +12,7 @@ class Arduino:
         self.ser.write(param)
 
     def read(self):
+        time.sleep(2)
         string_arduino = self.ser.read(self.ser.inWaiting())
         return string_arduino.decode().strip()
 
