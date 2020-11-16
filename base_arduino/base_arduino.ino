@@ -61,7 +61,7 @@ void read_dht_param(){  // чтение температуры dh11
     json += "'temp_street': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'Humidity_street': ";
+    json += ", 'humidity_street': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
   }
@@ -77,7 +77,7 @@ void read_dht_param(){  // чтение температуры dh11
       json += ",'temp_voda': ";
       dtostrf(t, 2,2,myStr);
       json += myStr;
-      json += ", 'Humidity_voda': ";
+      json += ", 'humidity_voda': ";
       dtostrf(h, 2,2,myStr);
       json += myStr;
     }
@@ -92,7 +92,7 @@ void read_dht_param(){  // чтение температуры dh11
     json += ",'temp_gaz': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'Humidity_gaz': ";
+    json += ", 'humidity_gaz': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
 

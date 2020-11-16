@@ -77,8 +77,8 @@ class RestartCam(View):
 class Temp(View):
     @staticmethod
     def get(request):
-        arduino_task()
-        weather_task()
+        arduino_task()  # читает датчики и занозит изменетия в БД
+        weather_task()  # Запрашивает по АПИ прогноз погоды и вносит в БД
         return redirect(reverse_lazy('form'))
 
 

@@ -86,7 +86,7 @@ def weather_task():
 def arduino_task():
     print('arduino_task add temp')
     try:
-        dic_param = read_ser()
+        dic_param = read_ser()  # Читает с Ардуино значения датчиков
     except Exception as err:
         print(err)
         log = Logs.objects.create(date_log=datetime.now(),
@@ -110,7 +110,7 @@ def arduino_task():
             temp.gaz_MQ4 = dic_param['gaz_MQ4']
         if dic_param.get('gaz_MQ135'):
             temp.gaz_MQ4 = dic_param['gaz_MQ135']
-
+        temp.save()
     else:
         log = Logs.objects.create(date_log=datetime.now(),
                           title_log='DHT_MQ Arduino',
