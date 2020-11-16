@@ -65,7 +65,7 @@ def weather_task():
         r_tomorrow = WeatherRain.objects.get(date=six_day['tomorrow_date'])
         Logs.objects.create(date_log=datetime.now(),
                             title_log='Weather',
-                            description_log='Ошибка записи в БД, '+ r_tomorrow)
+                            description_log='Ошибка записи в БД, '+ str(r_tomorrow))
     try:
         r_yesterday = WeatherRain.objects.get(date = yesterday['result_date'])
     except ObjectDoesNotExist:
