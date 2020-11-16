@@ -35,26 +35,37 @@ def weather_task():
         six_day = weather_6_day()
         yesterday = rain_yesterday()
     except Exception as err:
-        log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'WeatherRain',
-                                  description_log = 'Ошибка openweathermap.org Exeption')
-        print(err)
+        log = Logs.objects.create(
+            date_log = datetime.now(),
+            title_log = 'WeatherAPI',
+            description_log = 'Ошибка openweathermap.org Exeption изменилось API'+str(err))
         return None
+    Logs.objects.create(date_log=datetime.now(),
+                        title_log='Weather six_day',
+                        description_log=six_day,
+                        )
+    Logs.objects.create(date_log=datetime.now(),
+                        title_log='Weather yesterday',
+                        description_log=yesterday,
+                        )
     if six_day['status_code'] != 200 or yesterday['status_code'] != 200:
-        Logs.objects.create(date_log = datetime.now(),
-                            title_log = 'WeatherRain',
-                            description_log = f'{six_day["status_code"]}, '
-                                              f'{yesterday["status_code"]} - status_code')
+        Logs.objects.create(date_log=datetime.now(),
+                            title_log='Weather',
+                            description_log=f'Код ответа прогноза - {six_day["status_code"]}, '
+                                            f'код ответа запроса "вчера" - {yesterday["status_code"]}')
     try:
+
         r_tomorrow = WeatherRain.objects.create(date=six_day['tomorrow_date'],
-                                                rain= six_day['summ_rain_3_day'],
-                                                temp_min= six_day['min_temp'],
+                                                rain=six_day['summ_rain_3_day'],
+                                                temp_min=six_day['min_temp'],
                                                 temp_max=six_day['max_temp'],
-                                                snow= six_day['summ_snow_3_day'],
+                                                snow=six_day['summ_snow_3_day'],
                                                 )
     except django.db.utils.IntegrityError:
         r_tomorrow = WeatherRain.objects.get(date=six_day['tomorrow_date'])
-        print('Already exist')
+        Logs.objects.create(date_log=datetime.now(),
+                            title_log='Weather',
+                            description_log='Ошибка записи в БД, '+ r_tomorrow)
     try:
         r_yesterday = WeatherRain.objects.get(date = yesterday['result_date'])
     except ObjectDoesNotExist:
@@ -65,7 +76,7 @@ def weather_task():
     r_yesterday.temp_max = yesterday['max_temp']
     r_yesterday.save()
 
-    Logs.objects.create(date_log =datetime.now(),
+    Logs.objects.create(date_log=datetime.now(),
                     title_log='Weather',
                     description_log=f'{r_tomorrow.date} -завтра, {r_yesterday.date} - вчеоа')
     print('weather_task end')
@@ -78,15 +89,15 @@ def arduino_task():
         dic_param = read_ser()
     except Exception as err:
         print(err)
-        log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'temp Arduino',
-                                  description_log = 'Ошибка ардуино Exeption')
+        log = Logs.objects.create(date_log=datetime.now(),
+                                  title_log='temp Arduino',
+                                  description_log='Ошибка ардуино Exeption')
         return err
 
     if dic_param['status'][0] == 'Test-OK':
-        Logs.objects.create(date_log = datetime.now(),
-                            title_log = 'Status',
-                            description_log = f'{dic_param["status"]}')
+        Logs.objects.create(date_log=datetime.now(),
+                            title_log='Ответ ардуино',
+                            description_log=dic_param['read_arduino'])
         if dic_param.get('Humidity_out'):
             temp_out = Temp_out.objects.create(date_temp = datetime.now(),
                                     temp = dic_param['Temperature_out'],

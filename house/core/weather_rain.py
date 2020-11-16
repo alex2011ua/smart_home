@@ -24,7 +24,7 @@ def weather_now():  # погода на сегодня и завтра
     """
     payload['exclude'] = 'minutely,hourly'
     url = 'https://api.openweathermap.org/data/2.5/onecall'
-    r = requests.get(url, params = payload)
+    r = requests.get(url, params=payload)
     if r.status_code != 200:
         return {'status_code': r.status_code}
     d = r.json()
@@ -61,7 +61,7 @@ def weather_6_day():
     """
     payload['exclude'] = 'current,minutely,hourly,alerts'
     url = 'https://api.openweathermap.org/data/2.5/onecall'
-    r = requests.get(url, params = payload)
+    r = requests.get(url, params=payload)
     if r.status_code != 200:
         return {'status_code', r.status_code}
     d = r.json()
@@ -103,7 +103,7 @@ def rain_yesterday():
     payload['exclude'] = 'current'
     payload['dt'] = int(timestamp)
     url = 'https://api.openweathermap.org/data/2.5/onecall/timemachine'
-    r = requests.get(url, params = payload)
+    r = requests.get(url, params=payload)
     if r.status_code != 200:
         return {'status_code', r.status_code}
     d = r.json()
