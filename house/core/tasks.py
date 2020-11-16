@@ -98,6 +98,7 @@ def arduino_task():
         Logs.objects.create(date_log=datetime.now(),
                             title_log='Ответ ардуино',
                             description_log=dic_param['read_arduino'])
+'''
         if dic_param.get('Humidity_out'):
             temp_out = Temp_out.objects.create(date_temp = datetime.now(),
                                     temp = dic_param['Temperature_out'],
@@ -114,7 +115,7 @@ def arduino_task():
                           title_log = 'temp Arduino',
                           description_log = str(dic_param['status']))
     print('arduino_task Close')
-
+'''
 
 @cellery_app.task()
 def boiler_task_on():
