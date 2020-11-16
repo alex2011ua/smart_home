@@ -18,12 +18,10 @@ def raspberry(flag):
         if output['binary'] != '00000000000000000000':
             for item, value in output['breakdown'].items():
                 if value is True:
-                    status[item] = value
+                    status['Raspberry'] = list_alarm[value]
         else:
             status['Состояние Raspberry'] = 'Ошибок не обнаружено!'
-
-        temp = vcgm.measure_temp()
-        status['Температура процессора'] = temp
+        status['Температура процессора'] = vcgm.measure_temp()
         return status
     else:
         status = {'test Raspbery': 'Non Connect', 'test Raspbery2': 'Non Connect'}
@@ -45,23 +43,17 @@ def button(flag):
         garaz = GPIO.input(26)
         status = {}
         if boiler == False:
-            print('boiler ON')
-            status.update({'Бойлер': "Включен"})
+            status.update({'Бойлер': "Замкнуто"})
         else:
-            print("boiler OFF")
-            status.update({'Бойлер': "Выключен"})
+            status.update({'Бойлер': "Разомкуто"})
         if garaz == False:
-            print('garaz ON')
-            status.update({'Гараж': "Открыт"})
-        else:
-            print("boiler OFF")
             status.update({'Гараж': "Закрыт"})
-        if dvor == False:
-            print('dvor ON')
-            status.update({'Дверь': "Открыт"})
         else:
-            print("boiler OFF")
-            status.update({'Дверь': "Закрыт"})
+            status.update({'Гараж': "Открый"})
+        if dvor == False:
+            status.update({'Дверь': "Закрыта"})
+        else:
+            status.update({'Дверь': "Открыта"})
     else:
         status = {'Raspbery': 'Non Connect'}
     return status

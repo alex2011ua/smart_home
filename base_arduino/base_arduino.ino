@@ -156,13 +156,11 @@ void rele(int status){
   if (status == 1){
     digitalWrite(PIN_RELAY, LOW); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
-    digitalWrite(led, HIGH);        // при 1 включаем светодиод
   }
   if (status == 0){
     digitalWrite(PIN_RELAY, HIGH); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
-    digitalWrite(led, LOW);       // при 0 выключаем светодиод
-  }
+   }
 }
 
 void Boiler(int status){ //управление бойлером
