@@ -40,9 +40,9 @@ def button(flag):
         GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        boiler = GPIO.input(5)
-        garaz = GPIO.input(6)
-        dvor = GPIO.input(13)
+        boiler = GPIO.input(19)
+        dvor = GPIO.input(6)
+        garaz = GPIO.input(26)
         status = {}
         if boiler == False:
             print('boiler ON')

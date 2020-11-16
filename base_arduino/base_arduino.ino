@@ -1,7 +1,7 @@
 #include "DHT.h"
 // список пинов:
 
-#define PIN_RELAY       2 // Определяем пин, используемый для подключения реле
+#define PIN_RELAY       9 // Определяем пин, используемый для подключения реле
 #define DHTPIN          3     // к какому пину будет подключен вывод Data dht 11
 #define DHT22PIN        4 // уличный dht 22
 #define PIN_RELAY_BOILER  5 // реле включения бойлера
