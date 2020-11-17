@@ -62,8 +62,8 @@ void setup(){
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
 void read_dht_param(){  // чтение температуры dh11
-  boolean noGas; //переменная для хранения значения о присутствии газа
-  int gasValue = 0; //переменная для хранения количества газа
+    boolean noGas; //переменная для хранения значения о присутствии газа
+    int gasValue = 0; //переменная для хранения количества газа
   float h;
   float t;
   char myStr[5];  // текстовый массив
@@ -81,6 +81,7 @@ void read_dht_param(){  // чтение температуры dh11
     json += ", 'humidity_street': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
+    json += ',';
   }
 
     dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
@@ -91,12 +92,13 @@ void read_dht_param(){  // чтение температуры dh11
     }
     else {
 
-      json += ",'temp_voda': ";
+      json += "'temp_voda': ";
       dtostrf(t, 2,2,myStr);
       json += myStr;
       json += ", 'humidity_voda': ";
       dtostrf(h, 2,2,myStr);
       json += myStr;
+      json += ',';
     }
   dht_gaz.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
   h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
@@ -106,36 +108,38 @@ void read_dht_param(){  // чтение температуры dh11
     }
   else {
 
-    json += ",'temp_gaz': ";
+    json += "'temp_gaz': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
     json += ", 'humidity_gaz': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
+    json += ',';
 
   }
-    noGas = digitalRead(digitalSignal_MQ135); //считываем значение о присутствии газа
+    noGas = digitalRead(MQ135); //считываем значение о присутствии газа
     gasValue = analogRead(analogSignal_MQ135); // и о его количестве
-    json += ",'MQ135': ";
+    json += "'MQ135': ";
     if (noGas) {
-    json += "false";
+    json += "false,";
     }
     else{
-    json += "true";
+    json += "true,";
     }
-    json += ", 'MQ135_value': ";
+    json += "'MQ135_value': ";
     json += String(gasValue);
+    json += ',';
 
-    noGas = digitalRead(digitalSignal_MQ4); //считываем значение о присутствии газа
+    noGas = digitalRead(MQ4); //считываем значение о присутствии газа
     gasValue = analogRead(analogSignal_MQ4); // и о его количестве
-    json += ",'MQ4': ";
+    json += "'MQ4': ";
     if (noGas) {
-    json += "false";
+    json += "false,";
     }
     else{
-    json += "true";
+    json += "true,";
     }
-    json += ", 'MQ4_value': ";
+    json += "'MQ4_value': ";
     json += String(gasValue);
 
     json += "}";
