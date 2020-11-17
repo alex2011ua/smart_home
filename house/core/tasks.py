@@ -106,10 +106,11 @@ def arduino_task():
         if dic_param.get('temp_street'):
             temp.temp_street = dic_param['temp_street']
             temp.humidity_street = dic_param['humidity_street']
-        if dic_param.get('gaz_MQ4'):
-            temp.gaz_MQ4 = dic_param['gaz_MQ4']
-        if dic_param.get('gaz_MQ135'):
-            temp.gaz_MQ4 = dic_param['gaz_MQ135']
+        if dic_param.get('MQ4_value'):
+            temp.gaz_MQ4 = dic_param['MQ4_value']
+        if dic_param.get('MQ135_value'):
+            temp.gaz_MQ135 = dic_param['MQ135_value']
+
         temp.save()
     else:
         log = Logs.objects.create(date_log=datetime.now(),
