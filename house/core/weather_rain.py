@@ -14,7 +14,7 @@ payload = {'lat': 50.40,
            'units': 'metric',
            'lang': 'ru',
            }
-start_Date = date.today()  # год, месяц, число
+
 
 
 def weather_now():  # погода на сегодня и завтра
@@ -81,7 +81,7 @@ def weather_6_day():
             min_temp = i['temp']['min']
         if i['temp']['max'] > max_temp:
             max_temp = i['temp']['max']
-
+    start_Date = date.today()  # год, месяц, число
     tomorrow_date = start_Date + timedelta(days=1)
     context = {
         'tomorrow_date':    tomorrow_date,
@@ -99,6 +99,7 @@ def rain_yesterday():
     погода на вчера
     :return: float sum_rain, datetime.date
     '''
+    start_Date = date.today()  # год, месяц, число
     timestamp = time.mktime(start_Date.timetuple())
     payload['exclude'] = 'current'
     payload['dt'] = int(timestamp)
@@ -135,22 +136,41 @@ def rain_yesterday():
 
 
 def weather_min():
-    """
-    :return: summ of rain (Сумма воды которая выпадет за 3 дней)
-    """
-    timestamp = time.mktime(start_Date.timetuple())
 
-    payload = {'lat': 50.40,
-               'lon': 30.31,
-               'appid': 'd16e0dacb5474e43829b385c7102e12d',
-               'units': 'metric',
-               'lang': 'ru',
-               }
+    payload['exclude'] = 'current,minutely,hourly,alerts'
+    payload['appid'] = 'd16e0dacb5474e43829b385c7102e12d'
     url = 'https://api.openweathermap.org/data/2.5/onecall'
-    r = requests.get(url, params = payload)
-
+    r = requests.get(url, params=payload)
+    if r.status_code != 200:
+        return {'status_code', r.status_code}
     d = r.json()
-    return d
+
+    summ_rain_3_day = 0.0
+    summ_snow_3_day = 0.0
+    for i in d["daily"][0:3]:
+        if i.get('rain'):
+            summ_rain_3_day += float(i['rain'])
+        if i.get('snow'):
+            summ_snow_3_day += float(i['snow'])
+
+    min_temp = 100
+    max_temp = -100
+    for i in d["daily"][0:6]:
+        if i['temp']['min'] < min_temp:
+            min_temp = i['temp']['min']
+        if i['temp']['max'] > max_temp:
+            max_temp = i['temp']['max']
+    start_Date = date.today()  # год, месяц, число
+    tomorrow_date = start_Date + timedelta(days=1)
+    context = {
+        'tomorrow_date':    tomorrow_date,
+        'summ_rain_3_day':  summ_rain_3_day,
+        'summ_snow_3_day':  summ_snow_3_day,
+        'min_temp':         min_temp,
+        'max_temp':         max_temp,
+        'status_code':      r.status_code
+    }
+    return context
 
 
 

@@ -43,4 +43,3 @@ class DHT_MQ(models.Model):
     gaz_MQ4 = models.IntegerField(null=True)
     gaz_MQ135 = models.IntegerField(null=True)
 
-class Button(models.Model):
