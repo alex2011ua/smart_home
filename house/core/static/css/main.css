@@ -1,11 +1,13 @@
 .my-center {
 
     margin-right: auto;
-    width: 10em
+    width: 5em
 }
 .b{
-    width: 250px;
+    width: 190px;
     border-radius: 12px;
+    margin-bottom: 10px;
+
 }
 .time_center{
 text-align: center;
@@ -16,5 +18,16 @@ text-align: center;
     padding: 3px;
    }
 .pad{
-    padding-bottom: 15px;
+    padding-bottom: 10px;
+}
+.center{
+    display:flex;
+    justify-content: center; /*центрируем элемент по горизонтали */
+    align-items: center; /* и вертикали */
+    width: 200px; /* задали размеры блоку-родителю */
+    height: 200px;
+    overflow: hidden; /* если элемент больше блока-родителя – обрезаем лишнее */
+}
+.block-width{
+    width: 180px;
 }

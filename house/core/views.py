@@ -27,37 +27,39 @@ class ControllerView(View):
         context = {}
         date_now = datetime.datetime.now()
 
-        context['data'] = raspberry(DEBUG)  # state raspberry
-        context['data'].update(button(DEBUG))  # state boiler
+        context['raspberry'] = raspberry(DEBUG)  # state raspberry
+        context['button'] = button(DEBUG)  # загрузка состояний кнопок
 
         try:
             temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
         except IndexError:
             temp = DHT_MQ.objects.create(date_t_h=datetime.datetime.now())
-        context['data']['Дата измерения'] = temp.date_t_h
-        context['data']['Температура уличного датчика'] = temp.temp_street
-        context['data']['Влажность на улице'] = temp.humidity_street
+        context['sensors'] = {}
+        context['sensors']['date_t_h'] = temp.date_t_h
+        context['sensors']['street_temp'] = temp.temp_street
+        context['sensors']['humidity_street'] = temp.humidity_street
 
-        context['data']['Температура входящей воды'] = temp.temp_voda
-        context['data']['Влажность возле котла'] = temp.humidity_voda
+        context['sensors']['temp_voda'] = temp.temp_voda
+        context['sensors']['humidity_voda'] = temp.humidity_voda
 
-        context['data']['Температура котельной'] = temp.temp_gaz
-        context['data']['Влажность котельной'] = temp.humidity_gaz
+        context['sensors']['temp_gaz'] = temp.temp_gaz
+        context['sensors']['humidity_gaz'] = temp.humidity_gaz
 
-        context['data']['Температура теплицы'] = temp.temp_teplica
-        context['data']['Влажность теплицы'] = temp.humidity_teplica
+        context['sensors']['temp_teplica'] = temp.temp_teplica
+        context['sensors']['humidity_teplica'] = temp.humidity_teplica
 
-        context['data']['Показания датчика MQ4'] = temp.gaz_MQ4
-        context['data']['Влажность датчика MQ135'] = temp.gaz_MQ135
+        context['sensors']['gaz_MQ4'] = temp.gaz_MQ4
+        context['sensors']['gaz_MQ135'] = temp.gaz_MQ135
         try:
             weather_6 = Weather.objects.all().order_by('-date')[0]
         except:
             return redirect(reverse_lazy('temp'))
-        context['data']['Сумма осадков в следующие 6 дней'] = weather_6.rain
-        context['data']['Количество снега в следующие 6 дней'] = weather_6.snow
-        context['data']['минимальная температура за 6 дней'] = weather_6.temp_min
-        context['data']['максимальная температура за 6 дней'] = weather_6.temp_max
-        context['data']['Завтра'] = weather_6.date
+        context['weather_6_day'] = {}
+        context['weather_6_day']['rain'] = weather_6.rain
+        context['weather_6_day']['snow'] = weather_6.snow
+        context['weather_6_day']['temp_min'] = weather_6.temp_min
+        context['weather_6_day']['temp_max'] = weather_6.temp_max
+        context['weather_6_day']['tomorrow'] = weather_6.date
 
         context['time'] = date_now
 
@@ -110,7 +112,7 @@ class Boiler(View):
                                   title_log = 'Boiler',
                                   description_log = 'Ошибка ардуино Boiler'+ str(exx))
         try:
-            boiler_task_off.apply_async(countdown=60*5)
+            boiler_task_off.apply_async(countdown=60*10)
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                       title_log = 'Boiler',
                                       description_log = 'ВЫключение бойлера')

@@ -16,15 +16,16 @@ def raspberry(flag):
         vcgm = Vcgencmd()
         output = vcgm.get_throttled()
         if output['binary'] != '00000000000000000000':
+            status['Raspberry'] = []
             for item, value in output['breakdown'].items():
                 if value is True:
-                    status['Raspberry'] = list_alarm[value]
+                    status['Raspberry'].append(list_alarm[value])
         else:
-            status['Состояние Raspberry'] = 'Ошибок не обнаружено!'
-        status['Температура процессора'] = vcgm.measure_temp()
+            status['Raspberry'] = 'Ошибок не обнаружено!'
+        status['temp_core'] = vcgm.measure_temp()
         return status
     else:
-        status = {'test Raspbery': 'Non Connect', 'test Raspbery2': 'Non Connect'}
+        status = {'Raspberry': 'Non Connect', 'temp_core': 44}
         return status
 
 def button(flag):
@@ -41,19 +42,11 @@ def button(flag):
         boiler = GPIO.input(19)
         dvor = GPIO.input(6)
         garaz = GPIO.input(26)
-        status = {}
-        if boiler == False:
-            status.update({'Бойлер': "Замкнуто"})
-        else:
-            status.update({'Бойлер': "Разомкуто"})
-        if garaz == False:
-            status.update({'Гараж': "Закрыт"})
-        else:
-            status.update({'Гараж': "Открый"})
-        if dvor == False:
-            status.update({'Дверь': "Закрыта"})
-        else:
-            status.update({'Дверь': "Открыта"})
+        #  True - открыто, разомкнуто
+        #  False -  закрыто, замкнуто
+
     else:
-        status = {'Raspbery': 'Non Connect'}
-    return status
+        garaz = False
+        dvor = True
+
+    return {'Garaz': garaz, 'Dor_street': dvor}

@@ -2,98 +2,123 @@
 {% load static %}
 
 {% block head %}
+<header>
+  <div id="layer1" class="container-fluid time_center" >
+    {{time}}{{ alerts }}
+  </div>
+</header>
+
 <div class="container-fluid bg-info ">
-    <div id="layer1" class="row ">
-        <div class="col ">{{time}}{{ alerts }}</div> </div>
-    <div class="row no-gutters ">
-        <div class="col-md-2 ">
-            <div class="card bg-info align-items-center " style="height: 100%; padding: 0px">
-                <div class="card-body bg-info" style="padding: 0px">
-                    <a class="navbar-brand text-center" href="{% url 'form' %}">
-                    <img  src="http://openweathermap.org/img/wn/{{ icon }}.png">
-                    <br />
-                    <img  src="{% static 'img/home.gif' %}" height="65">
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card bg-info align-items-center " style="height: 100%;">
-
-                <div class="card-body bg-info " style="padding: 0px">
-                    <p>Сейчас:</p>
-                    <p> {{description}}<br />
-                      {{temp}} - градусов,<br />
-                      ветер - {{wind}} м/c<br />
-
-                      </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card bg-info align-items-center" style="height: 100%;">
-                <div class="card-body bg-info" style="padding: 0px">
-                    <p>Завтра:{{data_6}}</p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-3 ">
+            <p><strong>Сейчас:</strong><br />
+             {{description}}<br />
+                <em>{{temp}}&deg;</em> - градусов,( <em>{{sensors.street_temp}}&deg;</em>) - датчик<br />
+                ветер - <em>{{wind}}</em> м/c.<br />
+                влажность - <em>{{sensors.humidity_street}}</em>
+            </p>
+            <p><strong>Завтра: </strong>{{weather_6_day.tomorrow}}<br />
               {{description_next}}<br />
-               вероятность осадков: {{pop_next}},<br />
-              температура утром: {{temp_next_morn}}<br />
-            температура днем: {{temp_next_day}}<br />
-            температура вечером: {{temp_next_eve}}<br />
-                    ветер: {{wind_speed_next}}
-                </p>
-                </div>
-            </div>
+                вероятность осадков: <em>{{pop_next}}</em>,<br />
+                температура утром: <em>{{temp_next_morn}}&deg;</em><br />
+                температура днем: <em>{{temp_next_day}}&deg;</em><br />
+                температура вечером: <em>{{temp_next_eve}}&deg;</em><br />
+                ветер:<em> {{wind_speed_next}}м/с.</em>
+             </p>
         </div>
-        <div class="col-md-2">
-            <div class="card bg-info align-items-center" style="height: 100%;">
-                <div class="card-body bg-info" style="padding: 0px">
-                    <p></p>
-                </div>
-            </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
+            <a href="{% url 'test'%} ">  <button type="button" class="btn btn-primary b"  >Тест Ардуино</button></a> <br />
+            <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-primary b"  >Перезагрузка камер</button></a> <br />
+            <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-primary b" >Обновление датчиков </button></a> <br />
+            <a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a> <br />
+            <a href="{% url 'Boiler'%} ">  <button type="button" class="btn btn-warning b" >Включение бойлера </button></a>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
+            <p class=""><a class="" href="{% url 'form' %}">
+                        <img class="my-center"  src="http://openweathermap.org/img/wn/{{ icon }}.png">
+                        <br />
+                        <img  src="{% static 'img/home.gif' %}" height="65">
+                    </a></p>{{raspberry.Raspberry}}<br />
+                            {{raspberry.temp_core}}&deg;
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
+            {% if button.Dor_street %} <span class="badge badge-pill badge-danger b">Дверь Открыта</span>
+            {% else %}          <span class="badge badge-pill badge-success b ">Дверь Закрыта</span>
+            {% endif %}
+            {% if button.Garaz %}      <span class="badge badge-pill badge-danger b">Гараж Открыт</span>
+            {% else %}          <span class="badge badge-pill badge-success b ">Гараж Закрыт</span>
+            {% endif %}
+            {% if sensors.gaz_MQ4 > 190 or sensors.gaz_MQ135 > 150 %} <span class="badge badge-pill badge-dark b ">Внимание: ГАЗ!</span>
+            {% else %} <span class="badge badge-pill badge-light b ">Газ в норме</span>
+            {% endif%}
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-3 ">
+            <p><strong>На неделе:</strong><br />
+            {% if weather_6_day.rain > 5 %}Дожди - {{weather_6_day.rain}}мм. <br /> {% endif %}
+            {% if weather_6_day.snow > 5 %}Снег - {{weather_6_day.snow}}мм. <br /> {% endif %}
+                Минимальная температура: {{weather_6_day.temp_min}}&deg;<br />
+                Максимальная температура: {{weather_6_day.temp_max}}&deg;<br />
+            </p>
         </div>
     </div>
 </div>
-
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md">
-            <div class="card">
-                <div class="card-header">
+  <div class="row">
+      <div class="col-md">
+          <div class="card">
+              <div class="card-header">
                     Настройки
-                </div>
-
+              </div>
                 <div class="card-body">
-                    <ul>
-                    <li class="pad"><a href="{% url 'test'%} ">  <button type="button" class="btn btn-success b"  >Тест Ардуино</button></a></li>
-                    <li class="pad"><a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-success b"  >Перезагрузка камер</button></a></li>
-                    <li class="pad"><a href="{% url 'temp'%} ">  <button type="button" class="btn btn-success b" >Обновление датчиков </button></a></li>
-                    <li class="pad"><a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a></li>
-                    <li class="pad"><a href="{% url 'Boiler'%} ">  <button type="button" class="btn btn-danger b" >Включение бойлера </button></a></li>
-                    </ul>
+                    <span class="badge badge-pill badge-primary ">Primary</span>
+                    <span class="badge badge-pill badge-secondary ">Secondary</span>
+                    <span class="badge badge-pill badge-success  ">Success</span>
+                    <span class="badge badge-pill badge-danger ">Danger</span>
+                    <span class="badge badge-pill badge-warning  ">Warning</span>
+                    <span class="badge badge-pill badge-info ">Info</span>
+                    <span class="badge badge-pill badge-light ">Light</span>
+                    <span class="badge badge-pill badge-dark ">Dark</span>
                 </div>
-            </div>
-        </div>
+          </div>
+      </div>
         <div class="col-md">
             <div class="card">
                 <div class="card-header">
-                    Текущие значения
+                    Котельня
                 </div>
-
                 <div class="card-body">
-                    {% for key, value in data.items %}
-                        <div class="row">
-                            <div class="col-sm">
-                                <strong>{{ key }}</strong>
-                            </div>
-                            <div class="col-4-sm">
-                                {{ value }}
-                            </div>
-                        </div>
-                    {% endfor %}
+                    <div class="row">
+                        <div class="col-sm"><strong>Температура воздуха в котельне</strong></div>
+                        <div class="col-4-sm">{{ sensors.temp_gaz }}&deg</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Влажность в котельне</strong></div>
+                        <div class="col-4-sm">{{ sensors.humidity_gaz }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Температура воды подачи</strong></div>
+                        <div class="col-4-sm">{{ sensors.temp_voda }}&deg</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Влажность возле котла</strong></div>
+                        <div class="col-4-sm">{{ sensors.humidity_voda }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Состояние воздужа по датчику MQ4</strong></div>
+                        <div class="col-4-sm">{{ sensors.gaz_MQ4 }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Состояние воздужа по датчику MQ135</strong></div>
+                        <div class="col-4-sm">{{ sensors.gaz_MQ135 }}</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+  </div>
 </div>
 <table class="table">
   <thead>
@@ -115,6 +140,15 @@
     {% endfor %}
   </tbody>
 </table>
+
+<footer>
+  <div class="container-fluid">
+    FOOTER
+  </div>
+</footer>
+
+
+
 {% endblock %}
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
