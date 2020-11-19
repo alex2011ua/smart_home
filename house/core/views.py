@@ -12,7 +12,7 @@ from .form import ControllerForm
 from .tasks import boiler_task_on, boiler_task_off
 from django.http import HttpResponse
 
-from .main_arduino import restart_cam, read_ser, reset, testing
+from .main_arduino import restart_cam, read_ser, reset, testing, sound
 from .raspberry import raspberry, button
 from .weather_rain import weather_now
 from house.core.tasks import restart_cam_task, weather_task, arduino_task
@@ -136,5 +136,20 @@ class Test(View):
             log = Logs.objects.create(date_log = datetime.datetime.now(),
                                   title_log = 'arduino',
                                   description_log = 'Ошибка ардуино TEST')
+
+        return redirect(reverse_lazy('form'))
+
+class Sound(View):
+    @staticmethod
+    def get(request):
+        try:
+            context = sound()
+            log = Logs.objects.create(date_log = datetime.datetime.now(),
+                                      title_log = 'arduino',
+                                      description_log = context['status'])
+        except Exception:
+            log = Logs.objects.create(date_log = datetime.datetime.now(),
+                                  title_log = 'arduino',
+                                  description_log = 'Ошибка ардуино Exeptyon')
 
         return redirect(reverse_lazy('form'))

@@ -10,29 +10,24 @@
 
 <div class="container-fluid bg-info ">
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-3 ">
-            <p><strong>Сейчас:</strong><br />
-             {{description}}<br />
-                <em>{{temp}}&deg;</em> - градусов,( <em>{{sensors.street_temp}}&deg;</em>) - датчик<br />
-                ветер - <em>{{wind}}</em> м/c.<br />
-                влажность - <em>{{sensors.humidity_street}}</em>
-            </p>
-            <p><strong>Завтра: </strong>{{weather_6_day.tomorrow}}<br />
-              {{description_next}}<br />
-                вероятность осадков: <em>{{pop_next}}</em>,<br />
-                температура утром: <em>{{temp_next_morn}}&deg;</em><br />
-                температура днем: <em>{{temp_next_day}}&deg;</em><br />
-                температура вечером: <em>{{temp_next_eve}}&deg;</em><br />
-                ветер:<em> {{wind_speed_next}}м/с.</em>
-             </p>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+            {% if button.Dor_street %} <span class="badge badge-pill badge-danger b">Дверь Открыта</span>
+            {% else %}          <span class="badge badge-pill badge-success b ">Дверь Закрыта</span>
+            {% endif %}
+            {% if button.Garaz %}      <span class="badge badge-pill badge-danger b">Гараж Открыт</span>
+            {% else %}          <span class="badge badge-pill badge-success b ">Гараж Закрыт</span>
+            {% endif %}
+            {% if sensors.gaz_MQ4 > 190 or sensors.gaz_MQ135 > 150 %} <span class="badge badge-pill badge-dark b ">Внимание: ГАЗ!</span>
+            {% else %} <span class="badge badge-pill badge-light b ">Газ в норме</span>
+            {% endif%}
+
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
             <a href="{% url 'test'%} ">  <button type="button" class="btn btn-primary b"  >Тест Ардуино</button></a> <br />
             <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-primary b"  >Перезагрузка камер</button></a> <br />
             <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-primary b" >Обновление датчиков </button></a> <br />
-            <a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a> <br />
-            <a href="{% url 'Boiler'%} ">  <button type="button" class="btn btn-warning b" >Включение бойлера </button></a>
+
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
@@ -45,18 +40,13 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
-            {% if button.Dor_street %} <span class="badge badge-pill badge-danger b">Дверь Открыта</span>
-            {% else %}          <span class="badge badge-pill badge-success b ">Дверь Закрыта</span>
-            {% endif %}
-            {% if button.Garaz %}      <span class="badge badge-pill badge-danger b">Гараж Открыт</span>
-            {% else %}          <span class="badge badge-pill badge-success b ">Гараж Закрыт</span>
-            {% endif %}
-            {% if sensors.gaz_MQ4 > 190 or sensors.gaz_MQ135 > 150 %} <span class="badge badge-pill badge-dark b ">Внимание: ГАЗ!</span>
-            {% else %} <span class="badge badge-pill badge-light b ">Газ в норме</span>
-            {% endif%}
+            <a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a> <br />
+            <a href="{% url 'boiler'%} ">  <button type="button" class="btn btn-warning b" >Включение бойлера </button></a>
+            <a href="{% url 'sound'%} ">  <button type="button" class="btn btn-warning b" >Sound </button></a>
+
         </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-3 ">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
             <p><strong>На неделе:</strong><br />
             {% if weather_6_day.rain > 5 %}Дожди - {{weather_6_day.rain}}мм. <br /> {% endif %}
             {% if weather_6_day.snow > 5 %}Снег - {{weather_6_day.snow}}мм. <br /> {% endif %}
@@ -71,18 +61,22 @@
       <div class="col-md">
           <div class="card">
               <div class="card-header">
-                    Настройки
+                    Инфо
               </div>
-                <div class="card-body">
-                    <span class="badge badge-pill badge-primary ">Primary</span>
-                    <span class="badge badge-pill badge-secondary ">Secondary</span>
-                    <span class="badge badge-pill badge-success  ">Success</span>
-                    <span class="badge badge-pill badge-danger ">Danger</span>
-                    <span class="badge badge-pill badge-warning  ">Warning</span>
-                    <span class="badge badge-pill badge-info ">Info</span>
-                    <span class="badge badge-pill badge-light ">Light</span>
-                    <span class="badge badge-pill badge-dark ">Dark</span>
-                </div>
+                <p><strong>Сейчас:</strong><br />
+             {{description}}<br />
+                <em>{{temp}}&deg;</em> - градусов,( <em>{{sensors.street_temp}}&deg;</em>) - датчик<br />
+                ветер - <em>{{wind}}</em> м/c.<br />
+                влажность - <em>{{sensors.humidity_street}}</em>
+            </p>
+            <p><strong>Завтра: </strong>{{weather_6_day.tomorrow}}<br />
+              {{description_next}}<br />
+                вероятность осадков: <em>{{pop_next}}</em>,<br />
+                температура утром: <em>{{temp_next_morn}}&deg;</em><br />
+                температура днем: <em>{{temp_next_day}}&deg;</em><br />
+                температура вечером: <em>{{temp_next_eve}}&deg;</em><br />
+                ветер:<em> {{wind_speed_next}}м/с.</em>
+             </p>
           </div>
       </div>
         <div class="col-md">
@@ -120,8 +114,8 @@
         </div>
   </div>
 </div>
-<table class="table">
-  <thead>
+<table class="table table-striped table-sm">
+  <thead class="thead-light">
     <tr>
       <th scope="col">#</th>
       <th scope="col">дата</th>
@@ -129,7 +123,7 @@
       <th scope="col">Описание</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="">
     {% for log in logs %}
     <tr>
       <th scope="row">{{ log.id }}</th>
@@ -143,7 +137,16 @@
 
 <footer>
   <div class="container-fluid">
-    FOOTER
+    <div class="card-body">
+    <span class="badge badge-pill badge-primary ">Primary</span>
+    <span class="badge badge-pill badge-secondary ">Secondary</span>
+    <span class="badge badge-pill badge-success  ">Success</span>
+    <span class="badge badge-pill badge-danger ">Danger</span>
+    <span class="badge badge-pill badge-warning  ">Warning</span>
+    <span class="badge badge-pill badge-info ">Info</span>
+    <span class="badge badge-pill badge-light ">Light</span>
+    <span class="badge badge-pill badge-dark ">Dark</span>
+</div>
   </div>
 </footer>
 

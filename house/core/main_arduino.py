@@ -82,4 +82,13 @@ def boiler_off():
     context['status'].append('Boiler off')
     return context
 
-
+def sound():
+    context = testing()
+    arduino.write(b'S')
+    time.sleep(0.5)
+    arduino.write(b's')
+    time.sleep(0.5)
+    arduino.write(b'S')
+    time.sleep(0.5)
+    arduino.write(b's')
+    return context['status'].append('sound')

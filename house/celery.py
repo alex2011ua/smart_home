@@ -15,6 +15,9 @@ cellery_app.autodiscover_tasks()
 from house.core.tasks import restart_cam_task, weather_task, arduino_task
 from celery.exceptions import SoftTimeLimitExceeded
 
+from .core.models import Logs
+import datetime
+
 # запуск рестарта камер
 @cellery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
@@ -25,7 +28,9 @@ def setup_periodic_tasks(sender, **kwargs):
             restart_cam_task.s(),
             name = 'Restart cam')
     except SoftTimeLimitExceeded as err:
-        print(err)
+        Logs.objects.create(date_log = datetime.datetime.now(),
+                            title_log = 'Celery',
+                            description_log = f'{err}- превышен лимит времени')
 # запуск обновления ино о погоде
 @cellery_app.on_after_configure.connect
 def setup_periodic_tasks_weather(sender, **kwargs):
@@ -35,11 +40,12 @@ def setup_periodic_tasks_weather(sender, **kwargs):
             weather_task.s(),
             name = 'Weather')
     except SoftTimeLimitExceeded as err:
-        print(err)
+        Logs.objects.create(date_log = datetime.datetime.now(),
+                            title_log = 'Celery',
+                            description_log = f'{err}- превышен лимит времени')
 
 
-# запуск обновления ино arduino
-
+# запуск обновления инфо arduino
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_arduino(sender, **kwargs):
     try:
@@ -48,4 +54,6 @@ def setup_periodic_task_arduino(sender, **kwargs):
             arduino_task.s(),
             name = 'arduino')
     except SoftTimeLimitExceeded as err:
-        print(err)
+        Logs.objects.create(date_log = datetime.datetime.now(),
+                            title_log = 'Celery',
+                            description_log = f'{err}- превышен лимит времени')

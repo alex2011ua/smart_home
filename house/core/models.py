@@ -6,7 +6,8 @@ class Setting(models.Model):
     controller_name = models.CharField(max_length=40, unique=True)
     label = models.CharField(max_length=100)
     value = models.IntegerField(default=20)
-
+    def __str__(self):
+        return str(self.label) + str(self.value)
 
 class Weather(models.Model):
     date = models.DateField(unique = True)
@@ -14,13 +15,15 @@ class Weather(models.Model):
     temp_min = models.IntegerField(default=0)
     temp_max = models.IntegerField(default=0)
     snow = models.IntegerField(default=0)
-
+    def __str__(self):
+        return str(self.date)
 
 class Logs(models.Model):
     date_log = models.DateTimeField()
     title_log = models.CharField(max_length=50)
     description_log = models.CharField(max_length=150)
-
+    def __str__(self):
+        return str(self.date_log)
 
 class DHT_MQ(models.Model):
     date_t_h = models.DateTimeField()
@@ -42,4 +45,6 @@ class DHT_MQ(models.Model):
 
     gaz_MQ4 = models.IntegerField(null=True)
     gaz_MQ135 = models.IntegerField(null=True)
+    def __str__(self):
+        return str(self.date_t_h), str(self.temp_street)
 

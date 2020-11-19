@@ -1,7 +1,7 @@
 #include "DHT.h"
 // список пинов:
 
-
+                                // 2
 #define DHTPIN             3   // dht 11 датчик температуры воды в котел
 #define DHT22PIN           4   // уличный dht 22
 #define PIN_RELAY_BOILER   5 // реле включения бойлера
@@ -9,9 +9,9 @@
 #define PIN_DHT11_GAZ      7   //Температура воздуха возле вытяжки
 #define MQ135              8      //  MQ-135
 #define PIN_RELAY          9   // реле перезагрузки камер
-#define SOUND              10      //  Пищалка
+#define TEST               10      // 10
 #define MQ4                11      //  MQ-4
-
+                                   //12
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
 
@@ -50,7 +50,7 @@ void setup(){
   Serial.begin(9600);
   pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY_BOILER, OUTPUT);
-  digitalWrite(PIN_RELAY, HIGH); // Выключаем реле - посылаем высокий сигнал
+  digitalWrite(PIN_RELAY, LOW); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY_BOILER, HIGH);
   pinMode(PIN_SOUND, OUTPUT);
   pinMode(led, OUTPUT); // объявляем пин 13 как выход
@@ -199,11 +199,11 @@ void Test(){  // во время теста 6 раз мигнем светоди
 
 void rele(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY, LOW); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY, HIGH); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
    }
 }
