@@ -18,14 +18,33 @@ class DHT_MQAdmin(admin.ModelAdmin):
                     )
     list_filter = (
         'date_t_h',
-        'gaz_MQ4',
-        'gaz_MQ135',
-        'temp_street',
-        'temp_room',
+    )
+@admin.register(Weather)
+class WeatherAdmin(admin.ModelAdmin):
+    list_display = ('date',
+                    'rain',
+                    'temp_min',
+                    'temp_max',
+                    'snow',
+                    )
+    list_filter = (
+        'date',
+    )
+@admin.register(Logs)
+class LogsAdmin(admin.ModelAdmin):
+    list_display = ('date_log',
+                    'title_log',
+                    'description_log',
 
+                    )
+    list_filter = (
+        'date_log',
     )
 
-#admin.site.register(Weather)
-#admin.site.register(Logs)
-#admin.site.register(DHT_MQAdmin)
-#admin.site.register(Setting)
+@admin.register(Setting)
+class SettingAdmin(admin.ModelAdmin):
+    list_display = ('controller_name',
+                    'label',
+                    'value',
+                    )
+

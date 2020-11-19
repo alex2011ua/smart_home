@@ -10,7 +10,7 @@
 
 <div class="container-fluid bg-info ">
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 time_center">
             {% if button.Dor_street %} <span class="badge badge-pill badge-danger b">Дверь Открыта</span>
             {% else %}          <span class="badge badge-pill badge-success b ">Дверь Закрыта</span>
             {% endif %}
@@ -31,12 +31,17 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
+            <a class="" href="/admin">
+                        <span class="badge badge-pill badge-light ">Admin</span>
+                    </a>
             <p class=""><a class="" href="{% url 'form' %}">
                         <img class="my-center"  src="http://openweathermap.org/img/wn/{{ icon }}.png">
                         <br />
                         <img  src="{% static 'img/home.gif' %}" height="65">
                     </a></p>{{raspberry.Raspberry}}<br />
-                            {{raspberry.temp_core}}&deg;
+                            {{raspberry.temp_core}}&deg;<br />
+
+
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
@@ -46,7 +51,7 @@
 
         </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 time_center">
             <p><strong>На неделе:</strong><br />
             {% if weather_6_day.rain > 5 %}Дожди - {{weather_6_day.rain}}мм. <br /> {% endif %}
             {% if weather_6_day.snow > 5 %}Снег - {{weather_6_day.snow}}мм. <br /> {% endif %}
@@ -63,20 +68,60 @@
               <div class="card-header">
                     Инфо
               </div>
-                <p><strong>Сейчас:</strong><br />
-             {{description}}<br />
-                <em>{{temp}}&deg;</em> - градусов,( <em>{{sensors.street_temp}}&deg;</em>) - датчик<br />
-                ветер - <em>{{wind}}</em> м/c.<br />
-                влажность - <em>{{sensors.humidity_street}}</em>
-            </p>
-            <p><strong>Завтра: </strong>{{weather_6_day.tomorrow}}<br />
-              {{description_next}}<br />
-                вероятность осадков: <em>{{pop_next}}</em>,<br />
-                температура утром: <em>{{temp_next_morn}}&deg;</em><br />
-                температура днем: <em>{{temp_next_day}}&deg;</em><br />
-                температура вечером: <em>{{temp_next_eve}}&deg;</em><br />
-                ветер:<em> {{wind_speed_next}}м/с.</em>
-             </p>
+              <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm"><strong>Сейчас:</strong></div>
+                        <div class="col-4-sm">{{time}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">{{description}}</div>
+                        <div class="col-4-sm"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Прогноз температуры</strong></div>
+                        <div class="col-4-sm">{{temp}}&deg</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Фактическая температура</strong></div>
+                        <div class="col-4-sm">{{sensors.street_temp}}&deg;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Ветер</strong></div>
+                        <div class="col-4-sm"><em>{{wind}}</em> м/c</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>Влажность</strong></div>
+                        <div class="col-4-sm"><em>{{sensors.humidity_street}}</em></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong><br />Завтра: </strong></div>
+                        <div class="col-4-sm"><br />{{weather_6_day.tomorrow}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">{{description_next}}</div>
+                        <div class="col-4-sm"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>вероятность осадков:</strong></div>
+                        <div class="col-4-sm"><em>{{pop_next}}</em></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>температура утром:</strong></div>
+                        <div class="col-4-sm"><em><em>{{temp_next_morn}}&deg;</em></em></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>температура днем:</strong></div>
+                        <div class="col-4-sm">{{temp_next_day}}&deg;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>температура вечером: </strong></div>
+                        <div class="col-4-sm"><em>{{temp_next_eve}}&deg;</em></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm"><strong>ветер:</strong></div>
+                        <div class="col-4-sm"><em> {{wind_speed_next}}м/с.</em></div>
+                    </div>
+                </div>
           </div>
       </div>
         <div class="col-md">
