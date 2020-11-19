@@ -18,6 +18,7 @@ from celery.exceptions import SoftTimeLimitExceeded
 from .core.models import Logs
 import datetime
 
+
 # запуск рестарта камер
 @cellery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
@@ -31,6 +32,8 @@ def setup_periodic_tasks(sender, **kwargs):
         Logs.objects.create(date_log = datetime.datetime.now(),
                             title_log = 'Celery',
                             description_log = f'{err}- превышен лимит времени')
+
+
 # запуск обновления ино о погоде
 @cellery_app.on_after_configure.connect
 def setup_periodic_tasks_weather(sender, **kwargs):
