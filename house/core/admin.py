@@ -33,7 +33,10 @@ class LogsAdmin(admin.ModelAdmin):
                     'description_log',
 
                     )
-
+    list_filter = (
+        'date_log',
+        'status'
+    )
 
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):

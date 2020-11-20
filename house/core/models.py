@@ -24,6 +24,7 @@ class Weather(models.Model):
 
 class Logs(models.Model):
     date_log = models.DateTimeField()
+    status = models.CharField(max_length = 50, null=True)
     title_log = models.CharField(max_length=50)
     description_log = models.CharField(max_length=150)
 

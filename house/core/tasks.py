@@ -17,12 +17,14 @@ def restart_cam_task():
     except Exception as err:
         print(err)
         log = Logs.objects.create(date_log = datetime.now(),
-                                  title_log = 'Камеры',
+                                  status = 'Error',
+                                  title_log = 'Task restart_cam_task' ,
                                   description_log = 'Не перезагружены Exeption')
         return
 
     log = Logs.objects.create(date_log = datetime.now(),
-                              title_log = 'Камеры',
+                              status = 'OK',
+                              title_log = 'Task restart_cam_task',
                               description_log = str(context['status']))
 
     print('restart_cam_task Close')
@@ -37,20 +39,14 @@ def weather_task():
     except Exception as err:
         log = Logs.objects.create(
             date_log = datetime.now(),
-            title_log = 'WeatherAPI',
+            status = 'Error',
+            title_log = 'Task weather_task',
             description_log = 'Ошибка openweathermap.org Exeption изменилось API'+str(err))
         return None
-    Logs.objects.create(date_log=datetime.now(),
-                        title_log='Weather six_day',
-                        description_log=six_day,
-                        )
-    Logs.objects.create(date_log=datetime.now(),
-                        title_log='Weather yesterday',
-                        description_log=yesterday,
-                        )
     if six_day['status_code'] != 200 or yesterday['status_code'] != 200:
         Logs.objects.create(date_log=datetime.now(),
-                            title_log='Weather',
+                            status = 'Error',
+                            title_log='Task weather_task',
                             description_log=f'Код ответа прогноза - {six_day["status_code"]}, '
                                             f'код ответа запроса "вчера" - {yesterday["status_code"]}')
     try:
@@ -64,7 +60,8 @@ def weather_task():
     except django.db.utils.IntegrityError:
         r_tomorrow = Weather.objects.get(date=six_day['tomorrow_date'])
         Logs.objects.create(date_log=datetime.now(),
-                            title_log='Weather',
+                            status='Error',
+                            title_log='Task weather_task',
                             description_log='Ошибка записи в БД, ' + str(r_tomorrow))
     try:
         r_yesterday = Weather.objects.get(date = yesterday['result_date'])
@@ -77,7 +74,8 @@ def weather_task():
     r_yesterday.save()
 
     Logs.objects.create(date_log=datetime.now(),
-                    title_log='Weather',
+                        status = 'OK',
+                        title_log='Task weather_task',
                     description_log=f'{r_tomorrow.date} -завтра, {r_yesterday.date} - вчеоа')
     print('weather_task end')
 
@@ -90,7 +88,8 @@ def arduino_task():
     except Exception as err:
         print(err)
         log = Logs.objects.create(date_log=datetime.now(),
-                                  title_log='temp Arduino',
+                                  status = 'Error',
+                                  title_log='Task arduino',
                                   description_log='Ошибка ардуино Exeption')
         return
 
@@ -114,8 +113,9 @@ def arduino_task():
         temp.save()
     else:
         log = Logs.objects.create(date_log=datetime.now(),
-                          title_log='DHT_MQ Arduino',
-                          description_log=str(dic_param['status'])+'Error')
+                                  status = 'OK',
+                                  title_log='Task arduino_task',
+                                  description_log=str(dic_param['status'])+'Error')
     print('arduino_task Close')
 
 
@@ -126,12 +126,14 @@ def boiler_task_on():
         context = boiler_on()
     except Exception as err:
         Logs.objects.create(date_log=datetime.now(),
-                            title_log='Бойлер',
+                            status = 'Error',
+                            title_log='Task boiler_task_on',
                             description_log='Не включен Exeption' + str(err))
         return
 
     Logs.objects.create(date_log=datetime.now(),
-                        title_log='Бойлер',
+                        status = 'OK',
+                        title_log='Task boiler_task_on',
                         description_log=str(context['status']))
 
     print('Start boiler Close on')
@@ -144,12 +146,14 @@ def boiler_task_off():
         context = boiler_off()
     except Exception as err:
         Logs.objects.create(date_log=datetime.now(),
-                            title_log='Бойлер',
+                            status = 'Error',
+                            title_log='Task boiler_task_off',
                             description_log='Не выключен Exeption' + str(err))
         return
 
     Logs.objects.create(date_log=datetime.now(),
-                        title_log='Бойлер',
+                        status = 'OK',
+                        title_log='Task boiler_task_off',
                         description_log=str(context['status']))
 
     print('Start boiler Close off')
