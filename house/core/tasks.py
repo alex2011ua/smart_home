@@ -73,10 +73,6 @@ def weather_task():
     r_yesterday.temp_max = yesterday['max_temp']
     r_yesterday.save()
 
-    Logs.objects.create(date_log=datetime.now(),
-                        status = 'OK',
-                        title_log='Task weather_task',
-                    description_log=f'{r_tomorrow.date} -завтра, {r_yesterday.date} - вчеоа')
     print('weather_task end')
 
 
