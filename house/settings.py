@@ -155,9 +155,13 @@ else:
     )
 MEDIA_URL = '/media/'
 
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'EMAIL_HOST')
-EMAIL_PORT = os.getenv('EMAIL_PORT', 'EMAIL_PORT')
-EMAIL_RECEPIENT = os.getenv('EMAIL_RECEPIENT', 'EMAIL_RECEPIENT')
+EMAIL_HOST = os.environ.get('smtpServer')
+EMAIL_PORT = os.environ.get('smtpPort')
+EMAIL_HOST_USER = os.environ.get('mail_user')
+EMAIL_HOST_PASSWORD = os.environ.get('mail_pass')
+
+
+
 
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'

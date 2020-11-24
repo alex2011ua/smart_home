@@ -7,12 +7,12 @@ from .tasks import boiler_task_on, boiler_task_off
 #  from django.http import HttpResponse
 
 from .main_arduino import reset, testing, sound
-from .raspberry import raspberry, button
+from .raspberry import raspberry, button, rele_board
 from .weather_rain import weather_now
 from house.core.tasks import restart_cam_task, weather_task, arduino_task
 import datetime
 from django.conf import settings
-
+from .mail import send_test_mail
 DEBUG = settings.PLACE
 
 
@@ -157,10 +157,35 @@ class Sound(View):
                                 status = 'OK',
                                 title_log = 'view Sound',
                                 description_log = context['status'])
-        except Exception:
+        except Exception as err:
             Logs.objects.create(date_log = datetime.datetime.now(),
                                 status = 'Error',
                                 title_log = 'view Sound',
-                                description_log = 'Ошибка ардуино Exeptyon')
+                                description_log = 'Ошибка ардуино Exeptyon' + str(err))
+
+        return redirect(reverse_lazy('form'))
+
+
+class Raspberry_rele(View):
+    @staticmethod
+    def get(request):
+        try:
+            rele_board(DEBUG)
+        except Exception as err:
+            Logs.objects.create(date_log=datetime.datetime.now(),
+                                status='Error',
+                                title_log='view raspberry_rele',
+                                description_log = str(err))
+
+
+class Mail_test(View):
+    @staticmethod
+    def get(request):
+
+        send_test_mail()
+        Logs.objects.create(date_log = datetime.datetime.now(),
+                            status = 'Test',
+                            title_log = 'view Mail_test',
+                            description_log = 'Send Mail')
 
         return redirect(reverse_lazy('form'))

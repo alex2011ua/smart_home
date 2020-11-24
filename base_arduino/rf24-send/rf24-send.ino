@@ -1,18 +1,15 @@
 #include <SPI.h>                                               // Подключаем библиотеку для работы с шиной SPI.
 #include <nRF24L01.h>                                          // Подключаем файл настроек из библиотеки RF24.
 #include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
-RF24     radio(7, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
-
+RF24     radio(9, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
+int      ackData;
+int     ack1;
 int     arr1[4];
 // Объявляем массив для хранения и передачи данных (до 32 байт включительно).
    // стартовый байт отправки
 #define SEND_START 55      
    // стоповый байт отправки
 #define SEND_STOP 56     
-
-
-
-
 
 const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
 const int buttonPin = 2; // датчик освещения
@@ -30,8 +27,10 @@ void setup(){
     radio.setChannel      (27);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит передача данных осуществляется на частоте 2,427 ГГц.
     radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
     radio.setPALevel      (RF24_PA_LOW);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
-    radio.openReadingPipe (0, 0xAABBCCDD11LL);                 // Открываем 0 трубу с адресом 0xAABBCCDD11, для приема и передачи данных.
-    radio.startListening  ();
+    radio.enableAckPayload();
+    radio.openWritingPipe (0xAABBCCDD11LL);                 // Открываем 0 трубу с адресом 0xAABBCCDD11, для приема и передачи данных.
+    //radio.enableDynamicPayloads();
+
 }                                                              //
 
                                                                
@@ -45,29 +44,22 @@ void rele(int status){
     digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
    }
-}      
-void loop(){     
-  char val;
-  if (Serial.available()){
-    val = Serial.read(); // переменная val равна полученной команде
-    if (val == '0') { //  если 0 выключаем реле
-      rele(0);
-    }
-    if (val == '1'){//  если 1 включаем реле
-      rele(1);
-    }
-  }
+}
+
+void loop(){
+
   if(millis()-millissenddata>5000) {
-          Serial.println("10 read sensor");
-radio.stopListening  ();
+         Serial.println("read sensor");
+
          // получение данных с датчика
-          sensorValue = analogRead(analogInPin);
+         sensorValue = analogRead(analogInPin);
           // map it to the range of the analog out:
-          buttonState = digitalRead(buttonPin);
+         buttonState = digitalRead(buttonPin);
          arr1[0] = SEND_START;  
          arr1[1] = sensorValue;                            
-         arr1[2] = buttonState;                            
-         arr1[3] = SEND_STOP;  
+         arr1[2] = buttonState;
+         arr1[3] = ack1;                            
+         arr1[4] = SEND_STOP;  
          Serial.print("send");
          
          Serial.print(arr1[0]);
@@ -77,23 +69,36 @@ radio.stopListening  ();
          Serial.print(arr1[2]);
          Serial.print(" ");
          Serial.print(arr1[3]);
+         Serial.print(" ");
+         Serial.print(arr1[4]);
          Serial.println(" ");
          // отправляем данные
-         radio.write(&arr1, sizeof(arr1));  
-         delay(100);
+ 
+         
          if( radio.write(&arr1, sizeof(arr1)) ){                // Если указанное количество байт массива myData было доставлено приёмнику, то ...
             //  Данные передатчика были корректно приняты приёмником.  // Тут можно указать код который будет выполняться при получении данных приёмником.
             Serial.println("send OK");
           }
-          else{   
+          else{
               Serial.println("send Error");
               // Иначе (если данные не доставлены) ...
               //  Данные передатчика не приняты или дошли с ошибкой CRC. // Тут можно указать код который будет выполняться если приёмника нет или он не получил данные.
           }                                                          //
-                    
+         Serial.println(ackData);
+         if( radio.isAckPayloadAvailable() ){                       // Если в буфере имеются принятые данные из пакета подтверждения приёма, то ...
+        Serial.println(" AckPayloadAvailable");
+        radio.read(&ackData, sizeof(ackData));                 // Читаем данные из буфера в массив ackData указывая сколько всего байт может поместиться в массив.
+          if (ackData == 13){
+          rele(0);
+          }
+          if (ackData == 12){
+          rele(1);
+          }
+          Serial.println(ackData);
+         }
          millissenddata=millis();
-         radio.startListening  ();
-      }   
+
+      }
 }
 
                                                      
