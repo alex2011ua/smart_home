@@ -1,31 +1,36 @@
 from __future__ import absolute_import, unicode_literals
 
-from .main_arduino import restart_cam, read_ser, boiler_on, boiler_off
+from .main_arduino import read_ser, boiler_on, boiler_off
 from .weather_rain import weather_6_day, rain_yesterday
-from .models import  Logs, Weather, DHT_MQ
+from .raspberry import restart_cam
+from .models import Logs, Weather, DHT_MQ, Message
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
 import django.db
+
+from django.conf import settings
+DEBUG = settings.PLACE
+
 
 @cellery_app.task()
 def restart_cam_task():
     print('Start restart_cam_task')
 
     try:
-        context = restart_cam()
+        restart_cam(DEBUG)
     except Exception as err:
         print(err)
         log = Logs.objects.create(date_log = datetime.now(),
                                   status = 'Error',
-                                  title_log = 'Task restart_cam_task' ,
-                                  description_log = 'Не перезагружены Exeption')
+                                  title_log = 'Task restart_cam_task',
+                                  description_log = 'Не перезагружены' + str(err))
         return
 
-    log = Logs.objects.create(date_log = datetime.now(),
+    Logs.objects.create(date_log = datetime.now(),
                               status = 'OK',
                               title_log = 'Task restart_cam_task',
-                              description_log = str(context['status']))
+                              description_log = 'Restart Cam')
 
     print('restart_cam_task Close')
 
@@ -153,3 +158,72 @@ def boiler_task_off():
                         description_log=str(context['status']))
 
     print('Start boiler Close off')
+
+
+@cellery_app.task()
+def bot_task():
+    from .raspberry import button
+    from .Telegram import bot
+    print('Start bot task')
+    date_now = datetime.now()
+    temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
+    if temp.gaz_MQ4 or temp.gaz_MQ135 > 100:
+        try:
+            gaz = Message.objects.get(controller_name = 'gaz')
+        except Exception:
+            gaz = Message.objects.create(controller_name = 'gaz',
+                                   date_message=datetime(2000, 0, 0))
+
+        time_delta = (date_now - gaz.date_message) // 60 #  minutes
+        if time_delta.seconds > 60:
+            bot.send_message('Завышены показания газовый датчиков')
+            bot.send_message(f'MQ-4 - {temp.gaz_MQ4}, MQ-135 - {temp.gaz_MQ135}')
+            gaz.date_message = date_now
+            gaz.controller_name = 'gaz'
+            gaz.label = "Allarm"
+            gaz.value_int = temp.gaz_MQ4 + temp.gaz_MQ135
+            gaz.save()
+
+    context = button(DEBUG)  # загрузка состояний кнопок
+    try:
+        dor = Message.objects.get(controller_name = 'dor')
+        garaz = Message.objects.get(controller_name = 'garaz')
+    except Exception:
+        dor = Message.objects.create(controller_name = 'dor',
+                                     date_message = datetime(2000, 0, 0),
+                                     value_int = 0)
+        garaz = Message.objects.create(controller_name = 'garaz',
+                                       date_message = datetime(2000, 0, 0),
+                                       value_int = 0)
+    if context['Garaz'] != garaz.state:
+        garaz.state = context['Garaz']
+        garaz.date_message = date_now
+        if context['Garaz']:
+            garaz.label = 'Открыт гараж'
+        else:
+            garaz.label = 'Закрыт гараж'
+        bot.send_message(garaz.label)
+
+    if context['Dor_street'] != dor.state:
+        dor.state = context['Dor_street']
+        dor.date_message = date_now
+        if context['Dor_street']:
+            dor.label = 'Открыта дверь'
+        else:
+            dor.label = 'Закрыта дверь'
+        bot.send_message(dor.label)
+
+    if date_now.hour < 5:
+        if context['Garaz'] and garaz.value_int == 0:
+            bot.send_message('Открыт гараж')
+            garaz.value_int = 1
+        if context['Dor_street'] and dor.value_int == 0:
+            bot.send_message('Открыта дверь')
+            dor.value_int = 1
+    if date_now.hour >= 5:
+        garaz.value_int = 0
+        dor.value_int = 0
+    garaz.save()
+    dor.save()
+    print('Start bot task off')
+

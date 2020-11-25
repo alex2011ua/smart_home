@@ -16,3 +16,6 @@ django-celery
 gpiozero
 RPi.GPIO
 smbus
+
+telebot
+pytelegrambotapi

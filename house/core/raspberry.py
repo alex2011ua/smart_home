@@ -28,6 +28,19 @@ def raspberry(flag):
         status = {'Raspberry': 'Non Connect', 'temp_core': 44}
         return status
 
+
+def restart_cam(flag):
+    if not flag:
+        import time as t
+        import smbus
+        DEVICE_BUS = 1
+        DEVICE_ADDR = 0x10
+        bus = smbus.SMBus(DEVICE_BUS)
+        bus.write_byte_data(DEVICE_ADDR, 1, 0xFF)
+        t.sleep(8)
+        bus.write_byte_data(DEVICE_ADDR, 1, 0x00)
+
+
 def button(flag):
         # Connections:
         # GPIO5 is button input

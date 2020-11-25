@@ -13,6 +13,8 @@ from house.core.tasks import restart_cam_task, weather_task, arduino_task
 import datetime
 from django.conf import settings
 from .mail import send_test_mail
+from .Telegram import bot
+
 DEBUG = settings.PLACE
 
 
@@ -178,14 +180,21 @@ class Raspberry_rele(View):
                                 description_log = str(err))
 
 
-class Mail_test(View):
+class MailTest(View):
     @staticmethod
     def get(request):
 
-        send_test_mail()
+        send_test_mail('subject test', 'message test')
         Logs.objects.create(date_log = datetime.datetime.now(),
                             status = 'Test',
                             title_log = 'view Mail_test',
                             description_log = 'Send Mail')
 
+        return redirect(reverse_lazy('form'))
+
+
+class TelegramTest(View):
+    @staticmethod
+    def get(request):
+        bot.send_message('test')
         return redirect(reverse_lazy('form'))

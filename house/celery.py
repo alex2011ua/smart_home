@@ -12,7 +12,7 @@ cellery_app = Celery('proj')
 cellery_app.config_from_object('django.conf:settings', namespace='CELERY')
 cellery_app.autodiscover_tasks()
 
-from house.core.tasks import restart_cam_task, weather_task, arduino_task
+from house.core.tasks import restart_cam_task, weather_task, arduino_task, bot_task
 from celery.exceptions import SoftTimeLimitExceeded
 
 from .core.models import Logs
@@ -55,6 +55,19 @@ def setup_periodic_task_arduino(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute='*/15'),
             arduino_task.s(),
+            name = 'arduino')
+    except SoftTimeLimitExceeded as err:
+        Logs.objects.create(date_log = datetime.datetime.now(),
+                            title_log = 'Celery',
+                            description_log = f'{err}- превышен лимит времени')
+
+# запуск обновления инфо arduino
+@cellery_app.on_after_configure.connect()
+def setup_periodic_task_bot(sender, **kwargs):
+    try:
+        sender.add_periodic_task(
+            crontab(minute='*/2'),
+            bot_task.s(),
             name = 'arduino')
     except SoftTimeLimitExceeded as err:
         Logs.objects.create(date_log = datetime.datetime.now(),

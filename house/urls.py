@@ -17,7 +17,7 @@ from django.urls import path
 from django.contrib import admin
 from django.conf.urls import url
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
-    Boiler, Test, Sound, Raspberry_rele, Mail_test
+    Boiler, Test, Sound, Raspberry_rele, MailTest, TelegramTest
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,6 @@ urlpatterns = [
     url(r'^test/$', Test.as_view(), name = 'test'),
     url(r'^sound/$', Sound.as_view(), name = 'sound'),
     url(r'^rele_board/$', Raspberry_rele.as_view(), name = 'rele_board'),
-    url(r'^mail/$', Mail_test.as_view(), name = 'mail_test'),
+    url(r'^mail/$', MailTest.as_view(), name = 'mail_test'),
+    url(r'^telegram/$', TelegramTest.as_view(), name = 'telegram_test'),
 ]

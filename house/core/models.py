@@ -7,6 +7,7 @@ class Setting(models.Model):
     label = models.CharField(max_length=100)
     value = models.IntegerField(default=20)
 
+
     def __str__(self):
         return str(self.label)
 
@@ -56,3 +57,10 @@ class DHT_MQ(models.Model):
     def __str__(self):
         return str(self.date_t_h)
 
+class Message(models.Model):
+    date_message = models.DateTimeField()
+    controller_name = models.CharField(max_length = 40, unique = True)
+    label = models.CharField(max_length = 100, null=True)
+    value_int = models.IntegerField(null=True)
+    value_float = models.FloatField(null=True)
+    state = models.BooleanField(default=False)
