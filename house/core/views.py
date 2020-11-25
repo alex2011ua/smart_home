@@ -158,7 +158,7 @@ class Sound(View):
             Logs.objects.create(date_log = datetime.datetime.now(),
                                 status = 'OK',
                                 title_log = 'view Sound',
-                                description_log = context['status'])
+                                description_log = str(context['status']))
         except Exception as err:
             Logs.objects.create(date_log = datetime.datetime.now(),
                                 status = 'Error',
@@ -196,5 +196,5 @@ class MailTest(View):
 class TelegramTest(View):
     @staticmethod
     def get(request):
-        bot.send_message('test')
+        bot.send_message(datetime.datetime.now())
         return redirect(reverse_lazy('form'))

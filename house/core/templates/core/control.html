@@ -24,11 +24,10 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
-            <a href="{% url 'test'%} ">  <button type="button" class="btn btn-primary b"  >Тест Ардуино</button></a> <br />
+
             <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-primary b"  >Перезагрузка камер</button></a> <br />
             <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-primary b" >Обновление датчиков </button></a> <br />
-            <a href="{% url 'mail_test'%} ">  <button type="button" class="btn btn-primary b" >Тест Mail </button></a> <br />
-            <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn btn-primary b" >Тест BOT </button></a> <br />
+
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
@@ -186,16 +185,23 @@
 
 <footer>
   <div class="container-fluid">
-    <div class="card-body">
-    <span class="badge badge-pill badge-primary ">Primary</span>
-    <span class="badge badge-pill badge-secondary ">Secondary</span>
-    <span class="badge badge-pill badge-success  ">Success</span>
-    <span class="badge badge-pill badge-danger ">Danger</span>
-    <span class="badge badge-pill badge-warning  ">Warning</span>
-    <span class="badge badge-pill badge-info ">Info</span>
-    <span class="badge badge-pill badge-light ">Light</span>
-    <span class="badge badge-pill badge-dark ">Dark</span>
-</div>
+      <div class="row">
+          <div class="col">
+              <a href="{% url 'test'%} ">  <button type="button" class="btn btn-primary b"  >Тест Ардуино</button></a>
+              <a href="{% url 'mail_test'%} ">  <button type="button" class="btn btn-primary b" >Тест Mail </button></a> <br />
+              <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn btn-primary b" >Тест BOT </button></a> <br />
+          </div>
+          <div class="col">
+          <span class="badge badge-pill badge-primary ">Primary</span>
+          <span class="badge badge-pill badge-secondary ">Secondary</span>
+          <span class="badge badge-pill badge-success  ">Success</span>
+          <span class="badge badge-pill badge-danger ">Danger</span>
+          <span class="badge badge-pill badge-warning  ">Warning</span>
+          <span class="badge badge-pill badge-info ">Info</span>
+          <span class="badge badge-pill badge-light ">Light</span>
+          <span class="badge badge-pill badge-dark ">Dark</span>
+          </div>
+      </div>
   </div>
 </footer>
 

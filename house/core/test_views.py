@@ -5,7 +5,9 @@ from datetime import date
 from django.conf import settings
 from .main_arduino import testing, read_ser
 from .tasks import arduino_task
-class TestArduino():
+
+
+class TestArduino:
     @pytest.mark.django_db
     def test_arduino(self, db):
         assert testing() == {'status': ['Test-OK']}

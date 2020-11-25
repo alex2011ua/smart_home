@@ -1,15 +1,16 @@
 import requests
 import os
-
+from .models import Message
 from dotenv import load_dotenv
-
-
+from .raspberry import button
+from datetime import datetime
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
 token = os.getenv('TOKEN', os.environ.get('TOKEN'))
-
+from django.conf import settings
+DEBUG = settings.PLACE
 class TelegramBot:
     def __init__(self, token):
         self.token = token
@@ -41,4 +42,64 @@ class TelegramBot:
 
 bot = TelegramBot(token)
 
+def gaz_analiz(MQ4, MQ135):
+    try:
+        gaz = Message.objects.get(controller_name = 'gaz')
+    except Exception:
+        gaz = Message.objects.create(controller_name = 'gaz',
+                                     date_message = datetime(2000, 1, 1))
+    date_now = datetime.now()
+    time_delta = (date_now - gaz.date_message) // 60  # minutes
+    if time_delta.seconds > 60:
+        bot.send_message('Завышены показания газовый датчиков')
+        bot.send_message(f'MQ-4 - {MQ4}, MQ-135 - {MQ135}')
+        gaz.date_message = date_now
+        gaz.controller_name = 'gaz'
+        gaz.label = "Allarm"
+        gaz.value_int = MQ4 + MQ135
+        gaz.save()
 
+def button_analiz():
+    date_now = datetime.now()
+    context = button(DEBUG)  # загрузка состояний кнопок
+    try:
+        dor = Message.objects.get(controller_name = 'dor')
+        garaz = Message.objects.get(controller_name = 'garaz')
+    except Exception:
+        dor = Message.objects.create(controller_name = 'dor',
+                                     date_message = datetime(2000, 1, 1),
+                                     value_int = 0)
+        garaz = Message.objects.create(controller_name = 'garaz',
+                                       date_message = datetime(2000, 1, 1),
+                                       value_int = 0)
+    if context['Garaz'] != garaz.state:
+        garaz.state = context['Garaz']
+        garaz.date_message = date_now
+        if context['Garaz']:
+            garaz.label = 'Открыт гараж'
+        else:
+            garaz.label = 'Закрыт гараж'
+        bot.send_message(garaz.label)
+
+    if context['Dor_street'] != dor.state:
+        dor.state = context['Dor_street']
+        dor.date_message = date_now
+        if context['Dor_street']:
+            dor.label = 'Открыта дверь'
+        else:
+            dor.label = 'Закрыта дверь'
+        bot.send_message(dor.label)
+
+    if date_now.hour < 5:
+        if context['Garaz'] and garaz.value_int == 0:
+            bot.send_message('Открыт гараж')
+            garaz.value_int = 1
+        if context['Dor_street'] and dor.value_int == 0:
+            bot.send_message('Открыта дверь')
+            dor.value_int = 1
+    if date_now.hour >= 5:
+        garaz.value_int = 0
+        dor.value_int = 0
+
+    garaz.save()
+    dor.save()

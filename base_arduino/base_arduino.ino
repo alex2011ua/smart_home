@@ -1,16 +1,16 @@
 #include "DHT.h"
 // список пинов:
 
-                                // 2
+#define PIN_RELAY          2     // 2
 #define DHTPIN             3   // dht 11 датчик температуры воды в котел
 #define DHT22PIN           4   // уличный dht 22
 #define PIN_RELAY_BOILER   5 // реле включения бойлера
 #define PIN_SOUND          6   // пищалка
 #define PIN_DHT11_GAZ      7   //Температура воздуха возле вытяжки
-#define MQ135              8      //  MQ-135
-#define PIN_RELAY          9   // реле перезагрузки камер
-#define TEST               10      // 10
-#define MQ4                11      //  MQ-4
+#define MQ135              8      //
+#define PIN_RELAY          9   //
+#define TEST               10      //
+#define MQ4                11      //
                                    //12
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
@@ -117,28 +117,16 @@ void read_dht_param(){  // чтение температуры dh11
     json += ',';
 
   }
-    noGas = digitalRead(MQ135); //считываем значение о присутствии газа
+
     gasValue = analogRead(analogSignal_MQ135); // и о его количестве
-    json += "'MQ135': ";
-    if (noGas) {
-    json += "false,";
-    }
-    else{
-    json += "true,";
-    }
+
     json += "'MQ135_value': ";
     json += String(gasValue);
     json += ',';
 
-    noGas = digitalRead(MQ4); //считываем значение о присутствии газа
+
     gasValue = analogRead(analogSignal_MQ4); // и о его количестве
-    json += "'MQ4': ";
-    if (noGas) {
-    json += "false,";
-    }
-    else{
-    json += "true,";
-    }
+
     json += "'MQ4_value': ";
     json += String(gasValue);
 

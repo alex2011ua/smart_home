@@ -91,4 +91,5 @@ def sound():
     arduino.write(b'S')
     time.sleep(0.5)
     arduino.write(b's')
-    return context['status'].append('sound')
+    context['status'].append('sound')
+    return context

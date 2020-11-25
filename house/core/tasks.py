@@ -8,8 +8,10 @@ from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
 import django.db
+from .Telegram import gaz_analiz, button_analiz
 
 from django.conf import settings
+
 DEBUG = settings.PLACE
 
 
@@ -21,16 +23,16 @@ def restart_cam_task():
         restart_cam(DEBUG)
     except Exception as err:
         print(err)
-        log = Logs.objects.create(date_log = datetime.now(),
-                                  status = 'Error',
-                                  title_log = 'Task restart_cam_task',
-                                  description_log = 'Не перезагружены' + str(err))
+        Logs.objects.create(date_log = datetime.now(),
+                            status = 'Error',
+                            title_log = 'Task restart_cam_task',
+                            description_log = 'Не перезагружены' + str(err))
         return
 
     Logs.objects.create(date_log = datetime.now(),
-                              status = 'OK',
-                              title_log = 'Task restart_cam_task',
-                              description_log = 'Restart Cam')
+                        status = 'OK',
+                        title_log = 'Task restart_cam_task',
+                        description_log = 'Restart Cam')
 
     print('restart_cam_task Close')
 
@@ -46,32 +48,33 @@ def weather_task():
             date_log = datetime.now(),
             status = 'Error',
             title_log = 'Task weather_task',
-            description_log = 'Ошибка openweathermap.org Exeption изменилось API'+str(err))
+            description_log = 'Ошибка openweathermap.org Exeption изменилось API' + str(
+                err))
         return None
     if six_day['status_code'] != 200 or yesterday['status_code'] != 200:
-        Logs.objects.create(date_log=datetime.now(),
+        Logs.objects.create(date_log = datetime.now(),
                             status = 'Error',
-                            title_log='Task weather_task',
-                            description_log=f'Код ответа прогноза - {six_day["status_code"]}, '
-                                            f'код ответа запроса "вчера" - {yesterday["status_code"]}')
+                            title_log = 'Task weather_task',
+                            description_log = f'Код ответа прогноза - {six_day["status_code"]}, '
+                                              f'код ответа запроса "вчера" - {yesterday["status_code"]}')
     try:
 
-        r_tomorrow = Weather.objects.create(date=six_day['tomorrow_date'],
-                                            rain=six_day['summ_rain_3_day'],
-                                            temp_min=six_day['min_temp'],
-                                            temp_max=six_day['max_temp'],
-                                            snow=six_day['summ_snow_3_day'],
-                                            )
+        Weather.objects.create(date = six_day['tomorrow_date'],
+                               rain = six_day['summ_rain_3_day'],
+                               temp_min = six_day['min_temp'],
+                               temp_max = six_day['max_temp'],
+                               snow = six_day['summ_snow_3_day'],
+                               )
     except django.db.utils.IntegrityError:
-        r_tomorrow = Weather.objects.get(date=six_day['tomorrow_date'])
-        Logs.objects.create(date_log=datetime.now(),
-                            status='Error',
-                            title_log='Task weather_task',
-                            description_log='Ошибка записи в БД, ' + str(r_tomorrow))
+        r_tomorrow = Weather.objects.get(date = six_day['tomorrow_date'])
+        Logs.objects.create(date_log = datetime.now(),
+                            status = 'Error',
+                            title_log = 'Task weather_task',
+                            description_log = 'Ошибка записи в БД, ' + str(r_tomorrow))
     try:
         r_yesterday = Weather.objects.get(date = yesterday['result_date'])
     except ObjectDoesNotExist:
-        r_yesterday = Weather.objects.create(date=yesterday['result_date'])
+        r_yesterday = Weather.objects.create(date = yesterday['result_date'])
     r_yesterday.rain = yesterday['sum_rain']
     r_yesterday.snow = yesterday['sum_snow']
     r_yesterday.temp_min = yesterday['min_temp']
@@ -88,14 +91,14 @@ def arduino_task():
         dic_param = read_ser()  # Читает с Ардуино значения датчиков
     except Exception as err:
         print(err)
-        log = Logs.objects.create(date_log=datetime.now(),
-                                  status = 'Error',
-                                  title_log='Task arduino',
-                                  description_log='Ошибка ардуино Exeption')
+        Logs.objects.create(date_log = datetime.now(),
+                            status = 'Error',
+                            title_log = 'Task arduino',
+                            description_log = 'Ошибка ардуино Exeption')
         return
 
     if dic_param['status'][-1] == 'Test-OK':
-        temp = DHT_MQ.objects.create(date_t_h=datetime.now())
+        temp = DHT_MQ.objects.create(date_t_h = datetime.now())
 
         if dic_param.get('temp_voda'):
             temp.temp_voda = dic_param['temp_voda']
@@ -113,10 +116,10 @@ def arduino_task():
 
         temp.save()
     else:
-        log = Logs.objects.create(date_log=datetime.now(),
-                                  status = 'OK',
-                                  title_log='Task arduino_task',
-                                  description_log=str(dic_param['status'])+'Error')
+        Logs.objects.create(date_log = datetime.now(),
+                            status = 'OK',
+                            title_log = 'Task arduino_task',
+                            description_log = str(dic_param['status']) + 'Error')
     print('arduino_task Close')
 
 
@@ -126,16 +129,16 @@ def boiler_task_on():
     try:
         context = boiler_on()
     except Exception as err:
-        Logs.objects.create(date_log=datetime.now(),
+        Logs.objects.create(date_log = datetime.now(),
                             status = 'Error',
-                            title_log='Task boiler_task_on',
-                            description_log='Не включен Exeption' + str(err))
+                            title_log = 'Task boiler_task_on',
+                            description_log = 'Не включен Exeption' + str(err))
         return
 
-    Logs.objects.create(date_log=datetime.now(),
+    Logs.objects.create(date_log = datetime.now(),
                         status = 'OK',
-                        title_log='Task boiler_task_on',
-                        description_log=str(context['status']))
+                        title_log = 'Task boiler_task_on',
+                        description_log = str(context['status']))
 
     print('Start boiler Close on')
 
@@ -146,84 +149,27 @@ def boiler_task_off():
     try:
         context = boiler_off()
     except Exception as err:
-        Logs.objects.create(date_log=datetime.now(),
+        Logs.objects.create(date_log = datetime.now(),
                             status = 'Error',
-                            title_log='Task boiler_task_off',
-                            description_log='Не выключен Exeption' + str(err))
+                            title_log = 'Task boiler_task_off',
+                            description_log = 'Не выключен Exeption' + str(err))
         return
 
-    Logs.objects.create(date_log=datetime.now(),
+    Logs.objects.create(date_log = datetime.now(),
                         status = 'OK',
-                        title_log='Task boiler_task_off',
-                        description_log=str(context['status']))
+                        title_log = 'Task boiler_task_off',
+                        description_log = str(context['status']))
 
     print('Start boiler Close off')
 
 
 @cellery_app.task()
 def bot_task():
-    from .raspberry import button
-    from .Telegram import bot
     print('Start bot task')
-    date_now = datetime.now()
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
     if (temp.gaz_MQ4 > 100) or (temp.gaz_MQ135 > 100):
-        try:
-            gaz = Message.objects.get(controller_name = 'gaz')
-        except Exception:
-            gaz = Message.objects.create(controller_name = 'gaz',
-                                   date_message=datetime(2000, 1, 1))
+        gaz_analiz(temp.gaz_MQ4, temp.gaz_MQ135)
 
-        time_delta = (date_now - gaz.date_message) // 60 #  minutes
-        if time_delta.seconds > 60:
-            bot.send_message('Завышены показания газовый датчиков')
-            bot.send_message(f'MQ-4 - {temp.gaz_MQ4}, MQ-135 - {temp.gaz_MQ135}')
-            gaz.date_message = date_now
-            gaz.controller_name = 'gaz'
-            gaz.label = "Allarm"
-            gaz.value_int = temp.gaz_MQ4 + temp.gaz_MQ135
-            gaz.save()
+    button_analiz()
 
-    context = button(DEBUG)  # загрузка состояний кнопок
-    try:
-        dor = Message.objects.get(controller_name = 'dor')
-        garaz = Message.objects.get(controller_name = 'garaz')
-    except Exception:
-        dor = Message.objects.create(controller_name = 'dor',
-                                     date_message = datetime(2000, 1, 1),
-                                     value_int = 0)
-        garaz = Message.objects.create(controller_name = 'garaz',
-                                       date_message = datetime(2000, 1, 1),
-                                       value_int = 0)
-    if context['Garaz'] != garaz.state:
-        garaz.state = context['Garaz']
-        garaz.date_message = date_now
-        if context['Garaz']:
-            garaz.label = 'Открыт гараж'
-        else:
-            garaz.label = 'Закрыт гараж'
-        bot.send_message(garaz.label)
-
-    if context['Dor_street'] != dor.state:
-        dor.state = context['Dor_street']
-        dor.date_message = date_now
-        if context['Dor_street']:
-            dor.label = 'Открыта дверь'
-        else:
-            dor.label = 'Закрыта дверь'
-        bot.send_message(dor.label)
-
-    if date_now.hour < 5:
-        if context['Garaz'] and garaz.value_int == 0:
-            bot.send_message('Открыт гараж')
-            garaz.value_int = 1
-        if context['Dor_street'] and dor.value_int == 0:
-            bot.send_message('Открыта дверь')
-            dor.value_int = 1
-    if date_now.hour >= 5:
-        garaz.value_int = 0
-        dor.value_int = 0
-    garaz.save()
-    dor.save()
     print('Start bot task off')
-
