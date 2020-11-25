@@ -172,7 +172,7 @@ def bot_task():
             gaz = Message.objects.get(controller_name = 'gaz')
         except Exception:
             gaz = Message.objects.create(controller_name = 'gaz',
-                                   date_message=datetime(2000, 0, 0))
+                                   date_message=datetime(2000, 1, 1))
 
         time_delta = (date_now - gaz.date_message) // 60 #  minutes
         if time_delta.seconds > 60:
@@ -190,10 +190,10 @@ def bot_task():
         garaz = Message.objects.get(controller_name = 'garaz')
     except Exception:
         dor = Message.objects.create(controller_name = 'dor',
-                                     date_message = datetime(2000, 0, 0),
+                                     date_message = datetime(2000, 1, 1),
                                      value_int = 0)
         garaz = Message.objects.create(controller_name = 'garaz',
-                                       date_message = datetime(2000, 0, 0),
+                                       date_message = datetime(2000, 1, 1),
                                        value_int = 0)
     if context['Garaz'] != garaz.state:
         garaz.state = context['Garaz']
