@@ -167,7 +167,7 @@ def bot_task():
     print('Start bot task')
     date_now = datetime.now()
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
-    if temp.gaz_MQ4 or temp.gaz_MQ135 > 100:
+    if (temp.gaz_MQ4 > 100) or (temp.gaz_MQ135 > 100):
         try:
             gaz = Message.objects.get(controller_name = 'gaz')
         except Exception:
