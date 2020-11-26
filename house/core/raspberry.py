@@ -15,13 +15,12 @@ def raspberry(flag):
 
         vcgm = Vcgencmd()
         output = vcgm.get_throttled()
+        status['Raspberry'] = []
         if output['binary'] != '00000000000000000000':
-            status['Raspberry'] = []
             for item, value in output['breakdown'].items():
                 if value is True:
                     status['Raspberry'].append(list_alarm[value])
-        else:
-            status['Raspberry'] = 'Ошибок не обнаружено!'
+
         status['temp_core'] = vcgm.measure_temp()
         return status
     else:
