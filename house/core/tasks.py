@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from .main_arduino import read_ser, boiler_on, boiler_off
 from .weather_rain import weather_6_day, rain_yesterday
 from .raspberry import restart_cam
-from .models import Logs, Weather, DHT_MQ, Message
+from .models import Logs, Weather, DHT_MQ, Setting
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
@@ -135,11 +135,6 @@ def boiler_task_on():
                             description_log = 'Не включен Exeption' + str(err))
         return
 
-    Logs.objects.create(date_log = datetime.now(),
-                        status = 'OK',
-                        title_log = 'Task boiler_task_on',
-                        description_log = str(context['status']))
-
     print('Start boiler Close on')
 
 
@@ -148,18 +143,17 @@ def boiler_task_off():
     print('Start boiler off')
     try:
         context = boiler_off()
+        boiler = Setting.objects.get(controller_name = 'boiler')
+        boiler.label = 'Бойлер выключен'
+        boiler.value = 0
+        boiler.save()
+
     except Exception as err:
         Logs.objects.create(date_log = datetime.now(),
                             status = 'Error',
                             title_log = 'Task boiler_task_off',
                             description_log = 'Не выключен Exeption' + str(err))
         return
-
-    Logs.objects.create(date_log = datetime.now(),
-                        status = 'OK',
-                        title_log = 'Task boiler_task_off',
-                        description_log = str(context['status']))
-
     print('Start boiler Close off')
 
 

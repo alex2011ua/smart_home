@@ -1,4 +1,3 @@
 {
-  "house/core/test_views.py::TestArduino::test_arduino": true,
   "house/core/test_views.py::TestViews::test_get_controller_page": true
 }

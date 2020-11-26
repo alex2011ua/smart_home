@@ -8,17 +8,16 @@ from .tasks import arduino_task
 
 
 class TestArduino:
-    @pytest.mark.django_db
+
     def test_arduino(self, db):
+
         assert testing() == {'status': ['Test-OK']}
         assert arduino_task() is None
         assert read_ser() == {'status': ['Test-OK'],
                               'temp_gaz': 24.0,
                               'humidity_gaz': 19.0,
-                              'MQ135': False,
-                              'MQ135_value': 230,
-                              'MQ4': False,
-                              'MQ4_value': 295
+                              'MQ135_value': 50,
+                              'MQ4_value': 60
                               }
 
 

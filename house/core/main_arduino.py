@@ -93,3 +93,9 @@ def sound():
     arduino.write(b's')
     context['status'].append('sound')
     return context
+
+def rele_1_on():
+    pass
+
+def rele_1_off():
+    pass

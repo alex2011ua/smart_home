@@ -4,13 +4,17 @@ from .models import Message
 from dotenv import load_dotenv
 from .raspberry import button
 from datetime import datetime
+
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 
 token = os.getenv('TOKEN', os.environ.get('TOKEN'))
 from django.conf import settings
+
 DEBUG = settings.PLACE
+
+
 class TelegramBot:
     def __init__(self, token):
         self.token = token
@@ -42,7 +46,9 @@ class TelegramBot:
 
 bot = TelegramBot(token)
 
+
 def gaz_analiz(MQ4, MQ135):
+    """Если значения датчиков превышают пороговые - шлем сообщение в бот"""
     try:
         gaz = Message.objects.get(controller_name = 'gaz')
     except Exception:
@@ -59,7 +65,10 @@ def gaz_analiz(MQ4, MQ135):
         gaz.value_int = MQ4 + MQ135
         gaz.save()
 
+
 def button_analiz():
+    """Если меняется состояние кнопка - шлем сообщение в бот"""
+
     date_now = datetime.now()
     context = button(DEBUG)  # загрузка состояний кнопок
     try:
@@ -89,7 +98,7 @@ def button_analiz():
         else:
             dor.label = 'Закрыта дверь'
         bot.send_message(dor.label)
-
+    # Если ночью открывается дверь - шлем сообщение в бот
     if date_now.hour < 5:
         if context['Garaz'] and garaz.value_int == 0:
             bot.send_message('Открыт гараж')

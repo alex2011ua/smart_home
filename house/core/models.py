@@ -57,6 +57,7 @@ class DHT_MQ(models.Model):
     def __str__(self):
         return str(self.date_t_h)
 
+
 class Message(models.Model):
     date_message = models.DateTimeField()
     controller_name = models.CharField(max_length = 40, unique = True)

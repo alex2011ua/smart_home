@@ -4,7 +4,9 @@
 {% block head %}
 <header>
   <div id="layer1" class="container-fluid time_center" >
-    {{time}}{{ alerts }}
+    {{time}}{{ alerts }}{% for item in raspberry.Raspberry %}
+                     </a></p>{{item}}<br />
+                    {% endfor %}
   </div>
 </header>
 
@@ -25,8 +27,10 @@
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
 
-            <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-primary b"  >Перезагрузка камер</button></a> <br />
-            <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-primary b" >Обновление датчиков </button></a> <br />
+
+            {% if light.value == 0 %} <a href="{% url 'rele' light.label %}">  <button type="button" class="btn btn-dark b" >Включить освещение </button></a> <br />
+            {% else %} <a href="{% url 'rele' light.label %} ">  <button type="button" class="btn btn-light b" >Выключить освещение </button></a> <br />
+            {% endif%}
 
         </div>
 
@@ -38,17 +42,22 @@
                         <img class="my-center"  src="http://openweathermap.org/img/wn/{{ icon }}.png">
                         <br />
                         <img  src="{% static 'img/home.gif' %}" height="65">
-                    </a></p>{{raspberry.Raspberry}}<br />
-                            {{raspberry.temp_core}}&deg;<br />
 
-
+                    {% if raspberry.temp_core > 50 %} {{raspberry.temp_core}}&deg;<br />
+                    {% endif %}
+                       </a>
+            </p>
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
+            <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-primary b"  >Перезагрузка камер</button></a> <br />
+            <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-primary b" >Обновление датчиков </button></a> <br />
             <a href="{% url 'reset_arduino'%} ">  <button type="button" class="btn btn-warning b" >Перезагрузка Ардуино </button></a> <br />
-            <a href="{% url 'boiler'%} ">  <button type="button" class="btn btn-warning b" >Включение бойлера </button></a>
-            <a href="{% url 'sound'%} ">  <button type="button" class="btn btn-warning b" >Sound </button></a>
-            <a href="{% url 'rele_board'%} ">  <button type="button" class="btn btn-primary b" >Тест реле </button></a> <br />
+            {% if boiler.value == 0 %}<a href="{% url 'boiler'%} ">  <button type="button" class="btn btn-warning b" >Включение бойлера </button></a>
+            {% else %} <a href="">  <button type="button" class="btn btn-danger b" >Бойлер включен </button></a>
+            {% endif %}
+
+
 
         </div>
 
@@ -72,7 +81,7 @@
               <div class="card-body">
                     <div class="row">
                         <div class="col-sm"><strong>Сейчас:</strong></div>
-                        <div class="col-4-sm">{{time}}</div>
+                        <div class="col-4-sm">{{sensors.date_t_h}}</div>
                     </div>
                     <div class="row">
                         <div class="col-sm">{{description}}</div>
@@ -187,9 +196,11 @@
   <div class="container-fluid">
       <div class="row">
           <div class="col">
+              <a href="{% url 'sound'%} ">  <button type="button" class="btn btn-warning b" >Sound </button></a>
               <a href="{% url 'test'%} ">  <button type="button" class="btn btn-primary b"  >Тест Ардуино</button></a>
-              <a href="{% url 'mail_test'%} ">  <button type="button" class="btn btn-primary b" >Тест Mail </button></a> <br />
-              <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn btn-primary b" >Тест BOT </button></a> <br />
+              <a href="{% url 'mail_test'%} ">  <button type="button" class="btn btn-primary b" >Тест Mail </button></a>
+              <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn btn-primary b" >Тест BOT </button></a>
+              <a href="{% url 'rele_board'%} ">  <button type="button" class="btn btn-primary b" >Тест реле </button></a>
           </div>
           <div class="col">
           <span class="badge badge-pill badge-primary ">Primary</span>

@@ -1,7 +1,4 @@
-"""coursera_house URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
+"""
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -15,9 +12,11 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-from django.conf.urls import url
+from django.conf.urls import url, include
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
-    Boiler, Test, Sound, Raspberry_rele, MailTest, TelegramTest
+    Boiler, Rele
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,9 +25,8 @@ urlpatterns = [
     url(r'^temp/$', Temp.as_view(), name = 'temp'),
     url(r'^reset_arduino/$', ResetArduino.as_view(), name = 'reset_arduino'),
     url(r'^boiler/$', Boiler.as_view(), name = 'boiler'),
-    url(r'^test/$', Test.as_view(), name = 'test'),
-    url(r'^sound/$', Sound.as_view(), name = 'sound'),
-    url(r'^rele_board/$', Raspberry_rele.as_view(), name = 'rele_board'),
-    url(r'^mail/$', MailTest.as_view(), name = 'mail_test'),
-    url(r'^telegram/$', TelegramTest.as_view(), name = 'telegram_test'),
-]
+
+    url(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
+    url(r'^test/', include('house.core.test_urls')),
+
+    ]

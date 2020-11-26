@@ -10,7 +10,7 @@ class DebagArduino:
             b't': 'OK',
             b'B': 'bouiler on',
 
-            b'p': "Read fail;street; Read fail;voda; #{'temp_gaz': 24.00, 'humidity_gaz': 19.00,'MQ135': false,'MQ135_value': 50,'MQ4': false,'MQ4_value': 60}",
+            b'p': "Read fail;street; Read fail;voda; #{'temp_gaz': 24.00, 'humidity_gaz': 19.00,'MQ135_value': 50,'MQ4_value': 60}",
 
         }
     def write(self, param):

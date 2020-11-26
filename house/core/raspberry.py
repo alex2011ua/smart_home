@@ -25,7 +25,7 @@ def raspberry(flag):
         status['temp_core'] = vcgm.measure_temp()
         return status
     else:
-        status = {'Raspberry': 'Non Connect', 'temp_core': 44}
+        status = {'Raspberry': [], 'temp_core': 44}
         return status
 
 

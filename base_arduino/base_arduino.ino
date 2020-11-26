@@ -4,19 +4,16 @@
 #define PIN_RELAY          2     // 2
 #define DHTPIN             3   // dht 11 датчик температуры воды в котел
 #define DHT22PIN           4   // уличный dht 22
-#define PIN_RELAY_BOILER   5 // реле включения бойлера
+#define PIN_RELAY_BOILER   5 // реле включения бойлера ?
 #define PIN_SOUND          6   // пищалка
 #define PIN_DHT11_GAZ      7   //Температура воздуха возле вытяжки
-#define MQ135              8      //
-#define PIN_RELAY          9   //
-#define TEST               10      //
-#define MQ4                11      //
-                                   //12
+//#define                  8      //
+// ce                      9      // ce
+      // csn               10      // csn
+       //mi                11
+       //mo                12
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
-
-
-
 
 
 int led = 13; // led как пин 13
@@ -62,8 +59,8 @@ void setup(){
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
 void read_dht_param(){  // чтение температуры dh11
-    boolean noGas; //переменная для хранения значения о присутствии газа
-    int gasValue = 0; //переменная для хранения количества газа
+  boolean noGas; //переменная для хранения значения о присутствии газа
+  int gasValue = 0; //переменная для хранения количества газа
   float h;
   float t;
   char myStr[5];  // текстовый массив
@@ -83,7 +80,6 @@ void read_dht_param(){  // чтение температуры dh11
     json += myStr;
     json += ',';
   }
-
     dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
     h = dht.readHumidity();
     t = dht.readTemperature();
@@ -91,7 +87,6 @@ void read_dht_param(){  // чтение температуры dh11
         Serial.print(";voda; ");
     }
     else {
-
       json += "'temp_voda': ";
       dtostrf(t, 2,2,myStr);
       json += myStr;
@@ -107,7 +102,6 @@ void read_dht_param(){  // чтение температуры dh11
         Serial.print(";gaz; ");
     }
   else {
-
     json += "'temp_gaz': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
@@ -115,21 +109,14 @@ void read_dht_param(){  // чтение температуры dh11
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
-
   }
-
     gasValue = analogRead(analogSignal_MQ135); // и о его количестве
-
     json += "'MQ135_value': ";
     json += String(gasValue);
     json += ',';
-
-
     gasValue = analogRead(analogSignal_MQ4); // и о его количестве
-
     json += "'MQ4_value': ";
     json += String(gasValue);
-
     json += "}";
     Serial.println(json);
 }
@@ -168,6 +155,7 @@ void loop(){
   }
 }
 
+
 void Sound(int status){
   if (status == 1){
     analogWrite(PIN_SOUND, 50); // включаем пьезоизлучатель
@@ -195,6 +183,7 @@ void rele(int status){
     Serial.println("rele off");
    }
 }
+
 
 void Boiler(int status){ //управление бойлером
     if (status == 1){
