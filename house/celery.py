@@ -41,7 +41,7 @@ def setup_periodic_tasks_weather(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute=2, hour=1),
             weather_task.s(),
-            name = 'Weather')
+            name = 'Weather_task')
     except SoftTimeLimitExceeded as err:
         Logs.objects.create(date_log = datetime.datetime.now(),
                             title_log = 'Celery',
@@ -55,7 +55,7 @@ def setup_periodic_task_arduino(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute='*/15'),
             arduino_task.s(),
-            name = 'arduino')
+            name = 'arduino_task')
     except SoftTimeLimitExceeded as err:
         Logs.objects.create(date_log = datetime.datetime.now(),
                             title_log = 'Celery',
@@ -68,7 +68,7 @@ def setup_periodic_task_bot(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute='*/2'),
             bot_task.s(),
-            name = 'arduino')
+            name = 'bot_task')
     except SoftTimeLimitExceeded as err:
         Logs.objects.create(date_log = datetime.datetime.now(),
                             title_log = 'Celery',
