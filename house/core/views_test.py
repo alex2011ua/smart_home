@@ -63,7 +63,8 @@ class Raspberry_rele(View):
 class MailTest(View):
     @staticmethod
     def get(request):
-        send_test_mail('subject test', 'message test')
+
+        send_test_mail('subject test', request.META['HTTP_HOST'])
         Logs.objects.create(date_log = datetime.datetime.now(),
                             status = 'Test',
                             title_log = 'view Mail_test',
