@@ -63,8 +63,8 @@
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 time_center">
             <p><strong>На неделе:</strong><br />
-            {% if weather_6_day.rain > 5 %}Дожди - {{weather_6_day.rain}}мм. <br /> {% endif %}
-            {% if weather_6_day.snow > 5 %}Снег - {{weather_6_day.snow}}мм. <br /> {% endif %}
+            {% if weather_6_day.rain > 2 %}Дожди - {{weather_6_day.rain}}мм. <br /> {% endif %}
+            {% if weather_6_day.snow > 2 %}Снег - {{weather_6_day.snow}}мм. <br /> {% endif %}
                 Минимальная температура: {{weather_6_day.temp_min}}&deg;<br />
                 Максимальная температура: {{weather_6_day.temp_max}}&deg;<br />
             </p>

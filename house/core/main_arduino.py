@@ -95,7 +95,11 @@ def sound():
     return context
 
 def rele_1_on():
-    pass
+    context = testing()
+    arduino.write(b'1')
+    print(arduino.read())
 
 def rele_1_off():
-    pass
+    context = testing()
+    arduino.write(b'0')
+    print(arduino.read())

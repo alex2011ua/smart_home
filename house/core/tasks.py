@@ -117,7 +117,7 @@ def arduino_task():
         temp.save()
     else:
         Logs.objects.create(date_log = datetime.now(),
-                            status = 'OK',
+                            status = 'Error',
                             title_log = 'Task arduino_task',
                             description_log = str(dic_param['status']) + 'Error')
     print('arduino_task Close')

@@ -145,7 +145,5 @@ class Rele(View):
                 rele1_svet.value = 0
                 rele1_svet.save()
 
-        print(rele_id)
-        print(rele_id)
-        print(rele_id)
+
         return redirect(reverse_lazy('form'))
