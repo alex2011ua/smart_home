@@ -1,8 +1,8 @@
 from __future__ import absolute_import, unicode_literals
 
-from .main_arduino import read_ser, boiler_on, boiler_off
+from .main_arduino import read_ser
 from .weather_rain import weather_6_day, rain_yesterday
-from .raspberry import restart_cam
+from .raspberry import restart_cam, boiler_on, boiler_off
 from .models import Logs, Weather, DHT_MQ, Setting
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
@@ -33,7 +33,10 @@ def restart_cam_task():
                         status = 'OK',
                         title_log = 'Task restart_cam_task',
                         description_log = 'Restart Cam')
-
+    Logs.objects.create(date_log = datetime.now(),
+                        status = 'OK',
+                        title_log = 'Task restart_cam_task',
+                        description_log = 'Перезагружены')
     print('restart_cam_task Close')
 
 
@@ -127,14 +130,17 @@ def arduino_task():
 def boiler_task_on():
     print('Start boiler on')
     try:
-        context = boiler_on()
+        boiler_on(DEBUG)
     except Exception as err:
         Logs.objects.create(date_log = datetime.now(),
                             status = 'Error',
                             title_log = 'Task boiler_task_on',
                             description_log = 'Не включен Exeption' + str(err))
         return
-
+    Logs.objects.create(date_log = datetime.now(),
+                        status = 'OK',
+                        title_log = 'Task boiler_task',
+                        description_log = 'Бйлер включен')
     print('Start boiler Close on')
 
 
@@ -142,7 +148,7 @@ def boiler_task_on():
 def boiler_task_off():
     print('Start boiler off')
     try:
-        context = boiler_off()
+        boiler_off(DEBUG)
         boiler = Setting.objects.get(controller_name = 'boiler')
         boiler.label = 'Бойлер выключен'
         boiler.value = 0
@@ -154,6 +160,10 @@ def boiler_task_off():
                             title_log = 'Task boiler_task_off',
                             description_log = 'Не выключен Exeption' + str(err))
         return
+    Logs.objects.create(date_log = datetime.now(),
+                        status = 'OK',
+                        title_log = 'Task boiler_task',
+                        description_log = 'Бйлер выключен')
     print('Start boiler Close off')
 
 
