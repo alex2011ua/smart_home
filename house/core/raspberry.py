@@ -1,6 +1,4 @@
-import smbus
 import time as t
-import RPi.GPIO as GPIO
 
 
 def raspberry(flag):
@@ -34,8 +32,7 @@ def raspberry(flag):
 
 def restart_cam(flag):
     if not flag:
-
-
+        import smbus
         DEVICE_BUS = 1
         DEVICE_ADDR = 0x10
         bus = smbus.SMBus(DEVICE_BUS)
@@ -48,6 +45,7 @@ def button(flag):
         # Connections:
         # GPIO5 is button input
     if not flag:
+        import RPi.GPIO as GPIO
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(5, GPIO.IN, pull_up_down = GPIO.PUD_UP)
         GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -69,10 +67,11 @@ def button(flag):
 
 def rele_board(flag):
     if not flag:
+        import smbus
         DEVICE_BUS = 1
         DEVICE_ADDR = 0x10
         bus = smbus.SMBus(DEVICE_BUS)
-        n = 2
+        n = 1
         while n > 0:
             for i in range(1, 5):
                 bus.write_byte_data(DEVICE_ADDR, i, 0xFF)
@@ -86,6 +85,7 @@ def rele_board(flag):
 
 def boiler_on(flag):
     if not flag:
+        import smbus
         DEVICE_BUS = 1
         DEVICE_ADDR = 0x10
         bus = smbus.SMBus(DEVICE_BUS)
@@ -93,6 +93,7 @@ def boiler_on(flag):
 
 def boiler_off(flag):
     if not flag:
+        import smbus
         DEVICE_BUS = 1
         DEVICE_ADDR = 0x10
         bus = smbus.SMBus(DEVICE_BUS)

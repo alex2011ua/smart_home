@@ -3,13 +3,16 @@ class DebagArduino:
         print('run degug Arduino object')
         self.param = None
         self.dict_param = {
-            b'0': 'rele off',
-            b'1': 'rele on',
-            b'2': 'Humidity:22.00:Temperature:29.00',
-            b'3': 'Humidity:64.00:Temperature:4.20',
+            b'A': 'rele on',
+            b'a': 'rele off',
+            b'B': 'rele on',
+            b'b': 'rele off',
+            b'C': 'rele on',
+            b'c': 'rele off',
+            b'S': 'Sound on',
+            b's': 'Sound off',
             b't': 'OK',
-            b'B': 'bouiler on',
-
+            b'r': '',
             b'p': "Read fail;street; Read fail;voda; #{'temp_gaz': 24.00, 'humidity_gaz': 19.00,'MQ135_value': 50,'MQ4_value': 60}",
 
         }

@@ -28,8 +28,14 @@
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
 
 
-            {% if light.value == 0 %} <a href="{% url 'rele' light.label %}">  <button type="button" class="btn btn-dark b" >Включить освещение </button></a> <br />
-            {% else %} <a href="{% url 'rele' light.label %} ">  <button type="button" class="btn btn-light b" >Выключить освещение </button></a> <br />
+            {% if light_balkon.value == 0 %} <a href="{% url 'rele' light_balkon.label %}">  <button type="button" class="btn btn-dark b" >Включить балкон </button></a> <br />
+            {% else %} <a href="{% url 'rele' light_balkon.label %} ">  <button type="button" class="btn btn-light b" >Выключить балкон </button></a> <br />
+            {% endif%}
+            {% if light_tree.value == 0 %} <a href="{% url 'rele' light_tree.label %}">  <button type="button" class="btn btn-dark b" >Включить елку </button></a> <br />
+            {% else %} <a href="{% url 'rele' light_tree.label %} ">  <button type="button" class="btn btn-light b" >Выключить елку </button></a> <br />
+            {% endif%}
+            {% if light_perim.value == 0 %} <a href="{% url 'rele' light_perim.label %}">  <button type="button" class="btn btn-dark b" >Включить освещение </button></a> <br />
+            {% else %} <a href="{% url 'rele' light_perim.label %} ">  <button type="button" class="btn btn-light b" >Выключить освещение </button></a> <br />
             {% endif%}
 
         </div>

@@ -13,6 +13,25 @@ else:
     except Exception as err:
         print('Error Serial port')
 
+"""
+
+#define LIGHT_BALKON_ON     'A'
+#define LIGHT_BALKON_OFF    'a'
+
+#define LIGHT_TREE_ON   'B'
+#define LIGHT_TREE_OFF  'b'
+
+#define LIGHT_PERIM_ON   'C'
+#define LIGHT_PERIM_OFF  'c'
+
+#define SEND_PARAM  'p'
+#define RESET       'r'
+#define TEST        't'
+
+#define SOUND_ON    'S'
+#define SOUND_OFF   's'
+
+"""
 
 
 def testing():  # test answer Arduino
@@ -23,20 +42,6 @@ def testing():  # test answer Arduino
         if test == "OK":  # Связь есть, получаем данные
             return {'status': ['Test-OK']}
     return {'status': ['Test-Fail']}
-
-
-def restart_cam():
-    context = testing()
-
-    arduino.write(b'0')
-    print(arduino.read())
-    time.sleep(10)
-
-    arduino.write(b'1')
-    print(arduino.read())
-
-    context['status'].append('restart cam OK')
-    return context
 
 
 def read_ser():
@@ -68,19 +73,6 @@ def reset():
     context['status'].append('Restart Arduino OK')
     return context
 
-def boiler_on():
-    context = testing()
-    arduino.write(b'B')
-    print(arduino.read())
-    context['status'].append('Boiler on')
-    return context
-
-def boiler_off():
-    context = testing()
-    arduino.write(b'b')
-    print(arduino.read())
-    context['status'].append('Boiler off')
-    return context
 
 def sound():
     context = testing()
@@ -94,12 +86,38 @@ def sound():
     context['status'].append('sound')
     return context
 
-def rele_1_on():
-    context = testing()
-    arduino.write(b'1')
-    print(arduino.read())
 
-def rele_1_off():
+def rele_light_balkon(param):
     context = testing()
-    arduino.write(b'0')
-    print(arduino.read())
+    if param == 1:
+        arduino.write(b'A')
+        rele = arduino.read()
+    else:
+        arduino.write(b'a')
+        rele = arduino.read()
+    context['status'].append(rele)
+    return context
+
+
+def rele_light_tree(param):
+    context = testing()
+    if param == 1:
+        arduino.write(b'B')
+        rele = arduino.read()
+    else:
+        arduino.write(b'b')
+        rele = arduino.read()
+    context['status'].append(rele)
+    return context
+
+
+def rele_light_perim(param):
+    context = testing()
+    if param == 1:
+        arduino.write(b'C')
+        rele = arduino.read()
+    else:
+        arduino.write(b'c')
+        rele = arduino.read()
+    context['status'].append(rele)
+    return context

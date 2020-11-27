@@ -1,37 +1,37 @@
 #include "DHT.h"
 // список пинов:
+#define PIN_RELAY1         2    // LIGHT_BALKON
+#define DHTPIN             3    // dht 11 датчик температуры воды в котел
+#define DHT22PIN           4    // уличный dht 22
+#define PIN_RELAY2         5    // LIGHT_PERIM
+#define PIN_SOUND          6    // пищалка
+#define PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
+#define PIN_RELAY3         8    // LIGHT_TREE
+    // ce                  9    // ce
+    // csn                 10   // csn
+    //mi                   11
+    //mo                   12
 
-#define PIN_RELAY          2     // 2
-#define DHTPIN             3   // dht 11 датчик температуры воды в котел
-#define DHT22PIN           4   // уличный dht 22
-#define PIN_RELAY_BOILER   5 // реле включения бойлера ?
-#define PIN_SOUND          6   // пищалка
-#define PIN_DHT11_GAZ      7   //Температура воздуха возле вытяжки
-//#define                  8      //
-// ce                      9      // ce
-      // csn               10      // csn
-       //mi                11
-       //mo                12
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
 
 
-int led = 13; // led как пин 13
-
 // список команд с serial port
-#define RELE_OFF    '0'
-#define RELE_ON     '1'
+#define LIGHT_BALKON_ON     'A'
+#define LIGHT_BALKON_OFF    'a'
 
-#define SEND_PARAM  'p'
+#define LIGHT_TREE_ON       'B'
+#define LIGHT_TREE_OFF      'b'
 
-#define RESET       'r'
-#define TEST        't'
+#define LIGHT_PERIM_ON      'C'
+#define LIGHT_PERIM_OFF     'c'
 
-#define BOILER_ON   'B'
-#define BOILER_OFF  'b'
+#define SEND_PARAM       'p'
+#define RESET            'r'
+#define TEST             't'
 
-#define SOUND_ON    'S'
-#define SOUND_OFF   's'
+#define SOUND_ON         'S'
+#define SOUND_OFF        's'
 
 //выбор используемого датчика
 #define DHTTYPE DHT11   // DHT 11
@@ -45,12 +45,15 @@ DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха в
 void setup(){
   delay(1000); // ждем 1 секунду
   Serial.begin(9600);
-  pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
-  pinMode(PIN_RELAY_BOILER, OUTPUT);
-  digitalWrite(PIN_RELAY, LOW); // Выключаем реле - посылаем высокий сигнал
-  digitalWrite(PIN_RELAY_BOILER, HIGH);
+
+  pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
+  pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход
+  pinMode(PIN_RELAY3, OUTPUT); // Объявляем пин реле как выход
+  digitalWrite(PIN_RELAY1, LOW); // Выключаем реле - посылаем высокий сигнал
+  digitalWrite(PIN_RELAY2, LOW); // Выключаем реле - посылаем высокий сигнал
+  digitalWrite(PIN_RELAY3, LOW); // Выключаем реле - посылаем высокий сигнал
   pinMode(PIN_SOUND, OUTPUT);
-  pinMode(led, OUTPUT); // объявляем пин 13 как выход
+
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
 
@@ -59,7 +62,7 @@ void setup(){
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
 void read_dht_param(){  // чтение температуры dh11
-  boolean noGas; //переменная для хранения значения о присутствии газа
+
   int gasValue = 0; //переменная для хранения количества газа
   float h;
   float t;
@@ -124,28 +127,35 @@ void loop(){
   char val;
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
-    if (val == RELE_OFF) { //  если 0 выключаем реле
-      rele(0);
+    if (val == LIGHT_BALKON_OFF) { //  если 0 выключаем реле
+      rele_light_balkon(0);
     }
-    if (val == RELE_ON){//  если 1 включаем реле
-      rele(1);
+    if (val == LIGHT_BALKON_ON){//  если 1 включаем реле
+      rele_light_balkon(1);
     }
+    if (val == LIGHT_TREE_ON){ // управление бойлером Включаем
+        rele_light_tree(1);
+    }
+    if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
+        rele_light_tree(0);
+    }
+    if (val == LIGHT_PERIM_ON){ // управление бойлером Включаем
+        rele_light_perim(1);
+    }
+    if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
+        LIGHT_PERIM_OFF(0);
+    }
+
     if (val == SEND_PARAM){ //  если P шлем параметры
       read_dht_param();
     }
     if (val == RESET){ //  если r  перезапускаем Arduino
-
       resetFunc(); //вызываем reset
     }
     if (val == TEST){  // при  t 6 раз мигнем диодом возврат OK
         Test();
     }
-    if (val == BOILER_ON){ // управление бойлером Включаем
-        Boiler(1);
-    }
-    if (val == BOILER_OFF){ // управление бойлером Выключаем
-        Boiler(0);
-    }
+
     if (val == SOUND_ON){ // управление бойлером Включаем
         Sound(1);
     }
@@ -173,25 +183,37 @@ void Test(){  // во время теста 6 раз мигнем светоди
 }
 
 
-void rele(int status){
+void rele_light_balkon(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY1, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY1, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
    }
 }
 
 
-void Boiler(int status){ //управление бойлером
-    if (status == 1){
-    digitalWrite(PIN_RELAY_BOILER, LOW); // Отключаем реле - посылаем высокий уровень сигнала
-    Serial.println("bouiler on");
+void rele_light_perim(int status){
+  if (status == 1){
+    digitalWrite(PIN_RELAY2, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    Serial.println("rele on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY_BOILER, HIGH); // Включаем реле - посылаем низкий уровень сигнала
-    Serial.println("boiler off");
+    digitalWrite(PIN_RELAY2, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    Serial.println("rele off");
+   }
+}
+
+
+void rele_light_tree(int status){ //управление бойлером
+    if (status == 1){
+    digitalWrite(PIN_RELAY3, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    Serial.println("rele on");
+  }
+  if (status == 0){
+    digitalWrite(PIN_RELAY3, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    Serial.println("rele off");
     }
 }
