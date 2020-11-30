@@ -76,6 +76,14 @@ class MailTest(LoginRequiredMixin, View):
 class TelegramTest(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
-        bot.send_message(datetime.datetime.now())
+        bot.send_message(get_client_ip(request))
         return redirect(reverse_lazy('form'))
 
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip

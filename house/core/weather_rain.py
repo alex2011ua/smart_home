@@ -134,11 +134,11 @@ def rain_yesterday():
     }
     return context
 
-
+"""
 def weather_min():
 
     payload['exclude'] = 'current,minutely,hourly,alerts'
-    payload['appid'] = 'd16e0dacb5474e43829b385c7102e12d'
+    payload['appid'] = ''
     url = 'https://api.openweathermap.org/data/2.5/onecall'
     r = requests.get(url, params=payload)
     if r.status_code != 200:
@@ -177,6 +177,8 @@ def weather_min():
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__'':
     import pprint
     pprint.pprint(weather_min())
+    
+"""

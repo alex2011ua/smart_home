@@ -170,3 +170,5 @@ class Rele(LoginRequiredMixin, View):
                 rele.value = 0
                 rele.save()
         return redirect(reverse_lazy('form'))
+
+

@@ -28,6 +28,6 @@ urlpatterns = [
     path('boiler/', Boiler.as_view(), name = 'boiler'),
 
     re_path(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
-    path('test/', include('house.core.test_urls')),
+    path('test/', include('house.core.tests_urls')),
 
     ]

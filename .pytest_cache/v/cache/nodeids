@@ -3,5 +3,6 @@
   "house/core/test_views.py::TestViews::test_arduino",
   "house/core/test_views.py::TestViews::test_get_controller_page",
   "house/core/test_views.py::testing",
+  "house/core/views_test.py::testing",
   "tests/test_views.py::TestViews::test_get_controller_page"
 ]

@@ -42,7 +42,6 @@ def restart_cam(flag):
 
 
 def button(flag):
-        # Connections:
         # GPIO5 is button input
     if not flag:
         import RPi.GPIO as GPIO

@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from . import test_views
-from house.core.views_test import Test, Sound, Raspberry_rele, MailTest, TelegramTest
+from house.core.views_tests import Test, Sound, Raspberry_rele, MailTest, TelegramTest
 
 
 urlpatterns = [
