@@ -8,7 +8,7 @@ from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
 import django.db
-from .Telegram import gaz_analiz, button_analiz
+from .Telegram import gaz_analiz, button_analiz, temp_alert
 
 from django.conf import settings
 
@@ -177,3 +177,10 @@ def bot_task():
     button_analiz()
 
     print('Start bot task off')
+
+
+@cellery_app.task()
+def bot_task_1_hour():
+    print('Start bot_task_1_hour')
+    temp_alert()
+    print('Stop bot_task_1_hour')

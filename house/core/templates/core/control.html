@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block head %}
+{% block main %}
 <header>
   <div id="layer1" class="container-fluid time_center" >
     {{time}}{{ alerts }}{% for item in raspberry.Raspberry %}
@@ -73,6 +73,11 @@
             {% if weather_6_day.snow > 2 %}Снег - {{weather_6_day.snow}}мм. <br /> {% endif %}
                 Минимальная температура: {{weather_6_day.temp_min}}&deg;<br />
                 Максимальная температура: {{weather_6_day.temp_max}}&deg;<br />
+
+            {% if sensors.temp_voda < 2 %}<span class="badge badge-pill badge-warning  ">Температура на летней кухне - {{sensors.temp_voda}}</span> {% endif %}
+            {% if sensors.temp_gaz < 2 %}<span class="badge badge-pill badge-warning  ">Температура в котельной - {{sensors.temp_gaz}}</span> {% endif %}
+
+
             </p>
         </div>
     </div>
@@ -207,7 +212,7 @@
               <a href="{% url 'mail_test'%} ">  <button type="button" class="btn btn-primary b" >Тест Mail </button></a>
               <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn btn-primary b" >Тест BOT </button></a>
               <a href="{% url 'rele_board'%} ">  <button type="button" class="btn btn-primary b" >Тест реле </button></a>
-              <a href="{% url 'logout'%} ">  <button type="button" class="btn btn-primary b" >EXIT </button></a>
+              <a href="{% url 'logout'%} ">  <button type="button" class="btn btn-primary b" >EXIT {{user}}</button></a>
           </div>
           <div class="col">
           <span class="badge badge-pill badge-primary ">Primary</span>

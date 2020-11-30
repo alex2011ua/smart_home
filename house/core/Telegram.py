@@ -1,6 +1,6 @@
 import requests
 import os
-from .models import Message
+from .models import Message, DHT_MQ
 from dotenv import load_dotenv
 from .raspberry import button
 from datetime import datetime
@@ -112,3 +112,14 @@ def button_analiz():
 
     garaz.save()
     dor.save()
+
+
+def temp_alert():
+    try:
+        temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
+    except IndexError:
+        print('Error')
+    if temp.temp_voda <= 1:
+        bot.send_message(f"Температура в летней кухне опустилась: {temp.temp_voda}")
+    if temp.temp_gaz <= 22:
+        bot.send_message(f"Температура котельной: {temp.temp_voda}")

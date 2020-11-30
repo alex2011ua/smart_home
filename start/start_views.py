@@ -5,4 +5,4 @@ import datetime
 def index(request):
     context = {'date': datetime.datetime.now()}
 
-    return render(request, "start.html", context)
+    return render(request, "start/start.html", context)
