@@ -142,11 +142,11 @@ void loop(){
     if (val == LIGHT_PERIM_ON){ // управление бойлером Включаем
         rele_light_perim(1);
     }
-    if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
-        LIGHT_PERIM_OFF(0);
+    if (val == LIGHT_PERIM_OFF){ // управление бойлером Выключаем
+        rele_light_perim(0);
     }
 
-    if (val == SEND_PARAM){ //  если P шлем параметры
+    if (val == SEND_PARAM){ //  если p шлем параметры
       read_dht_param();
     }
     if (val == RESET){ //  если r  перезапускаем Arduino

@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Logs, DHT_MQ, Weather, Setting
 from .tasks import boiler_task_on, boiler_task_off
 
@@ -14,7 +14,7 @@ from django.conf import settings
 DEBUG = settings.PLACE
 
 
-class ControllerView(View):
+class ControllerView(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         context = {}
@@ -22,7 +22,7 @@ class ControllerView(View):
 
         boiler, created = Setting.objects.get_or_create(
             controller_name='boiler',
-            defaults = {'label': 'Выключен','value': 0})
+            defaults = {'label': 'Выключен', 'value': 0})
         light_balkon, created = Setting.objects.get_or_create(
             controller_name = 'light_balkon',
             defaults = {'label': '1', 'value': 0})
@@ -74,7 +74,7 @@ class ControllerView(View):
         return render(request, "core/control.html", context)
 
 
-class RestartCam(View):
+class RestartCam(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         restart_cam_task()
@@ -82,7 +82,7 @@ class RestartCam(View):
         return redirect(reverse_lazy('form'))
 
 
-class Temp(View):
+class Temp(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         arduino_task()  # читает датчики и занозит изменетия в БД
@@ -90,7 +90,7 @@ class Temp(View):
         return redirect(reverse_lazy('form'))
 
 
-class ResetArduino(View):
+class ResetArduino(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         try:
@@ -108,7 +108,7 @@ class ResetArduino(View):
         return redirect(reverse_lazy('form'))
 
 
-class Boiler(View):
+class Boiler(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         boiler = Setting.objects.get(controller_name='boiler')
@@ -135,7 +135,7 @@ class Boiler(View):
         return redirect(reverse_lazy('form'))
 
 
-class Rele(View):
+class Rele(LoginRequiredMixin, View):
     @staticmethod
     def get(request, rele_id):
         rele_id = int(rele_id)

@@ -10,9 +10,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.urls import path
+
 from django.contrib import admin
-from django.conf.urls import url, include
+from django.urls import include, path, re_path
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
     Boiler, Rele
 
@@ -20,13 +20,14 @@ from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^$', ControllerView.as_view(), name='form'),
-    url(r'^restart/$', RestartCam.as_view(), name='restart_cam'),
-    url(r'^temp/$', Temp.as_view(), name = 'temp'),
-    url(r'^reset_arduino/$', ResetArduino.as_view(), name = 'reset_arduino'),
-    url(r'^boiler/$', Boiler.as_view(), name = 'boiler'),
 
-    url(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
-    url(r'^test/', include('house.core.test_urls')),
+    path('', ControllerView.as_view(), name='form'),
+    path('restart/', RestartCam.as_view(), name='restart_cam'),
+    path('temp/', Temp.as_view(), name = 'temp'),
+    path('reset_arduino/', ResetArduino.as_view(), name = 'reset_arduino'),
+    path('boiler/', Boiler.as_view(), name = 'boiler'),
+
+    re_path(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
+    path('test/', include('house.core.test_urls')),
 
     ]

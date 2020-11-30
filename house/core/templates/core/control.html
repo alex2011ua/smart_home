@@ -41,7 +41,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
-            <a class="" href="/admin">
+            <a class="" href="/house/admin">
                         <span class="badge badge-pill badge-light ">Admin</span>
                     </a>
             <p class=""><a class="" href="{% url 'form' %}">
@@ -155,11 +155,11 @@
                         <div class="col-4-sm">{{ sensors.humidity_gaz }}</div>
                     </div>
                     <div class="row">
-                        <div class="col-sm"><strong>Температура воды подачи</strong></div>
+                        <div class="col-sm"><strong>Температура летняя кухня</strong></div>
                         <div class="col-4-sm">{{ sensors.temp_voda }}&deg</div>
                     </div>
                     <div class="row">
-                        <div class="col-sm"><strong>Влажность возле котла</strong></div>
+                        <div class="col-sm"><strong>Влажность летняя кухня</strong></div>
                         <div class="col-4-sm">{{ sensors.humidity_voda }}</div>
                     </div>
                     <div class="row">
@@ -207,6 +207,7 @@
               <a href="{% url 'mail_test'%} ">  <button type="button" class="btn btn-primary b" >Тест Mail </button></a>
               <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn btn-primary b" >Тест BOT </button></a>
               <a href="{% url 'rele_board'%} ">  <button type="button" class="btn btn-primary b" >Тест реле </button></a>
+              <a href="{% url 'logout'%} ">  <button type="button" class="btn btn-primary b" >EXIT </button></a>
           </div>
           <div class="col">
           <span class="badge badge-pill badge-primary ">Primary</span>

@@ -1,5 +1,6 @@
 from django.urls import reverse_lazy
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from .models import Logs
 from .main_arduino import testing, sound
@@ -12,7 +13,7 @@ DEBUG = settings.PLACE
 
 
 
-class Test(View):
+class Test(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         try:
@@ -30,7 +31,7 @@ class Test(View):
         return redirect(reverse_lazy('form'))
 
 
-class Sound(View):
+class Sound(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         try:
@@ -48,7 +49,7 @@ class Sound(View):
         return redirect(reverse_lazy('form'))
 
 
-class Raspberry_rele(View):
+class Raspberry_rele(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         try:
@@ -60,7 +61,7 @@ class Raspberry_rele(View):
                                 description_log = str(err))
         return redirect(reverse_lazy('form'))
 
-class MailTest(View):
+class MailTest(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
 
@@ -72,7 +73,7 @@ class MailTest(View):
         return redirect(reverse_lazy('form'))
 
 
-class TelegramTest(View):
+class TelegramTest(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         bot.send_message(datetime.datetime.now())
