@@ -61,11 +61,11 @@ class Raspberry_rele(LoginRequiredMixin, View):
                                 description_log = str(err))
         return redirect(reverse_lazy('form'))
 
-class MailTest(LoginRequiredMixin, View):
+class MailTest(View):
     @staticmethod
     def get(request):
 
-        send_test_mail('subject test', request.META['HTTP_HOST'])
+        send_test_mail('Вход на сайт', get_client_ip(request))
         Logs.objects.create(date_log = datetime.datetime.now(),
                             status = 'Test',
                             title_log = 'view Mail_test',
@@ -73,7 +73,7 @@ class MailTest(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class TelegramTest(LoginRequiredMixin, View):
+class TelegramTest(View):
     @staticmethod
     def get(request):
         bot.send_message(get_client_ip(request))
