@@ -5,10 +5,10 @@ def ip_info(ip):
     print(ip)
     payload = {'ip': ip
                }
-    url = 'https://api.2ip.ua/geo.json'
+    url = 'http://ip-api.com/json/'
     r = requests.get(url, params = payload)
     d = r.json()
-    return f'ip = {d["ip"]}, country - {d["country"]}, region - {d["region"]}, city - {d["city"]}'
+    return str(d)
 
 
 def get_client_ip(request):
