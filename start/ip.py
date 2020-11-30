@@ -3,10 +3,9 @@ import requests
 
 def ip_info(ip):
     print(ip)
-    payload = {'ip': ip
-               }
-    url = 'http://ip-api.com/json/'
-    r = requests.get(url, params = payload)
+
+    url = f'http://ip-api.com/json/{ip}'
+    r = requests.get(url)
     d = r.json()
     return str(d)
 
