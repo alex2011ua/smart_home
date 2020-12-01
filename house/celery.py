@@ -79,7 +79,7 @@ def setup_periodic_task_bot(sender, **kwargs):
 
 # ежечасный мониторинг
 @cellery_app.on_after_configure.connect()
-def setup_periodic_task_bot(sender, **kwargs):
+def setup_periodic_task_1_hour(sender, **kwargs):
     sender.add_periodic_task(
         crontab(minute=0),
         bot_task_1_hour.s(),
