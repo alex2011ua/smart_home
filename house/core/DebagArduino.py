@@ -13,7 +13,7 @@ class DebagArduino:
             b's': 'Sound off',
             b't': 'OK',
             b'r': '',
-            b'p': "Read fail;street; Read fail;voda; #{'temp_gaz': 24.00, 'humidity_gaz': 19.00,'MQ135_value': 50,'MQ4_value': 60}",
+            b'p': "#{'temp_street': 0.30, 'humidity_street': 95.40,'temp_voda': 5.00, 'humidity_voda': 76.00,'temp_gaz': 27.00, 'humidity_gaz': 28.00,'MQ135_value': 70,'MQ4_value': 49,'muve_kitchen': 0}",
 
         }
     def write(self, param):

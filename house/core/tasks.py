@@ -116,6 +116,8 @@ def arduino_task():
             temp.gaz_MQ4 = dic_param['MQ4_value']
         if dic_param.get('MQ135_value'):
             temp.gaz_MQ135 = dic_param['MQ135_value']
+        if dic_param.get('muve_kitchen'):
+            temp.muve_kitchen = dic_param['muve_kitchen']
 
         temp.save()
     else:

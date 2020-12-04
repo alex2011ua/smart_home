@@ -18,7 +18,7 @@ class ControllerView(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         context = {}
-        date_now = datetime.datetime.now()
+        date_time_now = datetime.datetime.now()
 
         boiler, created = Setting.objects.get_or_create(
             controller_name='boiler',
@@ -65,11 +65,11 @@ class ControllerView(LoginRequiredMixin, View):
         context['weather_6_day']['temp_min'] = weather_6.temp_min
         context['weather_6_day']['temp_max'] = weather_6.temp_max
         context['weather_6_day']['tomorrow'] = weather_6.date
-        context['time'] = date_now
+        context['time'] = date_time_now
 
         context.update(weather_now())
-
-        logs = Logs.objects.all().order_by('-date_log')[0:5]
+        date_now = datetime.date.today()
+        logs = Logs.objects.filter(status = 'Error', date_log__lte = date_now).order_by('-date_log')[0:5]
         context['logs'] = logs
         return render(request, "core/control.html", context)
 

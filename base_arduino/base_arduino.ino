@@ -138,8 +138,8 @@ void read_dht_param(){  // чтение температуры dh11
     json += String(gasValue);
     json += ',';
     json += "'muve_kitchen': ";
-    int pirVal = digitalRead(PIN_PIR);
-    json += pirVal
+    int pirVal = digitalRead(PIN_MUVE);
+    json += pirVal;
     json += "}";
     Serial.println(json);
 }
