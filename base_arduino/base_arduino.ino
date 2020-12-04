@@ -1,4 +1,8 @@
 #include "DHT.h"
+#include <SPI.h>                                               // Подключаем библиотеку для работы с шиной SPI.
+#include <nRF24L01.h>                                          // Подключаем файл настроек из библиотеки RF24.
+#include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
+RF24     radio(9, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
 // список пинов:
 #define PIN_RELAY1         2    // LIGHT_BALKON
 #define DHTPIN             3    // dht 11 датчик температуры воды в котел
@@ -56,6 +60,18 @@ void setup(){
 
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
+    radio.begin();                                             // Инициируем работу nRF24L01+.
+    radio.setChannel      (27);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит приём данных осуществляется на частоте 2,427 ГГц.
+    radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
+    radio.setPALevel      (RF24_PA_LOW);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
+    radio.enableAckPayload();
+    radio.openReadingPipe (1, 0xAABBCCDD11LL);                 // Открываем 1 трубу с адресом 1 передатчика 0xAABBCCDD11, для приема данных.
+    radio.openReadingPipe (2, 0xAABBCCDD22LL);                 // Открываем 2 трубу с адресом 2 передатчика 0xAABBCCDD22, для приема данных.
+    radio.openReadingPipe (3, 0xAABBCCDD33LL);                 // Открываем 3 трубу с адресом 3 передатчика 0xAABBCCDD33, для приема данных.
+    radio.openReadingPipe (4, 0xAABBCCDD96LL);                 // Открываем 4 трубу с адресом 4 передатчика 0xAABBCCDD96, для приема данных.
+    radio.openReadingPipe (5, 0xAABBCCDDFFLL);                 // Открываем 5 трубу с адресом 5 передатчика 0xAABBCCDDFF, для приема данных.
+    //radio.enableDynamicPayloads();
+    radio.startListening  ();                                  // Включаем приемник, начинаем прослушивать открытые трубы.
 
 }
 
@@ -160,27 +176,9 @@ void loop(){
         Test();
     }
 
-    if (val == SOUND_ON){ // управление бойлером Включаем
-        Sound(1);
-    }
-    if (val == SOUND_OFF){ // управление бойлером Выключаем
-        Sound(0);
-    }
+
   }
 }
-
-
-void Sound(int status){
-  if (status == 1){
-    analogWrite(PIN_SOUND, 50); // включаем пьезоизлучатель
-    Serial.println("Sound on");
-  }
-  if (status == 0){
-    analogWrite(PIN_SOUND, 0); // выключаем звук
-    Serial.println("Sound off");
-  }
-}
-
 
 void Test(){  // во время теста 6 раз мигнем светодиодом
     Serial.println("OK");
