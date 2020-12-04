@@ -4,7 +4,7 @@
 #define DHTPIN             3    // dht 11 датчик температуры воды в котел
 #define DHT22PIN           4    // уличный dht 22
 #define PIN_RELAY2         5    // LIGHT_PERIM
-#define PIN_SOUND          6    // пищалка
+#define PIN_MUVE          6    // движение кухня
 #define PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
 #define PIN_RELAY3         8    // LIGHT_TREE
     // ce                  9    // ce
@@ -52,7 +52,7 @@ void setup(){
   digitalWrite(PIN_RELAY1, LOW); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY2, LOW); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY3, LOW); // Выключаем реле - посылаем высокий сигнал
-  pinMode(PIN_SOUND, OUTPUT);
+  pinMode(PIN_MUVE, INPUT);
 
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
@@ -71,7 +71,7 @@ void read_dht_param(){  // чтение температуры dh11
   dht22.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
   h = dht22.readHumidity();
   t = dht22.readTemperature();
-  if (isnan(h) || isnan(t) ) {
+  if (isnan(h)) {
     Serial.print(";street; ");
   }
   else {
@@ -86,7 +86,7 @@ void read_dht_param(){  // чтение температуры dh11
     dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
     h = dht.readHumidity();
     t = dht.readTemperature();
-    if (isnan(h) || isnan(t)) {
+    if (isnan(h)) {
         Serial.print(";voda; ");
     }
     else {
@@ -101,7 +101,7 @@ void read_dht_param(){  // чтение температуры dh11
   dht_gaz.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
   h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
   t = dht_gaz.readTemperature();
-  if (isnan(h) || isnan(t)) {
+  if (isnan(h)) {
         Serial.print(";gaz; ");
     }
   else {
@@ -120,6 +120,10 @@ void read_dht_param(){  // чтение температуры dh11
     gasValue = analogRead(analogSignal_MQ4); // и о его количестве
     json += "'MQ4_value': ";
     json += String(gasValue);
+    json += ',';
+    json += "'muve_kitchen': ";
+    int pirVal = digitalRead(PIN_PIR);
+    json += pirVal
     json += "}";
     Serial.println(json);
 }

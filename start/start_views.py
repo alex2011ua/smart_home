@@ -7,7 +7,5 @@ import datetime
 
 def index(request):
     context = {'date': datetime.datetime.now()}
-    ip = get_client_ip(request)
-    json = ip_info(ip)
-    send_test_mail('Вход на сайт', json)
+
     return render(request, "start/start.html", context)

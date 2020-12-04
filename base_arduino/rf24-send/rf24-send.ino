@@ -2,6 +2,7 @@
 #include <nRF24L01.h>                                          // Подключаем файл настроек из библиотеки RF24.
 #include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
 RF24     radio(9, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
+#define PIN_SOUND          3
 int      ackData;
 int     ack1;
 int     arr1[4];
@@ -10,6 +11,7 @@ int     arr1[4];
 #define SEND_START 55      
    // стоповый байт отправки
 #define SEND_STOP 56     
+
 
 const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
 const int buttonPin = 2; // датчик освещения
@@ -21,6 +23,7 @@ unsigned long millissenddata=0;
 
 void setup(){
   //
+    pinMode(PIN_SOUND, OUTPUT);
     Serial.begin(9600);
     pinMode(PIN_RELAY, OUTPUT); // Объявляем пин реле как выход
     radio.begin           ();                                  // Инициируем работу модуля nRF24L01+.
@@ -47,12 +50,19 @@ void rele(int status){
 }
 
 void loop(){
-
+  
   if(millis()-millissenddata>5000) {
          Serial.println("read sensor");
 
          // получение данных с датчика
          sensorValue = analogRead(analogInPin);
+         Serial.print("sensor - ");
+         Serial.println(sensorValue);
+         if (sensorValue > 600){
+          analogWrite(PIN_SOUND, 50);
+          delay(500);
+          analogWrite(PIN_SOUND, 0);
+         }
           // map it to the range of the analog out:
          buttonState = digitalRead(buttonPin);
          arr1[0] = SEND_START;  
