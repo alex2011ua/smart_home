@@ -1,6 +1,6 @@
 import requests
 import os
-from .models import Message, DHT_MQ
+from .models import Message, DHT_MQ, Setting
 from dotenv import load_dotenv
 from .raspberry import button
 from datetime import datetime
@@ -121,6 +121,11 @@ def temp_alert():
     """
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
     if temp.temp_voda <= 1:
-        bot.send_message(f"Температура в летней кухне опустилась: {temp.temp_voda}")
+
+        alert_temp_voda = Setting.objects.get_or_create(
+            controller_name = 'alert_temp_voda',
+            defaults = {'label': 'температура', 'value': int(temp.temp_voda), 'date': datetime.now()})
+        if int(temp.temp_voda) != alert_temp_voda.value:
+            bot.send_message(f"Температура в летней кухне опустилась: {temp.temp_voda}")
     if temp.temp_gaz <= 22:
         bot.send_message(f"Температура котельной: {temp.temp_voda}")
