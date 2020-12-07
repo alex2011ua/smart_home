@@ -115,10 +115,11 @@ def button_analiz():
 
 
 def temp_alert():
-    try:
-        temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
-    except IndexError:
-        print('Error')
+    """
+    Проверка критичных показаний температуры
+    :return:
+    """
+    temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
     if temp.temp_voda <= 1:
         bot.send_message(f"Температура в летней кухне опустилась: {temp.temp_voda}")
     if temp.temp_gaz <= 22:

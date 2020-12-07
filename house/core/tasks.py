@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from .main_arduino import read_ser
+from .main_arduino import read_ser, rele_light_balkon, rele_light_tree, rele_light_perim
 from .weather_rain import weather_6_day, rain_yesterday
 from .raspberry import restart_cam, boiler_on, boiler_off
 from .models import Logs, Weather, DHT_MQ, Setting
@@ -186,3 +186,25 @@ def bot_task_1_hour():
     print('Start bot_task_1_hour')
     temp_alert()
     print('Stop bot_task_1_hour')
+
+
+@cellery_app.task()
+def bot_task_11_hour():
+    print('Start bot_task_11_hour')
+    light_balkon = Setting.objects.get(controller_name = 'light_balkon')
+    if light_balkon.value == 1:
+        rele_light_balkon(0)
+        light_balkon.value = 0
+        light_balkon.save()
+    light_tree = Setting.objects.get(controller_name = 'light_tree')
+    if light_tree.value == 1:
+        rele_light_tree(0)
+        light_tree.value = 0
+        light_tree.save()
+    light_perim = Setting.objects.get(controller_name = 'light_perim')
+    if light_perim.value == 1:
+        rele_light_perim(0)
+        light_perim.value = 0
+        light_perim.save()
+
+    print('Stop bot_task_11_hour')

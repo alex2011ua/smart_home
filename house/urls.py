@@ -14,7 +14,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path, re_path
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
-    Boiler, Rele
+    Boiler, Rele, Light
 
 
 
@@ -26,7 +26,7 @@ urlpatterns = [
     path('temp/', Temp.as_view(), name = 'temp'),
     path('reset_arduino/', ResetArduino.as_view(), name = 'reset_arduino'),
     path('boiler/', Boiler.as_view(), name = 'boiler'),
-
+    path('light/', Light.as_view(), name = 'light'),
     re_path(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
     path('test/', include('house.core.tests_urls')),
 

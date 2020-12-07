@@ -3,7 +3,7 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Logs, DHT_MQ, Weather, Setting
-from .tasks import boiler_task_on, boiler_task_off
+from .tasks import boiler_task_on, boiler_task_off, bot_task_11_hour
 
 from .main_arduino import reset, rele_light_balkon, rele_light_tree, rele_light_perim
 from .raspberry import raspberry, button
@@ -69,7 +69,8 @@ class ControllerView(LoginRequiredMixin, View):
 
         context.update(weather_now())
         date_now = datetime.date.today()
-        logs = Logs.objects.filter(status = 'Error', date_log__lte = date_now).order_by('-date_log')[0:5]
+        result_date = date_now - datetime.timedelta(days = 1)
+        logs = Logs.objects.filter(status = 'Error', date_log__gte = result_date).order_by('-date_log')[0:5]
         context['logs'] = logs
         return render(request, "core/control.html", context)
 
@@ -172,3 +173,8 @@ class Rele(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
+class Light(LoginRequiredMixin, View):
+    @staticmethod
+    def get(request):
+        bot_task_11_hour()
+        return redirect(reverse_lazy('form'))
