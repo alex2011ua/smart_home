@@ -8,7 +8,7 @@ RF24     radio(9, 10);                                         // Создаём
 #define DHTPIN             3    // dht 11 датчик температуры воды в котел
 #define DHT22PIN           4    // уличный dht 22
 #define PIN_RELAY2         5    // LIGHT_PERIM
-#define PIN_MUVE          6    // движение кухня
+#define PIN_6          6    //
 #define PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
 #define PIN_RELAY3         8    // LIGHT_TREE
     // ce                  9    // ce
@@ -18,6 +18,7 @@ RF24     radio(9, 10);                                         // Создаём
 
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
+const int analogSignal_muve_kitchen = A2; //подключение датчика движения
 
 
 // список команд с serial port
@@ -138,7 +139,7 @@ void read_dht_param(){  // чтение температуры dh11
     json += String(gasValue);
     json += ',';
     json += "'muve_kitchen': ";
-    int pirVal = digitalRead(PIN_MUVE);
+    int pirVal = analogRead(analogSignal_muve_kitchen);
     json += pirVal;
     json += "}";
     Serial.println(json);
@@ -172,17 +173,12 @@ void loop(){
     if (val == RESET){ //  если r  перезапускаем Arduino
       resetFunc(); //вызываем reset
     }
-    if (val == TEST){  // при  t 6 раз мигнем диодом возврат OK
-        Test();
+    if (val == TEST){
+        Serial.println("OK");
     }
-
-
   }
 }
 
-void Test(){  // во время теста 6 раз мигнем светодиодом
-    Serial.println("OK");
-}
 
 
 void rele_light_balkon(int status){
