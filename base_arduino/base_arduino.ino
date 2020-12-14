@@ -57,7 +57,7 @@ void setup(){
   digitalWrite(PIN_RELAY1, LOW); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY2, LOW); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY3, LOW); // Выключаем реле - посылаем высокий сигнал
-  pinMode(PIN_MUVE, INPUT);
+
 
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
