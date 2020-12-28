@@ -20,7 +20,6 @@ const int analogSignal_MQ135 = A0; //подключение аналоговог
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
 const int analogSignal_muve_kitchen = A2; //подключение датчика движения
 
-
 // список команд с serial port
 #define LIGHT_BALKON_ON     'A'
 #define LIGHT_BALKON_OFF    'a'
@@ -58,7 +57,6 @@ void setup(){
   digitalWrite(PIN_RELAY2, LOW); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY3, LOW); // Выключаем реле - посылаем высокий сигнал
 
-
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
     radio.begin();                                             // Инициируем работу nRF24L01+.
@@ -79,7 +77,6 @@ void setup(){
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
 void read_dht_param(){  // чтение температуры dh11
-
   int gasValue = 0; //переменная для хранения количества газа
   float h;
   float t;
@@ -179,8 +176,6 @@ void loop(){
   }
 }
 
-
-
 void rele_light_balkon(int status){
   if (status == 1){
     digitalWrite(PIN_RELAY1, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
@@ -192,7 +187,6 @@ void rele_light_balkon(int status){
    }
 }
 
-
 void rele_light_perim(int status){
   if (status == 1){
     digitalWrite(PIN_RELAY2, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
@@ -203,7 +197,6 @@ void rele_light_perim(int status){
     Serial.println("rele off");
    }
 }
-
 
 void rele_light_tree(int status){ //управление бойлером
     if (status == 1){
