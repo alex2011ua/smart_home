@@ -63,18 +63,18 @@ def setup_periodic_task_arduino(sender, **kwargs):
                             title_log = 'Celery',
                             description_log = f'{err}- превышен лимит времени')
 
-# запуск обновления инфо arduino
+# запуск отправки сообщений через телеграмбот
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_bot(sender, **kwargs):
     try:
         sender.add_periodic_task(
             crontab(minute='*/2'),
             bot_task.s(),
-            name = 'bot_task')
+            name='bot_task')
     except SoftTimeLimitExceeded as err:
-        Logs.objects.create(date_log = datetime.datetime.now(),
-                            title_log = 'Celery',
-                            description_log = f'{err}- превышен лимит времени')
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            title_log='Celery',
+                            description_log=f'{err}- превышен лимит времени')
 
 
 # ежечасный мониторинг
@@ -83,4 +83,7 @@ def setup_periodic_task_1_hour(sender, **kwargs):
     sender.add_periodic_task(
         crontab(minute=0),
         bot_task_1_hour.s(),
-        name = 'bot_task_hour')
+        name='bot_task_hour')
+
+
+# todo проверка в 11-00
