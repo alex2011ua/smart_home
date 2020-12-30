@@ -54,7 +54,7 @@ void setup(){
   pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY3, OUTPUT); // Объявляем пин реле как выход
   digitalWrite(PIN_RELAY1, LOW); // Выключаем реле - посылаем высокий сигнал
-  digitalWrite(PIN_RELAY2, LOW); // Выключаем реле - посылаем высокий сигнал
+  digitalWrite(PIN_RELAY2, HIGH); // Выключаем реле - посылаем высокий сигнал
   digitalWrite(PIN_RELAY3, LOW); // Выключаем реле - посылаем высокий сигнал
 
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
@@ -189,11 +189,11 @@ void rele_light_balkon(int status){
 
 void rele_light_perim(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY2, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY2, LOW); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY2, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY2, HIGH); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
    }
 }
