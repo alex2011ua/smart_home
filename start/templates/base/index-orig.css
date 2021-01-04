@@ -1,0 +1,295 @@
+/*Ссылка на шрифты кроме основного '*/
+body
+{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.clear-fix:after
+{
+    display: block;
+    clear: both;
+
+    content: '';
+}
+
+/*––––––––––––––––––Шапка газеты––––––––––––––––––––*/
+.header
+{
+    margin: 35px 0 25px;
+}
+
+.header__info
+{
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+    width: 200px;
+    padding: 25px 10px;
+
+    border: 1px solid;
+}
+
+.header__weather
+{
+    float: right;
+
+    width: 200px;
+}
+
+.header__weather-title
+{
+    margin: 0;
+    font: bold 1.17em SpaceMono, monospace;
+    text-align: center;
+}
+
+.header__weather-text
+{
+    margin: 0;
+    text-align: justify;
+    font-size: .8em;
+    line-height: 1.1em;
+}
+
+.header__title
+{
+    overflow: visible;
+    font: bold 60px Rye, cursive;
+
+    text-align: center;
+    margin: 0;
+}
+
+
+/*––––––––––––––––––Подшапка газеты–––––––––––––––––*/
+.sub-header
+{
+    padding: 5px 0;
+    font-size: .8em;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+}
+
+.sub-header__copyright
+{
+    display: inline-block;
+font-size: .6em;
+    margin: 0 30px;
+}
+
+.sub-header__price
+{
+    float: right;
+}
+
+
+/*––––––––––––––––––Основной контент––––––––––––––––*/
+.content
+{
+    display: flex;
+}
+
+/*––––––––––––––––––Блок статьи–––––––––––––––––––––*/
+.article__title
+{
+    margin-top: 0;
+    margin-bottom: 10px;
+    font: bold 3.2em Six Caps, sans-serif;
+}
+
+.article__help
+{
+    margin-top: 10px !important;
+    margin-bottom: 4px !important;
+}
+
+
+.article__add-text
+{
+    margin-top: 10px;
+    margin-bottom: 4px;
+    text-align: justify;
+    font-size: .8em;
+    font-style: italic;
+
+
+}
+
+.article__author
+{
+    display: block;
+    font-size: .8em;
+    text-align: center;
+    margin-top: 10px;
+}
+.article__content p{
+    font-size: .8em;
+    text-align: justify;
+    margin: unset;
+}
+.article__content ::first-letter{
+    padding-left: 1em;
+}
+.article__continue
+{
+    display: block;
+    font-size: .8em;
+    text-align: center;
+    font-style: italic;
+}
+
+.article__image
+{
+    margin: 0;
+    text-indent: 0;
+}
+
+.article__image.article__image_align_right
+{
+    float: right;
+
+    margin: 10px 0 5px 10px;
+}
+.article__image-caption{
+    text-decoration: underline;
+    font-size: .8em;
+
+}
+.article__subtitle
+{
+    margin: 10px 0;
+    font: bold 1.17em "Times New Roman";
+    text-align: center;
+}
+.article__subtitle.smalll{
+    font-size: 1.1em;
+}
+/*––––––––––––––––––Блок главной фотографии–––––––––*/
+.main-photo__wrapper
+{
+    margin: 0;
+}
+
+.main-photo__img
+{
+    width: 100%;
+}
+
+.main-photo__title
+{
+    margin: 0;
+    font-size: .8em;
+    font-weight: bold;
+}
+
+.main-photo__desc
+{
+    margin-bottom: 20px;
+    font-size: .8em;
+}
+.main-photo__caption{
+    text-align: right;
+    text-transform: uppercase;
+    font-size: .7em;
+
+}
+/*––––––––––––––––––Линия разделения––––––––––––––––*/
+.line
+{
+    border-top: 1px solid #000;
+}
+
+.line.line_type_bold
+{
+    margin-bottom: 3px;
+
+    border-width: 2px;
+}
+
+.line.line_type_short
+{
+    width: 70px;
+    margin: 0 auto;
+}
+
+/*––––––––––––––––––Центральные колонки газеты––––––––––––––––––*/
+.multicolumn
+{
+    margin-top: 10px;
+}
+.column-my{
+    column-count: 2;
+}
+.multicolumn__right,
+.multicolumn__left
+{
+    display: inline-block;
+
+    box-sizing: border-box;
+    width: 49%;
+
+    vertical-align: top;
+
+}
+
+.multicolumn__right
+{
+    padding-left: 10px;
+}
+
+.multicolumn__left
+{
+    padding-right: 10px;
+
+    border-right: 1px solid #000;
+}
+
+.multicolumn .line_type_short
+{
+    width: 50%;
+    margin: 10px auto;
+}
+
+.multicolumn .article__title
+{
+    margin: 10px 0 0 0;
+
+}
+.article__title_font_racing{
+    font: bold italic 2em 'Racing Sans One' ;
+}
+.article__title_font_farsan{
+    font: bold italic 2.3em 'Farsan' ;
+}
+.center-column
+{
+    margin-top: 20px;
+    padding: 0 10px;
+
+    flex-grow: 2;
+}
+
+/*––––––––––––––––––Второстепенные колонки газеты––––––––––––––––––*/
+.left-column
+{
+    border-right: 1px solid #000;
+}
+
+.right-column
+{
+    border-left: 1px solid #000;
+}
+
+.right-column,
+.left-column
+{
+    box-sizing: border-box;
+    width: 200px;
+    margin-top: 20px;
+    padding: 0 10px;
+
+    flex-shrink: 0;
+}
+
+/*––––––––––––––––––––––––––––––––––––––––––––––––––*/
