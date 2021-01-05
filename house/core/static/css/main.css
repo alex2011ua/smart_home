@@ -20,14 +20,9 @@ text-align: center;
 .pad{
     padding-bottom: 10px;
 }
-.center{
-    display:flex;
-    justify-content: center; /*центрируем элемент по горизонтали */
-    align-items: center; /* и вертикали */
-    width: 200px; /* задали размеры блоку-родителю */
-    height: 200px;
-    overflow: hidden; /* если элемент больше блока-родителя – обрезаем лишнее */
-}
-.block-width{
-    width: 180px;
+
+
+.my-time {
+    font-family: 'Neucha', cursive;
+
 }

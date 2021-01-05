@@ -2,11 +2,10 @@
 {% load static %}
 
 {% block main %}
+
 <header>
   <div id="layer1" class="container-fluid time_center" >
-    {{time}}{{ alerts }}{% for item in raspberry.Raspberry %}
-                     </a></p>{{item}}<br />
-                    {% endfor %}
+      <span class="my-time"> {{time}}</span>{{ alerts }}{% for item in raspberry.Raspberry %}<br>{{item}}{% endfor %}
   </div>
 </header>
 
