@@ -8,7 +8,7 @@ from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
 import django.db
-from .Telegram import gaz_analiz, button_analiz, temp_alert
+from .Telegram import gaz_analiz, button_analiz, temp_alert, bot
 
 from django.conf import settings
 
@@ -173,7 +173,7 @@ def boiler_task_off():
 def bot_task():
     print('Start bot task')
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
-    if (temp.gaz_MQ4 > 100) or (temp.gaz_MQ135 > 100):
+    if (temp.gaz_MQ4 > 65) or (temp.gaz_MQ135 > 100):
         gaz_analiz(temp.gaz_MQ4, temp.gaz_MQ135)
 
     button_analiz()
@@ -191,20 +191,26 @@ def bot_task_1_hour():
 @cellery_app.task()
 def bot_task_11_hour():
     print('Start bot_task_11_hour')
+
     light_balkon = Setting.objects.get(controller_name = 'light_balkon')
     if light_balkon.value == 1:
         rele_light_balkon(0)
         light_balkon.value = 0
         light_balkon.save()
+        bot.send_message('Выключен свет на балконе по рассписанию!')
+
     light_tree = Setting.objects.get(controller_name = 'light_tree')
     if light_tree.value == 1:
         rele_light_tree(0)
         light_tree.value = 0
         light_tree.save()
+        bot.send_message('Выключена иллюминация елки по рассписанию!')
+
     light_perim = Setting.objects.get(controller_name = 'light_perim')
     if light_perim.value == 1:
         rele_light_perim(0)
         light_perim.value = 0
         light_perim.save()
+        bot.send_message('Выключена тестовая кнопка рассписанию!')
 
     print('Stop bot_task_11_hour')

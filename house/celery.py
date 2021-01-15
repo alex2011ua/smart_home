@@ -13,12 +13,14 @@ cellery_app.config_from_object('django.conf:settings', namespace='CELERY')
 cellery_app.autodiscover_tasks()
 
 from house.core.tasks import restart_cam_task, weather_task, arduino_task, bot_task, \
-                             bot_task_1_hour
+                             bot_task_1_hour, bot_task_11_hour
 
 from celery.exceptions import SoftTimeLimitExceeded
 
 from .core.models import Logs
 import datetime
+
+
 
 
 # запуск рестарта камер
@@ -63,6 +65,7 @@ def setup_periodic_task_arduino(sender, **kwargs):
                             title_log = 'Celery',
                             description_log = f'{err}- превышен лимит времени')
 
+
 # запуск отправки сообщений через телеграмбот
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_bot(sender, **kwargs):
@@ -86,4 +89,10 @@ def setup_periodic_task_1_hour(sender, **kwargs):
         name='bot_task_hour')
 
 
-# todo проверка в 11-00
+# мониторинг включенной илюминации
+@cellery_app.on_after_configure.connect()
+def setup_periodic_task_11_hour(sender, **kwargs):
+    sender.add_periodic_task(
+        crontab(minute=0, hour= 9),
+        bot_task_11_hour.s(),
+        name='bot_task_11_hour')
