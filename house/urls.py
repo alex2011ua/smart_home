@@ -10,13 +10,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-
+import os
 from django.contrib import admin
 from django.urls import include, path, re_path
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
-    Boiler, Rele, Light
+    Boiler, Rele, Light, Get_bot_message
 
-
+token = os.getenv('TOKEN', os.environ.get('TOKEN'))
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,5 @@ urlpatterns = [
     path('light/', Light.as_view(), name = 'light'),
     re_path(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
     path('test/', include('house.core.tests_urls')),
-
+    path('{}/'.format(token), Get_bot_message.as_view(), name='get_bot_message')
     ]
