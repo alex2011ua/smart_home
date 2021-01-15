@@ -203,28 +203,20 @@
 </table>
 
 <footer>
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col">
-              <a href="{% url 'sound'%} ">  <button type="button" class="btn btn-warning b" >Sound </button></a>
-              <a href="{% url 'light'%} ">  <button type="button" class="btn btn-warning b" >Свет </button></a>
-              <a href="{% url 'test'%} ">  <button type="button" class="btn btn-primary b"  >Тест Ардуино</button></a>
-              <a href="{% url 'mail_test'%} ">  <button type="button" class="btn btn-primary b" >Тест Mail </button></a>
-              <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn btn-primary b" >Тест BOT </button></a>
-              <a href="{% url 'rele_board'%} ">  <button type="button" class="btn btn-primary b" >Тест реле </button></a>
-              <a href="{% url 'logout'%} ">  <button type="button" class="btn btn-primary b" >EXIT {{user}}</button></a>
-          </div>
-          <div class="col">
-          <span class="badge badge-pill badge-primary ">Primary</span>
-          <span class="badge badge-pill badge-secondary ">Secondary</span>
-          <span class="badge badge-pill badge-success  ">Success</span>
-          <span class="badge badge-pill badge-danger ">Danger</span>
-          <span class="badge badge-pill badge-warning  ">Warning</span>
-          <span class="badge badge-pill badge-info ">Info</span>
-          <span class="badge badge-pill badge-light ">Light</span>
-          <span class="badge badge-pill badge-dark ">Dark</span>
-          </div>
+  <div class="time_center">
+      <div>
+              <a href="{% url 'sound'%} ">  <button type="button" class="btn badge-warning footer_button" >Sound </button></a>
+              <a href="{% url 'light'%} ">  <button type="button" class="btn badge-secondary footer_button" >Свет </button></a>
+              <a href="{% url 'test'%} ">  <button type="button" class="btn badge-success footer_button"  >Тест Ардуино</button></a>
+              <a href="{% url 'mail_test'%} ">  <button type="button" class="btn badge-danger footer_button" >Тест Mail </button></a>
+              <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn badge-info footer_button" >Тест BOT </button></a>
+              <a href="{% url 'rele_board'%} ">  <button type="button" class="btn btn-primary footer_button" >Тест реле </button></a>
       </div>
+
+      <div >
+          <a href="{% url 'logout'%} ">  <button type="button" class="btn badge-dark footer_button" >EXIT {{user}}</button></a>
+      </div>
+
   </div>
 </footer>
 

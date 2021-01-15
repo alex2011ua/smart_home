@@ -53,13 +53,13 @@ def read_ser():
     read_arduino = arduino.read()
     try:
         errors, param = read_arduino.split('#')
-        param = param.replace("\'",'"')
-    except:
+        param = param.replace("\'", '"')
+    except Exception:
         context['status'].append('Error parce Arduino answer')
         return context
     try:
         json_answer = json.loads(param)
-    except json.JSONDecodeError as asd:
+    except json.JSONDecodeError:
         context['status'].append('JSONDecodeError')
         return context
     context.update(json_answer)

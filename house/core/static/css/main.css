@@ -9,6 +9,12 @@
     margin-bottom: 10px;
 
 }
+.footer_button{
+    width: 150px;
+    border-radius: 13px;
+    margin-bottom: 5px;
+
+}
 .time_center{
 text-align: center;
 }

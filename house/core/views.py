@@ -15,11 +15,14 @@ DEBUG = settings.PLACE
 
 
 class ControllerView(LoginRequiredMixin, View):
+    """Оснавная страница"""
+
     @staticmethod
     def get(request):
         context = {}
         date_time_now = datetime.datetime.now()
 
+        # Состояние бойлера и света
         boiler, created = Setting.objects.get_or_create(
             controller_name='boiler',
             defaults = {'label': 'Выключен', 'value': 0})
@@ -36,10 +39,12 @@ class ControllerView(LoginRequiredMixin, View):
         context['light_tree'] = light_tree
         context['light_perim'] = light_perim
         context['boiler'] = boiler
+
         context['raspberry'] = raspberry(DEBUG)  # state raspberry
-        context['button'] = button(DEBUG)  # загрузка состояний кнопок
+        context['button'] = button(DEBUG)  # загрузка состояний датчиков Raspberry
+        # Получение параметров arduino из БД
         try:
-            temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
+            temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
         except IndexError:
             temp = DHT_MQ.objects.create(date_t_h = datetime.datetime.now())
 
@@ -55,6 +60,8 @@ class ControllerView(LoginRequiredMixin, View):
         context['sensors']['humidity_teplica'] = temp.humidity_teplica
         context['sensors']['gaz_MQ4'] = temp.gaz_MQ4
         context['sensors']['gaz_MQ135'] = temp.gaz_MQ135
+
+        # Получение инфо о погоде из бд
         try:
             weather_6 = Weather.objects.all().order_by('-date')[0]
         except IndexError:
@@ -67,15 +74,19 @@ class ControllerView(LoginRequiredMixin, View):
         context['weather_6_day']['tomorrow'] = weather_6.date
         context['time'] = date_time_now
 
+        # Получение инфо о погоде на сгодня завтра по API
         context.update(weather_now())
+        # Извлечение логов с ошибками из БД за последний день
         date_now = datetime.date.today()
         result_date = date_now - datetime.timedelta(days = 1)
         logs = Logs.objects.filter(status = 'Error', date_log__gte = result_date).order_by('-date_log')[0:5]
         context['logs'] = logs
+
         return render(request, "core/control.html", context)
 
 
 class RestartCam(LoginRequiredMixin, View):
+    """Restart my cemeras"""
     @staticmethod
     def get(request):
         restart_cam_task()
@@ -84,6 +95,7 @@ class RestartCam(LoginRequiredMixin, View):
 
 
 class Temp(LoginRequiredMixin, View):
+    """Обновляет информацию о температуре и прогнозе погоды в БД"""
     @staticmethod
     def get(request):
         arduino_task()  # читает датчики и занозит изменетия в БД
@@ -114,7 +126,7 @@ class Boiler(LoginRequiredMixin, View):
     def get(request):
         boiler = Setting.objects.get(controller_name='boiler')
         if boiler.value == 0:
-            try:
+            try:  # Включение бойлера и запись в БД
                 boiler_task_on.delay()
                 boiler.label = 'Бойлер включен'
                 boiler.value = 1
@@ -125,7 +137,7 @@ class Boiler(LoginRequiredMixin, View):
                                     title_log = 'view Boiler',
                                     description_log = 'Ошибка ардуино Boiler' + str(
                                         exx))
-            try:
+            try:  # Задача на выключение бойлера
                 boiler_task_off.apply_async(countdown = 60 * 10)
             except Exception as exx:
                 Logs.objects.create(date_log = datetime.datetime.now(),
@@ -137,6 +149,7 @@ class Boiler(LoginRequiredMixin, View):
 
 
 class Rele(LoginRequiredMixin, View):
+    """Включение и выключение реле"""
     @staticmethod
     def get(request, rele_id):
         rele_id = int(rele_id)
