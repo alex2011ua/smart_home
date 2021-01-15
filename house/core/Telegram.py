@@ -15,7 +15,7 @@ token = os.getenv('TOKEN', os.environ.get('TOKEN'))
 
 DEBUG = settings.PLACE
 
-# 1098632551:AAFWxP9r6bQ4HTfZ54Rcau3kBAC0qMOcS00
+
 class TelegramBot:
     def __init__(self, token):
         self.token = token

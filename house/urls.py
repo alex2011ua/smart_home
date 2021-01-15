@@ -14,9 +14,9 @@ import os
 from django.contrib import admin
 from django.urls import include, path, re_path
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
-    Boiler, Rele, Light, Get_bot_message
+    Boiler, Rele, Light
 
-token = os.getenv('TOKEN', os.environ.get('TOKEN'))
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +29,5 @@ urlpatterns = [
     path('light/', Light.as_view(), name = 'light'),
     re_path(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
     path('test/', include('house.core.tests_urls')),
-    path('{}/'.format(token), Get_bot_message.as_view(), name='get_bot_message')
+
     ]
