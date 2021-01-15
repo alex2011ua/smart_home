@@ -193,7 +193,7 @@ class Light(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class Get_bot_message(LoginRequiredMixin, View):
+class Get_bot_message(View):
     @staticmethod
     def post(request):
         import json
