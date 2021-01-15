@@ -198,9 +198,10 @@ class Get_bot_message(View):
     def post(request):
         import json
         from .Telegram import bot
+        bot.send_message('Resive message')
         try:
             data = json.loads(request.body.decode())
-            bot.send_message('Resive message')
+
             bot.send_message(data)
         except ValueError:
             print('Value Error')
