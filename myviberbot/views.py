@@ -8,7 +8,7 @@ from house.core.Telegram import bot
 @csrf_exempt
 def trx_bot(request):
     bot.send_message(request.method)
-    if request.method == "POST":
+    if request.method == "GET":
         bot.send_message('method - Post')
         viber = json.loads(request.body.decode('utf-8'))
         if viber['event'] == 'webhook':
