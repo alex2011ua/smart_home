@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'house.core',
-    'start'
+    'start',
+    'myviberbot',
 
 ]
 
