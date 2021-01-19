@@ -9,7 +9,7 @@ if os.path.exists(dotenv_path):
 
 bot_configuration = BotConfiguration(
 	name='AlexUA',
-	avatar='http://viber.com/avatar.jpg',
+	avatar='http://alexua.pp.ua/static/start/favico.jpg',
 	auth_token= os.getenv('viber_token', os.environ.get('viber_token'))
 )
 viber = Api(bot_configuration)
