@@ -21,6 +21,10 @@ def trx_bot(request):
         if json_answer['event'] == 'message':
             message = json_answer['message']['text']
             bot.send_message(message)
+            tokens = viber.send_messages(to=json_answer.get_sender().get_id(),
+                                         messages=[TextMessage(
+                                             text="sample message")])
+            bot.send_message(tokens)
             return HttpResponse(status=200)
 
         else:
