@@ -20,6 +20,8 @@ def trx_bot(request):
         json_answer = json.loads(request.body.decode('utf-8'))
         bot.send_message(json_answer)
         bot.send_message(json_answer['event'])
+        bot.send_message(json_answer['message'])
+        bot.send_message(json_answer['message']['text'])
         if not viber.verify_signature(request.body.decode('utf-8'), request.headers.get(
                 'X-Viber-Content-Signature')):
             bot.send_message('verify_signature False')
