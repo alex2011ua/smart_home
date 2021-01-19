@@ -17,7 +17,7 @@ from viberbot.api.messages.text_message import TextMessage
 @csrf_exempt
 def trx_bot(request):
     try:
-        json_answer = json.loads(str(request))
+        json_answer = json.loads(request.body.decode('utf-8'))
         bot.send_message(json_answer)
         bot.send_message(json_answer['event'])
         if not viber.verify_signature(request.body.decode('utf-8'), request.headers.get(
