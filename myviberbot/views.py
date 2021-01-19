@@ -30,7 +30,9 @@ def send_text(agent, text, track=None):
 
 @csrf_exempt
 def trx_bot(request):
+    bot.send_message(request)
     if request.method == "GET":
+        bot.send_message('GET methodd')
         viber = json.loads(request.body.decode('utf-8'))
         if viber['event'] == 'conversation_started':
             bot.send_message("Приветствую пользователя")
