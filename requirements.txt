@@ -19,3 +19,5 @@ smbus
 
 telebot
 pytelegrambotapi
+
+viberbot==1.0.11
