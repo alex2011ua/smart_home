@@ -18,10 +18,8 @@ from viberbot.api.messages.text_message import TextMessage
 def trx_bot(request):
     try:
 
-        bot.send_message(request.method)
-        bot.send_message(request.headers)
-        bot.send_message([request.GET.items()])
-        if not viber.verify_signature(request.body(), request.headers.get(
+        bot.send_message([*request.GET.items()])
+        if not viber.verify_signature(request.body.decode('utf-8'), request.headers.get(
                 'X-Viber-Content-Signature')):
             bot.send_message('verify_signature False')
             return HttpResponse(status=403)
