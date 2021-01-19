@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from house.core.Telegram import bot
 import json
-from .viber_bot import viber
+from .viber_bot import viber, send_viber
 from viberbot.api.viber_requests import ViberConversationStartedRequest
 from viberbot.api.viber_requests import ViberFailedRequest
 from viberbot.api.viber_requests import ViberMessageRequest
@@ -21,10 +21,8 @@ def trx_bot(request):
         if json_answer['event'] == 'message':
             message = json_answer['message']['text']
             bot.send_message(message)
-            tokens = viber.send_messages(to=json_answer['sender']['id'],
-                                         messages=[TextMessage(
-                        text="sample message"+json_answer['sender']['name'])])
-            bot.send_message(tokens)
+            send_viber(message)
+
             return HttpResponse(status=200)
 
         else:
