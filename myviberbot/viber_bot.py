@@ -15,4 +15,4 @@ bot_configuration = BotConfiguration(
 	auth_token=token
 )
 viber = Api(bot_configuration)
-bot.send_message('create viber,  '+token)
+
