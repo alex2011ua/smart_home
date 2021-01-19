@@ -16,7 +16,7 @@ from viberbot.api.messages.text_message import TextMessage
 
 @csrf_exempt
 def trx_bot(request):
-
+    bot.send_message(request.get_data())
     if not viber.verify_signature(request.get_data(), request.headers.get(
             'X-Viber-Content-Signature')):
         bot.send_message('verify_signature False')
