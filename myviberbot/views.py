@@ -17,8 +17,10 @@ from viberbot.api.messages.text_message import TextMessage
 @csrf_exempt
 def trx_bot(request):
     bot.send_message(request)
+    bot.send_message(request.method)
     if not viber.verify_signature(request.get_data(), request.headers.get(
             'X-Viber-Content-Signature')):
+        bot.send_message('verify_signature False')
         return HttpResponse(status=403)
 
     # this library supplies a simple way to receive a request object
