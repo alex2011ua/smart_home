@@ -20,7 +20,7 @@ def trx_bot(request):
 
         bot.send_message(request.method)
         bot.send_message(request.headers)
-        bot.send_message([request.GET.items()].join(','))
+        bot.send_message([request.GET.items()])
         if not viber.verify_signature(request.body(), request.headers.get(
                 'X-Viber-Content-Signature')):
             bot.send_message('verify_signature False')
