@@ -18,32 +18,14 @@ from viberbot.api.messages.text_message import TextMessage
 def trx_bot(request):
     try:
         json_answer = json.loads(request.body.decode('utf-8'))
-        bot.send_message(json_answer)
-        bot.send_message(json_answer['event'])
-        bot.send_message(json_answer['message'])
-        bot.send_message(json_answer['message']['text'])
-        if not viber.verify_signature(request.body.decode('utf-8'), request.headers.get(
-                'X-Viber-Content-Signature')):
-            bot.send_message('verify_signature False')
-            return HttpResponse(status=403)
-        bot.send_message('verify_signature True')
-        # this library supplies a simple way to receive a request object
-        viber_request = viber.parse_request(request.get_data())
-        bot.send_message(viber_request)
-        if isinstance(viber_request, ViberMessageRequest):
-            message = viber_request.message
+        if json_answer['event'] == 'message':
+            message = json_answer['message']['text']
             bot.send_message(message)
-            viber.send_messages(viber_request.sender.id, [
-                message
-            ])
-        elif isinstance(viber_request, ViberSubscribedRequest):
-            viber.send_messages(viber_request.get_user.id, [
-                TextMessage(text="thanks for subscribing!")
-            ])
-        elif isinstance(viber_request, ViberFailedRequest):
-            bot.send_message("client failed receiving message. failure: {0}".format(viber_request))
+            return HttpResponse(status=200)
 
-        return HttpResponse(status=200)
+        else:
+            return HttpResponse(status=200)
+
     except Exception as err:
         bot.send_message(err)
 
