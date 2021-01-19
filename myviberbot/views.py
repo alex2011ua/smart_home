@@ -5,7 +5,7 @@ from django.shortcuts import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from house.core.Telegram import bot
-
+import json
 from .viber_bot import viber
 from viberbot.api.viber_requests import ViberConversationStartedRequest
 from viberbot.api.viber_requests import ViberFailedRequest
@@ -17,11 +17,9 @@ from viberbot.api.messages.text_message import TextMessage
 @csrf_exempt
 def trx_bot(request):
     try:
-        if request.POST:
-            bot.send_message('post prezent')
-            for item in request.POST.keys():
-                bot.send_message(str(item))
-        bot.send_message(request.GET.get('sig', 'no_sig'))
+        json_answer = json.loads(request)
+        bot.send_message(json_answer)
+        bot.send_message(json_answer['event'])
         if not viber.verify_signature(request.body.decode('utf-8'), request.headers.get(
                 'X-Viber-Content-Signature')):
             bot.send_message('verify_signature False')
