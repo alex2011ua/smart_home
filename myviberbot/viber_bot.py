@@ -12,7 +12,7 @@ token = os.getenv('viber_token', os.environ.get('viber_token'))
 bot_configuration = BotConfiguration(
 	name='AlexUA',
 	avatar='http://alexua.pp.ua/static/start/favico.jpg',
-	auth_token=token
+	auth_token=token or '4cc55938aa67d11d-d23d41823480a1ed-e64072a2b142dce7'
 )
 viber = Api(bot_configuration)
 
