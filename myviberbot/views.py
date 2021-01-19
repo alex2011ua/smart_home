@@ -18,7 +18,6 @@ from viberbot.api.messages.text_message import TextMessage
 def trx_bot(request):
     try:
 
-        bot.send_message(request.body())
         bot.send_message(request.method)
         bot.send_message(request.headers)
         bot.send_message([request.GET.items()].join(','))
