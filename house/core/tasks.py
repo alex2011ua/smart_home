@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
-from .main_arduino import read_ser, rele_light_balkon, rele_light_tree, rele_light_perim
+from .main_arduino import read_ser, rele_light_balkon, rele_light_tree, \
+    rele_light_perim
 from .weather_rain import weather_6_day, rain_yesterday
 from .raspberry import restart_cam, boiler_on, boiler_off
 from .models import Logs, Weather, DHT_MQ, Setting
@@ -23,20 +24,20 @@ def restart_cam_task():
         restart_cam(DEBUG)
     except Exception as err:
         print(err)
-        Logs.objects.create(date_log = datetime.now(),
-                            status = 'Error',
-                            title_log = 'Task restart_cam_task',
-                            description_log = 'Не перезагружены' + str(err))
+        Logs.objects.create(date_log=datetime.now(),
+                            status='Error',
+                            title_log='Task restart_cam_task',
+                            description_log='Не перезагружены' + str(err))
         return
 
-    Logs.objects.create(date_log = datetime.now(),
-                        status = 'OK',
-                        title_log = 'Task restart_cam_task',
-                        description_log = 'Restart Cam')
-    Logs.objects.create(date_log = datetime.now(),
-                        status = 'OK',
-                        title_log = 'Task restart_cam_task',
-                        description_log = 'Перезагружены')
+    Logs.objects.create(date_log=datetime.now(),
+                        status='OK',
+                        title_log='Task restart_cam_task',
+                        description_log='Restart Cam')
+    Logs.objects.create(date_log=datetime.now(),
+                        status='OK',
+                        title_log='Task restart_cam_task',
+                        description_log='Перезагружены')
     print('restart_cam_task Close')
 
 
@@ -48,36 +49,37 @@ def weather_task():
         yesterday = rain_yesterday()
     except Exception as err:
         log = Logs.objects.create(
-            date_log = datetime.now(),
-            status = 'Error',
-            title_log = 'Task weather_task',
-            description_log = 'Ошибка openweathermap.org Exeption изменилось API' + str(
+            date_log=datetime.now(),
+            status='Error',
+            title_log='Task weather_task',
+            description_log='Ошибка openweathermap.org Exeption изменилось API' + str(
                 err))
         return None
     if six_day['status_code'] != 200 or yesterday['status_code'] != 200:
-        Logs.objects.create(date_log = datetime.now(),
-                            status = 'Error',
-                            title_log = 'Task weather_task',
-                            description_log = f'Код ответа прогноза - {six_day["status_code"]}, '
-                                              f'код ответа запроса "вчера" - {yesterday["status_code"]}')
+        Logs.objects.create(date_log=datetime.now(),
+                            status='Error',
+                            title_log='Task weather_task',
+                            description_log=f'Код ответа прогноза - {six_day["status_code"]}, '
+                                            f'код ответа запроса "вчера" - {yesterday["status_code"]}')
     try:
 
-        Weather.objects.create(date = six_day['tomorrow_date'],
-                               rain = six_day['summ_rain_3_day'],
-                               temp_min = six_day['min_temp'],
-                               temp_max = six_day['max_temp'],
-                               snow = six_day['summ_snow_3_day'],
+        Weather.objects.create(date=six_day['tomorrow_date'],
+                               rain=six_day['summ_rain_3_day'],
+                               temp_min=six_day['min_temp'],
+                               temp_max=six_day['max_temp'],
+                               snow=six_day['summ_snow_3_day'],
                                )
     except django.db.utils.IntegrityError:
-        r_tomorrow = Weather.objects.get(date = six_day['tomorrow_date'])
-        Logs.objects.create(date_log = datetime.now(),
-                            status = 'Error',
-                            title_log = 'Task weather_task',
-                            description_log = 'Ошибка записи в БД, ' + str(r_tomorrow))
+        r_tomorrow = Weather.objects.get(date=six_day['tomorrow_date'])
+        Logs.objects.create(date_log=datetime.now(),
+                            status='Error',
+                            title_log='Task weather_task',
+                            description_log='Ошибка записи в БД, ' + str(
+                                r_tomorrow))
     try:
-        r_yesterday = Weather.objects.get(date = yesterday['result_date'])
+        r_yesterday = Weather.objects.get(date=yesterday['result_date'])
     except ObjectDoesNotExist:
-        r_yesterday = Weather.objects.create(date = yesterday['result_date'])
+        r_yesterday = Weather.objects.create(date=yesterday['result_date'])
     r_yesterday.rain = yesterday['sum_rain']
     r_yesterday.snow = yesterday['sum_snow']
     r_yesterday.temp_min = yesterday['min_temp']
@@ -94,14 +96,14 @@ def arduino_task():
         dic_param = read_ser()  # Читает с Ардуино значения датчиков
     except Exception as err:
         print(err)
-        Logs.objects.create(date_log = datetime.now(),
-                            status = 'Error',
-                            title_log = 'Task arduino',
-                            description_log = 'Ошибка ардуино Exeption')
+        Logs.objects.create(date_log=datetime.now(),
+                            status='Error',
+                            title_log='Task arduino',
+                            description_log='Ошибка ардуино Exeption')
         return
 
     if dic_param['status'][-1] == 'Test-OK':
-        temp = DHT_MQ.objects.create(date_t_h = datetime.now())
+        temp = DHT_MQ.objects.create(date_t_h=datetime.now())
 
         if dic_param.get('temp_voda'):
             temp.temp_voda = dic_param['temp_voda']
@@ -121,10 +123,10 @@ def arduino_task():
 
         temp.save()
     else:
-        Logs.objects.create(date_log = datetime.now(),
-                            status = 'Error',
-                            title_log = 'Task arduino_task',
-                            description_log = str(dic_param['status']) + 'Error')
+        Logs.objects.create(date_log=datetime.now(),
+                            status='Error',
+                            title_log='Task arduino_task',
+                            description_log=str(dic_param['status']) + 'Error')
     print('arduino_task Close')
 
 
@@ -134,15 +136,15 @@ def boiler_task_on():
     try:
         boiler_on(DEBUG)
     except Exception as err:
-        Logs.objects.create(date_log = datetime.now(),
-                            status = 'Error',
-                            title_log = 'Task boiler_task_on',
-                            description_log = 'Не включен Exeption' + str(err))
+        Logs.objects.create(date_log=datetime.now(),
+                            status='Error',
+                            title_log='Task boiler_task_on',
+                            description_log='Не включен Exeption' + str(err))
         return
-    Logs.objects.create(date_log = datetime.now(),
-                        status = 'OK',
-                        title_log = 'Task boiler_task',
-                        description_log = 'Бйлер включен')
+    Logs.objects.create(date_log=datetime.now(),
+                        status='OK',
+                        title_log='Task boiler_task',
+                        description_log='Бйлер включен')
     print('Start boiler Close on')
 
 
@@ -151,21 +153,21 @@ def boiler_task_off():
     print('Start boiler off')
     try:
         boiler_off(DEBUG)
-        boiler = Setting.objects.get(controller_name = 'boiler')
+        boiler = Setting.objects.get(controller_name='boiler')
         boiler.label = 'Бойлер выключен'
         boiler.value = 0
         boiler.save()
 
     except Exception as err:
-        Logs.objects.create(date_log = datetime.now(),
-                            status = 'Error',
-                            title_log = 'Task boiler_task_off',
-                            description_log = 'Не выключен Exeption' + str(err))
+        Logs.objects.create(date_log=datetime.now(),
+                            status='Error',
+                            title_log='Task boiler_task_off',
+                            description_log='Не выключен Exeption' + str(err))
         return
-    Logs.objects.create(date_log = datetime.now(),
-                        status = 'OK',
-                        title_log = 'Task boiler_task',
-                        description_log = 'Бйлер выключен')
+    Logs.objects.create(date_log=datetime.now(),
+                        status='OK',
+                        title_log='Task boiler_task',
+                        description_log='Бйлер выключен')
     print('Start boiler Close off')
 
 
@@ -192,25 +194,38 @@ def bot_task_1_hour():
 def bot_task_11_hour():
     print('Start bot_task_11_hour')
 
-    light_balkon = Setting.objects.get(controller_name = 'light_balkon')
+    light_balkon = Setting.objects.get(controller_name='light_balkon')
     if light_balkon.value == 1:
         rele_light_balkon(0)
         light_balkon.value = 0
         light_balkon.save()
         bot.send_message('Выключен свет на балконе по рассписанию!')
 
-    light_tree = Setting.objects.get(controller_name = 'light_tree')
+    light_tree = Setting.objects.get(controller_name='light_tree')
     if light_tree.value == 1:
         rele_light_tree(0)
         light_tree.value = 0
         light_tree.save()
         bot.send_message('Выключена иллюминация елки по рассписанию!')
 
-    light_perim = Setting.objects.get(controller_name = 'light_perim')
+    light_perim = Setting.objects.get(controller_name='light_perim')
     if light_perim.value == 1:
         rele_light_perim(0)
         light_perim.value = 0
         light_perim.save()
         bot.send_message('Выключена тестовая кнопка рассписанию!')
 
+    print('Stop bot_task_11_hour')
+
+
+@cellery_app.task()
+def bot_task_18_hour():
+    """Включение иллюминация на балконе по рассписанию"""
+    print('Start bot_task_18_hour')
+    light_balkon = Setting.objects.get(controller_name='light_balkon')
+    if light_balkon.value == 0:
+        rele_light_balkon(1)
+        light_balkon.value = 1
+        light_balkon.save()
+        bot.send_message('Включена иллюминация на балконе по рассписанию!')
     print('Stop bot_task_11_hour')

@@ -1,18 +1,9 @@
-from django.shortcuts import render
-
-
 from django.shortcuts import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-
 from house.core.Telegram import bot
 import json
-from .viber_bot import viber, send_viber
-from viberbot.api.viber_requests import ViberConversationStartedRequest
-from viberbot.api.viber_requests import ViberFailedRequest
-from viberbot.api.viber_requests import ViberMessageRequest
-from viberbot.api.viber_requests import ViberSubscribedRequest
-from viberbot.api.viber_requests import ViberUnsubscribedRequest
-from viberbot.api.messages.text_message import TextMessage
+from .viber_bot import send_viber
+
 
 @csrf_exempt
 def trx_bot(request):
@@ -22,12 +13,9 @@ def trx_bot(request):
             message = json_answer['message']['text']
             bot.send_message(message)
             send_viber(message)
-
             return HttpResponse(status=200)
-
         else:
             return HttpResponse(status=200)
-
     except Exception as err:
         bot.send_message(err)
 

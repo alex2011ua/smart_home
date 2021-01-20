@@ -12,8 +12,9 @@ cellery_app = Celery('proj')
 cellery_app.config_from_object('django.conf:settings', namespace='CELERY')
 cellery_app.autodiscover_tasks()
 
-from house.core.tasks import restart_cam_task, weather_task, arduino_task, bot_task, \
-                             bot_task_1_hour, bot_task_11_hour
+from house.core.tasks import restart_cam_task, weather_task, arduino_task, \
+    bot_task, \
+    bot_task_1_hour, bot_task_11_hour
 
 from celery.exceptions import SoftTimeLimitExceeded
 
@@ -21,21 +22,19 @@ from .core.models import Logs
 import datetime
 
 
-
-
 # запуск рестарта камер
 @cellery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute = 3,
-                    hour = '6,15,21'),
+            crontab(minute=3,
+                    hour='6,15,21'),
             restart_cam_task.s(),
-            name = 'Restart cam')
+            name='Restart cam')
     except SoftTimeLimitExceeded as err:
-        Logs.objects.create(date_log = datetime.datetime.now(),
-                            title_log = 'Celery',
-                            description_log = f'{err}- превышен лимит времени')
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            title_log='Celery',
+                            description_log=f'{err}- превышен лимит времени')
 
 
 # запуск обновления ино о погоде
@@ -45,11 +44,11 @@ def setup_periodic_tasks_weather(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute=2, hour=1),
             weather_task.s(),
-            name = 'Weather_task')
+            name='Weather_task')
     except SoftTimeLimitExceeded as err:
-        Logs.objects.create(date_log = datetime.datetime.now(),
-                            title_log = 'Celery',
-                            description_log = f'{err}- превышен лимит времени')
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            title_log='Celery',
+                            description_log=f'{err}- превышен лимит времени')
 
 
 # запуск обновления инфо arduino
@@ -59,11 +58,11 @@ def setup_periodic_task_arduino(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute='*/15'),
             arduino_task.s(),
-            name = 'arduino_task')
+            name='arduino_task')
     except SoftTimeLimitExceeded as err:
-        Logs.objects.create(date_log = datetime.datetime.now(),
-                            title_log = 'Celery',
-                            description_log = f'{err}- превышен лимит времени')
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            title_log='Celery',
+                            description_log=f'{err}- превышен лимит времени')
 
 
 # запуск отправки сообщений через телеграмбот
@@ -91,8 +90,15 @@ def setup_periodic_task_1_hour(sender, **kwargs):
 
 # мониторинг включенной илюминации
 @cellery_app.on_after_configure.connect()
-def setup_periodic_task_11_hour(sender, **kwargs):
+def setup_periodic_task_22_hour(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute=0, hour= 9),
+        crontab(minute=0, hour=20),
         bot_task_11_hour.s(),
         name='bot_task_11_hour')
+
+@cellery_app.on_after_configure.connect()
+def setup_periodic_task_18_hour(sender, **kwargs):
+    sender.add_periodic_task(
+        crontab(minute=0, hour=16),
+        bot_task_18_hour.s(),
+        name='bot_task_18_hour')
