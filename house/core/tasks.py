@@ -34,10 +34,6 @@ def restart_cam_task():
                         status='OK',
                         title_log='Task restart_cam_task',
                         description_log='Restart Cam')
-    Logs.objects.create(date_log=datetime.now(),
-                        status='OK',
-                        title_log='Task restart_cam_task',
-                        description_log='Перезагружены')
     print('restart_cam_task Close')
 
 
