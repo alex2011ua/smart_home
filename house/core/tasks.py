@@ -218,10 +218,10 @@ def bot_task_11_hour():
 def bot_task_18_hour():
     """Включение иллюминация на балконе по рассписанию"""
     print('Start bot_task_18_hour')
-    light_balkon = Setting.objects.get(controller_name='light_balkon')
-    if light_balkon.value == 0:
-        rele_light_balkon(1)
-        light_balkon.value = 1
-        light_balkon.save()
+    light_perim = Setting.objects.get(controller_name='light_perim')
+    if light_perim.value == 0:
+        rele_light_perim(1)
+        light_perim.value = 1
+        light_perim.save()
         bot.send_message('Включена иллюминация на балконе по рассписанию!')
     print('Stop bot_task_11_hour')
