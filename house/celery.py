@@ -14,7 +14,7 @@ cellery_app.autodiscover_tasks()
 
 from house.core.tasks import restart_cam_task, weather_task, arduino_task, \
     bot_task, \
-    bot_task_1_hour, bot_task_11_hour
+    bot_task_1_hour, bot_task_11_hour, bot_task_18_hour
 
 from celery.exceptions import SoftTimeLimitExceeded
 
