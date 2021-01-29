@@ -1,15 +1,16 @@
 import requests
-import os
+
 from .models import Message, DHT_MQ, Setting
-from dotenv import load_dotenv
+
 from .raspberry import button
 from datetime import datetime
 from django.conf import settings
 
+import os
+from dotenv import load_dotenv
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
-
 token = os.getenv('TOKEN', os.environ.get('TOKEN'))
 
 

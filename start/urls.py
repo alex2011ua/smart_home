@@ -8,7 +8,7 @@ token = os.getenv('TOKEN', os.environ.get('TOKEN'))
 
 urlpatterns = [
     path('house/', include('house.urls')),
-    path('', start_views.index, name='index'),
+    path('', start_views.IndexView.as_view(), name='index'),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
     path('{}/'.format(token), start_views.get_bot_message, name='get_bot_message'),
