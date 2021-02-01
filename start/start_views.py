@@ -4,31 +4,107 @@ from .ip import get_client_ip, ip_info
 import json
 from house.core.Telegram import bot
 from django.views import View
-from .avto_api import get_list_car
-
+from .avto_api import get_list_car, make_baza_avto
+import time
+from django.http import HttpResponse
 class IndexView(View):
     @staticmethod
     def get(request):
-        return render(request, "start/start.html", {})
+        context = {
+            's_yers': [2016],
+            'po_yers': [2018],
+            'price_ot': 10000,
+            'price_do': 10500,
+            'type': ['1', '4', '6'],
+            'gearbox': ['2', '3']
+        }
 
-    @staticmethod
-    def post(request):
-        s_yers = request.POST.get('s_yers')
-        po_yers = request.POST.get('po_yers')
-        price_ot = request.POST.get('price_ot')
-        price_do = request.POST.get('price_do')
-        toplivo = request.POST.getlist('toplivo')
-        print(toplivo)
-        print(s_yers, po_yers, price_ot, price_do)
-        zapros = get_list_car({
-            's_yers': [s_yers],
-            'po_yers': [po_yers],
-            'price_ot': price_ot,
-            'price_do': price_do,
-            'type': toplivo,
-        })
+        if 's_yers' in request.GET:
+            context.update({'s_yers': [request.GET['s_yers']]})
+        if 'po_yers' in request.GET:
+            context.update({'po_yers': [request.GET['po_yers']]})
+        if 'price_ot' in request.GET:
+            context.update({'price_ot': request.GET['price_ot']})
+        if 'price_do' in request.GET:
+            context.update({'price_do': request.GET['price_do']})
+
+        if 'price_ot' in request.GET:
+            context['type'] = []
+            context['gearbox'] = []
+            if 'benz' in request.GET:
+                context['type'].append('1')
+            if 'dizel' in request.GET:
+                context['type'].append('2')
+            if 'gaz' in request.GET:
+                context['type'].append('4')
+            if 'elektro' in request.GET:
+                context['type'].append('6')
+
+            if 'mex' in request.GET:
+                context['gearbox'].append('1')
+            if 'avtomat' in request.GET:
+                context['gearbox'].append('2')
+            if 'tip' in request.GET:
+                context['gearbox'].append('3')
+
+        zapros = get_list_car(context)
         count = zapros['count_avto']
-        return render(request, "start/start.html", {'count': count})
+        context['count'] = count
+        return render(request, "start/start.html", context)
+
+class AnalizView(View):
+    @staticmethod
+    def get(request):
+        context = {
+            's_yers': [2016],
+            'po_yers': [2018],
+            'price_ot': 10000,
+            'price_do': 10500,
+            'type': ['1', '4', '6'],
+            'gearbox': ['2', '3']
+        }
+
+        if 's_yers' in request.GET:
+            context.update({'s_yers': [request.GET['s_yers']]})
+        if 'po_yers' in request.GET:
+            context.update({'po_yers': [request.GET['po_yers']]})
+        if 'price_ot' in request.GET:
+            context.update({'price_ot': request.GET['price_ot']})
+        if 'price_do' in request.GET:
+            context.update({'price_do': request.GET['price_do']})
+
+        if 'price_ot' in request.GET:
+            context['type'] = []
+            context['gearbox'] = []
+            if 'benz' in request.GET:
+                context['type'].append('1')
+            if 'dizel' in request.GET:
+                context['type'].append('2')
+            if 'gaz' in request.GET:
+                context['type'].append('4')
+            if 'elektro' in request.GET:
+                context['type'].append('6')
+
+            if 'mex' in request.GET:
+                context['gearbox'].append('1')
+            if 'avtomat' in request.GET:
+                context['gearbox'].append('2')
+            if 'tip' in request.GET:
+                context['gearbox'].append('3')
+
+        zapros = get_list_car(context)
+        count = zapros['count_avto']
+        context['count_avto'] = count
+        time_start = time.time()
+        baza = make_baza_avto(zapros['list_cars'][:100])
+        time_zapros = time.time() - time_start
+        if baza['status'] != 200:
+            return HttpResponse(baza['status'])
+
+        context['avtos'] = baza['baza_avto']
+        context['time_zapros'] = time_zapros
+        return render(request, "start/cart.html", context)
+
 
 def get_bot_message(request):
     bot.send_message('Resive message')

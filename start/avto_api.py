@@ -1330,15 +1330,23 @@ def make_baza_avto(car_list):
             if name_avto in baza_avto:
                 #  высчитываем среднюю цену
                 baza_avto[name_avto]['price'] = \
-                    (baza_avto[name_avto]['count'] * baza_avto[name_avto]['price'] + price) \
-                    // (baza_avto[name_avto]['count'] + 1)
+                    (baza_avto[name_avto]['count_item'] * baza_avto[name_avto]['price'] + price) \
+                    // (baza_avto[name_avto]['count_item'] + 1)
 
-                baza_avto[name_avto]['count'] += 1
+                baza_avto[name_avto]['count_item'] += 1
             else:
-                baza_avto[name_avto] = {'count': 1, 'foto': foto,  'price': price}
+                baza_avto[name_avto] = {'count_item': 1, 'foto': foto,  'price': price}
         else:
             return {'status': info_avto.status_code, 'baza_avto': baza_avto}
+    baza_avto = sort_baza(baza_avto)
     return {'status': 200, 'baza_avto': baza_avto}
 
 
-
+def sort_baza(baza):
+    list_to_sort = []
+    for name, value in baza.items():
+        list_to_sort.append(
+            (value['count_item'], value['price'], name, value['foto'] )
+        )
+    sort_list = sorted(list_to_sort, reverse = True)
+    return sort_list

@@ -1,0 +1,31 @@
+{% extends "start/base_start.html" %}
+{% load static %}
+{% block title %}Анализ рынка{% endblock %}
+
+{% block main %}
+
+    <div class="row mb-4">
+        <div class="col-lg-8 mx-auto text-center">
+            <a class="btn btn-primary" href="house/" role="button">Home</a>
+            <h1 class="display-6">Список автомобилей, соответствующие Вашим параметрам, которые сейчас продаются</h1>
+        </div>
+    </div> <!-- End -->
+<div class="row mt-5">{% for avto in avtos %}
+      <div class="col-4">
+        <div class="card mb-4">
+          <div class="embed-responsive embed-responsive-16by9">
+             <img class="card-img-top embed-responsive-item" src="{{avto.3}}" alt="" />
+          </div>
+          <div class="card-body">
+            <h2 class="h5 card-title">{{ avto.2 }}, - {{ avto.0 }} шт. </h2>
+            <p class="card-text">{{ avto.1 }} USD (средняя цена)</p>
+            <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+          </div>
+        </div>
+      </div>{% endfor %}
+    </div>
+
+
+время запроса {{time_zapros}}
+
+{% endblock %}
