@@ -68,3 +68,5 @@ class Message(models.Model):
     value_int = models.IntegerField(null=True)
     value_float = models.FloatField(null=True)
     state = models.BooleanField(default=False)
+
+

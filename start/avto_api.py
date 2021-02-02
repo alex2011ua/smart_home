@@ -1,5 +1,6 @@
 import requests
-
+import datetime
+from django.core.exceptions import ObjectDoesNotExist
 import os
 from dotenv import load_dotenv
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -1262,8 +1263,8 @@ brandOrigin = [
 url_search = 'https://developers.ria.com/auto/search'
 url_info = 'https://developers.ria.com/auto/info'
 
-
-
+from start.models import Avto
+import time
 
 
 def get_list_car(params):
@@ -1306,14 +1307,14 @@ def get_list_car(params):
 
         return {'status': 200, 'count_avto': count_avto, 'list_cars': list_cars}
     else:
-        return {'status':zapros_po_param.status_code}  # 429 (слишком много запросов)
+        return {'status': zapros_po_param.status_code}  # 429 (слишком много запросов)
 
 
 def make_baza_avto(car_list):
     '''
     перебор списка авто для анализа
     :param car_list: list
-    :return: dict
+    :return: list
     '''
     baza_avto = {}
     for car in car_list:
@@ -1321,23 +1322,32 @@ def make_baza_avto(car_list):
             'api_key': apy_key,
             'auto_id': car
         }
-        info_avto = requests.get(url_info, params = params)
-        if info_avto.status_code == 200:
-            info_json = info_avto.json()
-            name_avto = info_json['markName'] + ' ' + info_json['modelName']
-            foto = info_json['photoData']['seoLinkB']
-            price = int(info_json['USD'])
-            if name_avto in baza_avto:
-                #  высчитываем среднюю цену
-                baza_avto[name_avto]['price'] = \
-                    (baza_avto[name_avto]['count_item'] * baza_avto[name_avto]['price'] + price) \
-                    // (baza_avto[name_avto]['count_item'] + 1)
+        try:
+            car_baze = Avto.objects.get(autoId=car)
+        except ObjectDoesNotExist:
+            info_avto = requests.get(url_info, params = params)
+            if info_avto.status_code != 200:
+                return {'status': info_avto.status_code, 'baza_avto': baza_avto}
+            car_baze = car_add_baze(info_avto)
 
-                baza_avto[name_avto]['count_item'] += 1
-            else:
-                baza_avto[name_avto] = {'count_item': 1, 'foto': foto,  'price': price}
+        name_avto = car_baze.markName + ' ' + car_baze.modelName
+
+        if name_avto in baza_avto:
+            #  высчитываем среднюю цену
+            price = int(car_baze.USD)
+            baza_avto[name_avto]['price'] = \
+                (baza_avto[name_avto]['count_item'] * baza_avto[name_avto]['price'] + price) \
+                // (baza_avto[name_avto]['count_item'] + 1)
+
+            baza_avto[name_avto]['count_item'] += 1
         else:
-            return {'status': info_avto.status_code, 'baza_avto': baza_avto}
+            baza_avto[name_avto] = {
+              'count_item': 1,
+              'linkToView': car_baze.linkToView,
+              'foto': car_baze.foto,
+              'price': int(car_baze.USD)}
+
+
     baza_avto = sort_baza(baza_avto)
     return {'status': 200, 'baza_avto': baza_avto}
 
@@ -1346,7 +1356,25 @@ def sort_baza(baza):
     list_to_sort = []
     for name, value in baza.items():
         list_to_sort.append(
-            (value['count_item'], value['price'], name, value['foto'] )
+            (value['count_item'], value['price'], name, value['foto'])
         )
     sort_list = sorted(list_to_sort, reverse = True)
     return sort_list
+
+
+def car_add_baze(avto):
+    info_json = avto.json()
+    avto_query = Avto(
+        date_message = datetime.datetime.now(),
+        autoId = info_json['autoData']['autoId'],
+        raceInt = info_json['autoData']['raceInt'],
+        USD = info_json['USD'],
+        year = info_json['autoData']['year'],
+        markName = info_json['markName'],
+        modelName = info_json['modelName'],
+        linkToView = info_json['linkToView'],
+        foto = info_json['photoData']['seoLinkB'],
+        bodyId = info_json['autoData']['bodyId'],
+                      )
+    avto_query.save()
+    return avto_query
