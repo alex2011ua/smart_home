@@ -26,7 +26,7 @@
                     <div class="tab-content">
                         <!-- credit card info-->
                         <div id="credit-card" class="tab-pane fade show active pt-3">
-                            <form role="form" method="get" action="/">
+                            <form role="form" method="get" action="/"  >
 
 
                                 <div class="row">
@@ -99,7 +99,7 @@
                                 <div class="card-footer"> <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm"> Отправить запрос по параметрам! </button></div>
                             {% if count %} По Вашему запросу было найдено <span class="count_avto">{{count}} </span> автомобилей! <br>
 
-                                <button type="submit" formaction="/analiz" class="subscribe btn btn-warning btn-block shadow-sm"> Анализ найденых автомобилей! </button>
+                                <button type="submit" onclick="validateForm()" formaction="/analiz" class="subscribe btn btn-warning btn-block shadow-sm"> Анализ найденых автомобилей! </button>
                         {% endif %}
                                 <span class="count_avto"> {{ error }} </span>
                             </form>
@@ -111,6 +111,13 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+function validateForm()
+{
 
+  alert("Время обработки запроса может занять несколько минут");
+
+}
+</script>
 
 {% endblock %}
