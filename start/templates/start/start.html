@@ -97,9 +97,11 @@
     </div>
 </div>
                                 <div class="card-footer"> <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm"> Отправить запрос по параметрам! </button></div>
-                            {% if count %} По Вашему запросу было найдено <span class="count_avto">{{count}} </span> автомобилей! <br> Aнализ 100 авто занимает 30 секунд!
-                        <button type="submit" formaction="/analiz" class="subscribe btn btn-warning btn-block shadow-sm"> Анализ найденых автомобилей! </button>
+                            {% if count %} По Вашему запросу было найдено <span class="count_avto">{{count}} </span> автомобилей! <br>
+
+                                <button type="submit" formaction="/analiz" class="subscribe btn btn-warning btn-block shadow-sm"> Анализ найденых автомобилей! </button>
                         {% endif %}
+                                <span class="count_avto"> {{ error }} </span>
                             </form>
                         </div>
 

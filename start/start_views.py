@@ -6,7 +6,7 @@ from house.core.Telegram import bot
 from django.views import View
 from .avto_api import get_list_car, make_baza_avto
 import time
-from django.http import HttpResponse
+
 class IndexView(View):
     @staticmethod
     def get(request):
@@ -48,8 +48,15 @@ class IndexView(View):
                 context['gearbox'].append('3')
 
         zapros = get_list_car(context)
-        count = zapros['count_avto']
-        context['count'] = count
+        if zapros['status'] == 429:
+            context['error'] = 'Cлишком много запросов, попробуйте через час!'
+        elif zapros['status'] != 200:
+            context['error'] = zapros['status']
+        else:
+
+            count = zapros['count_avto']
+            context['count'] = count
+
         return render(request, "start/start.html", context)
 
 class AnalizView(View):
@@ -96,10 +103,10 @@ class AnalizView(View):
         count = zapros['count_avto']
         context['count_avto'] = count
         time_start = time.time()
-        baza = make_baza_avto(zapros['list_cars'][:100])
-        time_zapros = time.time() - time_start
+        baza = make_baza_avto(zapros['list_cars'])
         if baza['status'] != 200:
-            return HttpResponse(baza['status'])
+            context['error'] = baza['status']
+        time_zapros = time.time() - time_start
 
         context['avtos'] = baza['baza_avto']
         context['time_zapros'] = time_zapros
