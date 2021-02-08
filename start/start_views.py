@@ -63,12 +63,7 @@ class AnalizView(View):
     @staticmethod
     def get(request):
         context = {
-            's_yers': [2016],
-            'po_yers': [2018],
-            'price_ot': 10000,
-            'price_do': 10500,
-            'type': ['1', '4', '6'],
-            'gearbox': ['2', '3']
+
         }
 
         if 's_yers' in request.GET:
@@ -98,18 +93,6 @@ class AnalizView(View):
                 context['gearbox'].append('2')
             if 'tip' in request.GET:
                 context['gearbox'].append('3')
-
-        zapros = get_list_car(context)
-        count = zapros['count_avto']
-        context['count_avto'] = count
-        time_start = time.time()
-        baza = make_baza_avto(zapros['list_cars'])
-        if baza['status'] != 200:
-            context['error'] = baza['status']
-        time_zapros = time.time() - time_start
-
-        context['avtos'] = baza['baza_avto']
-        context['time_zapros'] = time_zapros
         return render(request, "start/cart.html", context)
 
 

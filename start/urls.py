@@ -3,7 +3,7 @@ from django.contrib.auth import views
 from . import start_views
 import os
 from myviberbot.views import trx_bot
-
+from .ajax import ajax, ajax_analiz
 token = os.getenv('TOKEN', os.environ.get('TOKEN'))
 
 urlpatterns = [
@@ -14,4 +14,7 @@ urlpatterns = [
     path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
     path('{}/'.format(token), start_views.get_bot_message, name='get_bot_message'),
     path('webhook2020/', trx_bot),
+    path('ajax/', ajax),
+    path('ajax/analiz', ajax_analiz),
+
 ]

@@ -3,30 +3,47 @@
 {% block title %}Анализ рынка{% endblock %}
 
 {% block main %}
+
+<script>
+    console.log('start script')
+    $(document).ready(function(){
+        $("#button_count").click(function(){
+            let data = $('#myForm').serializeArray();
+            $.ajax({
+	            url: '/ajax/',
+	            method: 'POST',
+    	        data: data,
+            })
+            .done(function(text) {
+	            $('#ccount').html(text);
+            })
+        });
+
+    });
+</script>
 <div class="container py-5">
-
     <div class="row mb-4">
-
         <div class="col-lg-8 mx-auto text-center">
             <a class="btn btn-primary" href="house/" role="button">Home</a>
             <h1 class="display-6">Выбор автоомобиля по параметрам</h1>
         </div>
     </div> <!-- End -->
+
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="card ">
                 <div class="card-header">
                     <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
                         <!-- Credit card form tabs -->
-                        <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                            <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Заполнение параметров автомобиля </a> </li>
-                        </ul>
+                        <button id="button_count" class="subscribe btn btn-black btn-block shadow-sm "> Отправить запрос по параметрам! </button>
+                        По Вашему запросу было найдено <span id="ccount" class="count_avto">{{count}} </span> автомобилей!
+
                     </div> <!-- End -->
                     <!-- Credit card form content -->
                     <div class="tab-content">
                         <!-- credit card info-->
                         <div id="credit-card" class="tab-pane fade show active pt-3">
-                            <form role="form" method="get" action="/"  >
+                            <form id="myForm" role="form" method="get" action="/"  >
 
 
                                 <div class="row">
@@ -96,11 +113,11 @@
         </div>
     </div>
 </div>
-                                <div class="card-footer"> <button type="submit" class="subscribe btn btn-primary btn-block shadow-sm"> Отправить запрос по параметрам! </button></div>
-                            {% if count %} По Вашему запросу было найдено <span class="count_avto">{{count}} </span> автомобилей! <br>
+                                <div class="card-footer"> </div>
+
 
                                 <button type="submit" onclick="validateForm()" formaction="/analiz" class="subscribe btn btn-warning btn-block shadow-sm"> Анализ найденых автомобилей! </button>
-                        {% endif %}
+
                                 <span class="count_avto"> {{ error }} </span>
                             </form>
                         </div>
@@ -111,6 +128,8 @@
         </div>
     </div>
 </div>
+<div id="result"></div>
+
 <script type="text/javascript">
 function validateForm()
 {
