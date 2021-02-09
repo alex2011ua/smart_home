@@ -56,7 +56,19 @@ def get_list_car(params):
     else:
         return {'status': zapros_po_param.status_code}  # 429 (слишком много запросов)
 
-
+def analiz_avto(car):
+    params = {
+        'api_key': apy_key,
+        'auto_id': car
+    }
+    try:
+        Avto.objects.get(autoId = car)
+    except ObjectDoesNotExist:
+        info_avto = requests.get(url_info, params = params)
+        if info_avto.status_code != 200:
+            return {'status': info_avto.status_code, }
+        car_add_baze(info_avto)
+    return {'status': 200, }
 def make_baza_avto(car_list):
     '''
     перебор списка авто для анализа

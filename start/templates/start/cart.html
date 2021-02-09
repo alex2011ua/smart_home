@@ -15,40 +15,70 @@
             Цена: с <span id="price_ot">{{price_ot}}</span> по <span id="price_do">{{price_do}}</span>
             топливо: <span id="type">{{type}}</span>, коробка: <span id="gearbox">{{gearbox}}</span>
         </p>
+            <p>
+
+            </p>
         </div>
     </div> <!-- End -->
-
+<p id="avto">Идет процесс анализа. Ждите!</p>
 <script>
-    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-    console.log('start script card')
+    let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    let baza_avto = [];
     $.ajaxSetup({
         headers: {
             'X-CSRFToken': csrftoken
         }
     });
-
-    $(document).ready(function(){
-    let data = {
-        "s_yers": $('#s_yers').text(),
-        "po_yers": $('#po_yers').text(),
-        "price_ot": $('#price_ot').text(),
-        "price_do": $('#price_do').text(),
-        "type": $('#type').text(),
-        "gearbox": $('#gearbox').text(),
-
+$(document).ready(function(){
+    let list_avto = {{ car_list|safe }};
+    for (list_a in list_avto){
+        let avto_array = list_avto[list_a];
+        let data ={list_avto: avto_array };
+        $.ajax({
+            url: '/ajax/analiz',
+            method: 'POST',
+            data: data,
+            dataType: 'json',
+            success: function () {
+                for (ite in avto_array){
+                    baza_avto.push(avto_array[ite]);
+                };
+                $('#avto').html(baza_avto.length);
+                if (baza_avto.length == {{count_avto_in}}){
+                    zvit()
+                }
+            },
+            error: function (text) {
+                console.log('error');
+                console.log(text);
+            },
+        })
     };
-    console.log(data)
+
+    function zvit(){
+        let baza = {baza: baza_avto}
     $.ajax({
-        url: '/ajax/analiz',
-        method: 'POST',
-        data: data,
-    })
-    .done(function(text) {
-        $('#avto').html(text);
-    })
-    });
+            url: '/ajax/zvit',
+            method: 'POST',
+            data: baza,
+
+            success: function (text) {
+            console.log('__ok__');
+            console.log(text);
+            $('#avto').html(text);
+            },
+            error: function (text) {
+                console.log('__1__');
+                console.log(text);
+            },
+        })
+    }
+
+});
+
+
 </script>
-<p id="avto">Идет процесс анализа. Ждите!</p>
+
 
 
 {% endblock %}

@@ -1,6 +1,9 @@
-from django.http import HttpResponse
-from .avto_api import get_list_car
+from django.http import HttpResponse, JsonResponse
+from .avto_api import get_list_car, make_baza_avto, analiz_avto
 from django.shortcuts import render
+import json
+
+
 def ajax(request):
     t = []
     g = []
@@ -30,13 +33,18 @@ def ajax(request):
     list_car = get_list_car(params)
     return HttpResponse(list_car['count_avto'])
 
+
 def ajax_analiz(request):
-    print(request.POST)
-    import time
-    time.sleep(70)
-    avtos = [
-        ['asd30',23,23,3,4,5,6,34],
-        ['asd33', 23, 23, 3, 4, 5, 6, 34]
-             ]
-    context = {'avtos': avtos}
-    return render(request, "start/ca.html", context)
+    avtos = request.POST.getlist('list_avto[]')
+    for avto in avtos:
+        status = analiz_avto(avto)
+        if status['status'] != 200:
+            print(status['status'])
+    return JsonResponse({'status': 200})
+
+
+def ajax_zvit(request):
+    avtos = request.POST.getlist('baza[]')
+    sort_list = make_baza_avto(avtos)
+
+    return render(request, "start/ca.html", sort_list)
