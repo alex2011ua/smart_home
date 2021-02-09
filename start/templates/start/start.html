@@ -21,7 +21,7 @@
 
     });
 </script>
-<div class="container py-5">
+<div id="button_count" class="container py-5">
     <div class="row mb-4">
         <div class="col-lg-8 mx-auto text-center">
             <a class="btn btn-primary" href="house/" role="button">Home</a>
@@ -35,7 +35,6 @@
                 <div class="card-header">
                     <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
                         <!-- Credit card form tabs -->
-                        <button id="button_count" class="subscribe btn btn-black btn-block shadow-sm "> Отправить запрос по параметрам! </button>
                         По Вашему запросу было найдено <span id="ccount" class="count_avto">{{count}} </span> автомобилей!
 
                     </div> <!-- End -->
@@ -131,6 +130,29 @@
 <div id="result"></div>
 <a class="btn btn-primary" href="clear_baze/" role="button">clear_baze</a>
 <script type="text/javascript">
+    const form = document.getElementById('myForm');
+    form.addEventListener('focusout', (event) => {
+        let data = $('#myForm').serializeArray();
+            $.ajax({
+	            url: '/ajax/',
+	            method: 'POST',
+    	        data: data,
+            })
+            .done(function(text) {
+	            $('#ccount').html(text);
+            })
+    });
+        form.addEventListener('click', (event) => {
+        let data = $('#myForm').serializeArray();
+            $.ajax({
+	            url: '/ajax/',
+	            method: 'POST',
+    	        data: data,
+            })
+            .done(function(text) {
+	            $('#ccount').html(text);
+            })
+    });
 function validateForm()
 {
 
