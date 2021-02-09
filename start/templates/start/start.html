@@ -6,9 +6,8 @@
 
 <script>
     console.log('start script')
-    $(document).ready(function(){
-        $("#button_count").click(function(){
-            let data = $('#myForm').serializeArray();
+    function count(){
+        let data = $('#myForm').serializeArray();
             $.ajax({
 	            url: '/ajax/',
 	            method: 'POST',
@@ -17,6 +16,12 @@
             .done(function(text) {
 	            $('#ccount').html(text);
             })
+    }
+
+    $(document).ready(function(){
+        count()
+        $("#button_count").click(function(){
+            count()
         });
 
     });
@@ -143,15 +148,7 @@
             })
     });
         form.addEventListener('click', (event) => {
-        let data = $('#myForm').serializeArray();
-            $.ajax({
-	            url: '/ajax/',
-	            method: 'POST',
-    	        data: data,
-            })
-            .done(function(text) {
-	            $('#ccount').html(text);
-            })
+        count()
     });
 function validateForm()
 {
