@@ -19,8 +19,8 @@ url_info = 'https://developers.ria.com/auto/info'
 def get_list_car(params):
     '''
     получает словарь параметров запроса и возвращает ответ
-    :param params: dict
-    :return: dict
+    :param params: dict словарь параметров запроса
+    :return: dict количество авто в запросе и список ID авто
     '''
     payload = {
             'api_key': apy_key,
@@ -57,6 +57,11 @@ def get_list_car(params):
         return {'status': zapros_po_param.status_code}  # 429 (слишком много запросов)
 
 def analiz_avto(car):
+    """
+    проверяет наличие авто в кеше
+    :param car: ID авто
+    :return:
+    """
     params = {
         'api_key': apy_key,
         'auto_id': car
@@ -69,6 +74,8 @@ def analiz_avto(car):
             return {'status': info_avto.status_code, }
         car_add_baze(info_avto)
     return {'status': 200, }
+
+
 def make_baza_avto(car_list):
     '''
     перебор списка авто для анализа
@@ -118,6 +125,11 @@ def make_baza_avto(car_list):
 
 
 def sort_baza(baza):
+    """
+    сортирует словарь и возвращает отсортированный список
+    :param baza: dict
+    :return: list
+    """
     list_to_sort = []
     for name, value in baza.items():
         list_to_sort.append(

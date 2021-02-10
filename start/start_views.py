@@ -1,12 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from house.core.mail import send_test_mail
-from .ip import get_client_ip, ip_info
-import json
 from start.models import Avto
 from house.core.Telegram import bot
 from django.views import View
-from .avto_api import get_list_car, make_baza_avto
+from .avto_api import get_list_car
 import json
 
 
@@ -23,12 +20,12 @@ class IndexView(View):
             'type': ['1', '4', '6'],
             'gearbox': ['2', '3']
         }
-
         return render(request, "start/start.html", context)
 
 class AnalizView(View):
     @staticmethod
     def get(request):
+        # разбираем QueryString
         param_avto = {}
         if 's_yers' in request.GET:
             param_avto.update({'s_yers': [request.GET['s_yers']]})
@@ -58,10 +55,11 @@ class AnalizView(View):
             if 'tip' in request.GET:
                 param_avto['gearbox'].append('3')
 
-        zapros = get_list_car(param_avto)
-        count = zapros['count_avto']
+        zapros = get_list_car(param_avto)  # получаем количество авто
+        count = zapros['count_avto']  # получаем количество авто
         car_list = zapros['list_cars']
         count_avto_in = len(car_list)
+        # разбивае список на сисок списков по 10 машин для отправки нескольких Ajax запросов
         car_list_split = split(car_list)
         context = {
             'param_avto': json.dumps(param_avto, ensure_ascii = False),
@@ -69,7 +67,6 @@ class AnalizView(View):
             'car_list': car_list_split,
             'count_avto_in': count_avto_in,
         }
-
         return render(request, "start/cart.html", context)
 
 
@@ -84,6 +81,12 @@ def get_bot_message(request):
 
 
 def split(arr, size=10):
+    """
+     разбивае список на сисок списков
+    :param arr: целый список
+    :param size: количество машни во вложеном списке
+    :return: список списков
+    """
     arrs = []
     while len(arr) > size:
         pice = arr[:size]
