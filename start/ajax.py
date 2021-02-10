@@ -14,7 +14,7 @@ def ajax(request):
             t.append(2)
         elif item == 'gaz':
             t.append(4)
-        elif item == 'electro':
+        elif item == 'elektro':
             t.append(6)
         elif item == 'mex':
             g.append(1)

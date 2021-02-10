@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 from house.core.mail import send_test_mail
 from .ip import get_client_ip, ip_info
 import json
@@ -12,7 +13,9 @@ import json
 class IndexView(View):
     @staticmethod
     def get(request):
+        car_baze = Avto.objects.all()
         context = {
+            'kesh': len(car_baze),
             's_yers': [2016],
             'po_yers': [2018],
             'price_ot': 10000,
@@ -20,6 +23,7 @@ class IndexView(View):
             'type': ['1', '4', '6'],
             'gearbox': ['2', '3']
         }
+
         return render(request, "start/start.html", context)
 
 class AnalizView(View):
@@ -93,12 +97,5 @@ def clear_baze(request):
     car_baze = Avto.objects.all()
     for car in car_baze:
         car.delete()
-    context = {
-        's_yers': [2016],
-        'po_yers': [2018],
-        'price_ot': 10000,
-        'price_do': 10500,
-        'type': ['1', '4', '6'],
-        'gearbox': ['2', '3']
-    }
-    return render(request, "start/start.html", context)
+    return redirect('index')
+

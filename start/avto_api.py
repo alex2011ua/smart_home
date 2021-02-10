@@ -50,7 +50,7 @@ def get_list_car(params):
     zapros_po_param = requests.get(url_search, params=payload)
     if zapros_po_param.status_code == 200:
         j = zapros_po_param.json()
-        count_avto = j['result']['search_result']['count']
+        count_avto = int(j['result']['search_result']['count'])
         list_cars = j['result']['search_result']['ids']
         return {'status': 200, 'count_avto': count_avto, 'list_cars': list_cars}
     else:
@@ -97,6 +97,10 @@ def make_baza_avto(car_list):
             baza_avto[name_avto]['price'] = \
                 (baza_avto[name_avto]['count_item'] * baza_avto[name_avto]['price'] +
                  price) // (baza_avto[name_avto]['count_item'] + 1)
+            raceInt = int(car_baze.raceInt)
+            baza_avto[name_avto]['raceInt'] = \
+                (baza_avto[name_avto]['count_item'] * baza_avto[name_avto]['raceInt'] +
+                 raceInt) // (baza_avto[name_avto]['count_item'] + 1)
 
             baza_avto[name_avto]['count_item'] += 1
         else:
@@ -110,7 +114,7 @@ def make_baza_avto(car_list):
                 'bodyId': car_baze.bodyId
             }
     baza_avto = sort_baza(baza_avto)
-    return {'status': 200, 'baza_avto': baza_avto}
+    return {'status': 200, 'baza_avto': baza_avto[:12]}
 
 
 def sort_baza(baza):

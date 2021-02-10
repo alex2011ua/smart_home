@@ -3,45 +3,23 @@
 {% block title %}Анализ рынка{% endblock %}
 
 {% block main %}
-
-<script>
-    console.log('start script')
-    function count(){
-        let data = $('#myForm').serializeArray();
-            $.ajax({
-	            url: '/ajax/',
-	            method: 'POST',
-    	        data: data,
-            })
-            .done(function(text) {
-	            $('#ccount').html(text);
-            })
-    }
-
-    $(document).ready(function(){
-        count()
-        $("#button_count").click(function(){
-            count()
-        });
-
-    });
-</script>
-<div id="button_count" class="container py-5">
+<div  class="container py-5">
     <div class="row mb-4">
         <div class="col-lg-8 mx-auto text-center">
-            <a class="btn btn-primary" href="house/" role="button">Home</a>
-            <h1 class="display-6">Выбор автоомобиля по параметрам</h1>
+            <p class=""><a class="" href="{% url 'form' %}">
+                        <img  src="{% static 'img/home.gif' %}" height="65">
+                       </a>
+            </p>
+            <h1 class="display-6 my-time">Выбор автоомобиля по параметрам</h1>
         </div>
     </div> <!-- End -->
-
     <div class="row">
         <div class="col-lg-8 mx-auto">
             <div class="card ">
                 <div class="card-header">
                     <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
                         <!-- Credit card form tabs -->
-                        По Вашему запросу было найдено <span id="ccount" class="count_avto">{{count}} </span> автомобилей!
-
+                        По Вашему запросу было найдено <span id="ccount" class="count_avto"> {{count}} </span> автомобилей!
                     </div> <!-- End -->
                     <!-- Credit card form content -->
                     <div class="tab-content">
@@ -118,10 +96,7 @@
     </div>
 </div>
                                 <div class="card-footer"> </div>
-
-
-                                <button type="submit" onclick="validateForm()" formaction="/analiz" class="subscribe btn btn-warning btn-block shadow-sm"> Анализ найденых автомобилей! </button>
-
+                                <button type="submit" formaction="/analiz" class="subscribe btn btn-warning btn-block shadow-sm"> Анализ найденых автомобилей! </button>
                                 <span class="count_avto"> {{ error }} </span>
                             </form>
                         </div>
@@ -133,8 +108,28 @@
     </div>
 </div>
 <div id="result"></div>
-<a class="btn btn-primary" href="clear_baze/" role="button">clear_baze</a>
+В Кеше находится: {{kesh}} запросов.
+<a class="btn btn-primary" href="clear_baze/" role="button">Очистить кеш!</a>
 <script type="text/javascript">
+    function count(){
+        let data = $('#myForm').serializeArray();
+            $.ajax({
+	            url: '/ajax/',
+	            method: 'POST',
+    	        data: data,
+            })
+            .done(function(text) {
+	            $('#ccount').html(text);
+            })
+    }
+
+    $(document).ready(function(){
+        count()
+        $("#button_count").click(function(){
+            count()
+        });
+
+    });
     const form = document.getElementById('myForm');
     form.addEventListener('focusout', (event) => {
         let data = $('#myForm').serializeArray();
@@ -150,12 +145,6 @@
         form.addEventListener('click', (event) => {
         count()
     });
-function validateForm()
-{
-
-  alert("Время обработки запроса может занять несколько минут");
-
-}
 </script>
 
 {% endblock %}
