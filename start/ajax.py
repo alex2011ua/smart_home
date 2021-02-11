@@ -5,36 +5,46 @@ import json
 
 
 def ajax(request):
-    t = []
-    g = []
+    '''
+    возвращает количество найденыз авто
+    :param request:
+    :return: count_avto
+    '''
+    type_en = []
+    gearbox = []
     for item in request.POST:
         if item == 'benz':
-            t.append(1)
+            type_en.append(1)
         elif item == 'dizel':
-            t.append(2)
+            type_en.append(2)
         elif item == 'gaz':
-            t.append(4)
+            type_en.append(4)
         elif item == 'elektro':
-            t.append(6)
+            type_en.append(6)
         elif item == 'mex':
-            g.append(1)
+            gearbox.append(1)
         elif item == 'avtomat':
-            g.append(2)
+            gearbox.append(2)
         elif item == 'tip':
-            g.append(3)
+            gearbox.append(3)
     params = {
         's_yers': [request.POST.get('s_yers'),],
         'po_yers': [request.POST.get('po_yers'),],
         'price_ot': int(request.POST.get('price_ot')),
         'price_do': int(request.POST.get('price_do')),
-        'type': t,
-        'gearbox': g,
+        'type': type_en,
+        'gearbox': gearbox,
     }
     list_car = get_list_car(params)
     return HttpResponse(list_car['count_avto'])
 
 
 def ajax_analiz(request):
+    '''
+    добавляет авто в кеш
+    :param request:
+    :return:
+    '''
     avtos = request.POST.getlist('list_avto[]')
     for avto in avtos:
         status = analiz_avto(avto)
@@ -44,6 +54,11 @@ def ajax_analiz(request):
 
 
 def ajax_zvit(request):
+    '''
+    формирует HTML с карточками машин
+    :param request:
+    :return:
+    '''
     avtos = request.POST.getlist('baza[]')
     sort_list = make_baza_avto(avtos)
 
