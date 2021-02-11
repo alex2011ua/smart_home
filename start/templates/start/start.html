@@ -109,7 +109,7 @@
 </div>
 <div id="result"></div>
 В кеше находится: {{kesh}} запросов.
-<a class="btn btn-primary" href="clear_baze/" role="button">Очистить кеш!</a>
+<a class="btn btn-primary" onclick='return confirm("Are you sure?")' href="clear_baze/" role="button">Очистить кеш!</a>
 <script type="text/javascript">
     function count(){
         let data = $('#myForm').serializeArray();
