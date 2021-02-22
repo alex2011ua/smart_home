@@ -1,4 +1,3 @@
-
 Django == 3.1.2
 pytest
 pytest-django
@@ -8,7 +7,6 @@ responses
 requests
 celery==5.0.1
 redis==3.5.3
-marshmallow
 python-dotenv
 vcgencmd
 pyserial
@@ -16,8 +14,6 @@ django-celery
 gpiozero
 RPi.GPIO
 smbus
-
 telebot
 pytelegrambotapi
-
 viberbot==1.0.11
