@@ -11,6 +11,9 @@ from .weather_rain import weather_now
 from house.core.tasks import restart_cam_task, weather_task, arduino_task
 import datetime
 from django.conf import settings
+from .raspberry import printer_off, printer_on
+
+
 DEBUG = settings.PLACE
 
 
@@ -23,30 +26,33 @@ class ControllerView(LoginRequiredMixin, View):
         date_time_now = datetime.datetime.now()
 
         # Состояние бойлера и света
+        printer, created = Setting.objects.get_or_create(
+            controller_name='printer',
+            defaults={'label': 'Выключен', 'value': 0})
         boiler, created = Setting.objects.get_or_create(
             controller_name='boiler',
-            defaults = {'label': 'Выключен', 'value': 0})
+            defaults={'label': 'Выключен', 'value': 0})
         light_balkon, created = Setting.objects.get_or_create(
-            controller_name = 'light_balkon',
-            defaults = {'label': '1', 'value': 0})
+            controller_name='light_balkon',
+            defaults={'label': '1', 'value': 0})
         light_tree, created = Setting.objects.get_or_create(
-            controller_name = 'light_tree',
-            defaults = {'label': '2', 'value': 0})
+            controller_name='light_tree',
+            defaults={'label': '2', 'value': 0})
         light_perim, created = Setting.objects.get_or_create(
-            controller_name = 'light_perim',
-            defaults = {'label': '3', 'value': 0})
+            controller_name='light_perim',
+            defaults={'label': '3', 'value': 0})
         context['light_balkon'] = light_balkon
         context['light_tree'] = light_tree
         context['light_perim'] = light_perim
         context['boiler'] = boiler
-
+        context['printer'] = printer
         context['raspberry'] = raspberry(DEBUG)  # state raspberry
         context['button'] = button(DEBUG)  # загрузка состояний датчиков Raspberry
         # Получение параметров arduino из БД
         try:
             temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
         except IndexError:
-            temp = DHT_MQ.objects.create(date_t_h = datetime.datetime.now())
+            temp = DHT_MQ.objects.create(date_t_h=datetime.datetime.now())
 
         context['sensors'] = {}
         context['sensors']['date_t_h'] = temp.date_t_h
@@ -78,8 +84,8 @@ class ControllerView(LoginRequiredMixin, View):
         context.update(weather_now())
         # Извлечение логов с ошибками из БД за последний день
         date_now = datetime.date.today()
-        result_date = date_now - datetime.timedelta(days = 1)
-        logs = Logs.objects.filter(status = 'Error', date_log__gte = result_date).order_by('-date_log')[0:5]
+        result_date = date_now - datetime.timedelta(days=1)
+        logs = Logs.objects.filter(status='Error', date_log__gte=result_date).order_by('-date_log')[0:5]
         context['logs'] = logs
 
         return render(request, "core/control.html", context)
@@ -87,6 +93,7 @@ class ControllerView(LoginRequiredMixin, View):
 
 class RestartCam(LoginRequiredMixin, View):
     """Restart my cemeras"""
+
     @staticmethod
     def get(request):
         restart_cam_task()
@@ -96,6 +103,7 @@ class RestartCam(LoginRequiredMixin, View):
 
 class Temp(LoginRequiredMixin, View):
     """Обновляет информацию о температуре и прогнозе погоды в БД"""
+
     @staticmethod
     def get(request):
         arduino_task()  # читает датчики и занозит изменетия в БД
@@ -132,29 +140,30 @@ class Boiler(LoginRequiredMixin, View):
                 boiler.value = 1
                 boiler.save()
             except Exception as exx:
-                Logs.objects.create(date_log = datetime.datetime.now(),
-                                    status = 'Error',
-                                    title_log = 'view Boiler',
-                                    description_log = 'Ошибка ардуино Boiler' + str(
+                Logs.objects.create(date_log=datetime.datetime.now(),
+                                    status='Error',
+                                    title_log='view Boiler',
+                                    description_log='Ошибка ардуино Boiler' + str(
                                         exx))
             try:  # Задача на выключение бойлера
-                boiler_task_off.apply_async(countdown = 60 * 10)
+                boiler_task_off.apply_async(countdown=60 * 10)
             except Exception as exx:
-                Logs.objects.create(date_log = datetime.datetime.now(),
-                                    status = 'Error',
-                                    title_log = 'view Boiler',
-                                    description_log = 'Ошибка ардуино Boiler' + str(
+                Logs.objects.create(date_log=datetime.datetime.now(),
+                                    status='Error',
+                                    title_log='view Boiler',
+                                    description_log='Ошибка ардуино Boiler' + str(
                                         exx))
         return redirect(reverse_lazy('form'))
 
 
 class Rele(LoginRequiredMixin, View):
     """Включение и выключение реле"""
+
     @staticmethod
     def get(request, rele_id):
         rele_id = int(rele_id)
         if rele_id == 1:
-            rele = Setting.objects.get(controller_name = 'light_balkon')
+            rele = Setting.objects.get(controller_name='light_balkon')
             if rele.value == 0:
                 rele_light_balkon(1)
                 rele.value = 1
@@ -164,7 +173,7 @@ class Rele(LoginRequiredMixin, View):
                 rele.value = 0
                 rele.save()
         if rele_id == 2:
-            rele = Setting.objects.get(controller_name = 'light_tree')
+            rele = Setting.objects.get(controller_name='light_tree')
             if rele.value == 0:
                 rele_light_tree(1)
                 rele.value = 1
@@ -174,7 +183,7 @@ class Rele(LoginRequiredMixin, View):
                 rele.value = 0
                 rele.save()
         if rele_id == 3:
-            rele = Setting.objects.get(controller_name = 'light_perim')
+            rele = Setting.objects.get(controller_name='light_perim')
             if rele.value == 0:
                 rele_light_perim(1)
                 rele.value = 1
@@ -193,3 +202,34 @@ class Light(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
+class Printer(LoginRequiredMixin, View):
+    @staticmethod
+    def get(request):
+        printer = Setting.objects.get(controller_name='printer')
+        if printer.value == 0:
+            try:  # Включение бойлера и запись в БД
+                printer_on(DEBUG)
+                printer.label = 'printer включен'
+                print('включен')
+                printer.value = 1
+                printer.save()
+            except Exception as exx:
+                Logs.objects.create(date_log=datetime.datetime.now(),
+                                    status='Error',
+                                    title_log='view Boiler',
+                                    description_log='Ошибка ардуино Boiler' + str(
+                                        exx))
+        else:
+            try:  # Выключение бойлера и запись в БД
+                printer_off(DEBUG)
+                printer.label = 'printer выключен'
+                print('выключен')
+                printer.value = 0
+                printer.save()
+            except Exception as exx:
+                Logs.objects.create(date_log=datetime.datetime.now(),
+                                    status='Error',
+                                    title_log='view Boiler',
+                                    description_log='Ошибка ардуино Boiler' + str(
+                                        exx))
+        return redirect(reverse_lazy('form'))

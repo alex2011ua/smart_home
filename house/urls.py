@@ -14,21 +14,19 @@ import os
 from django.contrib import admin
 from django.urls import include, path, re_path
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
-    Boiler, Rele, Light
-
-
+    Boiler, Rele, Light, Printer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', ControllerView.as_view(), name='form'),
     path('restart/', RestartCam.as_view(), name='restart_cam'),
-    path('temp/', Temp.as_view(), name = 'temp'),
-    path('reset_arduino/', ResetArduino.as_view(), name = 'reset_arduino'),
-    path('boiler/', Boiler.as_view(), name = 'boiler'),
-    path('light/', Light.as_view(), name = 'light'),
-    re_path(r'^rele/([1-9])/$', Rele.as_view(), name = 'rele'),
+    path('temp/', Temp.as_view(), name='temp'),
+    path('reset_arduino/', ResetArduino.as_view(), name='reset_arduino'),
+    path('boiler/', Boiler.as_view(), name='boiler'),
+    path('printer/', Printer.as_view(), name='printer'),
+    path('light/', Light.as_view(), name='light'),
+    re_path(r'^rele/([1-9])/$', Rele.as_view(), name='rele'),
     path('test/', include('house.core.tests_urls')),
 
-
-    ]
+]

@@ -64,23 +64,6 @@ def button(flag):
     return {'Garaz': garaz, 'Dor_street': dvor}
 
 
-def rele_board(flag):
-    if not flag:
-        import smbus
-        DEVICE_BUS = 1
-        DEVICE_ADDR = 0x10
-        bus = smbus.SMBus(DEVICE_BUS)
-        n = 1
-        while n > 0:
-            for i in range(1, 5):
-                bus.write_byte_data(DEVICE_ADDR, i, 0xFF)
-                t.sleep(1)
-                bus.write_byte_data(DEVICE_ADDR, i, 0x00)
-                t.sleep(1)
-            n -= 1
-        print("Quit the Loop")
-    else:
-        pass
 
 def boiler_on(flag):
     if not flag:
@@ -97,3 +80,19 @@ def boiler_off(flag):
         DEVICE_ADDR = 0x10
         bus = smbus.SMBus(DEVICE_BUS)
         bus.write_byte_data(DEVICE_ADDR, 2, 0x00)
+
+def printer_on(flag):
+    if not flag:
+        import smbus
+        DEVICE_BUS = 1
+        DEVICE_ADDR = 0x10
+        bus = smbus.SMBus(DEVICE_BUS)
+        bus.write_byte_data(DEVICE_ADDR, 3, 0xFF)
+
+def printer_off(flag):
+    if not flag:
+        import smbus
+        DEVICE_BUS = 1
+        DEVICE_ADDR = 0x10
+        bus = smbus.SMBus(DEVICE_BUS)
+        bus.write_byte_data(DEVICE_ADDR, 3, 0x00)

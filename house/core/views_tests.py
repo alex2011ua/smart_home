@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from .models import Logs
 from .main_arduino import testing, sound
-from .raspberry import rele_board
 import datetime
 from .mail import send_test_mail
 from .Telegram import bot
