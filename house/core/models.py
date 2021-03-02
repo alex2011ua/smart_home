@@ -8,13 +8,12 @@ class Setting(models.Model):
     value = models.IntegerField(default=20)
     date = models.DateTimeField(null=True)
 
-
     def __str__(self):
         return str(self.label)
 
 
 class Weather(models.Model):
-    date = models.DateField(unique = True)
+    date = models.DateField(unique=True)
     rain = models.IntegerField(default=0)
     temp_min = models.IntegerField(default=0)
     temp_max = models.IntegerField(default=0)
@@ -26,7 +25,7 @@ class Weather(models.Model):
 
 class Logs(models.Model):
     date_log = models.DateTimeField()
-    status = models.CharField(max_length = 50, null=True)
+    status = models.CharField(max_length=50, null=True)
     title_log = models.CharField(max_length=50)
     description_log = models.CharField(max_length=150)
 
@@ -63,10 +62,8 @@ class DHT_MQ(models.Model):
 
 class Message(models.Model):
     date_message = models.DateTimeField()
-    controller_name = models.CharField(max_length = 40, unique = True)
-    label = models.CharField(max_length = 100, null=True)
+    controller_name = models.CharField(max_length=40, unique=True)
+    label = models.CharField(max_length=100, null=True)
     value_int = models.IntegerField(null=True)
     value_float = models.FloatField(null=True)
     state = models.BooleanField(default=False)
-
-

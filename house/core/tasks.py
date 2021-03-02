@@ -226,13 +226,15 @@ def bot_task_11_hour():
 
 
 @cellery_app.task()
-def bot_task_18_hour():
-    """Включение иллюминация на балконе по рассписанию"""
-    print('Start bot_task_18_hour')
-    light_perim = Setting.objects.get(controller_name='light_perim')
-    if light_perim.value == 0:
-        rele_light_perim(1)
-        light_perim.value = 1
-        light_perim.save()
-        bot.send_message('Включена иллюминация на балконе по рассписанию!')
-    print('Stop bot_task_11_hour')
+def bot_task_watering_analiz():
+    """Анализ необходимости включения полива"""
+    bot.send_message("Анализ необходимости включения полива")
+    weather = Weather.objects.filter().order_by('-date')[0:5]
+    sum_rain = 0
+    for day in weather:
+        sum_rain += day.rain
+    if sum_rain > 10:
+        bot.send_message('полив производится не будет количество осадков: {}'.format(sum_rain))
+    if sum_rain < 10:
+        bot.send_message('полив производится будет количество осадков: {}'.format(sum_rain))
+
