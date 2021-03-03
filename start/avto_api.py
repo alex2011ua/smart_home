@@ -111,15 +111,18 @@ def make_baza_avto(car_list):
 
             baza_avto[name_avto]['count_item'] += 1
         else:
-            baza_avto[name_avto] = {
-                'count_item': 1,
-                'linkToView': car_baze.linkToView,
-                'foto': car_baze.foto,
-                'price': int(car_baze.USD),
-                'year': car_baze.year,
-                'raceInt': int(car_baze.raceInt),
-                'bodyId': car_baze.bodyId
-            }
+            try:
+                baza_avto[name_avto] = {
+                    'count_item': 1,
+                    'linkToView': car_baze.linkToView,
+                    'foto': car_baze.foto,
+                    'price': int(car_baze.USD),
+                    'year': car_baze.year,
+                    'raceInt': int(car_baze.raceInt),
+                    'bodyId': car_baze.bodyId
+                }
+            except TypeError as err:
+                print(err)
     baza_avto = sort_baza(baza_avto)
     return {'status': 200, 'baza_avto': baza_avto[:12]}
 
