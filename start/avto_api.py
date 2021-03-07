@@ -11,7 +11,6 @@ if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 apy_key = os.getenv('apy_key', os.environ.get('apy_key'))
 
-
 url_search = 'https://developers.ria.com/auto/search'
 url_info = 'https://developers.ria.com/auto/info'
 
@@ -23,29 +22,29 @@ def get_list_car(params):
     :return: dict количество авто в запросе и список ID авто
     '''
     payload = {
-            'api_key': apy_key,
-            'category_id': 1,
-            's_yers': [2016],
-            'po_yers': [2018],
-            'price_ot': 10000,
-            'price_do': 10500,
-            'type': [
-                1,  # бенз
-                # 2,  # дизель
-                4,   # газ
-                6,  # электро
-                ],
-            'gearbox': [
-                1,  # механика
-                2,  # автомат
-                3,  # титпроник
-                ],
-            'countpage': 100,
-            'abroad': 2,  # Не отображать авто которые находяться не в Украине
-            'custom': 1,  # Не отображать нерастаможенные авто
-            'with_photo': 1,  # Только с фото
-            'damage': 1,  # не поврежден
-            }
+        'api_key': apy_key,
+        'category_id': 1,
+        's_yers': [2016],
+        'po_yers': [2018],
+        'price_ot': 10000,
+        'price_do': 10500,
+        'type': [
+            1,  # бенз
+            # 2,  # дизель
+            4,  # газ
+            6,  # электро
+        ],
+        'gearbox': [
+            1,  # механика
+            2,  # автомат
+            3,  # титпроник
+        ],
+        'countpage': 100,
+        'abroad': 2,  # Не отображать авто которые находяться не в Украине
+        'custom': 1,  # Не отображать нерастаможенные авто
+        'with_photo': 1,  # Только с фото
+        'damage': 1,  # не поврежден
+    }
     payload.update(params)
     zapros_po_param = requests.get(url_search, params=payload)
     if zapros_po_param.status_code == 200:
@@ -55,6 +54,7 @@ def get_list_car(params):
         return {'status': 200, 'count_avto': count_avto, 'list_cars': list_cars}
     else:
         return {'status': zapros_po_param.status_code}  # 429 (слишком много запросов)
+
 
 def analiz_avto(car):
     """
@@ -67,9 +67,9 @@ def analiz_avto(car):
         'auto_id': car
     }
     try:
-        Avto.objects.get(autoId = car)
+        Avto.objects.get(autoId=car)
     except ObjectDoesNotExist:
-        info_avto = requests.get(url_info, params = params)
+        info_avto = requests.get(url_info, params=params)
         if info_avto.status_code != 200:
             return {'status': info_avto.status_code, }
         car_add_baze(info_avto)
@@ -91,7 +91,7 @@ def make_baza_avto(car_list):
         try:
             car_baze = Avto.objects.get(autoId=car)
         except ObjectDoesNotExist:
-            info_avto = requests.get(url_info, params = params)
+            info_avto = requests.get(url_info, params=params)
             if info_avto.status_code != 200:
                 return {'status': info_avto.status_code, 'baza_avto': baza_avto}
             car_baze = car_add_baze(info_avto)
@@ -146,23 +146,23 @@ def sort_baza(baza):
              value['bodyId']
              )
         )
-    sort_list = sorted(list_to_sort, reverse = True)
+    sort_list = sorted(list_to_sort, reverse=True)
     return sort_list
 
 
 def car_add_baze(avto):
     info_json = avto.json()
     avto_query = Avto(
-        date_message = datetime.datetime.now(),
-        autoId = info_json['autoData']['autoId'],
-        raceInt = info_json['autoData'].get('raceInt'),
-        USD = info_json.get('USD'),
-        year = info_json['autoData'].get('year'),
-        markName = info_json['markName'],
-        modelName = info_json['modelName'],
-        linkToView = info_json['linkToView'],
-        foto = info_json['photoData']['seoLinkB'],
-        bodyId = info_json['autoData'].get('bodyId'),
-                      )
+        date_message=datetime.datetime.now(),
+        autoId=info_json['autoData']['autoId'],
+        raceInt=info_json['autoData'].get('raceInt'),
+        USD=info_json.get('USD'),
+        year=info_json['autoData'].get('year'),
+        markName=info_json['markName'],
+        modelName=info_json['modelName'],
+        linkToView=info_json['linkToView'],
+        foto=info_json['photoData']['seoLinkB'],
+        bodyId=info_json['autoData'].get('bodyId'),
+    )
     avto_query.save()
     return avto_query

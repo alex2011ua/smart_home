@@ -172,8 +172,10 @@ def boiler_task_off():
 def bot_task():
     print('Start bot task')
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
-    if (temp.gaz_MQ4 > 65) or (temp.gaz_MQ135 > 100):
-        gaz_analiz(temp.gaz_MQ4, temp.gaz_MQ135)
+    MQ4 = temp.gaz_MQ4 or 0
+    MQ135 = temp.gaz_MQ135 or 0
+    if (MQ4 > 65) or (MQ135 > 100):
+        gaz_analiz(MQ4, MQ135)
 
     button_analiz()
 
