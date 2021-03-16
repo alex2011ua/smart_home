@@ -154,6 +154,7 @@ def boiler_task_off():
         boiler.label = 'Бойлер выключен'
         boiler.value = 0
         boiler.save()
+        bot.send_message('ВЫключен бойлер')
 
     except Exception as err:
         Logs.objects.create(date_log=datetime.now(),
@@ -230,13 +231,14 @@ def bot_task_11_hour():
 @cellery_app.task()
 def bot_task_watering_analiz():
     """Анализ необходимости включения полива"""
-    bot.send_message("Анализ необходимости включения полива")
-    weather = Weather.objects.filter().order_by('-date')[0:5]
+
+    weather = Weather.objects.filter().order_by('-date')[0:6]
     sum_rain = 0
     for day in weather:
         sum_rain += day.rain
-    if sum_rain > 10:
-        bot.send_message('полив производится не будет количество осадков: {}'.format(sum_rain))
-    if sum_rain < 10:
-        bot.send_message('полив производится будет количество осадков: {}'.format(sum_rain))
+    if sum_rain >= 15:
+        bot.send_message(f'полив производится не будет количество осадков: {sum_rain}')
+    if sum_rain < 15:
+        bot.send_message(f'Включение полива производится будет количество осадков: {sum_rain}')
+
 

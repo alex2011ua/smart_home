@@ -12,7 +12,7 @@ from house.core.tasks import restart_cam_task, weather_task, arduino_task
 import datetime
 from django.conf import settings
 from .raspberry import printer_off, printer_on
-
+from .Telegram import bot
 
 DEBUG = settings.PLACE
 
@@ -134,11 +134,13 @@ class Boiler(LoginRequiredMixin, View):
     def get(request):
         boiler = Setting.objects.get(controller_name='boiler')
         if boiler.value == 0:
+
             try:  # Включение бойлера и запись в БД
                 boiler_task_on.delay()
                 boiler.label = 'Бойлер включен'
                 boiler.value = 1
                 boiler.save()
+                bot.send_message('Включен бойлер')
             except Exception as exx:
                 Logs.objects.create(date_log=datetime.datetime.now(),
                                     status='Error',
@@ -207,12 +209,14 @@ class Printer(LoginRequiredMixin, View):
     def get(request):
         printer = Setting.objects.get(controller_name='printer')
         if printer.value == 0:
-            try:  # Включение бойлера и запись в БД
+
+            try:  # Включение принтера и запись в БД
                 printer_on(DEBUG)
                 printer.label = 'printer включен'
                 print('включен')
                 printer.value = 1
                 printer.save()
+                bot.send_message('Включение принтера')
             except Exception as exx:
                 Logs.objects.create(date_log=datetime.datetime.now(),
                                     status='Error',
@@ -220,12 +224,13 @@ class Printer(LoginRequiredMixin, View):
                                     description_log='Ошибка ардуино Boiler' + str(
                                         exx))
         else:
-            try:  # Выключение бойлера и запись в БД
+            try:  # Выключение принтера и запись в БД
                 printer_off(DEBUG)
                 printer.label = 'printer выключен'
                 print('выключен')
                 printer.value = 0
                 printer.save()
+                bot.send_message('ВЫключение принтера')
             except Exception as exx:
                 Logs.objects.create(date_log=datetime.datetime.now(),
                                     status='Error',
