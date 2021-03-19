@@ -76,7 +76,7 @@ class TelegramTest(View):
     @staticmethod
     def get(request):
         bot.send_message(get_client_ip(request))
-        send_viber('get_client_ip(request)')
+        send_viber(get_client_ip(request))
 
         return redirect(reverse_lazy('form'))
 

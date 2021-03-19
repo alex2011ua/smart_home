@@ -239,6 +239,7 @@ def bot_task_watering_analiz():
         sum_rain += day.rain
     if sum_rain >= 15:
         bot.send_message(f'полив производится не будет количество осадков: {sum_rain}')
+
     if sum_rain < 15:
         bot.send_message(f'Включение полива производится будет количество осадков: {sum_rain}')
 

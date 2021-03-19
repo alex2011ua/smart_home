@@ -5,6 +5,7 @@ from .models import Message, DHT_MQ, Setting
 from .raspberry import button
 from datetime import datetime
 from django.conf import settings
+from myviberbot.viber_bot import send_viber
 
 import os
 from dotenv import load_dotenv
@@ -72,6 +73,8 @@ def button_analiz():
         garaz = Message.objects.create(controller_name='garaz',
                                        date_message=datetime(2000, 1, 1),
                                        value_int=0)
+
+    # извещение о смене состоянию входов
     if context['Garaz'] != garaz.state:
         garaz.state = context['Garaz']
         garaz.date_message = date_now
@@ -92,17 +95,24 @@ def button_analiz():
     # Если ночью открывается дверь - шлем сообщение в бот
     if date_now.hour < 5:
         if context['Garaz'] and garaz.value_int == 0:
-            bot.send_message('Открыт гараж')
+            bot.send_message('Открыт гараж ночью')
+            send_viber('Открыт гараж ночью')
             garaz.value_int = 1
         if context['Dor_street'] and dor.value_int == 0:
-            bot.send_message('Открыта дверь')
+            bot.send_message('Открыта дверь ночью')
+            send_viber('Открыта дверь ночью')
             dor.value_int = 1
     if date_now.hour >= 5:
         garaz.value_int = 0
         dor.value_int = 0
-    if date_now.hour == 19 and date_now.minute == 0:
+        # напоминание вечером закрыть входы
+    if (date_now.hour == 19 or date_now.hour == 20 or date_now.hour == 21) and date_now.minute == 0:
         if context['Garaz'] == 1:
             bot.send_message('Нужно на ночь закрыть гараж')
+            send_viber('Нужно на ночь закрыть гараж')
+        if context['Dor_street'] == 1:
+            bot.send_message('Нужно на ночь закрыть дверь')
+            send_viber('Нужно на ночь закрыть дверь')
     garaz.save()
     dor.save()
 
@@ -113,7 +123,7 @@ def temp_alert():
     :return:
     """
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
-    if temp.temp_voda <= 1:
+    if temp.temp_voda <= 2 or type(temp.temp_voda) != int:
 
         alert_temp_voda = Setting.objects.get_or_create(
             controller_name='alert_temp_voda',
