@@ -9,7 +9,7 @@ from .mail import send_test_mail
 from .Telegram import bot
 from django.conf import settings
 DEBUG = settings.PLACE
-
+from myviberbot.viber_bot import send_viber
 
 
 class Test(LoginRequiredMixin, View):
@@ -76,6 +76,7 @@ class TelegramTest(View):
     @staticmethod
     def get(request):
         bot.send_message(get_client_ip(request))
+        send_viber('get_client_ip(request)')
 
         return redirect(reverse_lazy('form'))
 

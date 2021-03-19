@@ -171,6 +171,7 @@ def boiler_task_off():
 
 @cellery_app.task()
 def bot_task():
+    """запускается каждые 2 минуты"""
     print('Start bot task')
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
     MQ4 = temp.gaz_MQ4 or 0

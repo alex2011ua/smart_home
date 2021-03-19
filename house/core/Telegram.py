@@ -8,11 +8,11 @@ from django.conf import settings
 
 import os
 from dotenv import load_dotenv
+
 dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
 if os.path.exists(dotenv_path):
     load_dotenv(dotenv_path)
 token = os.getenv('TOKEN', os.environ.get('TOKEN'))
-
 
 DEBUG = settings.PLACE
 
@@ -24,7 +24,6 @@ class TelegramBot:
         self.api_setWebhook = \
             "https://api.telegram.org/bot{}/setWebhook?url=https://alexua.pp.ua:8443/{}/".format(token, token)
 
-
     def send_message(self, text, chat_id=810867568):
         params = {'chat_id': chat_id, 'text': text}
         method = 'sendMessage'
@@ -35,16 +34,17 @@ class TelegramBot:
         resp = requests.get(self.api_setWebhook)
         print(resp.text)
 
+
 bot = TelegramBot(token)
 
 
 def gaz_analiz(MQ4, MQ135):
     """Если значения датчиков превышают пороговые - шлем сообщение в бот"""
     try:
-        gaz = Message.objects.get(controller_name = 'gaz')
+        gaz = Message.objects.get(controller_name='gaz')
     except Exception:
-        gaz = Message.objects.create(controller_name = 'gaz',
-                                     date_message = datetime(2000, 1, 1))
+        gaz = Message.objects.create(controller_name='gaz',
+                                     date_message=datetime(2000, 1, 1))
     date_now = datetime.now()
     time_delta = (date_now - gaz.date_message) // 60  # minutes
     if time_delta.seconds > 60:
@@ -63,15 +63,15 @@ def button_analiz():
     date_now = datetime.now()
     context = button(DEBUG)  # загрузка состояний кнопок
     try:
-        dor = Message.objects.get(controller_name = 'dor')
-        garaz = Message.objects.get(controller_name = 'garaz')
+        dor = Message.objects.get(controller_name='dor')
+        garaz = Message.objects.get(controller_name='garaz')
     except Exception:
-        dor = Message.objects.create(controller_name = 'dor',
-                                     date_message = datetime(2000, 1, 1),
-                                     value_int = 0)
-        garaz = Message.objects.create(controller_name = 'garaz',
-                                       date_message = datetime(2000, 1, 1),
-                                       value_int = 0)
+        dor = Message.objects.create(controller_name='dor',
+                                     date_message=datetime(2000, 1, 1),
+                                     value_int=0)
+        garaz = Message.objects.create(controller_name='garaz',
+                                       date_message=datetime(2000, 1, 1),
+                                       value_int=0)
     if context['Garaz'] != garaz.state:
         garaz.state = context['Garaz']
         garaz.date_message = date_now
@@ -100,7 +100,9 @@ def button_analiz():
     if date_now.hour >= 5:
         garaz.value_int = 0
         dor.value_int = 0
-
+    if date_now.hour == 19 and date_now.minute == 0:
+        if context['Garaz'] == 1:
+            bot.send_message('Нужно на ночь закрыть гараж')
     garaz.save()
     dor.save()
 
@@ -114,8 +116,8 @@ def temp_alert():
     if temp.temp_voda <= 1:
 
         alert_temp_voda = Setting.objects.get_or_create(
-            controller_name = 'alert_temp_voda',
-            defaults = {'label': 'температура', 'value': int(temp.temp_voda), 'date': datetime.now()})
+            controller_name='alert_temp_voda',
+            defaults={'label': 'температура', 'value': int(temp.temp_voda), 'date': datetime.now()})
         if int(temp.temp_voda) != alert_temp_voda.value:
             bot.send_message(f"Температура в летней кухне опустилась: {temp.temp_voda}")
     if temp.temp_gaz <= 22:
