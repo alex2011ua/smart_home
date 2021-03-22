@@ -7,10 +7,11 @@ from .main_arduino import testing, sound
 import datetime
 from .mail import send_test_mail
 from .Telegram import bot
-from django.conf import settings
-DEBUG = settings.PLACE
 from myviberbot.viber_bot import send_viber
+from django.conf import settings
 
+
+DEBUG = settings.PLACE
 
 class Test(LoginRequiredMixin, View):
     @staticmethod
@@ -48,18 +49,6 @@ class Sound(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class Raspberry_rele(LoginRequiredMixin, View):
-    @staticmethod
-    def get(request):
-        try:
-            rele_board(DEBUG)
-        except Exception as err:
-            Logs.objects.create(date_log=datetime.datetime.now(),
-                                status='Error',
-                                title_log='view raspberry_rele',
-                                description_log = str(err))
-        return redirect(reverse_lazy('form'))
-
 class MailTest(View):
     @staticmethod
     def get(request):
@@ -76,9 +65,10 @@ class TelegramTest(View):
     @staticmethod
     def get(request):
         bot.send_message(get_client_ip(request))
-        send_viber(get_client_ip(request))
+        send_viber('test viber bot')
 
         return redirect(reverse_lazy('form'))
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

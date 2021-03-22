@@ -9,8 +9,9 @@ from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
 import django.db
-from .Telegram import gaz_analiz, button_analiz, temp_alert, bot
+from .Telegram import bot
 from myviberbot.viber_bot import send_viber
+from .analiz import button_analiz, gaz_analiz, temp_alert
 
 from django.conf import settings
 
@@ -179,7 +180,7 @@ def bot_task():
     if (MQ4 > 65) or (MQ135 > 100):
         gaz_analiz(MQ4, MQ135)
 
-    button_analiz()
+    button_analiz(DEBUG)
 
     print('Start bot task off')
 
