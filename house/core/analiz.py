@@ -44,7 +44,7 @@ def button_analiz(DEBUG):
         dor.save()
         bot.send_message(dor.label)
     # Если ночью открывается дверь - шлем сообщение в бот
-    if date_now.hour <= 5:
+    if date_now.hour <= 5 or date_now.hour > 21:
         if context['Garaz'] and garaz.value_int == 0:
             bot.send_message('Открыт гараж ночью')
             send_viber('Открыт гараж ночью')
@@ -66,7 +66,7 @@ def button_analiz(DEBUG):
 
 
 def vecher(now, garaz, dor):
-    list_to_hour = [19, 20, 21]
+    list_to_hour = [19, 20, 21, 22, 23]
     if (now.hour in list_to_hour) and now.minute == 0:
         if garaz == 1:
             bot.send_message('Нужно на ночь закрыть гараж')
