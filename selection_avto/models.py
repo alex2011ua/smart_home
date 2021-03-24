@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Avto(models.Model):
     date_message = models.DateTimeField()
     autoId = models.CharField(max_length=40, unique=True)
