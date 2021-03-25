@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from start.models import Avto
+from selection_avto.models import Avto
 from house.core.Telegram import bot
 from django.views import View
 from .avto_api import get_list_car
@@ -19,7 +19,7 @@ class IndexView(View):
             'type': ['1', '4', '6'],
             'gearbox': ['2', '3']
         }
-        return render(request, "start/start.html", context)
+        return render(request, "selection_avto/start.html", context)
 
 class AnalizView(View):
     @staticmethod
@@ -66,7 +66,7 @@ class AnalizView(View):
             'car_list': car_list_split,
             'count_avto_in': count_avto_in,
         }
-        return render(request, "start/cart.html", context)
+        return render(request, "selection_avto/cart.html", context)
 
 
 def get_bot_message(request):

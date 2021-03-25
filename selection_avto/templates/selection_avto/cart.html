@@ -1,4 +1,4 @@
-{% extends "start/base_start.html" %}
+{% extends "selection_avto/base_start.html" %}
 {% load static %}
 {% block title %}Анализ рынка{% endblock %}
 
@@ -7,7 +7,7 @@
 
     <div class="row mb-4">
         <div class="col-lg-8 mx-auto text-center">
-            <a class="btn btn-primary" href="/" role="button">Назад</a>
+            <a class="btn btn-primary" href="/avto" role="button">Назад</a>
             <h1 class="display-7 my-time">Список автомобилей</h1>
             <p> соответствующие Вашим параметрам, которые сейчас продаются:</p>
         </div>
@@ -30,7 +30,7 @@ $(document).ready(function(){
         let avto_array = list_avto[list_a];
         let data ={list_avto: avto_array };
         $.ajax({
-            url: '/ajax/analiz',
+            url: 'ajax/analiz/',
             method: 'POST',
             data: data,
             dataType: 'json',
@@ -46,7 +46,7 @@ $(document).ready(function(){
             },
             error: function (text) {
                 $.ajax({
-                    url: '/ajax/analiz',
+                    url: 'ajax/analiz/',
                     method: 'POST',
                     data: data,
                     dataType: 'json',
@@ -72,7 +72,7 @@ $(document).ready(function(){
     function zvit(){
         let baza = {baza: baza_avto}
     $.ajax({
-            url: '/ajax/zvit',
+            url: 'ajax/zvit/',
             method: 'POST',
             data: baza,
 

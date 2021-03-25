@@ -2,7 +2,7 @@ import requests
 import datetime
 from django.core.exceptions import ObjectDoesNotExist
 
-from start.models import Avto
+from selection_avto.models import Avto
 from dotenv import load_dotenv
 import os
 

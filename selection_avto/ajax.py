@@ -62,4 +62,4 @@ def ajax_zvit(request):
     avtos = request.POST.getlist('baza[]')
     sort_list = make_baza_avto(avtos)
 
-    return render(request, "start/ca.html", sort_list)
+    return render(request, "selection_avto/ca.html", sort_list)
