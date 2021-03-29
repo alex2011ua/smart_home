@@ -50,8 +50,7 @@ def weather_task():
             date_log=datetime.now(),
             status='Error',
             title_log='Task weather_task',
-            description_log='Ошибка openweathermap.org Exeption изменилось API' + str(
-                err))
+            description_log='Ошибка openweathermap.org Exeption изменилось API' + str(err))
         return None
     if six_day['status_code'] != 200 or yesterday['status_code'] != 200:
         Logs.objects.create(date_log=datetime.now(),

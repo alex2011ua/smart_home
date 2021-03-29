@@ -11,7 +11,8 @@ def button_analiz(DEBUG):
 
     date_now = datetime.now()
     context = button(DEBUG)  # текущее состояние  датчиков входа
-
+    if DEBUG:
+        date_now = datetime(2021, 3, 29, 21, 0, 0)
     try:
         dor = Message.objects.get(controller_name='dor')
         garaz = Message.objects.get(controller_name='garaz')

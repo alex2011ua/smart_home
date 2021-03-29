@@ -9,7 +9,7 @@ from .mail import send_test_mail
 from .Telegram import bot
 from myviberbot.viber_bot import send_viber
 from django.conf import settings
-
+from .analiz import button_analiz
 
 DEBUG = settings.PLACE
 
@@ -77,3 +77,13 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+class Bot_task_view(View):
+    @staticmethod
+    def get(request):
+
+        button_analiz(True)
+
+        return redirect(reverse_lazy('form'))
+
+
