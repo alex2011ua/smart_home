@@ -5,9 +5,18 @@
 полив участка
 {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href='{% static "css/poliv.css" %}'>
+{% endblock%}
 
 {% block main %}
     {% if poliv.value == 0 %} <a href="{% url 'poliv_index'  %}">  <button type="button" class="btn btn-secondary b" >Управление поливом</button></a> <br />
     {% else %} <a href="{% url 'poliv_index' %} ">  <button type="button" class="btn btn-success  b" >Управление поливом </button></a> <br />
     {% endif%}
+
+<div id="dvor">
+    <div id="garaz"></div>
+    <div id="pesochnica"></div>
+    <div id="elki"></div>
+</div>
 {% endblock %}
