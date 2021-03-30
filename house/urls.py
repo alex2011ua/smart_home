@@ -28,5 +28,5 @@ urlpatterns = [
     path('light/', Light.as_view(), name='light'),
     re_path(r'^rele/([1-9])/$', Rele.as_view(), name='rele'),
     path('test/', include('house.core.tests_urls')),
-
+    path('poliv/', include('house.core.poliv_urls')),
 ]

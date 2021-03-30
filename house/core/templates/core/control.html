@@ -36,6 +36,9 @@
             {% if light_perim.value == 0 %} <a href="{% url 'rele' light_perim.label %}">  <button type="button" class="btn btn-dark b" >Включить балкон </button></a> <br />
             {% else %} <a href="{% url 'rele' light_perim.label %} ">  <button type="button" class="btn btn-light b" >Выключить балкон </button></a> <br />
             {% endif%}
+            {% if poliv.value == 0 %} <a href="{% url 'poliv_index'  %}">  <button type="button" class="btn btn-secondary b" >Управление поливом</button></a> <br />
+            {% else %} <a href="{% url 'poliv_index' %} ">  <button type="button" class="btn btn-success  b" >Управление поливом </button></a> <br />
+            {% endif%}
 
         </div>
 

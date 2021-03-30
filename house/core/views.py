@@ -41,6 +41,10 @@ class ControllerView(LoginRequiredMixin, View):
         light_perim, created = Setting.objects.get_or_create(
             controller_name='light_perim',
             defaults={'label': '3', 'value': 0})
+        poliv, created = Setting.objects.get_or_create(
+            controller_name='poliv',
+            defaults={'label': 'Выключен', 'value': 0})
+        context['poliv'] = poliv
         context['light_balkon'] = light_balkon
         context['light_tree'] = light_tree
         context['light_perim'] = light_perim
