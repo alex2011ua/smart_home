@@ -1,11 +1,59 @@
 #dvor {
-    width: 393px;
-    height: 720px;
+    position: absolute;
+    width: 400px;
+    height: 700px;
     background: rgba(64, 113, 59, 0.75);
 }
+#dom {
+    position: absolute;
+    top: 490px;
+    left: 80px;
+}
 #garaz {
-    width: 93px;
-    height: 20px;
+    position: absolute;
+    top: 595px;
+    left: 245px;
+    width: 150px;
+    height: 100px;
     background: rgba(59, 74, 113, 0.75);
 }
-
+#pesochnica {
+    position: absolute;
+    top: 330px;
+    left: 295px;
+    width: 100px;
+    height: 150px;
+    background: rgba(59, 74, 113, 0.75);
+}
+#teplica {
+    position: absolute;
+    top: 490px;
+    left: 295px;
+    width: 100px;
+    height: 100px;
+    background: rgba(29, 38, 62, 0.75);
+}
+#elki {
+    position: absolute;
+    top: 160px;
+    left: 120px;
+    width: 120px;
+    height: 150px;
+    background: rgba(76, 99, 69, 0.75);
+}
+#sad {
+    position: absolute;
+    top: 5px;
+    left: 120px;
+    width: 120px;
+    height: 150px;
+    background: rgba(76, 99, 69, 0.75);
+}
+#strawberry {
+    position: absolute;
+    top: 320px;
+    left: 120px;
+    width: 120px;
+    height: 150px;
+    background: rgba(76, 99, 69, 0.75);
+}

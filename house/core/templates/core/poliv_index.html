@@ -15,8 +15,16 @@
     {% endif%}
 
 <div id="dvor">
-    <div id="garaz"></div>
-    <div id="pesochnica"></div>
-    <div id="elki"></div>
+    <a class="" href="{% url 'form' %}"><img id="dom" src="{% static 'img/home.gif' %}" height="100"></a>
+    <div id="garaz">garaz</div>
+    <div id="pesochnica">pesochnica</div>
+    <div id="teplica">teplica</div>
+    <div id="elki">elki</div>
+    <div id="sad">sad</div>
+    <div id="strawberry">strawberry</div>
 </div>
+
+{% endblock %}
+{% block jivo %}
+
 {% endblock %}
