@@ -39,19 +39,21 @@
     left: 120px;
     width: 120px;
     height: 150px;
-    background: rgba(76, 99, 69, 0.75);
+
 }
 #sad {
-    position: absolute;
-    top: 5px;
+        position: absolute;
+    top: 320px;
     left: 120px;
     width: 120px;
     height: 150px;
     background: rgba(76, 99, 69, 0.75);
 }
 #strawberry {
+
+
     position: absolute;
-    top: 320px;
+    top: 5px;
     left: 120px;
     width: 120px;
     height: 150px;

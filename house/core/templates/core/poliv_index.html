@@ -7,7 +7,7 @@
 
 {% block css %}
 <link rel="stylesheet" type="text/css" href='{% static "css/poliv.css" %}'>
-{% endblock%}
+{% endblock %}
 
 {% block main %}
     {% if poliv.value == 0 %} <a href="{% url 'poliv_index'  %}">  <button type="button" class="btn btn-secondary b" >Управление поливом</button></a> <br />
@@ -17,14 +17,17 @@
 <div id="dvor">
     <a class="" href="{% url 'form' %}"><img id="dom" src="{% static 'img/home.gif' %}" height="100"></a>
     <div id="garaz">garaz</div>
-    <div id="pesochnica">pesochnica</div>
+    <div id="pesochnica">
+        <img src="{% static 'img/kach.gif' %}" height="100" alt="pesochnica.fif">
+        <img src="{% static 'img/DHUM.gif' %}" height="50" alt="pesochnica.fif">
+    </div>
     <div id="teplica">teplica</div>
-    <div id="elki">elki</div>
-    <div id="sad">sad</div>
-    <div id="strawberry">strawberry</div>
+    <div id="elki"><img src="{% static 'img/elka.gif' %}" height="150" alt="elki.fif"></div>
+    <div id="sad">
+        <img src="{% static 'img/DHUM.gif' %}" height="50" alt="pesochnica.fif">
+        <img src="{% static 'img/sad.gif' %}" height="100" alt="sad.fif"></div>
+    <div id="strawberry"><img src="{% static 'img/rastberry.gif' %}" height="100" alt="strawberry.fif"></div>
 </div>
-
+<script type="application/javascript" src='{% static "js/polivScript.js" %}'></script>
 {% endblock %}
-{% block jivo %}
-
-{% endblock %}
+{% block jivo %} {% endblock %}
