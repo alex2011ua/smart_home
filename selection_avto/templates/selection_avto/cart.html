@@ -75,11 +75,10 @@ $(document).ready(function(){
             url: 'ajax/zvit/',
             method: 'POST',
             data: baza,
-
             success: function (text) {
-            console.log('__ok__');
-            console.log(text);
-            $('#avto').html(text);
+                console.log('__ok__');
+                console.log(text);
+                $('#avto').html(text);
             },
             error: function (text) {
                 console.log('__1__');

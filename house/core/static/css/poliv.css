@@ -15,7 +15,7 @@
     left: 245px;
     width: 150px;
     height: 100px;
-    background: rgba(59, 74, 113, 0.75);
+    background: rgba(40, 68, 39, 0.48);
 }
 #pesochnica {
     position: absolute;
@@ -23,7 +23,6 @@
     left: 295px;
     width: 100px;
     height: 150px;
-    background: rgba(59, 74, 113, 0.75);
 }
 #teplica {
     position: absolute;
@@ -31,7 +30,8 @@
     left: 295px;
     width: 100px;
     height: 100px;
-    background: rgba(29, 38, 62, 0.75);
+    background: rgba(40, 68, 39, 0.48);
+    text-align: center;
 }
 #elki {
     position: absolute;
@@ -47,15 +47,20 @@
     left: 120px;
     width: 120px;
     height: 150px;
-    background: rgba(76, 99, 69, 0.75);
-}
+    }
 #strawberry {
-
-
     position: absolute;
     top: 5px;
     left: 120px;
     width: 120px;
     height: 150px;
-    background: rgba(76, 99, 69, 0.75);
+
+}
+.DHUM {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 150px;
+    height: 150px;
+    z-index: 1;
 }
