@@ -4,13 +4,13 @@ $.ajaxSetup({
             'X-CSRFToken': csrftoken
         }
     });
-sad.addEventListener('click', function(event) {
-    if (event.target.dataset.hasOwnProperty('on')){
-        if (event.target.dataset.on ==='sad'){
-            alert('dataset.on')
-        }}
+dvor.addEventListener('click', function(event) {
+    let data = {};
+    if (event.target.dataset.hasOwnProperty('on')) {
+        data = {'on': event.target.dataset.on};
+    }
     alert('SAD');
-    let data = {123:'gvh'};
+
     $.ajax({
         url: '',
         method: 'POST',

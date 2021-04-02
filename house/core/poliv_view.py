@@ -9,7 +9,10 @@ class Poliv(View):
     def get(request):
         poliv_all = get_status_poliv()
         poliv = Setting.objects.get(controller_name='poliv')
-        context = {'poliv': poliv}
+        context = {
+            'poliv': poliv,
+            'poliv_all': poliv_all
+            }
 
         return render(request, 'core/poliv_index.html', context)
 
@@ -32,9 +35,9 @@ def get_status_poliv():
         poliv_teplica = Setting.objects.create(controller_name='poliv_teplica', label='выключен', value=0)
         poliv_sad = Setting.objects.create(controller_name='poliv_sad', label='выключен', value=0)
         poliv_strawberry = Setting.objects.create(controller_name='poliv_strawberry', label='выключен', value=0)
-    poliv_all = []
-    list(map(lambda x: poliv_all.append(x),
-             [
+    poliv_all = {}
+
+    p =      [
                  poliv_elki,
                  poliv_garaz,
                  poliv_pesochnica,
@@ -42,6 +45,7 @@ def get_status_poliv():
                  poliv_sad,
                  poliv_strawberry,
              ]
-             ))
+    for item in p:
+        poliv_all[item.controller_name] = item
     return poliv_all
 

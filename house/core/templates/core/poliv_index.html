@@ -17,19 +17,44 @@
 <div id="dvor">
 {% csrf_token %}
     <a class="" href="{% url 'form' %}"><img id="dom" src="{% static 'img/home.gif' %}" height="100"></a>
-    <div id="garaz">Гараж</div>
-    <div id="pesochnica">
 
-        <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM">
+    <div id="garaz" data-on="garaz">
+        {% if poliv_all.poliv_garaz.value == 1 %}
+            <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM">
+        {% endif %}
+    </div>
+
+    <div id="pesochnica" data-on="pesochnica">
+        {% if poliv_all.poliv_pesochnica.value == 1 %}
+            <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM" data-on="pesochnica">
+        {% endif %}
         <img src="{% static 'img/kach.gif' %}" height="100" alt="pesochnica.fif">
     </div>
-    <div id="teplica">Теплица</div>
-    <div id="elki"><img src="{% static 'img/elka.gif' %}" height="150" alt="elki.fif"></div>
-    <div id="sad">
 
-        <img src="{% static 'img/rain.gif' %}" height="50" alt="DHUM" class="DHUM" data-on="sad">
-        <img src="{% static 'img/sad.gif' %}" height="100" alt="sad.fif" data-on="asa"></div>
-    <div id="strawberry"><img src="{% static 'img/rastberry.gif' %}" height="100" alt="strawberry.fif"></div>
+    <div id="teplica" data-on="teplica">Теплица
+        {% if poliv_all.poliv_teplica.value == 1 %}
+        <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM">
+        {% endif %}
+    </div>
+
+    <div id="elki" data-on="elki">
+        {% if poliv_all.poliv_elki.value == 1 %}
+            <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM">
+        {% endif %}
+        <img src="{% static 'img/elka.gif' %}" height="150" alt="elki.fif" >
+    </div>
+
+    <div id="sad" data-on="sad">
+        {% if poliv_all.poliv_sad.value == 1 %}
+            <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM">
+        {% endif %}
+        <img src="{% static 'img/sad.gif' %}" height="100" alt="sad.fif">
+    </div>
+
+    <div id="strawberry" data-on="rastberry">
+        <img src="{% static 'img/rastberry.gif' %}" height="100" alt="strawberry.fif">
+    </div>
+
 </div>
 <script type="text/javascript" src="{% static 'selection_avto/jquery/jquery-3.5.1.js'%}"></script>
 
