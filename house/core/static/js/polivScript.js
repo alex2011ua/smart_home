@@ -5,11 +5,18 @@ $.ajaxSetup({
         }
     });
 dvor.addEventListener('click', function(event) {
+    console.log('Dvor');
+    console.log(event.target);
     let data = {};
     if (event.target.dataset.hasOwnProperty('on')) {
         data = {'on': event.target.dataset.on};
-    }
-    alert('SAD');
+        console.log("hasOwnProperty(\'on\')");
+    };
+    if (event.target.dataset.hasOwnProperty('off')) {
+        data = {'off': event.target.dataset.off};
+        console.log("hasOwnProperty(\'off\')");
+    };
+
 
     $.ajax({
         url: '',
@@ -21,10 +28,11 @@ dvor.addEventListener('click', function(event) {
             alert('success');
         },
         error: function (text) {
-            console.log('__1__');
+            console.log('__error__');
             console.log(text);
             alert('error');
         },
     })
 
     }, true);
+

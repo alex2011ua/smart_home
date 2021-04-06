@@ -20,6 +20,7 @@ class Poliv(View):
     def post(request):
         print(request.POST)  # print all url params
 
+
 def get_status_poliv():
     try:
         poliv_elki = Setting.objects.get(controller_name='poliv_elki')

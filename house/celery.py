@@ -99,6 +99,6 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_watering_analiz(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute=21, hour=16),
+        crontab(minute=21, hour=9),
         bot_task_watering_analiz.s(),
         name='bot_task_18_hour')

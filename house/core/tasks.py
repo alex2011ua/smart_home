@@ -234,13 +234,18 @@ def bot_task_watering_analiz():
     """Анализ необходимости включения полива"""
 
     weather = Weather.objects.filter().order_by('-date')[0:6]
+    poliv = Setting.objects.get(controller_name="poliv")
     sum_rain = 0
     for day in weather:
         sum_rain += day.rain
     if sum_rain >= 15:
-        bot.send_message(f'полив производится не будет количество осадков: {sum_rain}')
-
+        bot.send_message(f'ВЫключен полив. Количество осадков: {sum_rain}')
+        poliv.value = 0
+        poliv.label = 'выключен'
     if sum_rain < 15:
-        bot.send_message(f'Включение полива производится будет количество осадков: {sum_rain}')
+        bot.send_message(f'Полив включен. Количество осадков: {sum_rain}')
+        poliv.value = 1
+        poliv.label = 'включен'
+    poliv.save()
 
 
