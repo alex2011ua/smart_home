@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block main %}
-    <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM no-display ff" >
+    <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM no-display" >
     {% if poliv.value == 0 %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a> <br />
     {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a> <br />
     {% endif%}
