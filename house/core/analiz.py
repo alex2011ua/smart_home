@@ -67,7 +67,7 @@ def button_analiz(DEBUG):
 
 
 def vecher(now, garaz, dor):
-    list_to_hour = [19, 20, 21, 22, 23]
+    list_to_hour = [20, 21, 22, 23, 0, 1]
     if (now.hour in list_to_hour) and now.minute == 0:
         if garaz == 1:
             bot.send_message('Нужно на ночь закрыть гараж')

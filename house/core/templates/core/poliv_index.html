@@ -23,6 +23,7 @@
         {% if poliv_all.poliv_garaz.value == 1 %}
             <img src="{% static 'img/rain.gif' %}" data-on="poliv_garaz" height="50" alt="pesochnica.fif" class="DHUM">
         {% endif %}
+    <img src="{% static 'img/klumba.gif' %}" height="100" alt="pesochnica.fif" class="need" data-on="poliv_garaz">
     </div>
 
     <div id="pesochnica" data-on="pesochnica">
@@ -32,11 +33,12 @@
         <img src="{% static 'img/kach.gif' %}" height="100" alt="pesochnica.fif" class="need" data-on="poliv_pesochnica">
     </div>
 
-    <div id="teplica" class="need" data-on="poliv_teplica">Теплица
+    <div id="teplica" class="need" data-on="poliv_teplica">
         {% if poliv_all.poliv_teplica.value == 1 %}
-        <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM" data-on="poliv_teplica">
+        <img src="{% static 'img/rain.gif' %}" height="50" width="50" alt="poliv_teplica.fif" class="DHUM" data-on="poliv_teplica">
         {% endif %}
         <span class="need" data-on="poliv_teplica"></span>
+    <img src="{% static 'img/teplica.gif' %}" height="100" alt="poliv_teplica.fif" class="need" data-on="poliv_teplica">
     </div>
 
     <div id="elki" data-on="elki">

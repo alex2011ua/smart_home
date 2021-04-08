@@ -20,7 +20,7 @@ class Poliv(View):
 
     @staticmethod
     def post(request):
-        print(request.POST)  # print all url params
+        #print(request.POST)  # <QueryDict: {'off': ['poliv_pesochnica']}>
         if request.POST.get('off'):
             of_poliv = Setting.objects.get(controller_name=request.POST['off'])
             of_poliv.value = 0
@@ -63,6 +63,7 @@ def get_status_poliv():
     for item in p:
         poliv_all[item.controller_name] = item
     return poliv_all
+
 
 def poliv_on_of(request):
     poliv = Setting.objects.get(controller_name='poliv')

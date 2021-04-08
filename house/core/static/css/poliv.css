@@ -12,10 +12,9 @@
 #garaz {
     position: absolute;
     top: 595px;
-    left: 245px;
-    width: 150px;
+    left: 255px;
+    width: 140px;
     height: 100px;
-    background: rgba(40, 68, 39, 0.48);
 }
 #pesochnica {
     position: absolute;
@@ -30,7 +29,6 @@
     left: 295px;
     width: 100px;
     height: 100px;
-    background: rgba(40, 68, 39, 0.48);
     text-align: center;
 }
 #elki {
