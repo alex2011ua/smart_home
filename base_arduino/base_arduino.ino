@@ -2,7 +2,7 @@
 #include <SPI.h>                                               // Подключаем библиотеку для работы с шиной SPI.
 #include <nRF24L01.h>                                          // Подключаем файл настроек из библиотеки RF24.
 #include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
-RF24     radio(9, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
+RF24     radio(10, 9);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
 // список пинов:
 #define PIN_RELAY1         2    // LIGHT_BALKON
 #define DHTPIN             3    // dht 11 датчик температуры воды в котел
@@ -15,6 +15,7 @@ RF24     radio(9, 10);                                         // Создаём
     // csn                 10   // csn
     //mi                   11
     //mo                   12
+int buzzerPin = 44; //Define buzzerPin
 
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
@@ -30,7 +31,10 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 #define LIGHT_PERIM_ON      'C'
 #define LIGHT_PERIM_OFF     'c'
 
-#define SEND_PARAM       'p'
+#define Test_nrf         'D'
+
+#define SEND_PARAM       'p'   // опрос датчиков ардуино
+
 #define RESET            'r'
 #define TEST             't'
 
@@ -46,7 +50,12 @@ DHT dht(DHTPIN, DHTTYPE);
 DHT dht22(DHT22PIN, DHTTYPE22);
 DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха возле вытяжки
 
+int sound = 0;  // sound on/off
+int      myData[6] = {55,55,55,55,55,55};
+int      ackData[6];
+ 
 void setup(){
+  pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
   delay(1000); // ждем 1 секунду
   Serial.begin(9600);
 
@@ -59,22 +68,54 @@ void setup(){
 
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
+
+  
     radio.begin();                                             // Инициируем работу nRF24L01+.
     radio.setChannel      (27);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит приём данных осуществляется на частоте 2,427 ГГц.
     radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
     radio.setPALevel      (RF24_PA_LOW);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
-    radio.enableAckPayload();
-    radio.openReadingPipe (1, 0xAABBCCDD11LL);                 // Открываем 1 трубу с адресом 1 передатчика 0xAABBCCDD11, для приема данных.
-    radio.openReadingPipe (2, 0xAABBCCDD22LL);                 // Открываем 2 трубу с адресом 2 передатчика 0xAABBCCDD22, для приема данных.
-    radio.openReadingPipe (3, 0xAABBCCDD33LL);                 // Открываем 3 трубу с адресом 3 передатчика 0xAABBCCDD33, для приема данных.
-    radio.openReadingPipe (4, 0xAABBCCDD96LL);                 // Открываем 4 трубу с адресом 4 передатчика 0xAABBCCDD96, для приема данных.
-    radio.openReadingPipe (5, 0xAABBCCDDFFLL);                 // Открываем 5 трубу с адресом 5 передатчика 0xAABBCCDDFF, для приема данных.
-    //radio.enableDynamicPayloads();
-    radio.startListening  ();                                  // Включаем приемник, начинаем прослушивать открытые трубы.
+    radio.enableAckPayload();                                   // Указываем что в пакетах подтверждения приёма есть блок с пользовательскими данными.
+    radio.openWritingPipe (0xAABBCCDD11LL);                    // Открываем трубу с адресом 0xAABBCCDD11 для передачи данных (передатчик может одновременно вещать только по одной трубе).
+
+    
+    pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
+    analogWrite(buzzerPin, 255);
 
 }
 
 void(* resetFunc) (void) = 0; // объявляем функцию reset
+
+void send_NRF(int sounds){
+   Serial.print("start send_NRF, myData - ");
+   myData[1] = sound;
+   Serial.print( myData[0]);
+   Serial.print( myData[1]);
+   Serial.print( myData[2]);
+   Serial.print( myData[3]);
+   Serial.print( myData[4]);
+   Serial.println( myData[5]);
+    if( radio.write(&myData, sizeof(myData)) ){                // Если указанное количество байт массива myData было доставлено приёмнику, то ...
+      //  Данные передатчика были корректно приняты приёмником.  // Тут можно указать код который будет выполняться при получении данных приёмником.
+      Serial.println("radio.write - OK send");
+
+    }else{                                                     // Иначе (если данные не доставлены) ...
+      //  Данные передатчика не приняты или дошли с ошибкой CRC. // Тут можно указать код который будет выполняться если приёмника нет или он не получил данные.
+      Serial.println("radio.write - Error send");
+
+    }
+    Serial.println("end send_NRF");
+    //
+    if( radio.isAckPayloadAvailable() ){                       // Если в буфере имеются принятые данные из пакета подтверждения приёма, то ...
+        radio.read(&ackData, sizeof(ackData));                  // Читаем данные из буфера в массив ackData указывая сколько всего байт может поместиться в массив.
+      Serial.print ("isAckPayloadAvailable - ");
+        Serial.print( ackData[0]);
+        Serial.print( ackData[1]);
+        Serial.print( ackData[2]);
+        Serial.print( ackData[3]);
+        Serial.print( ackData[4]);
+        Serial.println( ackData[5]);
+    }
+}
 
 void read_dht_param(){  // чтение температуры dh11
   int gasValue = 0; //переменная для хранения количества газа
@@ -138,10 +179,26 @@ void read_dht_param(){  // чтение температуры dh11
     json += "'muve_kitchen': ";
     int pirVal = analogRead(analogSignal_muve_kitchen);
     json += pirVal;
+    json += ", 'sound': ";
+    json += sound;
+
+
     json += "}";
     Serial.println(json);
 }
+int s = 0;
 void loop(){
+  
+    if (sound == 1){
+    analogWrite(buzzerPin, s);
+    s = s + 1;
+    if (s == 255){
+      s = 0;
+    }
+    }
+    else{
+    analogWrite(buzzerPin, 255);
+    }
   char val;
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
@@ -172,6 +229,18 @@ void loop(){
     }
     if (val == TEST){
         Serial.println("OK");
+    }
+
+    if (val == SOUND_ON){
+      Serial.println("S - 1");
+        sound = 1;
+    }
+    if (val == SOUND_OFF){
+        sound = 0;
+        Serial.println("S - 0");
+    }
+    if (val == Test_nrf){
+        send_NRF(sound);
     }
   }
 }
