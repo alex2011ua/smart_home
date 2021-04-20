@@ -13,8 +13,8 @@ RF24     radio(10, 9);                                         // Создаём
 #define PIN_RELAY3         8    // LIGHT_TREE
     // ce                  9    // ce
     // csn                 10   // csn
-    //mi                   11
-    //mo                   12
+    //mi                   50
+    //mo                   51
 int buzzerPin = 44; //Define buzzerPin
 
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
@@ -30,8 +30,6 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 
 #define LIGHT_PERIM_ON      'C'
 #define LIGHT_PERIM_OFF     'c'
-
-#define Test_nrf         'D'
 
 #define SEND_PARAM       'p'   // опрос датчиков ардуино
 
@@ -53,10 +51,10 @@ DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха в
 int sound = 0;  // sound on/off
 int      myData[6] = {55,55,55,55,55,55};
 int      ackData[6];
- 
+uint8_t  i;
 void setup(){
   pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
-  delay(1000); // ждем 1 секунду
+  delay(500); // ждем 0.5секунду
   Serial.begin(9600);
 
   pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
@@ -71,50 +69,131 @@ void setup(){
 
   
     radio.begin();                                             // Инициируем работу nRF24L01+.
-    radio.setChannel      (27);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит приём данных осуществляется на частоте 2,427 ГГц.
+    //if(radio.isPVariant() ){ Serial.print("nRF24L01"      ); } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
+    //else                   { Serial.print("unknown module"); } // Иначе, если модуль не поддерживается, то выводи текст «unknown module».
+    //                         Serial.print("\r\n"          );   //
+    radio.setChannel      (10);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит приём данных осуществляется на частоте 2,427 ГГц.
     radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
-    radio.setPALevel      (RF24_PA_LOW);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
-    radio.enableAckPayload();                                   // Указываем что в пакетах подтверждения приёма есть блок с пользовательскими данными.
-    radio.openWritingPipe (0xAABBCCDD11LL);                    // Открываем трубу с адресом 0xAABBCCDD11 для передачи данных (передатчик может одновременно вещать только по одной трубе).
+    radio.setPALevel      (RF24_PA_MIN);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
+    //radio.enableAckPayload();                                   // Указываем что в пакетах подтверждения приёма есть блок с пользовательскими данными.
+    radio.openReadingPipe (1, 0xFEDCBA9876LL);                     
+    radio.openWritingPipe (   0xAABBCCDD11LL);
+    radio.startListening  ();
 
-    
     pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
     analogWrite(buzzerPin, 255);
 
 }
-
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
+int s = 0;
+void loop(){
+  
+  if(radio.available()){
+    radio.read( &ackData, sizeof(ackData) );
+
+  }
+  
+    if (sound == 1){
+    analogWrite(buzzerPin, s);
+    s = s + 1;
+    if (s == 255){
+      s = 0;
+    }
+    }
+    else{
+    analogWrite(buzzerPin, 255);
+    }
+  char val;
+  if (Serial.available()){
+    val = Serial.read(); // переменная val равна полученной команде
+    if (val == LIGHT_BALKON_OFF) { //  если 0 выключаем реле
+      rele_light_balkon(0);
+    }
+    if (val == LIGHT_BALKON_ON){//  если 1 включаем реле
+      rele_light_balkon(1);
+    }
+    if (val == LIGHT_TREE_ON){ // управление бойлером Включаем
+        rele_light_tree(1);
+    }
+    if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
+        rele_light_tree(0);
+    }
+    if (val == LIGHT_PERIM_ON){ // управление бойлером Включаем
+        rele_light_perim(1);
+    }
+    if (val == LIGHT_PERIM_OFF){ // управление бойлером Выключаем
+        rele_light_perim(0);
+    }
+
+    if (val == SEND_PARAM){ //  если p шлем параметры
+      read_dht_param();
+    }
+    if (val == RESET){ //  если r  перезапускаем Arduino
+      resetFunc(); //вызываем reset
+    }
+    if (val == TEST){
+        Serial.println("OK");
+    }
+
+    if (val == SOUND_ON){
+       sound = 1;
+       send_NRF(sound);
+    }
+    if (val == SOUND_OFF){
+       sound = 0;
+       send_NRF(sound);
+    }
+
+  }
+}
+
+void rele_light_balkon(int status){
+  if (status == 1){
+    digitalWrite(PIN_RELAY1, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    Serial.println("rele on");
+  }
+  if (status == 0){
+    digitalWrite(PIN_RELAY1, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    Serial.println("rele off");
+   }
+}
+
+void rele_light_perim(int status){
+  if (status == 1){
+    digitalWrite(PIN_RELAY2, LOW); // Отключаем реле - посылаем высокий уровень сигнала
+    Serial.println("rele on");
+  }
+  if (status == 0){
+    digitalWrite(PIN_RELAY2, HIGH); // Включаем реле - посылаем низкий уровень сигнала
+    Serial.println("rele off");
+   }
+}
+
+void rele_light_tree(int status){ //управление бойлером
+    if (status == 1){
+    digitalWrite(PIN_RELAY3, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    Serial.println("rele on");
+  }
+  if (status == 0){
+    digitalWrite(PIN_RELAY3, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    Serial.println("rele off");
+    }
+}
+
 void send_NRF(int sounds){
-   Serial.print("start send_NRF, myData - ");
+   radio.stopListening  ();
+   radio.setChannel      (20);
    myData[1] = sound;
-   Serial.print( myData[0]);
-   Serial.print( myData[1]);
-   Serial.print( myData[2]);
-   Serial.print( myData[3]);
-   Serial.print( myData[4]);
-   Serial.println( myData[5]);
     if( radio.write(&myData, sizeof(myData)) ){                // Если указанное количество байт массива myData было доставлено приёмнику, то ...
       //  Данные передатчика были корректно приняты приёмником.  // Тут можно указать код который будет выполняться при получении данных приёмником.
       Serial.println("radio.write - OK send");
-
     }else{                                                     // Иначе (если данные не доставлены) ...
       //  Данные передатчика не приняты или дошли с ошибкой CRC. // Тут можно указать код который будет выполняться если приёмника нет или он не получил данные.
       Serial.println("radio.write - Error send");
-
     }
-    Serial.println("end send_NRF");
-    //
-    if( radio.isAckPayloadAvailable() ){                       // Если в буфере имеются принятые данные из пакета подтверждения приёма, то ...
-        radio.read(&ackData, sizeof(ackData));                  // Читаем данные из буфера в массив ackData указывая сколько всего байт может поместиться в массив.
-      Serial.print ("isAckPayloadAvailable - ");
-        Serial.print( ackData[0]);
-        Serial.print( ackData[1]);
-        Serial.print( ackData[2]);
-        Serial.print( ackData[3]);
-        Serial.print( ackData[4]);
-        Serial.println( ackData[5]);
-    }
+    radio.setChannel      (10);
+    radio.startListening  ();
 }
 
 void read_dht_param(){  // чтение температуры dh11
@@ -185,95 +264,4 @@ void read_dht_param(){  // чтение температуры dh11
 
     json += "}";
     Serial.println(json);
-}
-int s = 0;
-void loop(){
-  
-    if (sound == 1){
-    analogWrite(buzzerPin, s);
-    s = s + 1;
-    if (s == 255){
-      s = 0;
-    }
-    }
-    else{
-    analogWrite(buzzerPin, 255);
-    }
-  char val;
-  if (Serial.available()){
-    val = Serial.read(); // переменная val равна полученной команде
-    if (val == LIGHT_BALKON_OFF) { //  если 0 выключаем реле
-      rele_light_balkon(0);
-    }
-    if (val == LIGHT_BALKON_ON){//  если 1 включаем реле
-      rele_light_balkon(1);
-    }
-    if (val == LIGHT_TREE_ON){ // управление бойлером Включаем
-        rele_light_tree(1);
-    }
-    if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
-        rele_light_tree(0);
-    }
-    if (val == LIGHT_PERIM_ON){ // управление бойлером Включаем
-        rele_light_perim(1);
-    }
-    if (val == LIGHT_PERIM_OFF){ // управление бойлером Выключаем
-        rele_light_perim(0);
-    }
-
-    if (val == SEND_PARAM){ //  если p шлем параметры
-      read_dht_param();
-    }
-    if (val == RESET){ //  если r  перезапускаем Arduino
-      resetFunc(); //вызываем reset
-    }
-    if (val == TEST){
-        Serial.println("OK");
-    }
-
-    if (val == SOUND_ON){
-      Serial.println("S - 1");
-        sound = 1;
-    }
-    if (val == SOUND_OFF){
-        sound = 0;
-        Serial.println("S - 0");
-    }
-    if (val == Test_nrf){
-        send_NRF(sound);
-    }
-  }
-}
-
-void rele_light_balkon(int status){
-  if (status == 1){
-    digitalWrite(PIN_RELAY1, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
-    Serial.println("rele on");
-  }
-  if (status == 0){
-    digitalWrite(PIN_RELAY1, LOW); // Включаем реле - посылаем низкий уровень сигнала
-    Serial.println("rele off");
-   }
-}
-
-void rele_light_perim(int status){
-  if (status == 1){
-    digitalWrite(PIN_RELAY2, LOW); // Отключаем реле - посылаем высокий уровень сигнала
-    Serial.println("rele on");
-  }
-  if (status == 0){
-    digitalWrite(PIN_RELAY2, HIGH); // Включаем реле - посылаем низкий уровень сигнала
-    Serial.println("rele off");
-   }
-}
-
-void rele_light_tree(int status){ //управление бойлером
-    if (status == 1){
-    digitalWrite(PIN_RELAY3, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
-    Serial.println("rele on");
-  }
-  if (status == 0){
-    digitalWrite(PIN_RELAY3, LOW); // Включаем реле - посылаем низкий уровень сигнала
-    Serial.println("rele off");
-    }
 }

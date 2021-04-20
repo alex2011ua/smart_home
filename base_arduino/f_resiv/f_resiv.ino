@@ -3,8 +3,13 @@
 #include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
 RF24     radio(9, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
 int      myData[6] = {11,12,13,14,15,16};                                            // Объявляем массив для приёма и хранения данных (до 32+2 байт включительно).
-int      ackData[6]= {11,12,13,14,15,16}; 
+int      ackData[6]; 
 int buzzerPin = 3; //Define buzzerPin
+int pirVals;
+int pirVal;
+int old_pirVal;
+uint8_t  i;
+
 
 void setup(){
   //
@@ -14,26 +19,39 @@ void setup(){
     Serial.begin(9600);
     
     radio.begin           ();                                  // Инициируем работу модуля nRF24L01+.
-    radio.setChannel      (27);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит передача данных осуществляется на частоте 2,427 ГГц.
+    if(radio.isPVariant() ){ Serial.print("nRF24L01"      ); } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
+    else                   { Serial.print("unknown module"); } // Иначе, если модуль не поддерживается, то выводи текст «unknown module».
+                             Serial.print("\r\n"          );   //
+    radio.setChannel      (20);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит передача данных осуществляется на частоте 2,427 ГГц.
+i = radio.getChannel(); // Получить номер используемого канала в переменную i
+    Serial.println(i);
     radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
-    radio.setPALevel      (RF24_PA_LOW);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
+    radio.setPALevel      (RF24_PA_MIN);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
                                                       
-    radio.enableAckPayload();                                  // Указываем что в пакетах подтверждения приёма есть блок с пользовательскими данными.
+//    radio.enableAckPayload();                                  // Указываем что в пакетах подтверждения приёма есть блок с пользовательскими данными.
 //  radio.enableDynamicPayloads();                             // Разрешить динамически изменяемый размер блока данных на всех трубах.
     radio.openReadingPipe (1, 0xAABBCCDD11LL);                 // Открываем 1 трубу с адресом 0xAABBCCDD11, для приема данных.
+    radio.openWritingPipe (   0xFEDCBA9876LL);
     radio.startListening  ();                                  // Включаем приемник, начинаем прослушивать открытые трубы.
-    radio.writeAckPayload (1, &ackData, sizeof(ackData) );     // Помещаем данные всего массива ackData в буфер FIFO. Как только будут получены любые данные от передатчика на 1 трубе, то данные из буфера FIFO будут отправлены этому передатчику вместе с пакетом подтверждения приёма его данных.
+//    radio.writeAckPayload (1, &ackData, sizeof(ackData) );     // Помещаем данные всего массива ackData в буфер FIFO. Как только будут получены любые данные от передатчика на 1 трубе, то данные из буфера FIFO будут отправлены этому передатчику вместе с пакетом подтверждения приёма его данных.
 }                                                              // В модуле имеется 3 буфера FIFO, значит в них одновременно может находиться до трёх разных или одинаковых данных для ответа по одной или разным трубам.
 int s = 0;
 int sound = 0;                                                     // После отправки данных из буфера FIFO к передатчику, соответствующий буфер очищается и способен принять новые данные для отправки.
 void loop(){                                                   //
-    if(radio.available()){                                     // Если в буфере приёма имеются принятые данные от передатчика, то ...
-        radio.read            (   &myData,  sizeof(myData)  ); // Читаем данные из буфера приёма в массив myData указывая сколько всего байт может поместиться в массив.
-        radio.writeAckPayload (1, &ackData, sizeof(ackData) ); // Помещаем данные всего массива ackData в буфер FIFO для их отправки на следующее получение данных от передатчика на 1 трубе.
+    if(radio.available()){  
+  Serial.println("available");
+        radio.read            (   &ackData,  sizeof(ackData)  ); // Читаем данные из буфера приёма в массив myData указывая сколько всего байт может поместиться в массив.
+        // radio.writeAckPayload (1, &ackData, sizeof(ackData) ); // Помещаем данные всего массива ackData в буфер FIFO для их отправки на следующее получение данных от передатчика на 1 трубе.
+    Serial.print( ackData[0]);
+   Serial.print( ackData[1]);
+   Serial.print( ackData[2]);
+   Serial.print( ackData[3]);
+   Serial.print( ackData[4]);
+   Serial.println( ackData[5]);      
     }                                                          // Если все 3 буфера FIFO уже заполнены, то функция writeAckPayload() будет проигнорирована.
-                                                              // Так как в данном скетче данные в буфер помещаются только после получения данных от передатчика, значит один из буферов был только что очищен и заполнение всех 3 буферов в данном скетче невозможно.
-    if (myData[0] == 55){
-        sound = myData[1];
+                                                       // Так как в данном скетче данные в буфер помещаются только после получения данных от передатчика, значит один из буферов был только что очищен и заполнение всех 3 буферов в данном скетче невозможно.
+    if (ackData[0] == 55){
+        sound = ackData[1];
     }
     if (sound == 1){
     analogWrite(buzzerPin, s);
@@ -45,4 +63,49 @@ void loop(){                                                   //
     else{
     analogWrite(buzzerPin, 255);
     }
+  pirVals = analogRead(A0);
+  
+  if (pirVals > 500){
+    pirVal = 1;
+  }else{
+    pirVal = 0;
+  }
+  
+  if (pirVal == old_pirVal){
+    
+  }else{
+    Serial.println(pirVals);
+    analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255);
+    old_pirVal = pirVal;
+    send_pir();
+  }
+  myData[1] = pirVals;
+}
+
+void send_pir(){
+  radio.stopListening  ();  
+  radio.setChannel      (10); 
+ i = radio.getChannel(); // Получить номер используемого канала в переменную i
+    Serial.println(i);
+  if (radio.write(&myData, sizeof(myData)) ){
+    Serial.println("Send OK");
+    analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255);
+  }else{
+    Serial.println("Send ERROR");
+    analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255);
+    delay(100);
+    analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255);
+  };
+  radio.setChannel      (20);
+i = radio.getChannel(); // Получить номер используемого канала в переменную i
+    Serial.println(i);
+  radio.startListening  ();
 }
