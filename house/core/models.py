@@ -14,10 +14,10 @@ class Setting(models.Model):
 
 class Weather(models.Model):
     date = models.DateField(unique=True)
-    rain = models.IntegerField(default=0)
-    temp_min = models.IntegerField(default=0)
-    temp_max = models.IntegerField(default=0)
-    snow = models.IntegerField(default=0)
+    rain = models.FloatField(default=0)
+    temp_min = models.FloatField(default=0)
+    temp_max = models.FloatField(default=0)
+    snow = models.FloatField(default=0)
 
     def __str__(self):
         return str(self.date)
@@ -48,7 +48,7 @@ class DHT_MQ(models.Model):
     temp_teplica = models.FloatField(null=True)
     humidity_teplica = models.FloatField(null=True)
 
-    temp_room = models.IntegerField(null=True)
+    temp_room = models.FloatField(null=True)
     humidity_room = models.IntegerField(null=True)
 
     gaz_MQ4 = models.IntegerField(null=True)
