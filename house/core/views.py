@@ -44,6 +44,9 @@ class ControllerView(LoginRequiredMixin, View):
         poliv, created = Setting.objects.get_or_create(
             controller_name='poliv',
             defaults={'label': 'Выключен', 'value': 0})
+        alarms = Setting.objects.get(controller_name='alarms')
+
+        context['alarms'] = alarms
         context['poliv'] = poliv
         context['light_balkon'] = light_balkon
         context['light_tree'] = light_tree
@@ -241,4 +244,25 @@ class Printer(LoginRequiredMixin, View):
                                     title_log='view Boiler',
                                     description_log='Ошибка ардуино Boiler' + str(
                                         exx))
+        return redirect(reverse_lazy('form'))
+
+
+class Alarms(LoginRequiredMixin, View):
+    @staticmethod
+    def get(request):
+        try:
+            alarms = Setting.objects.get(controller_name='alarms')
+        except:
+            alarms = Setting.objects.create(controller_name='alarms', value=0, label='...')
+
+        if alarms.value == 0:
+            alarms.value = 1
+            alarms.label = 'Извещения включены'
+            alarms.save()
+            bot.send_message('Извещения включены')
+        else:
+            alarms.value = 0
+            alarms.label = 'Извещения выключены'
+            alarms.save()
+            bot.send_message('Извещения выключены')
         return redirect(reverse_lazy('form'))

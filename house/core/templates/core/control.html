@@ -22,6 +22,10 @@
             {% else %} <span class="badge badge-pill badge-secondary b ">Газ в норме</span>
             {% endif%}
 
+            {% if alarms.value == 0 %}<a href="{% url 'alarms'%} ">  <button type="button" class="btn btn-danger b" > Вернуть напоминания</button></a>
+            {% else %} <a href="{% url 'alarms'%}">  <button type="button" class="btn  btn-primary b" > Напоминания</button></a>
+            {% endif %}
+
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
@@ -36,7 +40,7 @@
             {% if light_perim.value == 0 %} <a href="{% url 'rele' light_perim.label %}">  <button type="button" class="btn btn-dark b" >Включить балкон </button></a> <br />
             {% else %} <a href="{% url 'rele' light_perim.label %} ">  <button type="button" class="btn btn-light b" >Выключить балкон </button></a> <br />
             {% endif%}
-            {% if poliv.value == 0 %} <a href="{% url 'poliv_index'  %}">  <button type="button" class="btn btn-secondary b" >Управление поливом</button></a> <br />
+            {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_index'  %}">  <button type="button" class="btn btn-secondary b" >Управление поливом</button></a> <br />
             {% else %} <a href="{% url 'poliv_index' %} ">  <button type="button" class="btn btn-success  b" >Управление поливом </button></a> <br />
             {% endif%}
 
@@ -66,7 +70,7 @@
             {% endif %}
 
             {% if printer.value == 0 %}<a href="{% url 'printer'%} ">  <button type="button" class="btn btn-warning b" >Включение принтера </button></a>
-            {% else %} <a href={% url 'printer'%}>  <button type="button" class="btn btn-danger b" >Выключение принтера </button></a>
+            {% else %} <a href="{% url 'printer'%}">  <button type="button" class="btn btn-danger b" >Выключение принтера </button></a>
             {% endif %}
 
 

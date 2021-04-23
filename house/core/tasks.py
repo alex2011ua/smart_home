@@ -173,6 +173,10 @@ def boiler_task_off():
 def bot_task():
     """запускается каждые 2 минуты"""
     print('Start bot task')
+    alarms = Setting.objects.get(controller_name="alarms")
+    if alarms.value == 0:
+        print('Stop bot task off(alarm off)')
+        return
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
     MQ4 = temp.gaz_MQ4 or 0
     MQ135 = temp.gaz_MQ135 or 0
@@ -181,12 +185,16 @@ def bot_task():
 
     button_analiz(DEBUG)
 
-    print('Start bot task off')
+    print('Stop bot task off')
 
 
 @cellery_app.task()
 def bot_task_1_hour():
     print('Start bot_task_1_hour')
+    alarms = Setting.objects.get(controller_name="alarms")
+    if alarms.value == 0:
+        print('Stop bot_task_1_hour(alarm off)')
+        return
     temp_alert()
     print('Stop bot_task_1_hour')
 
@@ -233,18 +241,25 @@ def bot_task_11_hour():
 def bot_task_watering_analiz():
     """Анализ необходимости включения полива"""
 
-    weather = Weather.objects.filter().order_by('-date')[0:6]
+    weather = Weather.objects.filter().order_by('-date')[0:14]
     poliv = Setting.objects.get(controller_name="poliv")
     sum_rain = 0
+    corect = -1
+    water_time = 10
     for day in weather:
-        sum_rain += day.rain
+        if day.temp_max > 25:
+            water_time += 10
+        if (day.rain - corect) >= 0:
+            sum_rain += day.rain - corect
+        corect += 1
+
     if sum_rain >= 15:
         bot.send_message(f'ВЫключен полив. Количество осадков: {sum_rain}')
-        poliv.value = 0
+        poliv.value = water_time
         poliv.label = 'выключен'
     if sum_rain < 15:
-        bot.send_message(f'Полив включен. Количество осадков: {sum_rain}')
-        poliv.value = 1
+        bot.send_message(f'Полив включен. Количество осадков: {sum_rain}. Время полива {water_time}')
+        poliv.value = water_time
         poliv.label = 'включен'
     poliv.save()
 

@@ -76,7 +76,7 @@ def weather_6_day():
 
     min_temp = 100
     max_temp = -100
-    for i in d["daily"][0:6]:
+    for i in d["daily"][0:3]:
         if i['temp']['min'] < min_temp:
             min_temp = i['temp']['min']
         if i['temp']['max'] > max_temp:

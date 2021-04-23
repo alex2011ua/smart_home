@@ -23,13 +23,11 @@ class Poliv(View):
         #print(request.POST)  # <QueryDict: {'off': ['poliv_pesochnica']}>
         if request.POST.get('off'):
             of_poliv = Setting.objects.get(controller_name=request.POST['off'])
-            of_poliv.value = 0
             of_poliv.label = 'выключен'
             of_poliv.save()
             return JsonResponse({"status": 200})
         if request.POST.get('on'):
             on_poliv = Setting.objects.get(controller_name=request.POST['on'])
-            on_poliv.value = 1
             on_poliv.label = 'включен'
             on_poliv.save()
             return JsonResponse({"status": 200})
@@ -67,11 +65,9 @@ def get_status_poliv():
 
 def poliv_on_of(request):
     poliv = Setting.objects.get(controller_name='poliv')
-    if poliv.value:
-        poliv.value = 0
+    if poliv.label == 'включен':
         poliv.label = 'выключен'
     else:
-        poliv.value = 1
         poliv.label = 'включен'
     poliv.save()
     return redirect(reverse_lazy('poliv_index'))

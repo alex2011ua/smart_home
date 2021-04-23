@@ -66,3 +66,11 @@
 .no-display {
     display: none;
 }
+
+#myForm{
+    position: relative;
+    top: 700px;
+    left: 120px;
+    width: 120px;
+    height: 150px;
+}

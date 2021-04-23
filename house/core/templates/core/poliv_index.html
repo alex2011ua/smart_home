@@ -10,10 +10,12 @@
 {% endblock %}
 
 {% block main %}
+
     <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM no-display" >
-    {% if poliv.value == 0 %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a> <br />
-    {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a> <br />
+    {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a>
+    {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>
     {% endif%}
+Время полива - {{ poliv.value }}
 
 <div id="dvor">
 {% csrf_token %}
@@ -63,6 +65,24 @@
     </div>
 
 </div>
+
+<form id="myForm" role="form" method="get" action="poliv_form"  >
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group"> <label><span class="hidden-xs">
+                        <h6>time</h6>
+                    </span></label>
+                <div class="input-group"> <input type="number" value="{{ poliv.value }}" name="value" class="form-control" required >
+                </div>
+            </div>
+        </div>
+    </div>
+    {% csrf_token %}
+    <button type="submit" formaction="ch_value" class="subscribe btn btn-warning btn-block shadow-sm"> Изменить! </button>
+</form>
+
+
+
 <script type="text/javascript" src="{% static 'selection_avto/jquery/jquery-3.5.1.js'%}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
