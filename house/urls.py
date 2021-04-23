@@ -30,5 +30,6 @@ urlpatterns = [
     path('test/', include('house.core.tests_urls')),
     path('poliv/', include('house.core.poliv_urls')),
     path('alarms/', Alarms.as_view(), name='alarms'),
+    path('solnce/', include('house.core.solnce_urls')),
 
 ]
