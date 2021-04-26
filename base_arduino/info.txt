@@ -1,0 +1,13 @@
+список пинов:
+PIN_RELAY1         2    // LIGHT_BALKON
+DHTPIN             3    // dht 11 датчик температуры воды в котел
+DHT22PIN           4    // уличный dht 22
+PIN_RELAY2         5    // LIGHT_PERIM
+PIN_6               6    //
+PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
+PIN_RELAY3         8    // LIGHT_TREE
+ce                  9    // ce
+csn                 10   // csn
+mi                   50
+mo                   51
+buzzerPin            44;   //Define buzzerPin
