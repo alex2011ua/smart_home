@@ -1,15 +1,19 @@
+
+#include "DHT.h"
 #include <SPI.h>                                               // Подключаем библиотеку для работы с шиной SPI.
 #include <nRF24L01.h>                                          // Подключаем файл настроек из библиотеки RF24.
 #include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
+
+#define DHTPIN             4    // dht 11 датчик температуры воды в котел
+#define DHTTYPE DHT11   // DHT 11
+DHT dht(DHTPIN, DHTTYPE);
 RF24     radio(9, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
-int      myData[6] = {11,12,13,14,15,16};                                            // Объявляем массив для приёма и хранения данных (до 32+2 байт включительно).
+int      myData[6] = {11,0,0,0,0,0};                                            // Объявляем массив для приёма и хранения данных (до 32+2 байт включительно).
 int      ackData[6]; 
 int buzzerPin = 3; //Define buzzerPin
-int pirVals;
-int pirVal;
-int old_pirVal;
-uint8_t  i;
 
+uint8_t  i;
+unsigned long millissenddata=0; 
 
 void setup(){
   //
@@ -20,7 +24,15 @@ void setup(){
     
     radio.begin           ();                                  // Инициируем работу модуля nRF24L01+.
     if(radio.isPVariant() ){ Serial.print("nRF24L01"      ); } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
-    else                   { Serial.print("unknown module"); } // Иначе, если модуль не поддерживается, то выводи текст «unknown module».
+    else                   { 
+      analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255);
+    delay(100);
+    analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255); 
+    } // Иначе, если модуль не поддерживается, то выводи текст «unknown module».
                              Serial.print("\r\n"          );   //
     radio.setChannel      (20);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит передача данных осуществляется на частоте 2,427 ГГц.
 i = radio.getChannel(); // Получить номер используемого канала в переменную i
@@ -63,25 +75,10 @@ void loop(){                                                   //
     else{
     analogWrite(buzzerPin, 255);
     }
-  pirVals = analogRead(A0);
-  
-  if (pirVals > 500){
-    pirVal = 1;
-  }else{
-    pirVal = 0;
-  }
-  
-  if (pirVal == old_pirVal){
-    
-  }else{
-    Serial.println(pirVals);
-    analogWrite(buzzerPin, 150);
-    delay(100);
-    analogWrite(buzzerPin, 255);
-    old_pirVal = pirVal;
+  if(millis()-millissenddata>5000) {
     send_pir();
+    millissenddata=millis();
   }
-  myData[1] = pirVals;
 }
 
 void send_pir(){
@@ -89,20 +86,28 @@ void send_pir(){
   radio.setChannel      (10); 
  i = radio.getChannel(); // Получить номер используемого канала в переменную i
     Serial.println(i);
+    dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+    float h;
+    float t;
+    h = dht.readHumidity();
+    t = dht.readTemperature();
+    if (isnan(h)) {
+        Serial.print(";voda; ");
+    }
+    else {
+      Serial.print("Humidity:");
+      Serial.println(int(h));
+      Serial.print("Temp:");
+      Serial.println(t);
+      myData[1] = int(t);
+      myData[2] = int(h);
+    }
   if (radio.write(&myData, sizeof(myData)) ){
     Serial.println("Send OK");
-    analogWrite(buzzerPin, 150);
-    delay(100);
-    analogWrite(buzzerPin, 255);
+    
   }else{
     Serial.println("Send ERROR");
-    analogWrite(buzzerPin, 150);
-    delay(100);
-    analogWrite(buzzerPin, 255);
-    delay(100);
-    analogWrite(buzzerPin, 150);
-    delay(100);
-    analogWrite(buzzerPin, 255);
+    
   };
   radio.setChannel      (20);
 i = radio.getChannel(); // Получить номер используемого канала в переменную i

@@ -2,7 +2,7 @@
 #include <SPI.h>                                               // Подключаем библиотеку для работы с шиной SPI.
 #include <nRF24L01.h>                                          // Подключаем файл настроек из библиотеки RF24.
 #include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
-RF24     radio(10, 9);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
+RF24     radio(53, 49);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
 // список пинов:
 #define PIN_RELAY1         2    // LIGHT_BALKON
 #define DHTPIN             3    // dht 11 датчик температуры воды в котел
@@ -13,9 +13,14 @@ RF24     radio(10, 9);                                         // Создаём
 #define PIN_RELAY3         8    // LIGHT_TREE
     // ce                  9    // ce
     // csn                 10   // csn
+
+
+
+    
     //mi                   50
     //mo                   51
-int buzzerPin = 44; //Define buzzerPin
+    //sck                 52
+int buzzerPin = 42; //Define buzzerPin
 
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
 const int analogSignal_MQ4 = A1; //подключение аналогового сигналоьного пина
@@ -53,11 +58,17 @@ int      myData[6] = {55,55,55,55,55,55};
 int      ackData[6];
 uint8_t  i;
 void setup(){
+
   pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
+    
+
   delay(500); // ждем 0.5секунду
+  analogWrite(buzzerPin, 255);
   Serial.begin(9600);
 
   pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
+   pinMode(22, OUTPUT); // Объявляем пин реле как выход
+    pinMode(23, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY3, OUTPUT); // Объявляем пин реле как выход
   digitalWrite(PIN_RELAY1, LOW); // Выключаем реле - посылаем высокий сигнал
@@ -69,9 +80,17 @@ void setup(){
 
   
     radio.begin();                                             // Инициируем работу nRF24L01+.
-    //if(radio.isPVariant() ){ Serial.print("nRF24L01"      ); } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
-    //else                   { Serial.print("unknown module"); } // Иначе, если модуль не поддерживается, то выводи текст «unknown module».
-    //                         Serial.print("\r\n"          );   //
+    if(radio.isPVariant() ){ analogWrite(buzzerPin, 255); } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
+    else                   { 
+      analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255);
+    delay(100);
+    analogWrite(buzzerPin, 150);
+    delay(100);
+    analogWrite(buzzerPin, 255); 
+    } // Иначе, если модуль не поддерживается, то выводи текст «unknown module».
+    
     radio.setChannel      (10);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит приём данных осуществляется на частоте 2,427 ГГц.
     radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
     radio.setPALevel      (RF24_PA_MIN);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
@@ -80,9 +99,7 @@ void setup(){
     radio.openWritingPipe (   0xAABBCCDD11LL);
     radio.startListening  ();
 
-    pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
-    analogWrite(buzzerPin, 255);
-
+    
 }
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
@@ -91,7 +108,11 @@ void loop(){
   
   if(radio.available()){
     radio.read( &ackData, sizeof(ackData) );
-
+    //Serial.print("Humidity:");
+    //Serial.println(ackData[2]);
+    //Serial.print("Temp:");
+    //Serial.println(ackData[1]);
+  
   }
   
     if (sound == 1){
@@ -151,10 +172,14 @@ void loop(){
 void rele_light_balkon(int status){
   if (status == 1){
     digitalWrite(PIN_RELAY1, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(22, HIGH);
+    
     Serial.println("rele on");
   }
   if (status == 0){
     digitalWrite(PIN_RELAY1, LOW); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(22, LOW);
+    
     Serial.println("rele off");
    }
 }
@@ -182,6 +207,9 @@ void rele_light_tree(int status){ //управление бойлером
 }
 
 void send_NRF(int sounds){
+  if(radio.isPVariant() ){}
+  else return;
+  
    radio.stopListening  ();
    radio.setChannel      (20);
    myData[1] = sound;
@@ -260,7 +288,8 @@ void read_dht_param(){  // чтение температуры dh11
     json += pirVal;
     json += ", 'sound': ";
     json += sound;
-
+    json += ", 'temp_room': ";
+    json += ackData[1];
 
     json += "}";
     Serial.println(json);
