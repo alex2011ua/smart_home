@@ -253,11 +253,11 @@ def bot_task_watering_analiz():
             sum_rain += day.rain - corect
         corect += 1
 
-    if sum_rain >= 15:
+    if sum_rain >= 10:
         bot.send_message(f'ВЫключен полив. Количество осадков: {sum_rain}')
         poliv.value = water_time
         poliv.label = 'выключен'
-    if sum_rain < 15:
+    if sum_rain < 10:
         bot.send_message(f'Полив включен. Количество осадков: {sum_rain}. Время полива {water_time}')
         poliv.value = water_time
         poliv.label = 'включен'
