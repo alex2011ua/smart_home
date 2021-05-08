@@ -33,7 +33,6 @@ else:
 
 """
 
-
 def testing():  # test answer Arduino
     for i in range(3):
         arduino.write(b't')

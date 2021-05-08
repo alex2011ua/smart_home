@@ -92,11 +92,11 @@ def arduino_task():
     try:
         dic_param = read_ser()  # Читает с Ардуино значения датчиков
     except Exception as err:
-        print(err)
+
         Logs.objects.create(date_log=datetime.now(),
                             status='Error',
                             title_log='Task arduino',
-                            description_log='Ошибка ардуино Exeption')
+                            description_log='Ошибка ардуино Exeption'+ err)
         return
 
     if dic_param['status'][-1] == 'Test-OK':
