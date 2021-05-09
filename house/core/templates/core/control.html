@@ -33,7 +33,7 @@
             {% if poliv.label == 'выключен' %} <a href="{% url 'solnce' %}">  <button type="button" class="btn btn-secondary b" >Солнце</button></a> <br />
             {% else %} <a href="{% url 'solnce' %} ">  <button type="button" class="btn btn-success  b" >Солнце</button></a> <br />
             {% endif%}
-            {% if light_tree.value == 0 %} <a href="{% url 'rele' light_tree.label %}">  <button type="button" class="btn btn-dark b" >Включить елку </button></a> <br />
+            {% if light_tree.value == 0 %} <a href="{% url 'rele' light_tree.label %}">  <button type="button" class="btn btn-dark b" >Открыть воду </button></a> <br />
             {% else %} <a href="{% url 'rele' light_tree.label %} ">  <button type="button" class="btn btn-light b" >Выключить елку </button></a> <br />
             {% endif%}
             {% if light_perim.value == 0 %} <a href="{% url 'rele' light_perim.label %}">  <button type="button" class="btn btn-dark b" >Включить балкон </button></a> <br />
