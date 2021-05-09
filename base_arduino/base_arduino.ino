@@ -83,10 +83,10 @@ void setup(){
    pinMode(PIN_RELAY_1_KLAPAN, OUTPUT); // Объявляем пин реле как выход
    pinMode(PIN_RELAY_2_KLAPAN, OUTPUT); // Объявляем пин реле как выход
    pinMode(PIN_RELAY_3_KLAPAN, OUTPUT); // Объявляем пин реле как выход
-   digitalWrite(PIN_RELAY_VIN_KLAPAN, LOW); // Выключаем реле
-   digitalWrite(PIN_RELAY_1_KLAPAN, LOW); // Выключаем реле 1
-   digitalWrite(PIN_RELAY_2_KLAPAN, LOW); // Выключаем реле 2
-   digitalWrite(PIN_RELAY_3_KLAPAN, LOW); // Выключаем реле 3
+   digitalWrite(PIN_RELAY_VIN_KLAPAN, HIGH); // Выключаем реле
+   digitalWrite(PIN_RELAY_1_KLAPAN, HIGH); // Выключаем реле 1
+   digitalWrite(PIN_RELAY_2_KLAPAN, HIGH); // Выключаем реле 2
+   digitalWrite(PIN_RELAY_3_KLAPAN, HIGH); // Выключаем реле 3
 
   pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход

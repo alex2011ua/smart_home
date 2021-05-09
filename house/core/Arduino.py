@@ -5,7 +5,7 @@ import time
 class Arduino:
     def __init__(self):
 
-        self.ser = serial.Serial("/dev/ttyUSB1", 9600)
+        self.ser = serial.Serial("/dev/ttyUSB0", 9600)
         # change ACM number as found from ls /dev/tty/ACM*
         self.ser.baudrate = 9600
 
