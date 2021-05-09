@@ -7,14 +7,16 @@ RF24     radio(53, 49);                                         // Создаё�
 #define PIN_RELAY1         2    // LIGHT_BALKON
 #define DHTPIN             3    // dht 11 датчик температуры воды в котел
 #define DHT22PIN           4    // уличный dht 22
-#define PIN_RELAY2         5    // LIGHT_PERIM
+#define PIN_RELAY2         5    // включаем балкон
 #define PIN_6          6    //
 #define PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
 #define PIN_RELAY3         8    // LIGHT_TREE
     // ce                  9    // ce
     // csn                 10   // csn
-
-
+#define PIN_RELAY_VIN_KLAPAN  22  // Включение питания для клапанов
+#define PIN_RELAY_1_KLAPAN  23  // Управление первым клапаном
+#define PIN_RELAY_2_KLAPAN  24  // Управление вторым клапаном
+#define PIN_RELAY_3_KLAPAN  25  // Управление третьим клапаном
 
     
     //mi                   50
@@ -35,6 +37,16 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 
 #define LIGHT_PERIM_ON      'C'
 #define LIGHT_PERIM_OFF     'c'
+
+#define POLIV_VIN_ON      'D'
+#define POLIV_VIN_OFF      'd'
+
+#define POLIV_RELE_1_ON      'E'
+#define POLIV_RELE_1_OFF      'e'
+#define POLIV_RELE_2_ON      'F'
+#define POLIV_RELE_2_OFF      'f'
+#define POLIV_RELE_3_ON      'G'
+#define POLIV_RELE_3_OFF      'g'
 
 #define SEND_PARAM       'p'   // опрос датчиков ардуино
 
@@ -66,9 +78,17 @@ void setup(){
   analogWrite(buzzerPin, 255);
   Serial.begin(9600);
 
+
+   pinMode(PIN_RELAY_VIN_KLAPAN, OUTPUT); // Объявляем пин реле как выход
+   pinMode(PIN_RELAY_1_KLAPAN, OUTPUT); // Объявляем пин реле как выход
+   pinMode(PIN_RELAY_2_KLAPAN, OUTPUT); // Объявляем пин реле как выход
+   pinMode(PIN_RELAY_3_KLAPAN, OUTPUT); // Объявляем пин реле как выход
+   digitalWrite(PIN_RELAY_VIN_KLAPAN, LOW); // Выключаем реле
+   digitalWrite(PIN_RELAY_1_KLAPAN, LOW); // Выключаем реле 1
+   digitalWrite(PIN_RELAY_2_KLAPAN, LOW); // Выключаем реле 2
+   digitalWrite(PIN_RELAY_3_KLAPAN, LOW); // Выключаем реле 3
+
   pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
-   pinMode(22, OUTPUT); // Объявляем пин реле как выход
-    pinMode(23, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY3, OUTPUT); // Объявляем пин реле как выход
   digitalWrite(PIN_RELAY1, LOW); // Выключаем реле - посылаем высокий сигнал
@@ -93,7 +113,7 @@ void setup(){
     
     radio.setChannel      (10);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит приём данных осуществляется на частоте 2,427 ГГц.
     radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
-    radio.setPALevel      (RF24_PA_MIN);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
+    radio.setPALevel      (RF24_PA_HIGH);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
     //radio.enableAckPayload();                                   // Указываем что в пакетах подтверждения приёма есть блок с пользовательскими данными.
     radio.openReadingPipe (1, 0xFEDCBA9876LL);                     
     radio.openWritingPipe (   0xAABBCCDD11LL);
@@ -165,6 +185,31 @@ void loop(){
        sound = 0;
        send_NRF(sound);
     }
+    if (val == POLIV_VIN_ON){
+       poliv_on(PIN_RELAY_VIN_KLAPAN)
+    }
+    if (val == POLIV_VIN_OFF){
+       poliv_off(PIN_RELAY_VIN_KLAPAN)
+    }
+  if (val == POLIV_RELE_1_ON){
+       poliv_on(PIN_RELAY_1_KLAPAN)
+    }
+    if (val == POLIV_RELE_1_OFF){
+       poliv_off(PIN_RELAY_1_KLAPAN)
+    }
+    if (val == POLIV_RELE_2_ON){
+       poliv_on(PIN_RELAY_2_KLAPAN)
+    }
+    if (val == POLIV_RELE_2_OFF){
+       poliv_off(PIN_RELAY_2_KLAPAN)
+    }
+    if (val == POLIV_RELE_3_ON){
+       poliv_on(PIN_RELAY_3_KLAPAN)
+    }
+    if (val == POLIV_RELE_3_OFF){
+       poliv_off(PIN_RELAY_3_KLAPAN)
+    }
+
 
   }
 }
@@ -215,10 +260,10 @@ void send_NRF(int sounds){
    myData[1] = sound;
     if( radio.write(&myData, sizeof(myData)) ){                // Если указанное количество байт массива myData было доставлено приёмнику, то ...
       //  Данные передатчика были корректно приняты приёмником.  // Тут можно указать код который будет выполняться при получении данных приёмником.
-      Serial.println("radio.write - OK send");
+      //Serial.println("radio.write - OK send");
     }else{                                                     // Иначе (если данные не доставлены) ...
       //  Данные передатчика не приняты или дошли с ошибкой CRC. // Тут можно указать код который будет выполняться если приёмника нет или он не получил данные.
-      Serial.println("radio.write - Error send");
+      //Serial.println("radio.write - Error send");
     }
     radio.setChannel      (10);
     radio.startListening  ();
@@ -293,4 +338,11 @@ void read_dht_param(){  // чтение температуры dh11
 
     json += "}";
     Serial.println(json);
+}
+
+void Poliv_on(int pin_rele){
+    digitalWrite(pin_rele, LOW);
+}
+void Poliv_off(int pin_rele){
+    digitalWrite(pin_rele, HIGH);
 }

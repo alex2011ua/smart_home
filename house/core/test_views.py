@@ -27,6 +27,6 @@ class TestArduino:
                               'muve_kitchen': 242,
                               'sound': 0,
                               'temp_room': 0}
-
+        print(arduino_task())
 
 
