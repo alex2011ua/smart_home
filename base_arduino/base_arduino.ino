@@ -186,28 +186,28 @@ void loop(){
        send_NRF(sound);
     }
     if (val == POLIV_VIN_ON){
-       poliv_on(PIN_RELAY_VIN_KLAPAN)
+       Poliv_on(PIN_RELAY_VIN_KLAPAN);
     }
     if (val == POLIV_VIN_OFF){
-       poliv_off(PIN_RELAY_VIN_KLAPAN)
+       Poliv_off(PIN_RELAY_VIN_KLAPAN);
     }
   if (val == POLIV_RELE_1_ON){
-       poliv_on(PIN_RELAY_1_KLAPAN)
+       Poliv_on(PIN_RELAY_1_KLAPAN);
     }
     if (val == POLIV_RELE_1_OFF){
-       poliv_off(PIN_RELAY_1_KLAPAN)
+       Poliv_off(PIN_RELAY_1_KLAPAN);
     }
     if (val == POLIV_RELE_2_ON){
-       poliv_on(PIN_RELAY_2_KLAPAN)
+       Poliv_on(PIN_RELAY_2_KLAPAN);
     }
     if (val == POLIV_RELE_2_OFF){
-       poliv_off(PIN_RELAY_2_KLAPAN)
+       Poliv_off(PIN_RELAY_2_KLAPAN);
     }
     if (val == POLIV_RELE_3_ON){
-       poliv_on(PIN_RELAY_3_KLAPAN)
+       Poliv_on(PIN_RELAY_3_KLAPAN);
     }
     if (val == POLIV_RELE_3_OFF){
-       poliv_off(PIN_RELAY_3_KLAPAN)
+       Poliv_off(PIN_RELAY_3_KLAPAN);
     }
 
 
