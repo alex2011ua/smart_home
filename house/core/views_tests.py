@@ -10,7 +10,7 @@ from .Telegram import bot
 from myviberbot.viber_bot import send_viber
 from django.conf import settings
 from .analiz import button_analiz
-
+from .main_arduino import read_ser
 DEBUG = settings.PLACE
 
 class Test(LoginRequiredMixin, View):
@@ -87,3 +87,20 @@ class Bot_task_view(View):
         return redirect(reverse_lazy('form'))
 
 
+class String_arduino(LoginRequiredMixin, View):
+    @staticmethod
+    def get(request):
+        try:
+            dic_param = read_ser()  # Читает с Ардуино значения датчиков
+        except Exception as err:
+
+            Logs.objects.create(date_log=datetime.datetime.now(),
+                                status='Error',
+                                title_log='Task arduino',
+                                description_log='Ошибка ардуино Exeption' + str(err))
+            return
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            status='Error',
+                            title_log='Task arduino',
+                            description_log=str(dic_param))
+        return redirect(reverse_lazy('form'))

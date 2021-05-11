@@ -96,7 +96,7 @@ def arduino_task():
         Logs.objects.create(date_log=datetime.now(),
                             status='Error',
                             title_log='Task arduino',
-                            description_log='Ошибка ардуино Exeption'+ err)
+                            description_log='Ошибка ардуино Exeption' + str(err))
         return
 
     if dic_param['status'][-1] == 'Test-OK':
