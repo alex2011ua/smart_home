@@ -96,11 +96,11 @@ class String_arduino(LoginRequiredMixin, View):
 
             Logs.objects.create(date_log=datetime.datetime.now(),
                                 status='Error',
-                                title_log='Task arduino',
+                                title_log='viev_test arduino',
                                 description_log='Ошибка ардуино Exeption' + str(err))
             return
         Logs.objects.create(date_log=datetime.datetime.now(),
                             status='Error',
-                            title_log='Task arduino',
+                            title_log='viev_test String arduino ask',
                             description_log=str(dic_param))
         return redirect(reverse_lazy('form'))
