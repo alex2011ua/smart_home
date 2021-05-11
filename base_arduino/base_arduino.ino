@@ -13,6 +13,9 @@ RF24     radio(53, 49);                                         // Создаё�
 #define PIN_RELAY3         8    // LIGHT_TREE
     // ce                  9    // ce
     // csn                 10   // csn
+
+
+#define PIN_DHT22_TEPLICA  21  // Пин датчика температуры теплицы
 #define PIN_RELAY_VIN_KLAPAN  22  // Включение питания для клапанов
 #define PIN_RELAY_1_KLAPAN  23  // Управление первым клапаном
 #define PIN_RELAY_2_KLAPAN  24  // Управление вторым клапаном
@@ -63,6 +66,7 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 //инициализация датчика
 DHT dht(DHTPIN, DHTTYPE);
 DHT dht22(DHT22PIN, DHTTYPE22);
+DHT dht22_teplica(PIN_DHT22_TEPLICA, DHTTYPE22);
 DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха возле вытяжки
 
 int sound = 0;  // sound on/off
@@ -290,6 +294,23 @@ void read_dht_param(){  // чтение температуры dh11
     json += myStr;
     json += ',';
   }
+  //dht22_teplica
+  dht22_teplica.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
+  h = dht22_teplica.readHumidity();
+  t = dht22_teplica.readTemperature();
+  if (isnan(h)) {
+    Serial.print(";teplica; ");
+  }
+  else {
+    json += "'temp_teplica': ";
+    dtostrf(t, 2,2,myStr);
+    json += myStr;
+    json += ", 'humidity_teplica': ";
+    dtostrf(h, 2,2,myStr);
+    json += myStr;
+    json += ',';
+  }
+  //
     dht.begin(); // чтение температуры и влажности займет примерно 250 миллисекунд
     h = dht.readHumidity();
     t = dht.readTemperature();
