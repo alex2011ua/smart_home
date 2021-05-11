@@ -15,6 +15,8 @@ class Arduino:
     def read(self):
         time.sleep(2)
         string_arduino = self.ser.read(self.ser.inWaiting())
+        time.sleep(2)
+        string_arduino += self.ser.read(self.ser.inWaiting())
         return string_arduino.decode().strip()
 
     def restart(self):
