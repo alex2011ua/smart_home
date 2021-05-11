@@ -1,6 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 
-from .main_arduino import read_ser, rele_light_balkon, rele_light_tree, \
+from .main_arduino import get_arduino_answer, rele_light_balkon, rele_light_tree, \
     rele_light_perim
 from .weather_rain import weather_6_day, rain_yesterday
 from .raspberry import restart_cam, boiler_on, boiler_off, button
@@ -90,7 +90,7 @@ def weather_task():
 def arduino_task():
     print('arduino_task add temp')
     try:
-        dic_param = read_ser()  # Читает с Ардуино значения датчиков
+        dic_param = get_arduino_answer()  # Читает с Ардуино значения датчиков
     except Exception as err:
 
         Logs.objects.create(date_log=datetime.now(),

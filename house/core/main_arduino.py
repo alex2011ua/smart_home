@@ -42,14 +42,7 @@ def testing():  # test answer Arduino
             return {'status': ['Test-OK']}
     return {'status': ['Test-Fail']}
 
-
-def read_ser():
-    context = testing()
-    if context['status'][0] == 'Test-Fail':
-        return context
-
-    arduino.write(b'p')
-    read_arduino = arduino.read()
+def parse_arduino_answer(read_arduino, context):
     try:
         errors, param = read_arduino.split('#')
         param = param.replace("\'", '"')
@@ -63,6 +56,19 @@ def read_ser():
         return context
     context.update(json_answer)
     return context
+
+def get_arduino_answer():
+    context = testing()
+    if context['status'][0] == 'Test-Fail':
+        return context
+    return parse_arduino_answer(read_ser(), context)
+
+
+def read_ser():
+    arduino.write(b'p')
+    read_arduino = arduino.read()
+    return read_arduino
+
     
 
 def reset():

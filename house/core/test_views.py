@@ -3,7 +3,7 @@ import pytest
 
 from datetime import date
 from django.conf import settings
-from .main_arduino import testing, read_ser
+from .main_arduino import testing, get_arduino_answer
 from .tasks import arduino_task
 
 
@@ -14,8 +14,8 @@ class TestArduino:
         assert testing() == {'status': ['Test-OK']}
 
         assert arduino_task() is None
-        print(read_ser())
-        assert read_ser() == {'status': ['Test-OK'],
+        print(get_arduino_answer())
+        assert get_arduino_answer() == {'status': ['Test-OK'],
                                 'temp_street': 12.70,
                               'humidity_street': 76.90,
                               'temp_voda': 15.00,
