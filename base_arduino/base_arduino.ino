@@ -78,7 +78,7 @@ void setup(){
   pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
     
 
-  delay(500); // ждем 0.5секунду
+  delay(100); // ждем 0.5секунду
   analogWrite(buzzerPin, 255);
   Serial.begin(9600);
 
@@ -104,7 +104,7 @@ void setup(){
 
   
     radio.begin();                                             // Инициируем работу nRF24L01+.
-    if(radio.isPVariant() ){ analogWrite(buzzerPin, 255); } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
+    if(radio.isPVariant() ){  } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
     else                   { 
       analogWrite(buzzerPin, 150);
     delay(100);
@@ -283,7 +283,7 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22.readHumidity();
   t = dht22.readTemperature();
   if (isnan(h)) {
-    Serial.print(";street; ");
+    Serial.print(";street;");
   }
   else {
     json += "'temp_street': ";
@@ -299,7 +299,7 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22_teplica.readHumidity();
   t = dht22_teplica.readTemperature();
   if (isnan(h)) {
-    Serial.print(";teplica; ");
+    Serial.print(";teplica;");
   }
   else {
     json += "'temp_teplica': ";
@@ -315,7 +315,7 @@ void read_dht_param(){  // чтение температуры dh11
     h = dht.readHumidity();
     t = dht.readTemperature();
     if (isnan(h)) {
-        Serial.print(";voda; ");
+        Serial.print(";voda;");
     }
     else {
       json += "'temp_voda': ";
@@ -330,7 +330,7 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
   t = dht_gaz.readTemperature();
   if (isnan(h)) {
-        Serial.print(";gaz; ");
+        Serial.print(";gaz;");
     }
   else {
     json += "'temp_gaz': ";
