@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import Setting
 from django.core.exceptions import ObjectDoesNotExist
+from .Arduino import Arduino
 
 
 class Poliv(View):
@@ -24,7 +25,9 @@ class Poliv(View):
         if request.POST.get('off'):
             of_poliv = Setting.objects.get(controller_name=request.POST['off'])
             of_poliv.label = 'выключен'
+
             of_poliv.save()
+
             return JsonResponse({"status": 200})
         if request.POST.get('on'):
             on_poliv = Setting.objects.get(controller_name=request.POST['on'])
@@ -69,5 +72,13 @@ def poliv_on_of(request):
         poliv.label = 'выключен'
     else:
         poliv.label = 'включен'
+    poliv.save()
+    return redirect(reverse_lazy('poliv_index'))
+
+def ch_value_time(request):
+    value_time = request.GET.get('value')
+    poliv = Setting.objects.get(controller_name='poliv')
+    poliv.value = value_time
+
     poliv.save()
     return redirect(reverse_lazy('poliv_index'))

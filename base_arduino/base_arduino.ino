@@ -11,8 +11,7 @@ RF24     radio(53, 49);                                         // Создаё�
 #define PIN_6          6    //
 #define PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
 #define PIN_RELAY3         8    // LIGHT_TREE
-    // ce                  9    // ce
-    // csn                 10   // csn
+
 
 
 #define PIN_DHT22_TEPLICA  6  // Пин датчика температуры теплицы
@@ -25,6 +24,9 @@ RF24     radio(53, 49);                                         // Создаё�
     //mi                   50
     //mo                   51
     //sck                 52
+    //ce                   53
+    //ss   csn             49
+
 int buzzerPin = 42; //Define buzzerPin
 
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
@@ -152,65 +154,64 @@ void loop(){
   char val;
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
-    if (val == LIGHT_BALKON_OFF) { //  если 0 выключаем реле
+    switch (var) {
+    case LIGHT_BALKON_OFF: { //  если 0 выключаем реле
       rele_light_balkon(0);
     }
-    if (val == LIGHT_BALKON_ON){//  если 1 включаем реле
+    case LIGHT_BALKON_ON: {//  если 1 включаем реле
       rele_light_balkon(1);
     }
-    if (val == LIGHT_TREE_ON){ // управление бойлером Включаем
+    case LIGHT_TREE_ON: { // управление бойлером Включаем
         rele_light_tree(1);
     }
-    if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
+    case LIGHT_TREE_OFF: { // управление бойлером Выключаем
         rele_light_tree(0);
     }
-    if (val == LIGHT_PERIM_ON){ // управление бойлером Включаем
+    case  LIGHT_PERIM_ON: { // управление бойлером Включаем
         rele_light_perim(1);
     }
-    if (val == LIGHT_PERIM_OFF){ // управление бойлером Выключаем
+    case LIGHT_PERIM_OFF: { // управление бойлером Выключаем
         rele_light_perim(0);
     }
-
-    if (val == SEND_PARAM){ //  если p шлем параметры
+    case SEND_PARAM: { //  если p шлем параметры
       read_dht_param();
     }
-    if (val == RESET){ //  если r  перезапускаем Arduino
+    case RESET: { //  если r  перезапускаем Arduino
       resetFunc(); //вызываем reset
     }
-    if (val == TEST){
+    case  TEST: {
         Serial.println("OK");
     }
-
-    if (val == SOUND_ON){
+    case  SOUND_ON: {
        sound = 1;
        send_NRF(sound);
     }
-    if (val == SOUND_OFF){
+    case SOUND_OFF: {
        sound = 0;
        send_NRF(sound);
     }
-    if (val == POLIV_VIN_ON){
+    case POLIV_VIN_ON: {
        Poliv_on(PIN_RELAY_VIN_KLAPAN);
     }
-    if (val == POLIV_VIN_OFF){
+    case POLIV_VIN_OFF: {
        Poliv_off(PIN_RELAY_VIN_KLAPAN);
     }
-  if (val == POLIV_RELE_1_ON){
+  case POLIV_RELE_1_ON: {
        Poliv_on(PIN_RELAY_1_KLAPAN);
     }
-    if (val == POLIV_RELE_1_OFF){
+    case POLIV_RELE_1_OFF: {
        Poliv_off(PIN_RELAY_1_KLAPAN);
     }
-    if (val == POLIV_RELE_2_ON){
+    case POLIV_RELE_2_ON: {
        Poliv_on(PIN_RELAY_2_KLAPAN);
     }
-    if (val == POLIV_RELE_2_OFF){
+    case POLIV_RELE_2_OFF: {
        Poliv_off(PIN_RELAY_2_KLAPAN);
     }
-    if (val == POLIV_RELE_3_ON){
+    icase POLIV_RELE_3_ON: {
        Poliv_on(PIN_RELAY_3_KLAPAN);
     }
-    if (val == POLIV_RELE_3_OFF){
+    case POLIV_RELE_3_OFF: {
        Poliv_off(PIN_RELAY_3_KLAPAN);
     }
 

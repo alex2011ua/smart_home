@@ -15,28 +15,28 @@
     {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a>
     {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>
     {% endif%}
-Время полива - {{ poliv.value }}
+
 
 <div id="dvor">
 {% csrf_token %}
     <a class="" href="{% url 'form' %}"><img id="dom" src="{% static 'img/home.gif' %}" height="100"></a>
 
     <div id="garaz" data-on="garaz">
-        {% if poliv_all.poliv_garaz.value == 1 %}
+        {% if poliv_all.poliv_garaz.label == 'включен' %}
             <img src="{% static 'img/rain.gif' %}" data-on="poliv_garaz" height="50" alt="pesochnica.fif" class="DHUM">
         {% endif %}
     <img src="{% static 'img/klumba.gif' %}" height="100" alt="pesochnica.fif" class="need" data-on="poliv_garaz">
     </div>
 
     <div id="pesochnica" data-on="pesochnica">
-        {% if poliv_all.poliv_pesochnica.value == 1 %}
+        {% if poliv_all.poliv_pesochnica.label == 'включен' %}
             <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM" data-on="poliv_pesochnica">
         {% endif %}
         <img src="{% static 'img/kach.gif' %}" height="100" alt="pesochnica.fif" class="need" data-on="poliv_pesochnica">
     </div>
 
     <div id="teplica" class="need" data-on="poliv_teplica">
-        {% if poliv_all.poliv_teplica.value == 1 %}
+        {% if poliv_all.poliv_teplica.label == 'включен' %}
         <img src="{% static 'img/rain.gif' %}" height="50" width="50" alt="poliv_teplica.fif" class="DHUM" data-on="poliv_teplica">
         {% endif %}
         <span class="need" data-on="poliv_teplica"></span>
@@ -44,21 +44,21 @@
     </div>
 
     <div id="elki" data-on="elki">
-        {% if poliv_all.poliv_elki.value == 1 %}
+        {% if poliv_all.poliv_elki.label == 'включен' %}
             <img src="{% static 'img/rain.gif' %}"  height="50" alt="pesochnica.fif" class="DHUM" data-on="poliv_elki">
         {% endif %}
         <img src="{% static 'img/elka.gif' %}" height="150" alt="elki.fif" class="need" data-on="poliv_elki" >
     </div>
 
     <div id="sad" data-on="sad">
-        {% if poliv_all.poliv_sad.value == 1 %}
+        {% if poliv_all.poliv_sad.label == 'включен' %}
             <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM" data-on="poliv_sad">
         {% endif %}
         <img src="{% static 'img/sad.gif' %}" height="100" alt="sad.fif" class="need" data-on="poliv_sad">
     </div>
 
     <div id="strawberry" data-on="strawberry">
-        {% if poliv_all.poliv_strawberry.value == 1 %}
+        {% if poliv_all.poliv_strawberry.label == 'включен' %}
             <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM" data-on="poliv_strawberry">
         {% endif %}
         <img src="{% static 'img/rastberry.gif' %}" height="100" alt="strawberry.fif" class="need" data-on="poliv_strawberry">
@@ -70,6 +70,9 @@
     <div class="row">
         <div class="col-sm-8">
             <div class="form-group"> <label><span class="hidden-xs">
+                {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a>
+    {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>
+    {% endif%}
                         <h6>time</h6>
                     </span></label>
                 <div class="input-group"> <input type="number" value="{{ poliv.value }}" name="value" class="form-control" required >
@@ -78,7 +81,7 @@
         </div>
     </div>
     {% csrf_token %}
-    <button type="submit" formaction="ch_value" class="subscribe btn btn-warning btn-block shadow-sm"> Изменить! </button>
+    <button type="submit" formaction="ch_value_time" class="subscribe btn btn-warning btn-block shadow-sm"> Изменить! </button>
 </form>
 
 
