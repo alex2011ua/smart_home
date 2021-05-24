@@ -248,7 +248,7 @@ def bot_task_watering_analiz():
     water_time = 10
     for day in weather:
         if day.temp_max > 25:
-            water_time += 10
+            water_time += 1
         if (day.rain - corect) >= 0:
             sum_rain += day.rain - corect
         corect += 1
@@ -264,3 +264,8 @@ def bot_task_watering_analiz():
     poliv.save()
 
 
+@cellery_app.task()
+def poliv():
+    """включениe полива"""
+    poliv = Setting.objects.get(controller_name="poliv")
+    bot.send_message(f'Полив {poliv.label}, {poliv.value} min.')

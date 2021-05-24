@@ -14,7 +14,7 @@ cellery_app.autodiscover_tasks()
 
 from house.core.tasks import restart_cam_task, weather_task, arduino_task, \
     bot_task, \
-    bot_task_1_hour, bot_task_11_hour, bot_task_watering_analiz
+    bot_task_1_hour, bot_task_11_hour, bot_task_watering_analiz, poliv
 
 from celery.exceptions import SoftTimeLimitExceeded
 
@@ -99,6 +99,15 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_watering_analiz(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute=21, hour=9),
+        crontab(minute=21, hour=7),
         bot_task_watering_analiz.s(),
-        name='bot_task_18_hour')
+        name='periodic_task_watering_analiz')
+
+
+@cellery_app.on_after_configure.connect()
+def setup_periodic_task_watering_analiz(sender, **kwargs):
+    '''включеие полива по рассписанию'''
+    sender.add_periodic_task(
+        crontab(minute=17, hour=5),
+        poliv.s(),
+        name='periodic_task_watering_analiz')
