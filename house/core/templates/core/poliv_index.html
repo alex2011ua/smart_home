@@ -12,8 +12,8 @@
 {% block main %}
 
     <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM no-display" >
-    {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a>
-    {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>
+    {% if poliv_all.V24.label == 'выключен' %} <a href="{% url 'V24'  %}">  <button type="button" class="btn btn-secondary b" >Включить питание 24В</button></a>
+    {% else %} <a href="{% url 'V24' %} ">  <button type="button" class="btn btn-success  b" >Выключить питание 24В</button></a>
     {% endif%}
 
 
@@ -67,8 +67,11 @@
 </div>
 
 <form id="myForm" role="form" method="get" action="poliv_form"  >
+Управление поливом по рассписанию!
     <div class="row">
+
         <div class="col-sm-8">
+
             <div class="form-group"> <label><span class="hidden-xs">
                 {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a>
     {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>

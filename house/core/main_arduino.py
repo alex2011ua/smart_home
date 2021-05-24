@@ -142,3 +142,36 @@ def rele_light_perim(param):
         rele = arduino.read()
     context['status'].append(rele)
     return context
+
+def V24_arduino(param):
+    context = testing()
+    if param == 1:
+        arduino.write(b'D')
+    else:
+        arduino.write(b'd')
+
+def on_klapan(place):
+    places = {
+        'poliv_garaz':      b'',
+        "poliv_teplica":    b'',
+        "poliv_elki":       b'E',
+        "poliv_sad":        b'G',
+        "poliv_pesochnica": b'F',
+        "poliv_strawberry": b'',
+    }
+    context = testing()
+    arduino.write(places[place])
+
+
+def off_klapan(place):
+    places = {
+        'poliv_garaz': b'',
+        "poliv_teplica": b'',
+        "poliv_elki": b'e',
+        "poliv_sad": b'g',
+        "poliv_pesochnica": b'f',
+        "poliv_strawberry": b'',
+
+    }
+    context = testing()
+    arduino.write(places[place])
