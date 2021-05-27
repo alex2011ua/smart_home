@@ -283,13 +283,13 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22.readHumidity();
   t = dht22.readTemperature();
   if (isnan(h)) {
-    Serial.print(";street;");
+    Serial.print("-street;");
   }
   else {
     json += "'temp_street': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'humidity_street': ";
+    json += ", 'hum_street': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
@@ -299,13 +299,13 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22_teplica.readHumidity();
   t = dht22_teplica.readTemperature();
   if (isnan(h)) {
-    Serial.print(";teplica;");
+    Serial.print("-teplica;");
   }
   else {
     json += "'temp_teplica': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'humidity_teplica': ";
+    json += ", 'hum_teplica': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
@@ -315,13 +315,13 @@ void read_dht_param(){  // чтение температуры dh11
     h = dht.readHumidity();
     t = dht.readTemperature();
     if (isnan(h)) {
-        Serial.print(";voda;");
+        Serial.print("-voda;");
     }
     else {
       json += "'temp_voda': ";
       dtostrf(t, 2,2,myStr);
       json += myStr;
-      json += ", 'humidity_voda': ";
+      json += ", 'hum_voda': ";
       dtostrf(h, 2,2,myStr);
       json += myStr;
       json += ',';
@@ -330,26 +330,26 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
   t = dht_gaz.readTemperature();
   if (isnan(h)) {
-        Serial.print(";gaz;");
+        Serial.print("-gaz;");
     }
   else {
     json += "'temp_gaz': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'humidity_gaz': ";
+    json += ", 'hum_gaz': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
   }
     gasValue = analogRead(analogSignal_MQ135); // и о его количестве
-    json += "'MQ135_value': ";
+    json += "'MQ135': ";
     json += String(gasValue);
     json += ',';
     gasValue = analogRead(analogSignal_MQ4); // и о его количестве
-    json += "'MQ4_value': ";
+    json += "'MQ4': ";
     json += String(gasValue);
     json += ',';
-    json += "'muve_kitchen': ";
+    json += "'muve_k': ";
     int pirVal = analogRead(analogSignal_muve_kitchen);
     json += pirVal;
     json += ", 'sound': ";
