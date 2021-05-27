@@ -27,7 +27,8 @@ class ControllerView(LoginRequiredMixin, View):
         #Инфо о ошибках датчиков
         Error_dht, created = Setting.objects.get_or_create(
             controller_name="Error_dht",
-            defaults={'label':None,'value':0, 'date':datetime.datetime.now()})
+            defaults={'label': '', 'value': 0, 'date': datetime.datetime.now()})
+
         # Состояние бойлера и света
         printer, created = Setting.objects.get_or_create(
             controller_name='printer',
