@@ -154,7 +154,7 @@ void loop(){
   char val;
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
-    switch (var) {
+    switch (val) {
     case LIGHT_BALKON_OFF: { //  если 0 выключаем реле
       rele_light_balkon(0);
     }
@@ -196,7 +196,7 @@ void loop(){
     case POLIV_VIN_OFF: {
        Poliv_off(PIN_RELAY_VIN_KLAPAN);
     }
-  case POLIV_RELE_1_ON: {
+    case POLIV_RELE_1_ON: {
        Poliv_on(PIN_RELAY_1_KLAPAN);
     }
     case POLIV_RELE_1_OFF: {
@@ -208,7 +208,7 @@ void loop(){
     case POLIV_RELE_2_OFF: {
        Poliv_off(PIN_RELAY_2_KLAPAN);
     }
-    icase POLIV_RELE_3_ON: {
+    case POLIV_RELE_3_ON: {
        Poliv_on(PIN_RELAY_3_KLAPAN);
     }
     case POLIV_RELE_3_OFF: {
@@ -217,6 +217,7 @@ void loop(){
 
 
   }
+}
 }
 
 void rele_light_balkon(int status){
@@ -284,7 +285,7 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22.readHumidity();
   t = dht22.readTemperature();
   if (isnan(h)) {
-    Serial.print(";street;");
+    Serial.print("-street;");
   }
   else {
     json += "'temp_street': ";
@@ -300,7 +301,7 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22_teplica.readHumidity();
   t = dht22_teplica.readTemperature();
   if (isnan(h)) {
-    Serial.print(";teplica;");
+    Serial.print("-teplica;");
   }
   else {
     json += "'temp_teplica': ";
@@ -316,7 +317,7 @@ void read_dht_param(){  // чтение температуры dh11
     h = dht.readHumidity();
     t = dht.readTemperature();
     if (isnan(h)) {
-        Serial.print(";voda;");
+        Serial.print("-voda;");
     }
     else {
       json += "'temp_voda': ";
@@ -331,7 +332,7 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
   t = dht_gaz.readTemperature();
   if (isnan(h)) {
-        Serial.print(";gaz;");
+        Serial.print("-gaz;");
     }
   else {
     json += "'temp_gaz': ";
