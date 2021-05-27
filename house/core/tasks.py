@@ -123,6 +123,7 @@ def arduino_task():
             a = Setting.objects.get(controller_name="Error_dht")
             a.date = datetime.now()
             a.label = dic_param.get('control_error')
+            a.value = 1
             a.save()
         else:
             a = Setting.objects.get(controller_name="Error_dht")
