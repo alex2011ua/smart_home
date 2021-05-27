@@ -291,7 +291,7 @@ void read_dht_param(){  // чтение температуры dh11
     json += "'temp_street': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'humidity_street': ";
+    json += ", 'hum_street': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
@@ -307,7 +307,7 @@ void read_dht_param(){  // чтение температуры dh11
     json += "'temp_teplica': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'humidity_teplica': ";
+    json += ", 'hum_teplica': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
@@ -323,7 +323,7 @@ void read_dht_param(){  // чтение температуры dh11
       json += "'temp_voda': ";
       dtostrf(t, 2,2,myStr);
       json += myStr;
-      json += ", 'humidity_voda': ";
+      json += ", 'hum_voda': ";
       dtostrf(h, 2,2,myStr);
       json += myStr;
       json += ',';
@@ -338,20 +338,20 @@ void read_dht_param(){  // чтение температуры dh11
     json += "'temp_gaz': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'humidity_gaz': ";
+    json += ", 'hum_gaz': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
   }
     gasValue = analogRead(analogSignal_MQ135); // и о его количестве
-    json += "'MQ135_value': ";
+    json += "'MQ135': ";
     json += String(gasValue);
     json += ',';
     gasValue = analogRead(analogSignal_MQ4); // и о его количестве
-    json += "'MQ4_value': ";
+    json += "'MQ4': ";
     json += String(gasValue);
     json += ',';
-    json += "'muve_kitchen': ";
+    json += "'muve_k': ";
     int pirVal = analogRead(analogSignal_muve_kitchen);
     json += pirVal;
     json += ", 'sound': ";

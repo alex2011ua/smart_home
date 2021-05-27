@@ -103,19 +103,19 @@ def arduino_task():
 
         if dic_param.get('temp_voda'):
             temp.temp_voda = dic_param['temp_voda']
-            temp.humidity_voda = dic_param['humidity_voda']
+            temp.humidity_voda = dic_param['hum_voda']
         if dic_param.get('temp_gaz'):
             temp.temp_gaz = dic_param['temp_gaz']
-            temp.humidity_gaz = dic_param['humidity_gaz']
+            temp.humidity_gaz = dic_param['hum_gaz']
         if dic_param.get('temp_street'):
             temp.temp_street = dic_param['temp_street']
-            temp.humidity_street = dic_param['humidity_street']
-        if dic_param.get('MQ4_value'):
-            temp.gaz_MQ4 = dic_param['MQ4_value']
-        if dic_param.get('MQ135_value'):
-            temp.gaz_MQ135 = dic_param['MQ135_value']
-        if dic_param.get('muve_kitchen'):
-            temp.muve_kitchen = dic_param['muve_kitchen']
+            temp.humidity_street = dic_param['hum_street']
+        if dic_param.get('MQ4'):
+            temp.gaz_MQ4 = dic_param['MQ4']
+        if dic_param.get('MQ135'):
+            temp.gaz_MQ135 = dic_param['MQ135']
+        if dic_param.get('muve_k'):
+            temp.muve_kitchen = dic_param['muve_k']
 
         temp.save()
         if dic_param.get('control_error'):
