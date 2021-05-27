@@ -12,6 +12,8 @@ from django.conf import settings
 from .analiz import button_analiz
 from .main_arduino import read_ser
 DEBUG = settings.PLACE
+from django.http import HttpResponse, JsonResponse
+
 
 class Test(LoginRequiredMixin, View):
     @staticmethod
@@ -104,3 +106,25 @@ class String_arduino(LoginRequiredMixin, View):
                             title_log='viev_test String arduino ask',
                             description_log=str(dic_param))
         return redirect(reverse_lazy('form'))
+
+def string_to_bot(request):
+    print(request.GET)
+    try:
+        dic_param = read_ser()  # Читает с Ардуино значения датчиков
+
+    except Exception as err:
+
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            status='Error',
+                            title_log='viev_test arduino',
+                            description_log='Ошибка ардуино Exeption' + str(err))
+        return
+    Logs.objects.create(date_log=datetime.datetime.now(),
+                        status='Error',
+                        title_log='viev_test String arduino ask',
+                        description_log=str(dic_param))
+    print(dic_param)
+    bot.send_message(dic_param)
+    rp = {'data': dic_param}
+    rp['status'] = 200
+    return JsonResponse(rp)

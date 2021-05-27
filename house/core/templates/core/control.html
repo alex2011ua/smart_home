@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block main %}
-
+<script type="text/javascript" src='{% static "js/send_param.js" %}'></script>
 <header>
   <div id="layer1" class="container-fluid time_center" >
       <span class="my-time"> {{time}}</span>{{ alerts }}{% for item in raspberry.Raspberry %}<br>{{item}}{% endfor %}
@@ -219,10 +219,12 @@
               <a href="{% url 'sound'%} ">  <button type="button" class="btn badge-warning footer_button" >Sound </button></a>
               <a href="{% url 'light'%} ">  <button type="button" class="btn badge-secondary footer_button" >Свет </button></a>
               <a href="{% url 'test'%} ">  <button type="button" class="btn badge-success footer_button"  >Тест Ардуино</button></a>
-          <a href="{% url 'string_arduino'%} ">  <button type="button" class="btn badge-success footer_button"  >String Ардуино</button></a>
+            <button onClick='send_param_bot()' type="button" class="btn badge-success footer_button"  >String Ардуино</button>
               <a href="{% url 'mail_test'%} ">  <button type="button" class="btn badge-danger footer_button" >Тест Mail </button></a>
               <a href="{% url 'telegram_test'%} ">  <button type="button" class="btn badge-info footer_button" >Тест BOT </button></a>
               <a href="{% url 'task'%} ">  <button type="button" class="btn badge-secondary footer_button" >task </button></a>
+
+
 
       </div>
 
@@ -247,5 +249,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+
 </body>
 </html>
