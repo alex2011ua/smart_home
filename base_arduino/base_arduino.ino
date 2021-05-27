@@ -11,7 +11,8 @@ RF24     radio(53, 49);                                         // Создаё�
 #define PIN_6          6    //
 #define PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
 #define PIN_RELAY3         8    // LIGHT_TREE
-
+    // ce                  9    // ce
+    // csn                 10   // csn
 
 
 #define PIN_DHT22_TEPLICA  6  // Пин датчика температуры теплицы
@@ -20,13 +21,10 @@ RF24     radio(53, 49);                                         // Создаё�
 #define PIN_RELAY_2_KLAPAN  24  // Управление вторым клапаном
 #define PIN_RELAY_3_KLAPAN  25  // Управление третьим клапаном
 
-    
+
     //mi                   50
     //mo                   51
     //sck                 52
-    //ce                   53
-    //ss   csn             49
-
 int buzzerPin = 42; //Define buzzerPin
 
 const int analogSignal_MQ135 = A0; //подключение аналогового сигналоьного пина
@@ -78,7 +76,7 @@ uint8_t  i;
 void setup(){
 
   pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
-    
+
 
   delay(100); // ждем 0.5секунду
   analogWrite(buzzerPin, 255);
@@ -104,43 +102,43 @@ void setup(){
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
 
-  
+
     radio.begin();                                             // Инициируем работу nRF24L01+.
     if(radio.isPVariant() ){  } // Если модуль поддерживается библиотекой RF24, то выводим текст «nRF24L01».
-    else                   { 
+    else                   {
       analogWrite(buzzerPin, 150);
     delay(100);
     analogWrite(buzzerPin, 255);
     delay(100);
     analogWrite(buzzerPin, 150);
     delay(100);
-    analogWrite(buzzerPin, 255); 
+    analogWrite(buzzerPin, 255);
     } // Иначе, если модуль не поддерживается, то выводи текст «unknown module».
-    
+
     radio.setChannel      (10);                                // Указываем канал передачи данных (от 0 до 125), 27 - значит приём данных осуществляется на частоте 2,427 ГГц.
     radio.setDataRate     (RF24_250KBPS);                        // Указываем скорость передачи данных (RF24_250KBPS, RF24_1MBPS, RF24_2MBPS), RF24_1MBPS - 1Мбит/сек.
     radio.setPALevel      (RF24_PA_HIGH);                       // Указываем мощность передатчика (RF24_PA_MIN=-18dBm, RF24_PA_LOW=-12dBm, RF24_PA_HIGH=-6dBm, RF24_PA_MAX=0dBm).
     //radio.enableAckPayload();                                   // Указываем что в пакетах подтверждения приёма есть блок с пользовательскими данными.
-    radio.openReadingPipe (1, 0xFEDCBA9876LL);                     
+    radio.openReadingPipe (1, 0xFEDCBA9876LL);
     radio.openWritingPipe (   0xAABBCCDD11LL);
     radio.startListening  ();
 
-    
+
 }
 void(* resetFunc) (void) = 0; // объявляем функцию reset
 
 int s = 0;
 void loop(){
-  
+
   if(radio.available()){
     radio.read( &ackData, sizeof(ackData) );
     //Serial.print("Humidity:");
     //Serial.println(ackData[2]);
     //Serial.print("Temp:");
     //Serial.println(ackData[1]);
-  
+
   }
-  
+
     if (sound == 1){
     analogWrite(buzzerPin, s);
     s = s + 1;
@@ -154,83 +152,83 @@ void loop(){
   char val;
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
-    switch (val) {
-    case LIGHT_BALKON_OFF: { //  если 0 выключаем реле
+    if (val == LIGHT_BALKON_OFF) { //  если 0 выключаем реле
       rele_light_balkon(0);
     }
-    case LIGHT_BALKON_ON: {//  если 1 включаем реле
+    if (val == LIGHT_BALKON_ON){//  если 1 включаем реле
       rele_light_balkon(1);
     }
-    case LIGHT_TREE_ON: { // управление бойлером Включаем
+    if (val == LIGHT_TREE_ON){ // управление бойлером Включаем
         rele_light_tree(1);
     }
-    case LIGHT_TREE_OFF: { // управление бойлером Выключаем
+    if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
         rele_light_tree(0);
     }
-    case  LIGHT_PERIM_ON: { // управление бойлером Включаем
+    if (val == LIGHT_PERIM_ON){ // управление бойлером Включаем
         rele_light_perim(1);
     }
-    case LIGHT_PERIM_OFF: { // управление бойлером Выключаем
+    if (val == LIGHT_PERIM_OFF){ // управление бойлером Выключаем
         rele_light_perim(0);
     }
-    case SEND_PARAM: { //  если p шлем параметры
+
+    if (val == SEND_PARAM){ //  если p шлем параметры
       read_dht_param();
     }
-    case RESET: { //  если r  перезапускаем Arduino
+    if (val == RESET){ //  если r  перезапускаем Arduino
       resetFunc(); //вызываем reset
     }
-    case  TEST: {
+    if (val == TEST){
         Serial.println("OK");
     }
-    case  SOUND_ON: {
+
+    if (val == SOUND_ON){
        sound = 1;
        send_NRF(sound);
     }
-    case SOUND_OFF: {
+    if (val == SOUND_OFF){
        sound = 0;
        send_NRF(sound);
     }
-    case POLIV_VIN_ON: {
+    if (val == POLIV_VIN_ON){
        Poliv_on(PIN_RELAY_VIN_KLAPAN);
     }
-    case POLIV_VIN_OFF: {
+    if (val == POLIV_VIN_OFF){
        Poliv_off(PIN_RELAY_VIN_KLAPAN);
     }
-    case POLIV_RELE_1_ON: {
+  if (val == POLIV_RELE_1_ON){
        Poliv_on(PIN_RELAY_1_KLAPAN);
     }
-    case POLIV_RELE_1_OFF: {
+    if (val == POLIV_RELE_1_OFF){
        Poliv_off(PIN_RELAY_1_KLAPAN);
     }
-    case POLIV_RELE_2_ON: {
+    if (val == POLIV_RELE_2_ON){
        Poliv_on(PIN_RELAY_2_KLAPAN);
     }
-    case POLIV_RELE_2_OFF: {
+    if (val == POLIV_RELE_2_OFF){
        Poliv_off(PIN_RELAY_2_KLAPAN);
     }
-    case POLIV_RELE_3_ON: {
+    if (val == POLIV_RELE_3_ON){
        Poliv_on(PIN_RELAY_3_KLAPAN);
     }
-    case POLIV_RELE_3_OFF: {
+    if (val == POLIV_RELE_3_OFF){
        Poliv_off(PIN_RELAY_3_KLAPAN);
     }
 
 
   }
 }
-}
 
 void rele_light_balkon(int status){
   if (status == 1){
     digitalWrite(PIN_RELAY1, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     digitalWrite(22, HIGH);
-    
+
     Serial.println("rele on");
   }
   if (status == 0){
     digitalWrite(PIN_RELAY1, LOW); // Включаем реле - посылаем низкий уровень сигнала
     digitalWrite(22, LOW);
-    
+
     Serial.println("rele off");
    }
 }
@@ -260,7 +258,7 @@ void rele_light_tree(int status){ //управление бойлером
 void send_NRF(int sounds){
   if(radio.isPVariant() ){}
   else return;
-  
+
    radio.stopListening  ();
    radio.setChannel      (20);
    myData[1] = sound;
@@ -285,13 +283,13 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22.readHumidity();
   t = dht22.readTemperature();
   if (isnan(h)) {
-    Serial.print("-street;");
+    Serial.print(";street;");
   }
   else {
     json += "'temp_street': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'hum_street': ";
+    json += ", 'humidity_street': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
@@ -301,13 +299,13 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht22_teplica.readHumidity();
   t = dht22_teplica.readTemperature();
   if (isnan(h)) {
-    Serial.print("-teplica;");
+    Serial.print(";teplica;");
   }
   else {
     json += "'temp_teplica': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'hum_teplica': ";
+    json += ", 'humidity_teplica': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
@@ -317,13 +315,13 @@ void read_dht_param(){  // чтение температуры dh11
     h = dht.readHumidity();
     t = dht.readTemperature();
     if (isnan(h)) {
-        Serial.print("-voda;");
+        Serial.print(";voda;");
     }
     else {
       json += "'temp_voda': ";
       dtostrf(t, 2,2,myStr);
       json += myStr;
-      json += ", 'hum_voda': ";
+      json += ", 'humidity_voda': ";
       dtostrf(h, 2,2,myStr);
       json += myStr;
       json += ',';
@@ -332,26 +330,26 @@ void read_dht_param(){  // чтение температуры dh11
   h = dht_gaz.readHumidity(); //Температура воздуха возле вытяжки
   t = dht_gaz.readTemperature();
   if (isnan(h)) {
-        Serial.print("-gaz;");
+        Serial.print(";gaz;");
     }
   else {
     json += "'temp_gaz': ";
     dtostrf(t, 2,2,myStr);
     json += myStr;
-    json += ", 'hum_gaz': ";
+    json += ", 'humidity_gaz': ";
     dtostrf(h, 2,2,myStr);
     json += myStr;
     json += ',';
   }
     gasValue = analogRead(analogSignal_MQ135); // и о его количестве
-    json += "'MQ135': ";
+    json += "'MQ135_value': ";
     json += String(gasValue);
     json += ',';
     gasValue = analogRead(analogSignal_MQ4); // и о его количестве
-    json += "'MQ4': ";
+    json += "'MQ4_value': ";
     json += String(gasValue);
     json += ',';
-    json += "'muve_k': ";
+    json += "'muve_kitchen': ";
     int pirVal = analogRead(analogSignal_muve_kitchen);
     json += pirVal;
     json += ", 'sound': ";
