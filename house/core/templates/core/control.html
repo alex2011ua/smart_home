@@ -184,6 +184,12 @@
                         <div class="col-sm"><strong>Состояние воздужа по датчику MQ135</strong></div>
                         <div class="col-4-sm">{{ sensors.gaz_MQ135 }}</div>
                     </div>
+                    {% if Error_dht.value == 1 %}
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Обнаружены ошибки датчиков {{Error_dht.date}}</strong></div>
+                        <div class="col-4-sm">{{ Error_dht.label }}</div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -45,14 +45,16 @@ def testing():  # test answer Arduino
 def parse_arduino_answer(read_arduino, context):
     try:
         errors, param = read_arduino.split('#')
+        if errors:
+            context['control_error'] = errors
         param = param.replace("\'", '"')
     except Exception as err:
-        context['status'].append('{}, parce Arduino answer:"{}"'.format(err, read_arduino))
+        context['status'].append('{}, parce Arduino answer:"{}"'.format(str(err), read_arduino))
         return context
     try:
         json_answer = json.loads(param)
-    except json.JSONDecodeError:
-        context['status'].append('JSONDecodeError')
+    except json.JSONDecodeError as arr:
+        context['status'].append('JSONDecodeError'+str(arr))
         return context
     context.update(json_answer)
     return context

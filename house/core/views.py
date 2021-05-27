@@ -24,7 +24,10 @@ class ControllerView(LoginRequiredMixin, View):
     def get(request):
         context = {}
         date_time_now = datetime.datetime.now()
-
+        #Инфо о ошибках датчиков
+        Error_dht, created = Setting.objects.get_or_create(
+            controller_name="Error_dht",
+            defaults={'label':None,'value':0, 'date':datetime.datetime.now()})
         # Состояние бойлера и света
         printer, created = Setting.objects.get_or_create(
             controller_name='printer',
@@ -50,7 +53,7 @@ class ControllerView(LoginRequiredMixin, View):
         solnce, created = Setting.objects.get_or_create(
             controller_name='solnce',
             defaults={'label': 'Выключен', 'value': 0})
-
+        context['Error_dht'] = Error_dht
         context['solnce'] = solnce
         context['alarms'] = alarms
         context['poliv'] = poliv

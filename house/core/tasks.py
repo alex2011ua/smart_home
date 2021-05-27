@@ -1,5 +1,5 @@
 from __future__ import absolute_import, unicode_literals
-
+from django.db.utils import IntegrityError
 from .main_arduino import get_arduino_answer, rele_light_balkon, rele_light_tree, \
     rele_light_perim
 from .weather_rain import weather_6_day, rain_yesterday
@@ -92,7 +92,6 @@ def arduino_task():
     try:
         dic_param = get_arduino_answer()  # Читает с Ардуино значения датчиков
     except Exception as err:
-
         Logs.objects.create(date_log=datetime.now(),
                             status='Error',
                             title_log='Task arduino',
@@ -119,6 +118,17 @@ def arduino_task():
             temp.muve_kitchen = dic_param['muve_kitchen']
 
         temp.save()
+        if dic_param.get('control_error'):
+
+            a = Setting.objects.get(controller_name="Error_dht")
+            a.date = datetime.now()
+            a.label = dic_param.get('control_error')
+            a.save()
+        else:
+            a = Setting.objects.get(controller_name="Error_dht")
+            a.value = 0
+            a.save()
+
     else:
         Logs.objects.create(date_log=datetime.now(),
                             status='Error',
