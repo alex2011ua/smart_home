@@ -5,6 +5,8 @@ from .models import Weather, Logs, Setting, DHT_MQ
 @admin.register(DHT_MQ)
 class DHT_MQAdmin(admin.ModelAdmin):
     list_display = ('date_t_h',
+                    'temp_teplica',
+                    'humidity_teplica',
                     'muve_kitchen',
                     'temp_street',
                     'temp_voda',

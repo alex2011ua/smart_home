@@ -100,7 +100,9 @@ def arduino_task():
 
     if dic_param['status'][-1] == 'Test-OK':
         temp = DHT_MQ.objects.create(date_t_h=datetime.now())
-
+        if dic_param.get('temp_teplica'):
+            temp.temp_teplica = dic_param['temp_teplica']
+            temp.humidity_teplica = dic_param['hum_teplica']
         if dic_param.get('temp_voda'):
             temp.temp_voda = dic_param['temp_voda']
             temp.humidity_voda = dic_param['hum_voda']

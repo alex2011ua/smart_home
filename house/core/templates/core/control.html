@@ -160,6 +160,15 @@
                     Котельня
                 </div>
                 <div class="card-body ">
+                <div class="row fon">
+                        <div class="col-sm"><strong>Температура в теплице</strong></div>
+                        <div class="col-4-sm">{{ sensors.temp_teplica }}&deg</div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Влажность в теплицу</strong></div>
+                        <div class="col-4-sm">{{ sensors.humidity_teplica }}</div>
+                    </div>
+
                     <div class="row fon">
                         <div class="col-sm"><strong>Температура воздуха в котельне</strong></div>
                         <div class="col-4-sm">{{ sensors.temp_gaz }}&deg</div>
