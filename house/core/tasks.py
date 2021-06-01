@@ -289,7 +289,7 @@ def poliv():
 def poliv_async_test():
     import time
     time.delay(10)
-    send_viber("10 s ")
+    bot.send_message("10 s")
     time.delay(10)
-    send_viber("20 s ")
+    bot.send_message("20 s")
 
