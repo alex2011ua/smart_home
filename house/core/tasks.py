@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 from django.db.utils import IntegrityError
 from .main_arduino import get_arduino_answer, rele_light_balkon, rele_light_tree, \
-    rele_light_perim
+    rele_light_perim, arduino_restart_5v, arduino_poliv
 from .weather_rain import weather_6_day, rain_yesterday
 from .raspberry import restart_cam, boiler_on, boiler_off, button
 from .models import Logs, Weather, DHT_MQ, Setting
@@ -12,11 +12,12 @@ import django.db
 from .Telegram import bot
 from myviberbot.viber_bot import send_viber
 from .analiz import button_analiz, gaz_analiz, temp_alert
-
+import logging
 from django.conf import settings
 
-DEBUG = settings.PLACE
 
+logger = logging.getLogger('django')
+DEBUG = settings.PLACE
 
 @cellery_app.task()
 def restart_cam_task():
@@ -97,7 +98,18 @@ def arduino_task():
                             title_log='Task arduino',
                             description_log='Ошибка ардуино Exeption' + str(err))
         return
-
+    if dic_param.get('control_error'):
+        arduino_restart_5v()
+        a = Setting.objects.get(controller_name="Error_dht")
+        a.date = datetime.now()
+        a.label = dic_param.get('control_error')
+        a.value = 1
+        a.save()
+        dic_param = get_arduino_answer()
+    else:
+        a = Setting.objects.get(controller_name="Error_dht")
+        a.value = 0
+        a.save()
     if dic_param['status'][-1] == 'Test-OK':
         temp = DHT_MQ.objects.create(date_t_h=datetime.now())
         if dic_param.get('temp_teplica'):
@@ -120,18 +132,6 @@ def arduino_task():
             temp.muve_kitchen = dic_param['muve_k']
 
         temp.save()
-        if dic_param.get('control_error'):
-
-            a = Setting.objects.get(controller_name="Error_dht")
-            a.date = datetime.now()
-            a.label = dic_param.get('control_error')
-            a.value = 1
-            a.save()
-        else:
-            a = Setting.objects.get(controller_name="Error_dht")
-            a.value = 0
-            a.save()
-
     else:
         Logs.objects.create(date_log=datetime.now(),
                             status='Error',
@@ -253,7 +253,6 @@ def bot_task_11_hour():
 @cellery_app.task()
 def bot_task_watering_analiz():
     """Анализ необходимости включения полива"""
-
     weather = Weather.objects.filter().order_by('-date')[0:14]
     poliv = Setting.objects.get(controller_name="poliv")
     sum_rain = 0
@@ -279,6 +278,18 @@ def bot_task_watering_analiz():
 
 @cellery_app.task()
 def poliv():
+
     """включениe полива"""
     poliv = Setting.objects.get(controller_name="poliv")
+    if poliv.label == 'включен':
+        arduino_poliv(poliv.value)
     bot.send_message(f'Полив {poliv.label}, {poliv.value} min.')
+
+@cellery_app.task()
+def poliv_async_test():
+    import time
+    time.delay(10)
+    send_viber("10 s ")
+    time.delay(10)
+    send_viber("20 s ")
+

@@ -14,6 +14,18 @@ class DebagArduino:
             b't': 'OK',
             b'r': '',
             b'p': "Read fail-street;Read fail-teplica;#{'temp_street': 17.30, 'hum_street': 72.70,'temp_teplica': 19.00, 'hum_teplica': 84.10,'temp_voda': 18.00, 'hum_voda': 81.00,'temp_gaz': 25.00, 'hum_gaz': 29.00,'MQ135': 18,'MQ4': 48,'muve_k': 0, 'sound': 0, 'temp_room': 0}",
+            b'D': '',
+            b'd': '',
+            b'E': '',
+            b'e': '',
+            b'F': '',
+            b'f': '',
+            b'G': '',
+            b'g': '',
+            b'H': '',
+            b'H': '',
+
+
 
         }
     def write(self, param):

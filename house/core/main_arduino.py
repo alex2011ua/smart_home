@@ -2,7 +2,8 @@ import time
 import json
 from .Arduino import Arduino
 from .DebagArduino import DebagArduino
-
+import logging
+logger = logging.getLogger('django')
 from django.conf import settings
 DEBUG = settings.PLACE
 if DEBUG:  # если Дебаг то на компе нет Ардуино
@@ -110,25 +111,9 @@ def rele_light_tree(param):
     context = testing()
     if param == 1:
         arduino.write(b'B')
-
-        arduino.write(b'D')
-
-        arduino.write(b'E')
-
-        arduino.write(b'F')
-
-        arduino.write(b'G')
         rele = arduino.read()
     else:
         arduino.write(b'b')
-
-        arduino.write(b'd')
-
-        arduino.write(b'e')
-
-        arduino.write(b'f')
-
-        arduino.write(b'g')
         rele = arduino.read()
     context['status'].append(rele)
     return context
@@ -173,7 +158,25 @@ def off_klapan(place):
         "poliv_sad": b'g',
         "poliv_pesochnica": b'f',
         "poliv_strawberry": b'',
-
     }
     context = testing()
     arduino.write(places[place])
+
+def arduino_restart_5v():
+    logger.warning('restart 5v')
+    arduino.write(b'h')
+    time.sleep(1)
+    arduino.write(b'H')
+
+def arduino_poliv(minutes):
+    logger.warning('start poliv')
+    V24_arduino(1)
+    on_klapan("poliv_elki")
+    on_klapan("poliv_pesochnica")
+    time.sleep(3*minutes)
+    off_klapan("poliv_pesochnica")
+    time.sleep(3*minutes)
+    off_klapan("poliv_elki")
+    V24_arduino(0)
+    logger.warning('end poliv')
+    # todo

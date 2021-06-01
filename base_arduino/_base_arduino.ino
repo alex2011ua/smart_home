@@ -95,7 +95,6 @@ void setup(){
    digitalWrite(PIN_RELAY_1_KLAPAN, HIGH); // Выключаем реле 1
    digitalWrite(PIN_RELAY_2_KLAPAN, HIGH); // Выключаем реле 2
    digitalWrite(PIN_RELAY_3_KLAPAN, HIGH); // Выключаем реле 3
-   digitalWrite(PIN_RELE_5v, HIGH); // Выключаем реле питания датчиков 5 в
 
   pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход
@@ -158,17 +157,23 @@ void loop(){
   if (Serial.available()){
     val = Serial.read(); // переменная val равна полученной команде
     if (val == LIGHT_BALKON_OFF) { //  если 0 выключаем реле
-      rele_light_balkon(0);    }
+      rele_light_balkon(0);
+    }
     if (val == LIGHT_BALKON_ON){//  если 1 включаем реле
-      rele_light_balkon(1);    }
+      rele_light_balkon(1);
+    }
     if (val == LIGHT_TREE_ON){ // управление бойлером Включаем
-        rele_light_tree(1);    }
+        rele_light_tree(1);
+    }
     if (val == LIGHT_TREE_OFF){ // управление бойлером Выключаем
-        rele_light_tree(0);    }
+        rele_light_tree(0);
+    }
     if (val == LIGHT_PERIM_ON){ // управление бойлером Включаем
-        rele_light_perim(1);    }
+        rele_light_perim(1);
+    }
     if (val == LIGHT_PERIM_OFF){ // управление бойлером Выключаем
-        rele_light_perim(0);    }
+        rele_light_perim(0);
+    }
 
     if (val == SEND_PARAM){ //  если p шлем параметры
       read_dht_param();
@@ -182,17 +187,19 @@ void loop(){
 
     if (val == SOUND_ON){
        sound = 1;
-       send_NRF(sound);    }
+       send_NRF(sound);
+    }
     if (val == SOUND_OFF){
        sound = 0;
-       send_NRF(sound);    }
+       send_NRF(sound);
+    }
     if (val == POLIV_VIN_ON){
        Poliv_on(PIN_RELAY_VIN_KLAPAN);
     }
     if (val == POLIV_VIN_OFF){
        Poliv_off(PIN_RELAY_VIN_KLAPAN);
     }
-    if (val == POLIV_RELE_1_ON){
+  if (val == POLIV_RELE_1_ON){
        Poliv_on(PIN_RELAY_1_KLAPAN);
     }
     if (val == POLIV_RELE_1_OFF){
@@ -210,12 +217,15 @@ void loop(){
     if (val == POLIV_RELE_3_OFF){
        Poliv_off(PIN_RELAY_3_KLAPAN);
     }
+
     if (val == RELE_5v_ON){
        Poliv_on(PIN_RELE_5v);
     }
     if (val == RELE_5v_OFF){
        Poliv_off(PIN_RELE_5v);
     }
+
+
   }
 }
 

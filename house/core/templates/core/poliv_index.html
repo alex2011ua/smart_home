@@ -11,7 +11,7 @@
 
 {% block main %}
 
-    <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM no-display" >
+
     {% if poliv_all.V24.label == 'выключен' %} <a href="{% url 'V24'  %}">  <button type="button" class="btn btn-secondary b" >Включить питание 24В</button></a>
     {% else %} <a href="{% url 'V24' %} ">  <button type="button" class="btn btn-success  b" >Выключить питание 24В</button></a>
     {% endif%}

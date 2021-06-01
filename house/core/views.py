@@ -13,7 +13,8 @@ import datetime
 from django.conf import settings
 from .raspberry import printer_off, printer_on
 from .Telegram import bot
-
+import logging
+logger = logging.getLogger('django')
 DEBUG = settings.PLACE
 
 
@@ -22,6 +23,7 @@ class ControllerView(LoginRequiredMixin, View):
 
     @staticmethod
     def get(request):
+
         context = {}
         date_time_now = datetime.datetime.now()
         #Инфо о ошибках датчиков
@@ -30,6 +32,8 @@ class ControllerView(LoginRequiredMixin, View):
             defaults={'label': '', 'value': 0, 'date': datetime.datetime.now()})
 
         # Состояние бойлера и света
+        V24 = Setting.objects.get(controller_name='V24')
+
         printer, created = Setting.objects.get_or_create(
             controller_name='printer',
             defaults={'label': 'Выключен', 'value': 0})
@@ -54,6 +58,7 @@ class ControllerView(LoginRequiredMixin, View):
         solnce, created = Setting.objects.get_or_create(
             controller_name='solnce',
             defaults={'label': 'Выключен', 'value': 0})
+        context['V24'] = V24
         context['Error_dht'] = Error_dht
         context['solnce'] = solnce
         context['alarms'] = alarms

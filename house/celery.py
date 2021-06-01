@@ -98,16 +98,17 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_watering_analiz(sender, **kwargs):
+    """анализ необходимости полива"""
     sender.add_periodic_task(
-        crontab(minute=21, hour=7),
+        crontab(minute=21, hour=7), # +3
         bot_task_watering_analiz.s(),
         name='periodic_task_watering_analiz')
 
 
 @cellery_app.on_after_configure.connect()
-def setup_periodic_task_watering_analiz(sender, **kwargs):
-    '''включеие полива по рассписанию'''
+def setup_periodic_task_watering_start_if_need(sender, **kwargs):
+    """включеие полива по рассписанию"""
     sender.add_periodic_task(
-        crontab(minute=17, hour=5),
+        crontab(minute=17, hour=5-3),
         poliv.s(),
-        name='periodic_task_watering_analiz')
+        name='task_watering_start_if_need')
