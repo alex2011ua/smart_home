@@ -277,19 +277,13 @@ def bot_task_watering_analiz():
 
 
 @cellery_app.task()
-def poliv():
-
+def poliv(force=None):
     """включениe полива"""
+
     poliv = Setting.objects.get(controller_name="poliv")
-    if poliv.label == 'включен':
+    if poliv.label == 'включен' or force:
         arduino_poliv(poliv.value)
     bot.send_message(f'Полив {poliv.label}, {poliv.value} min.')
 
-@cellery_app.task()
-def poliv_async_test():
-    import time
-    time.sleep(10)
-    bot.send_message("10 s")
-    time.sleep(10)
-    bot.send_message("20 s")
+
 

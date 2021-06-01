@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from .models import Setting
 from django.core.exceptions import ObjectDoesNotExist
 from .main_arduino import V24_arduino, off_klapan, on_klapan
-from .tasks import poliv, poliv_async_test
+from .tasks import poliv
 
 class Poliv(View):
     @staticmethod
@@ -103,5 +103,6 @@ def V24(request):
     return redirect(reverse_lazy('poliv_index'))
 
 def zapusk_poliva(r):
-    poliv_async_test.apply_async()
+    poliv.delay(force=True)
+
     return redirect(reverse_lazy('poliv_index'))
