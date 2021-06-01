@@ -3,6 +3,7 @@ import json
 from .Arduino import Arduino
 from .DebagArduino import DebagArduino
 import logging
+from .models import Setting
 logger = logging.getLogger('django')
 from django.conf import settings
 DEBUG = settings.PLACE
@@ -170,7 +171,11 @@ def arduino_restart_5v():
 
 def arduino_poliv(minutes):
     logger.warning('start poliv')
+    V24 = Setting.objects.get(controller_name='V24')
+
     V24_arduino(1)
+    V24.label = 'включен'
+    V24.save()
     on_klapan("poliv_elki")
     on_klapan("poliv_pesochnica")
     time.sleep(60*minutes/2)
@@ -178,5 +183,7 @@ def arduino_poliv(minutes):
     time.sleep(60*minutes/2)
     off_klapan("poliv_elki")
     V24_arduino(0)
+    V24.label = 'выключен'
+    V24.save()
     logger.warning('end poliv')
     # todo
