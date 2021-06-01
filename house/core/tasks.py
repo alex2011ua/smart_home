@@ -288,8 +288,8 @@ def poliv():
 @cellery_app.task()
 def poliv_async_test():
     import time
-    time.delay(10)
+    time.sleep(10)
     bot.send_message("10 s")
-    time.delay(10)
+    time.sleep(10)
     bot.send_message("20 s")
 
