@@ -60,6 +60,13 @@ class DHT_MQ(models.Model):
         return str(self.date_t_h)
 
 
+class Params(models.Model):
+    date_t_h = models.DateTimeField()
+    myData = models.CharField(max_length=50, null=True)
+    ackData = models.CharField(max_length=50, null=True)
+    poliv = models.IntegerField(null=True)
+
+
 class Message(models.Model):
     date_message = models.DateTimeField()
     controller_name = models.CharField(max_length=40, unique=True)

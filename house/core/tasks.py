@@ -4,7 +4,7 @@ from .main_arduino import get_arduino_answer, rele_light_balkon, rele_light_tree
     rele_light_perim, arduino_restart_5v, arduino_poliv
 from .weather_rain import weather_6_day, rain_yesterday
 from .raspberry import restart_cam, boiler_on, boiler_off, button
-from .models import Logs, Weather, DHT_MQ, Setting
+from .models import Logs, Weather, DHT_MQ, Setting, Params
 from ..celery import cellery_app
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from datetime import datetime
@@ -111,6 +111,11 @@ def arduino_task():
         a.value = 0
         a.save()
     if dic_param['status'][-1] == 'Test-OK':
+        param = Params.objects.create(
+            date_t_h=datetime.now(),
+            myData=dic_param['myData'],
+            ackData=dic_param['ackData']
+        )
         temp = DHT_MQ.objects.create(date_t_h=datetime.now())
         if dic_param.get('temp_teplica'):
             temp.temp_teplica = dic_param['temp_teplica']

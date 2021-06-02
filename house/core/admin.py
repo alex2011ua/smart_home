@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Weather, Logs, Setting, DHT_MQ
+from .models import Weather, Logs, Setting, DHT_MQ, Params
 
 
 @admin.register(DHT_MQ)
@@ -48,3 +48,16 @@ class SettingAdmin(admin.ModelAdmin):
                     'date',
                     )
 
+# @admin.register(Params)
+# class ParamsAdmin(admin.ModelAdmin):
+#     list_display = ('date_t_h',
+#                     'myData',
+#                     'ackData',
+#                     'poliv',
+#                     ),
+#     list_filter = (
+#         'date_t_h',
+#         'myData',
+#         'ackData',
+#         'poliv',
+#     )
