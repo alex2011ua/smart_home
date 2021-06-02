@@ -388,9 +388,9 @@ void read_dht_param(){  // чтение температуры dh11
     json += ", 'temp_room': ";
     json += ackData[1];
     json += ", 'myData': ";
-    json += myData[0]+ ' ' + myData[1]+ ' ' + myData[2]+ ' ' + myData[3]+ ' ' + myData[4]+ ' ' + myData[5];
+    json + myData[0]+ "#" + myData[1]+ "#" + myData[2]+ "#" + myData[3]+ "$" + myData[4]+ "$" + myData[5];
     json += ", 'askData': ";
-    json += ackData[0]+ ' ' + ackData[1]+ ' ' + ackData[2]+ ' ' + ackData[3]+ ' ' + ackData[4]+ ' ' + ackData[5];
+    json + ackData[0]+ "#" + ackData[1]+ "#" + ackData[2]+ "#" + ackData[3]+ "$" + ackData[4]+ "$" + ackData[5];
     json += "}";
     Serial.println(json);
 }
