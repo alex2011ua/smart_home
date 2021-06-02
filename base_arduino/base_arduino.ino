@@ -91,6 +91,8 @@ void setup(){
    pinMode(PIN_RELAY_1_KLAPAN, OUTPUT); // Объявляем пин реле как выход
    pinMode(PIN_RELAY_2_KLAPAN, OUTPUT); // Объявляем пин реле как выход
    pinMode(PIN_RELAY_3_KLAPAN, OUTPUT); // Объявляем пин реле как выход
+   pinMode(PIN_RELE_5v, OUTPUT); // Объявляем пин реле как выход
+
    digitalWrite(PIN_RELAY_VIN_KLAPAN, HIGH); // Выключаем реле
    digitalWrite(PIN_RELAY_1_KLAPAN, HIGH); // Выключаем реле 1
    digitalWrite(PIN_RELAY_2_KLAPAN, HIGH); // Выключаем реле 2
