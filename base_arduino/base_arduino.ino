@@ -74,9 +74,13 @@ DHT dht22_teplica(PIN_DHT22_TEPLICA, DHTTYPE22);
 DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха возле вытяжки
 
 int sound = 0;  // sound on/off
-int      myData[6] = {55,55,55,55,55,55};
-int      ackData[6];
-uint8_t  i;
+int      myData[6] = {0,0,0,0,0,0};
+int      ackData[6] = {0,0,0,0,0,0};
+
+int i;
+uint32_t myTimer_room; // переменная хранения времени (unsigned long)
+uint32_t myTimer_Send_room; // переменная хранения времени (unsigned long)
+
 void setup(){
 
   pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
@@ -97,7 +101,7 @@ void setup(){
    digitalWrite(PIN_RELAY_1_KLAPAN, HIGH); // Выключаем реле 1
    digitalWrite(PIN_RELAY_2_KLAPAN, HIGH); // Выключаем реле 2
    digitalWrite(PIN_RELAY_3_KLAPAN, HIGH); // Выключаем реле 3
-   digitalWrite(PIN_RELE_5v, HIGH); // Выключаем реле питания датчиков 5 в
+   digitalWrite(PIN_RELE_5v, LOW); // Выключаем реле питания датчиков 5 в
 
   pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
   pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход
@@ -136,9 +140,20 @@ void(* resetFunc) (void) = 0; // объявляем функцию reset
 
 int s = 0;
 void loop(){
+    if (millis() - myTimer_room >= 60000*5) {   // ищем разницу за 5 минут
+        myTimer_room = millis();              // сброс таймера
+        for (i = 0; i < 5; i = i + 1) {
+        ackData[i] = 1;
+     }
 
+    }
+    if (millis() - myTimer_Send_room >= 1000) {   // ищем разницу за 1 c
+        myTimer_Send_room = millis();              // сброс таймера
+        send_NRF();
+    }
   if(radio.available()){
     radio.read( &ackData, sizeof(ackData) );
+    myTimer_room = millis();
     //Serial.print("Humidity:");
     //Serial.println(ackData[2]);
     //Serial.print("Temp:");
@@ -184,10 +199,10 @@ void loop(){
 
     if (val == SOUND_ON){
        sound = 1;
-       send_NRF(sound);    }
+       }
     if (val == SOUND_OFF){
        sound = 0;
-       send_NRF(sound);    }
+       }
     if (val == POLIV_VIN_ON){
        Poliv_on(PIN_RELAY_VIN_KLAPAN);
     }
@@ -258,19 +273,32 @@ void rele_light_tree(int status){ //управление бойлером
     }
 }
 
-void send_NRF(int sounds){
+void send_NRF(){
   if(radio.isPVariant() ){}
-  else return;
+  else {
+    for (i = 0; i < 5; i = i + 1) {
+        myData[i] = 1;
+     }
+  return;
+  }
+   myData[0] = 55;
+   myData[1] = sound;
+   myData[2] = 55;
+   myData[3] = 55;
 
    radio.stopListening  ();
    radio.setChannel      (20);
-   myData[1] = sound;
+
     if( radio.write(&myData, sizeof(myData)) ){                // Если указанное количество байт массива myData было доставлено приёмнику, то ...
       //  Данные передатчика были корректно приняты приёмником.  // Тут можно указать код который будет выполняться при получении данных приёмником.
       //Serial.println("radio.write - OK send");
+      myData[4] = 11;
+      myData[5] = 11;
     }else{                                                     // Иначе (если данные не доставлены) ...
       //  Данные передатчика не приняты или дошли с ошибкой CRC. // Тут можно указать код который будет выполняться если приёмника нет или он не получил данные.
       //Serial.println("radio.write - Error send");
+      myData[4] = 0;
+      myData[5] = 0;
     }
     radio.setChannel      (10);
     radio.startListening  ();
@@ -359,7 +387,10 @@ void read_dht_param(){  // чтение температуры dh11
     json += sound;
     json += ", 'temp_room': ";
     json += ackData[1];
-
+    json += ", 'myData': ";
+    json += myData[0],myData[1],myData[2],myData[3],myData[4],myData[5];
+    json += ", 'askData': ";
+    json += ackData[0],ackData[1],ackData[2],ackData[3],ackData[4],ackData[5];
     json += "}";
     Serial.println(json);
 }

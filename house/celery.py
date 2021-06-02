@@ -100,7 +100,7 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 def setup_periodic_task_watering_analiz(sender, **kwargs):
     """анализ необходимости полива"""
     sender.add_periodic_task(
-        crontab(minute=21, hour=7), # +3
+        crontab(minute=3, hour=6), # +3
         bot_task_watering_analiz.s(),
         name='periodic_task_watering_analiz')
 

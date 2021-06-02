@@ -8,8 +8,8 @@
 #define DHTTYPE DHT11   // DHT 11
 DHT dht(DHTPIN, DHTTYPE);
 RF24     radio(9, 10);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
-int      myData[6] = {11,0,0,0,0,0};                                            // Объявляем массив для приёма и хранения данных (до 32+2 байт включительно).
-int      ackData[6]; 
+int      myData[6] = {11,11,11,11,11,11};                                            // Объявляем массив для приёма и хранения данных (до 32+2 байт включительно).
+int      ackData[6] = {11,11,11,11,11,11};;
 int buzzerPin = 3; //Define buzzerPin
 
 uint8_t  i;
@@ -62,7 +62,7 @@ void loop(){                                                   //
    Serial.println( ackData[5]);      
     }                                                          // Если все 3 буфера FIFO уже заполнены, то функция writeAckPayload() будет проигнорирована.
                                                        // Так как в данном скетче данные в буфер помещаются только после получения данных от передатчика, значит один из буферов был только что очищен и заполнение всех 3 буферов в данном скетче невозможно.
-    if (ackData[0] == 55){
+    if (ackData[0] == 55 && ackData[2] == 55 && ackData[3] == 55){
         sound = ackData[1];
     }
     if (sound == 1){
@@ -75,7 +75,7 @@ void loop(){                                                   //
     else{
     analogWrite(buzzerPin, 255);
     }
-  if(millis()-millissenddata>5000) {
+  if(millis()-millissenddata>60000) { //раз в минуту
     send_pir();
     millissenddata=millis();
   }

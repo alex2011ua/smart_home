@@ -23,7 +23,7 @@ class DebagArduino:
             b'G': '',
             b'g': '',
             b'H': '',
-            b'H': '',
+            b'h': '',
 
 
 
