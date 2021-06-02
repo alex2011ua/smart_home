@@ -111,11 +111,7 @@ def arduino_task():
         a.value = 0
         a.save()
     if dic_param['status'][-1] == 'Test-OK':
-        param = Params.objects.create(
-            date_t_h=datetime.now(),
-            myData=dic_param['myData'],
-            ackData=dic_param['ackData']
-        )
+
         temp = DHT_MQ.objects.create(date_t_h=datetime.now())
         if dic_param.get('temp_teplica'):
             temp.temp_teplica = dic_param['temp_teplica']
@@ -135,6 +131,10 @@ def arduino_task():
             temp.gaz_MQ135 = dic_param['MQ135']
         if dic_param.get('muve_k'):
             temp.muve_kitchen = dic_param['muve_k']
+        if dic_param.get('myData'):
+            temp.myData = dic_param['myData'],
+        if dic_param.get('ackData'):
+            temp.ackData = dic_param['ackData']
 
         temp.save()
     else:
@@ -288,6 +288,9 @@ def poliv(force=None):
     poliv = Setting.objects.get(controller_name="poliv")
     if poliv.label == 'включен' or force:
         arduino_poliv(poliv.value)
+        Params.objects.create(
+            date_t_h=datetime.now(),
+            poliv=poliv.value)
     bot.send_message(f'Полив {poliv.label}, {poliv.value} min.')
 
 

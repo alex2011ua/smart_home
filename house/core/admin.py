@@ -15,6 +15,8 @@ class DHT_MQAdmin(admin.ModelAdmin):
                     'gaz_MQ135',
                     'humidity_voda',
                     'humidity_gaz',
+                    'myData',
+                    'ackData',
                     )
 
 
@@ -40,6 +42,7 @@ class LogsAdmin(admin.ModelAdmin):
         'status',
     )
 
+
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
     list_display = ('controller_name',
@@ -48,16 +51,13 @@ class SettingAdmin(admin.ModelAdmin):
                     'date',
                     )
 
-# @admin.register(Params)
-# class ParamsAdmin(admin.ModelAdmin):
-#     list_display = ('date_t_h',
-#                     'myData',
-#                     'ackData',
-#                     'poliv',
-#                     ),
-#     list_filter = (
-#         'date_t_h',
-#         'myData',
-#         'ackData',
-#         'poliv',
-#     )
+
+@admin.register(Params)
+class ParamsAdmin(admin.ModelAdmin):
+    list_display = ('date_t_h',
+                    'poliv',
+                    )
+    list_filter = (
+        'date_t_h',
+        'poliv',
+    )
