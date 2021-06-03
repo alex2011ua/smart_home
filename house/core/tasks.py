@@ -312,12 +312,12 @@ def poliv(force=None):
 
     poliv = Setting.objects.get(controller_name="poliv")
     if poliv.label == 'включен' or force:
-        arduino_poliv(poliv.value)
-        Params.objects.create(
-            date_t_h=datetime.now(),
-            poliv=poliv.value)
-        bot.send_message(f'Старт полива: {poliv.label}, {poliv.value} min.')
         Params.objects.create(poliv=poliv.value, date_t_h=datetime.now())
+        arduino_poliv(poliv.value)
+        bot.send_message(f'Полив завершен: {poliv.value} min.'+ "(принудительно)" if force else '')
+
+
+
 
 
 
