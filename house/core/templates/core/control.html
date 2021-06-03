@@ -24,6 +24,9 @@
             {% if alarms.value == 0 %}<a href="{% url 'alarms'%} ">  <button type="button" class="btn btn-danger b" > Вернуть напоминания</button></a>
             {% else %} <a href="{% url 'alarms'%}">  <button type="button" class="btn  btn-primary b" > Напоминания</button></a>
             {% endif %}
+            {% if radio_room1.value %} <span class="badge badge-pill badge-success b ">Комната - {{radio_room1.label}}</span>
+            {% else %}          <span class="badge badge-pill badge-danger b">Комната - {{radio_room1.label}}</span>
+            {% endif %}
 
         </div>
 

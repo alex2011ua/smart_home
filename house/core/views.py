@@ -27,13 +27,19 @@ class ControllerView(LoginRequiredMixin, View):
         context = {}
         date_time_now = datetime.datetime.now()
         #Инфо о ошибках датчиков
+
         Error_dht, created = Setting.objects.get_or_create(
             controller_name="Error_dht",
             defaults={'label': '', 'value': 0, 'date': datetime.datetime.now()})
 
         # Состояние бойлера и света
         V24 = Setting.objects.get(controller_name='V24')
-
+        room1, created = Setting.objects.get_or_create(controller_name='room1',
+                                      defaults={
+                                          'label': '',
+                                          'value': 0,
+                                          'date' : date_time_now
+                                      })
         printer, created = Setting.objects.get_or_create(
             controller_name='printer',
             defaults={'label': 'Выключен', 'value': 0})
@@ -58,6 +64,7 @@ class ControllerView(LoginRequiredMixin, View):
         solnce, created = Setting.objects.get_or_create(
             controller_name='solnce',
             defaults={'label': 'Выключен', 'value': 0})
+        context['radio_room1'] = room1
         context['V24'] = V24
         context['Error_dht'] = Error_dht
         context['solnce'] = solnce
@@ -129,7 +136,7 @@ class Temp(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         arduino_task()  # читает датчики и занозит изменетия в БД
-        weather_task()  # Запрашивает по АПИ прогноз погоды и вносит в БД
+        #weather_task()  # Запрашивает по АПИ прогноз погоды и вносит в БД
         return redirect(reverse_lazy('form'))
 
 

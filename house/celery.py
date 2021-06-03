@@ -109,6 +109,6 @@ def setup_periodic_task_watering_analiz(sender, **kwargs):
 def setup_periodic_task_watering_start_if_need(sender, **kwargs):
     """включеие полива по рассписанию"""
     sender.add_periodic_task(
-        crontab(minute=17, hour=5-3),
+        crontab(minute=11, hour=5-3),
         poliv.s(),
         name='task_watering_start_if_need')
