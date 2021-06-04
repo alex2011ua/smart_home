@@ -65,6 +65,8 @@ class Params(models.Model):
     date_t_h = models.DateTimeField()
 
     poliv = models.IntegerField(null=True)
+    min_temp_teplica = models.IntegerField(null=True)
+    max_temp_teplica = models.IntegerField(null=True)
 
 
 class Message(models.Model):

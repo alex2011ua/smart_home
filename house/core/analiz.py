@@ -2,7 +2,7 @@ from .raspberry import button
 from myviberbot.viber_bot import send_viber
 from .Telegram import bot
 from datetime import datetime
-from .models import Message, DHT_MQ, Setting
+from .models import Message, DHT_MQ, Setting, Params
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -96,11 +96,23 @@ def gaz_analiz(MQ4, MQ135):
         gaz.save()
 
 
-def temp_alert():
+def temp_alert(alarm):
     """
     Проверка критичных показаний температуры
+    :param alarm: int: если 0 - не оповещать
     :return:
     """
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
-    if temp.temp_gaz <= 22:
-        bot.send_message(f"Температура котельной: {temp.temp_voda}")
+    if temp.temp_teplica > 35 and alarm:
+        bot.send_message(f"Температура в теплице: {temp.temp_teplica}")
+    if datetime.now().hour == 23:
+        max_temp = Setting.objects.get(controller_name='max_temp_teplica')
+        min_temp = Setting.objects.get(controller_name='min_temp_teplica')
+
+        Params.objects.create(date_t_h=datetime.now(),
+                              min_temp_teplica=min_temp.value,
+                              max_temp_teplica=max_temp.value)
+        min_temp.value = 100
+        max_temp.value = 0
+        min_temp.save()
+        max_temp.save()

@@ -104,26 +104,26 @@
               <div class="card-body">
                     <div class="row fon">
                         <div class="col-sm"><strong>Сейчас:</strong></div>
-                        <div class="col-4-sm my-time">{{sensors.date_t_h}}</div>
+                        <div class="col-4-sm my-time"><strong>{{sensors.date_t_h}}</strong></div>
                     </div>
                     <div class="row fon">
                         <div class="col-sm">{{description}}</div>
                         <div class="col-4-sm"></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Прогноз температуры</strong></div>
+                        <div class="col-sm">Прогноз температуры</div>
                         <div class="col-4-sm">{{temp}}&deg</div>
                     </div>
                     <div class="row fon">
                         <div class="col-sm"><strong>Фактическая температура</strong></div>
-                        <div class="col-4-sm">{{sensors.street_temp}}&deg;</div>
+                        <div class="col-4-sm"><strong>{{sensors.street_temp}}&deg;</strong></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Ветер</strong></div>
+                        <div class="col-sm">Ветер</div>
                         <div class="col-4-sm"><em>{{wind}}</em> м/c</div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Влажность</strong></div>
+                        <div class="col-sm">Влажность</div>
                         <div class="col-4-sm"><em>{{sensors.humidity_street}}</em></div>
                     </div>
                     <div class="row fon">
@@ -135,23 +135,23 @@
                         <div class="col-4-sm"></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>вероятность осадков:</strong></div>
+                        <div class="col-sm">вероятность осадков:</div>
                         <div class="col-4-sm"><em>{{pop_next}}</em></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>температура утром:</strong></div>
+                        <div class="col-sm">температура утром:</div>
                         <div class="col-4-sm"><em><em>{{temp_next_morn}}&deg;</em></em></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>температура днем:</strong></div>
+                        <div class="col-sm">температура днем:</div>
                         <div class="col-4-sm">{{temp_next_day}}&deg;</div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>температура вечером: </strong></div>
+                        <div class="col-sm">температура вечером: </div>
                         <div class="col-4-sm"><em>{{temp_next_eve}}&deg;</em></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>ветер:</strong></div>
+                        <div class="col-sm">ветер:</div>
                         <div class="col-4-sm"><em> {{wind_speed_next}}м/с.</em></div>
                     </div>
                 </div>
@@ -163,37 +163,46 @@
                     Котельня
                 </div>
                 <div class="card-body ">
-                <div class="row fon">
+                    <div class="row fon">
                         <div class="col-sm"><strong>Температура в теплице</strong></div>
-                        <div class="col-4-sm">{{ sensors.temp_teplica }}&deg</div>
+                        <div class="col-4-sm"><strong>{{ sensors.temp_teplica }}&deg</strong></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Влажность в теплицу</strong></div>
+                        <div class="col-sm">Минимальная температура сегодня</div>
+                        <div class="col-4-sm">{{ min_temp_teplica.value }}&deg</div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">Максимальная температура сегодня</div>
+                        <div class="col-4-sm">{{ max_temp_teplica.value }}&deg</div>
+                    </div>
+
+                    <div class="row fon">
+                        <div class="col-sm">Влажность в теплице</div>
                         <div class="col-4-sm">{{ sensors.humidity_teplica }}</div>
                     </div>
 
                     <div class="row fon">
                         <div class="col-sm"><strong>Температура воздуха в котельне</strong></div>
-                        <div class="col-4-sm">{{ sensors.temp_gaz }}&deg</div>
+                        <div class="col-4-sm"><strong>{{ sensors.temp_gaz }}&deg</strong></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Влажность в котельне</strong></div>
+                        <div class="col-sm">Влажность в котельне</div>
                         <div class="col-4-sm">{{ sensors.humidity_gaz }}</div>
                     </div>
                     <div class="row fon">
                         <div class="col-sm"><strong>Температура летняя кухня</strong></div>
-                        <div class="col-4-sm">{{ sensors.temp_voda }}&deg</div>
+                        <div class="col-4-sm"><strong>{{ sensors.temp_voda }}&deg</strong></div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Влажность летняя кухня</strong></div>
+                        <div class="col-sm">Влажность летняя кухня</div>
                         <div class="col-4-sm">{{ sensors.humidity_voda }}</div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Состояние воздужа по датчику MQ4</strong></div>
+                        <div class="col-sm">Состояние воздужа по датчику MQ4</div>
                         <div class="col-4-sm">{{ sensors.gaz_MQ4 }}</div>
                     </div>
                     <div class="row fon">
-                        <div class="col-sm"><strong>Состояние воздужа по датчику MQ135</strong></div>
+                        <div class="col-sm">Состояние воздужа по датчику MQ135</div>
                         <div class="col-4-sm">{{ sensors.gaz_MQ135 }}</div>
                     </div>
                     {% if Error_dht.value == 1 %}

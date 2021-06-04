@@ -33,6 +33,12 @@ class ControllerView(LoginRequiredMixin, View):
             defaults={'label': '', 'value': 0, 'date': datetime.datetime.now()})
 
         # Состояние бойлера и света
+        max_temp_teplica, created = Setting.objects.get_or_create(
+            controller_name='max_temp_teplica',
+            defaults={'label': '', 'value': 0,'date': datetime.datetime.now()})
+        min_temp_teplica, created = Setting.objects.get_or_create(
+            controller_name='min_temp_teplica',
+            defaults={'label': '', 'value': 100, 'date': datetime.datetime.now()})
         V24 = Setting.objects.get(controller_name='V24')
         room1, created = Setting.objects.get_or_create(controller_name='room1',
                                       defaults={
@@ -64,6 +70,9 @@ class ControllerView(LoginRequiredMixin, View):
         solnce, created = Setting.objects.get_or_create(
             controller_name='solnce',
             defaults={'label': 'Выключен', 'value': 0})
+
+        context['max_temp_teplica'] = max_temp_teplica
+        context['min_temp_teplica'] = min_temp_teplica
         context['radio_room1'] = room1
         context['V24'] = V24
         context['Error_dht'] = Error_dht

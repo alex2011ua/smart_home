@@ -116,6 +116,17 @@ def arduino_task():
         if dic_param.get('temp_teplica'):
             temp.temp_teplica = dic_param['temp_teplica']
             temp.humidity_teplica = dic_param['hum_teplica']
+            max_temp_teplica = Setting.objects.get(controller_name='max_temp_teplica')
+            min_temp_teplica = Setting.objects.get(controller_name='min_temp_teplica')
+            if temp.temp_teplica > max_temp_teplica.value:
+                max_temp_teplica.value = round(temp.temp_teplica)
+                max_temp_teplica.save()
+            if temp.temp_teplica < min_temp_teplica.value:
+                min_temp_teplica.value = round(temp.temp_teplica)
+                min_temp_teplica.save()
+
+
+
         if dic_param.get('temp_voda'):
             temp.temp_voda = dic_param['temp_voda']
             temp.humidity_voda = dic_param['hum_voda']
@@ -228,12 +239,13 @@ def bot_task():
 
 @cellery_app.task()
 def bot_task_1_hour():
+    """
+    каждый час проверяет температуру теплицы.
+    :return:
+    """
     print('Start bot_task_1_hour')
     alarms = Setting.objects.get(controller_name="alarms")
-    if alarms.value == 0:
-        print('Stop bot_task_1_hour(alarm off)')
-        return
-    temp_alert()
+    temp_alert(alarms.value)
     print('Stop bot_task_1_hour')
 
 

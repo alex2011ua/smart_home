@@ -79,11 +79,11 @@ def setup_periodic_task_bot(sender, **kwargs):
                             description_log=f'{err}- превышен лимит времени')
 
 
-# ежечасный мониторинг
+# ежечасный мониторинг температуры теплицы
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_1_hour(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute=0),
+        crontab(minute=6),
         bot_task_1_hour.s(),
         name='bot_task_hour')
 
