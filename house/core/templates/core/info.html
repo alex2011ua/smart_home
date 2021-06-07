@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="row fon">
-                        <div class="col-sm"><strong>Фактическая температура</strong></div>
+                        <div class="col-sm"><strong>Температура на улице</strong></div>
                         <div class="col-4-sm"><strong>{{sensors.street_temp}}&deg;</strong></div>
                     </div>
 
@@ -57,14 +57,7 @@
                         <div class="col-4-sm">{{ sensors.humidity_teplica }}</div>
                     </div>
 
-                    <div class="row fon">
-                        <div class="col-sm"><strong>Температура воздуха в котельне</strong></div>
-                        <div class="col-4-sm"><strong>{{ sensors.temp_gaz }}&deg</strong></div>
-                    </div>
-                    <div class="row fon">
-                        <div class="col-sm">Влажность в котельне</div>
-                        <div class="col-4-sm">{{ sensors.humidity_gaz }}</div>
-                    </div>
+
                     <div class="row fon">
                         <div class="col-sm"><strong>Температура летняя кухня</strong></div>
                         <div class="col-4-sm"><strong>{{ sensors.temp_voda }}&deg</strong></div>
@@ -73,14 +66,7 @@
                         <div class="col-sm">Влажность летняя кухня</div>
                         <div class="col-4-sm">{{ sensors.humidity_voda }}</div>
                     </div>
-                    <div class="row fon">
-                        <div class="col-sm">Состояние воздужа по датчику MQ4</div>
-                        <div class="col-4-sm">{{ sensors.gaz_MQ4 }}</div>
-                    </div>
-                    <div class="row fon">
-                        <div class="col-sm">Состояние воздужа по датчику MQ135</div>
-                        <div class="col-4-sm">{{ sensors.gaz_MQ135 }}</div>
-                    </div>
+
                     {% if Error_dht.value == 1 %}
                     <div class="row fon">
                         <div class="col-sm"><strong>Обнаружены ошибки датчиков {{Error_dht.date}}</strong></div>
