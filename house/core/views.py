@@ -294,3 +294,48 @@ class Alarms(LoginRequiredMixin, View):
             bot.send_message('Извещения выключены')
         return redirect(reverse_lazy('form'))
 
+class Info(View):
+    """Info"""
+
+    @staticmethod
+    def get(request):
+        context = {}
+        date_time_now = datetime.datetime.now()
+        try:
+            temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
+        except IndexError:
+            temp = DHT_MQ.objects.create(date_t_h=datetime.datetime.now())
+        max_temp_teplica, created = Setting.objects.get_or_create(
+            controller_name='max_temp_teplica',
+            defaults={'label': '', 'value': 0, 'date': datetime.datetime.now()})
+        min_temp_teplica, created = Setting.objects.get_or_create(
+            controller_name='min_temp_teplica',
+            defaults={'label': '', 'value': 100, 'date': datetime.datetime.now()})
+        context['sensors'] = {}
+        context['sensors']['date_t_h'] = temp.date_t_h
+        context['sensors']['street_temp'] = temp.temp_street
+        context['sensors']['humidity_street'] = temp.humidity_street
+        context['sensors']['temp_voda'] = temp.temp_voda
+        context['sensors']['humidity_voda'] = temp.humidity_voda
+        context['sensors']['temp_gaz'] = temp.temp_gaz
+        context['sensors']['humidity_gaz'] = temp.humidity_gaz
+        context['sensors']['temp_teplica'] = temp.temp_teplica
+        context['sensors']['humidity_teplica'] = temp.humidity_teplica
+        context['sensors']['gaz_MQ4'] = temp.gaz_MQ4
+        context['sensors']['gaz_MQ135'] = temp.gaz_MQ135
+        context['max_temp_teplica'] = max_temp_teplica
+        context['min_temp_teplica'] = min_temp_teplica
+        # Получение инфо о погоде из бд
+        try:
+            weather_6 = Weather.objects.all().order_by('-date')[0]
+        except IndexError:
+            return redirect(reverse_lazy('temp'))
+        context['weather_6_day'] = {}
+        context['weather_6_day']['rain'] = weather_6.rain
+        context['weather_6_day']['snow'] = weather_6.snow
+        context['weather_6_day']['temp_min'] = weather_6.temp_min
+        context['weather_6_day']['temp_max'] = weather_6.temp_max
+        context['weather_6_day']['tomorrow'] = weather_6.date
+        context['time'] = date_time_now
+
+        return render(request, "core/info.html", context)

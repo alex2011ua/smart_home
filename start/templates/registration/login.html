@@ -4,6 +4,7 @@
 
 {% block main %}
 <div class="container-fluid bg-info">
+
     <div  class="row justify-content-center">
         <div  class="col-4">
             <h4 class="h4 mb-3 font-weight-normal">Вход в аккаунт.</h4>
@@ -11,9 +12,19 @@
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
             {{ form }}
-            <button type="submit" class="btn btn-primary b">Log in</button>
+            <button type="submit" class="btn btn-primary">Log in</button>
             </form>
+
+
         </div>
+
+    </div>
+
+</div>
+<div  class="row justify-content-center">
+    <div  class="col-4">
+<a href="{% url 'info' %} ">  <button type="button" class="btn btn-success " >Информация о системме</button></a>
     </div>
 </div>
-{% endblock %}
+
+        {% endblock %}

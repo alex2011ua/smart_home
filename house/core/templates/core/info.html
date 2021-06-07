@@ -1,0 +1,98 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block main %}
+
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-md">
+          <div class="card">
+              <div class="card-header">
+                    Инфо
+              </div>
+              <div class="card-body">
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Сейчас:</strong></div>
+                        <div class="col-4-sm my-time"><strong>{{sensors.date_t_h}}</strong></div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">{{description}}</div>
+                        <div class="col-4-sm"></div>
+                    </div>
+
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Фактическая температура</strong></div>
+                        <div class="col-4-sm"><strong>{{sensors.street_temp}}&deg;</strong></div>
+                    </div>
+
+                    <div class="row fon">
+                        <div class="col-sm">Влажность</div>
+                        <div class="col-4-sm"><em>{{sensors.humidity_street}}</em></div>
+                    </div>
+                </div>
+          </div>
+      </div>
+        <div class="col-md">
+            <div class="card">
+                <div class="card-header">
+                    Разное
+                </div>
+                <div class="card-body ">
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Температура в теплице</strong></div>
+                        <div class="col-4-sm"><strong>{{ sensors.temp_teplica }}&deg</strong></div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">Минимальная температура сегодня</div>
+                        <div class="col-4-sm">{{ min_temp_teplica.value }}&deg</div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">Максимальная температура сегодня</div>
+                        <div class="col-4-sm">{{ max_temp_teplica.value }}&deg</div>
+                    </div>
+
+                    <div class="row fon">
+                        <div class="col-sm">Влажность в теплице</div>
+                        <div class="col-4-sm">{{ sensors.humidity_teplica }}</div>
+                    </div>
+
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Температура воздуха в котельне</strong></div>
+                        <div class="col-4-sm"><strong>{{ sensors.temp_gaz }}&deg</strong></div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">Влажность в котельне</div>
+                        <div class="col-4-sm">{{ sensors.humidity_gaz }}</div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Температура летняя кухня</strong></div>
+                        <div class="col-4-sm"><strong>{{ sensors.temp_voda }}&deg</strong></div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">Влажность летняя кухня</div>
+                        <div class="col-4-sm">{{ sensors.humidity_voda }}</div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">Состояние воздужа по датчику MQ4</div>
+                        <div class="col-4-sm">{{ sensors.gaz_MQ4 }}</div>
+                    </div>
+                    <div class="row fon">
+                        <div class="col-sm">Состояние воздужа по датчику MQ135</div>
+                        <div class="col-4-sm">{{ sensors.gaz_MQ135 }}</div>
+                    </div>
+                    {% if Error_dht.value == 1 %}
+                    <div class="row fon">
+                        <div class="col-sm"><strong>Обнаружены ошибки датчиков {{Error_dht.date}}</strong></div>
+                        <div class="col-4-sm">{{ Error_dht.label }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block jivo %}
+{% endblock %}

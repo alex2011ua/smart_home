@@ -14,7 +14,7 @@ import os
 from django.contrib import admin
 from django.urls import include, path, re_path
 from house.core.views import ControllerView, RestartCam, Temp, ResetArduino, \
-    Boiler, Rele, Light, Printer, Alarms
+    Boiler, Rele, Light, Printer, Alarms, Info
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +31,6 @@ urlpatterns = [
     path('poliv/', include('house.core.poliv_urls')),
     path('alarms/', Alarms.as_view(), name='alarms'),
     path('solnce/', include('house.core.solnce_urls')),
+    path('info/', Info.as_view(), name='info'),
 
 ]
