@@ -290,12 +290,12 @@ def bot_task_11_hour():
 @cellery_app.task()
 def bot_task_watering_analiz():
     """Анализ необходимости включения полива"""
-    weather = Weather.objects.filter().order_by('-date')[0:14]
+    weather = Weather.objects.filter().order_by('-date')[0:8]
     poliv = Setting.objects.get(controller_name="poliv")
     sum_rain = 0
     corect = -1
-    water_time = 20
-    limit_rain = 10 # mm
+    water_time = 25 # время полива
+    limit_rain = 15 # мм
     for day in weather:
         if day.temp_max > 25:
             water_time += 1

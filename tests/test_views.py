@@ -2,23 +2,16 @@ import json
 import pytest
 import responses
 from django.conf import settings
-
+from house.core.tasks import tessty
+import unittest
+from unittest.mock import Mock, patch
 
 class TestViews():
-    @pytest.mark.skip
-    @responses.activate
-    def test_get_controller_page(self, client, db, response_ok):
-        """/ (GET) returns html page with sensors data."""
-        controller_url = settings.SMART_HOME_API_URL
-        headers = {}
-        responses.add(responses.GET, controller_url,
-                      json=response_ok, status=200, headers=headers)
+    @patch('Setting.objects.get(controller_name="poliv")')
+    def test_tsssty(self, mockPoliv):
+        poliv = mockPoliv()
+        poliv.value.return_value ='включен'
+        assert(tessty(), True)
 
-        response = client.get('/')
-        assert response.status_code == 200
-        assert response['Content-Type'] == 'text/html; charset=utf-8'
-        document = response.content.decode('utf-8')
 
-        for sensor in response_ok['data']:
-            assert sensor['name'] in document
 

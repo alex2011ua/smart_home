@@ -1,3 +1,4 @@
 {
+  "house/core/test_task.py": true,
   "house/core/test_views.py::TestViews::test_get_controller_page": true
 }
