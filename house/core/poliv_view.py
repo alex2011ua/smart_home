@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from .main_arduino import V24_arduino, off_klapan, on_klapan
 from .tasks import poliv
 
+
 class Poliv(View):
     @staticmethod
     def get(request):

@@ -229,7 +229,7 @@ def bot_task():
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]
     MQ4 = temp.gaz_MQ4 or 0
     MQ135 = temp.gaz_MQ135 or 0
-    if (MQ4 > 65) or (MQ135 > 100):
+    if (MQ4 > 100) or (MQ135 > 50):
         gaz_analiz(MQ4, MQ135)
 
     button_analiz(DEBUG)
