@@ -79,7 +79,7 @@ DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха в
 int sound = 0;  // sound on/off
 int      myData[6] = {0,0,0,0,0,0};
 int      ackData[6] = {0,0,0,0,0,0};
-int pshik = 0 //включение режима жаркое лето
+int pshik = 0; //включение режима жаркое лето
 int i;
 uint32_t myTimer_room; // переменная хранения времени (unsigned long)
 uint32_t myTimer_Send_room; // переменная хранения времени (unsigned long)
@@ -164,15 +164,15 @@ void loop(){
 
   }
   if (pshik == 1){
-        if (millis() - timer_pshik >= 60000) {// ищем разницу за 1 минут
-            Poliv_on(PIN_RELAY_VIN_KLAPAN);
+        if (millis() - timer_pshik >= 65000) {// ищем разницу за 1 минут
+
             Poliv_on(PIN_RELAY_1_KLAPAN);
-            Poliv_on(PIN_RELAY_1_KLAPAN);
+            Poliv_on(PIN_RELAY_2_KLAPAN);
             if (millis() - timer_pshik >= 75000) {
-                Poliv_off(PIN_RELAY_VIN_KLAPAN);
+
                 Poliv_off(PIN_RELAY_1_KLAPAN);
-                Poliv_off(PIN_RELAY_1_KLAPAN);
-                timer_pshik = millis()
+                Poliv_off(PIN_RELAY_2_KLAPAN);
+                timer_pshik = millis();
             }
         }
   }
@@ -251,13 +251,13 @@ void loop(){
     }
     if (val == PSHIK_ON){
         pshik = 1;
-        timer_pshik = millis()
+        timer_pshik = millis();
+        timer_pshik += 65000;
     }
     if (val == PSHIK_OFF){
         pshik = 0;
-        Poliv_off(PIN_RELAY_VIN_KLAPAN);
         Poliv_off(PIN_RELAY_1_KLAPAN);
-        Poliv_off(PIN_RELAY_1_KLAPAN);
+        Poliv_off(PIN_RELAY_2_KLAPAN);
     }
 
 
