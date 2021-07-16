@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from .poliv_view import Poliv, poliv_on_of, ch_value_time, V24, zapusk_poliva
+from .poliv_view import Poliv, poliv_on_of, ch_value_time, V24, zapusk_poliva, pshik
 
 
 urlpatterns = [
@@ -8,5 +8,7 @@ urlpatterns = [
     url(r'ch_value_time/$', ch_value_time, name='ch_value_time'),
     url(r'V24/$', V24, name='V24'),
     url(r'zapusk_poliva/$', zapusk_poliva, name='zapusk_poliva'),
+    url(r'psik/$', pshik, name='pshik'),
+
 
 ]

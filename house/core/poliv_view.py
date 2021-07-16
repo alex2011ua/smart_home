@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import Setting
 from django.core.exceptions import ObjectDoesNotExist
-from .main_arduino import V24_arduino, off_klapan, on_klapan
+from .main_arduino import V24_arduino, off_klapan, on_klapan, arduino_pshik
 from .tasks import poliv
 
 
@@ -46,6 +46,11 @@ def get_status_poliv():
         controller_name='V24',
         defaults={'label': 'Выключен', 'value': 0})
     try:
+        pshik = Setting.objects.get(controller_name='pshik')
+    except ObjectDoesNotExist:
+        pshik = Setting.objects.create(controller_name='pshik', label='выключен', value=0)
+
+    try:
         poliv_elki = Setting.objects.get(controller_name='poliv_elki')
         poliv_garaz = Setting.objects.get(controller_name='poliv_garaz')
         poliv_pesochnica = Setting.objects.get(controller_name='poliv_pesochnica')
@@ -62,6 +67,7 @@ def get_status_poliv():
     poliv_all = {}
 
     p = [
+        pshik,
         V24,
         poliv_elki,
         poliv_garaz,
@@ -106,4 +112,15 @@ def V24(request):
 def zapusk_poliva(r):
     poliv.delay(force=True)
 
+    return redirect(reverse_lazy('poliv_index'))
+
+def pshik(request):
+    pshik = Setting.objects.get(controller_name='pshik')
+    if pshik.label == 'включен':
+        pshik.label = 'выключен'
+        arduino_pshik(0)
+    else:
+        pshik.label = 'включен'
+        arduino_pshik(1)
+    pshik.save()
     return redirect(reverse_lazy('poliv_index'))

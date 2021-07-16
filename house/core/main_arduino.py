@@ -187,3 +187,15 @@ def arduino_poliv(minutes):
     V24.save()
     logger.warning('end poliv')
     # todo
+
+
+def arduino_pshik(param):
+    context = testing()
+    if param == 1:
+        arduino.write(b'K')
+        rele = arduino.read()
+    else:
+        arduino.write(b'k')
+        rele = arduino.read()
+    context['status'].append(rele)
+    return context

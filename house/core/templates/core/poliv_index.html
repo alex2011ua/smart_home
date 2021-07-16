@@ -15,6 +15,9 @@
     {% if poliv_all.V24.label == 'выключен' %} <a href="{% url 'V24'  %}">  <button type="button" class="btn btn-secondary b" >Включить питание 24В</button></a>
     {% else %} <a href="{% url 'V24' %} ">  <button type="button" class="btn btn-success  b" >Выключить питание 24В</button></a>
     {% endif%}
+{% if poliv_all.pshik.label == 'выключен' %} <a href="{% url 'pshik'  %}">  <button type="button" class="btn btn-secondary b" >Включить pshik</button></a>
+    {% else %} <a href="{% url 'pshik' %} ">  <button type="button" class="btn btn-success  b" >Выключить pshik</button></a>
+    {% endif%}
 
 
 <div id="dvor">

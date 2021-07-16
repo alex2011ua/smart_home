@@ -57,6 +57,9 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 
 #define SEND_PARAM       'p'   // опрос датчиков ардуино
 
+#define PSHIK_ON            'K'
+#define PSHIK_OFF            'k'
+
 #define RESET            'r'
 #define TEST             't'
 
@@ -76,11 +79,11 @@ DHT dht_gaz(PIN_DHT11_GAZ, DHTTYPE);  //Температура воздуха в
 int sound = 0;  // sound on/off
 int      myData[6] = {0,0,0,0,0,0};
 int      ackData[6] = {0,0,0,0,0,0};
-
+int pshik = 0 //включение режима жаркое лето
 int i;
 uint32_t myTimer_room; // переменная хранения времени (unsigned long)
 uint32_t myTimer_Send_room; // переменная хранения времени (unsigned long)
-
+uint32_t timer_pshik = 0; // переменная хранения времени (unsigned long)
 void setup(){
 
   pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
@@ -160,6 +163,19 @@ void loop(){
     //Serial.println(ackData[1]);
 
   }
+  if (pshik == 1){
+        if (millis() - timer_pshik >= 60000) {// ищем разницу за 1 минут
+            Poliv_on(PIN_RELAY_VIN_KLAPAN);
+            Poliv_on(PIN_RELAY_1_KLAPAN);
+            Poliv_on(PIN_RELAY_1_KLAPAN);
+            if (millis() - timer_pshik >= 75000) {
+                Poliv_off(PIN_RELAY_VIN_KLAPAN);
+                Poliv_off(PIN_RELAY_1_KLAPAN);
+                Poliv_off(PIN_RELAY_1_KLAPAN);
+                timer_pshik = millis()
+            }
+        }
+  }
 
     if (sound == 1){
     analogWrite(buzzerPin, s);
@@ -233,6 +249,18 @@ void loop(){
     if (val == RELE_5v_OFF){
        Poliv_off(PIN_RELE_5v);
     }
+    if (val == PSHIK_ON){
+        pshik = 1;
+        timer_pshik = millis()
+    }
+    if (val == PSHIK_OFF){
+        pshik = 0;
+        Poliv_off(PIN_RELAY_VIN_KLAPAN);
+        Poliv_off(PIN_RELAY_1_KLAPAN);
+        Poliv_off(PIN_RELAY_1_KLAPAN);
+    }
+
+
   }
 }
 
@@ -401,3 +429,4 @@ void Poliv_on(int pin_rele){
 void Poliv_off(int pin_rele){
     digitalWrite(pin_rele, HIGH);
 }
+
