@@ -176,11 +176,11 @@ def arduino_poliv(minutes):
     V24_arduino(1)
     V24.label = 'включен'
     V24.save()
-    on_klapan("poliv_elki")
     on_klapan("poliv_pesochnica")
-    time.sleep(60*minutes/2)
+    time.sleep(60*minutes/2-5)
+    on_klapan("poliv_elki")
     off_klapan("poliv_pesochnica")
-    time.sleep(60*minutes/2)
+    time.sleep(60*minutes/2+5)
     off_klapan("poliv_elki")
     V24_arduino(0)
     V24.label = 'выключен'

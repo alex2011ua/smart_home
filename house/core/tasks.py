@@ -328,7 +328,15 @@ def poliv(force=None):
         arduino_poliv(poliv.value)
         bot.send_message(f'Полив завершен: {poliv.value} min.'+ "(принудительно)" if force else '')
 
+@cellery_app.task()
+def pshik(force=None):
+    """включениe режима пшик"""
 
+    pshik = Setting.objects.get(controller_name="pshik")
+    if poliv.label == 'включен' or force:
+        Params.objects.create(poliv=pshik.value, date_t_h=datetime.now())
+        arduino_poliv(poliv.value)
+        bot.send_message(f'Полив завершен: {poliv.value} min.'+ "(принудительно)" if force else '')
 
 
 
