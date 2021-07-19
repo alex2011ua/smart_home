@@ -50,7 +50,25 @@ class E_R(View):
         all = Words.objects.all()
         context = {}
         for item in all:
-            context[item.english] = item.russian
+            try:
+                context[item.english] = item.russian
+            except:
+                print('error')
         return JsonResponse(context)
 
 
+class R_E(View):
+    @staticmethod
+    def get(request):
+        return render(request, 'english/r-e.html')
+
+    @staticmethod
+    def post(request):
+        all = Words.objects.all()
+        context = {}
+        for item in all:
+            try:
+                context[item.russian] = item.english
+            except:
+                print('error')
+        return JsonResponse(context)
