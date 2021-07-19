@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Weather, Logs, Setting, DHT_MQ, Params
+from english.models import Words
 
 
 @admin.register(DHT_MQ)
@@ -65,3 +66,11 @@ class ParamsAdmin(admin.ModelAdmin):
         'min_temp_teplica',
         'max_temp_teplica',
     )
+
+
+@admin.register(Words)
+class WordsAdmin(admin.ModelAdmin):
+    list_display = ('english',
+                    'russian',
+
+                    )

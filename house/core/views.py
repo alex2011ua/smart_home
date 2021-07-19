@@ -39,7 +39,8 @@ class ControllerView(LoginRequiredMixin, View):
         min_temp_teplica, created = Setting.objects.get_or_create(
             controller_name='min_temp_teplica',
             defaults={'label': '', 'value': 100, 'date': datetime.datetime.now()})
-        V24 = Setting.objects.get(controller_name='V24')
+        V24, created = Setting.objects.get_or_create(controller_name='V24',
+                                                     defaults={'label': '', 'value': 0, 'date': datetime.datetime.now()})
         room1, created = Setting.objects.get_or_create(controller_name='room1',
                                       defaults={
                                           'label': '',
@@ -145,7 +146,7 @@ class Temp(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
         arduino_task()  # читает датчики и занозит изменетия в БД
-        #weather_task()  # Запрашивает по АПИ прогноз погоды и вносит в БД
+        weather_task()  # Запрашивает по АПИ прогноз погоды и вносит в БД
         return redirect(reverse_lazy('form'))
 
 
