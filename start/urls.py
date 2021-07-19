@@ -15,5 +15,5 @@ urlpatterns = [
 
     path('webhook2020/', trx_bot),
 
-
+    path('english/', include('english.urls')),
 ]

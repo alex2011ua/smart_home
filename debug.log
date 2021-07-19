@@ -23,7 +23,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -40,7 +40,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -51,7 +51,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -86,7 +86,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 The above exception was the direct cause of the following exception:
 
@@ -105,7 +105,7 @@ Traceback (most recent call last):
     self.gen.throw(type, value, traceback)
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\kombu\connection.py", line 452, in _reraise_as_library_errors
     raise ConnectionError(str(exc)) from exc
-kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2021-06-01 17:04:31,905 basehttp  "GET /house/poliv/zapusk_poliva/ HTTP/1.1" 500 237436
 INFO 2021-06-01 17:04:56,512 autoreload  Watching for file changes with StatReloader
 INFO 2021-06-01 17:04:58,054 basehttp  "GET /house/ HTTP/1.1" 200 13007
@@ -145,7 +145,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -162,7 +162,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -173,7 +173,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -208,7 +208,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 The above exception was the direct cause of the following exception:
 
@@ -229,7 +229,7 @@ Traceback (most recent call last):
     self.gen.throw(type, value, traceback)
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\kombu\connection.py", line 452, in _reraise_as_library_errors
     raise ConnectionError(str(exc)) from exc
-kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2021-06-01 17:15:24,461 basehttp  "GET /house/poliv/zapusk_poliva/ HTTP/1.1" 500 242011
 INFO 2021-06-01 17:17:12,288 autoreload  D:\SynologyDrive\my_smart_home\house\core\poliv_view.py changed, reloading.
 INFO 2021-06-01 17:17:15,643 autoreload  Watching for file changes with StatReloader
@@ -242,7 +242,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -259,7 +259,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -270,7 +270,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -305,7 +305,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 The above exception was the direct cause of the following exception:
 
@@ -324,7 +324,7 @@ Traceback (most recent call last):
     self.gen.throw(type, value, traceback)
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\kombu\connection.py", line 452, in _reraise_as_library_errors
     raise ConnectionError(str(exc)) from exc
-kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2021-06-01 17:19:57,066 basehttp  "GET /house/poliv/zapusk_poliva/ HTTP/1.1" 500 238007
 INFO 2021-06-01 17:20:05,288 autoreload  D:\SynologyDrive\my_smart_home\house\core\tasks.py changed, reloading.
 INFO 2021-06-01 17:20:07,712 autoreload  Watching for file changes with StatReloader
@@ -341,7 +341,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -358,7 +358,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -369,7 +369,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -404,7 +404,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 The above exception was the direct cause of the following exception:
 
@@ -425,7 +425,7 @@ Traceback (most recent call last):
     self.gen.throw(type, value, traceback)
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\kombu\connection.py", line 452, in _reraise_as_library_errors
     raise ConnectionError(str(exc)) from exc
-kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2021-06-01 17:22:10,308 basehttp  "GET /house/poliv/zapusk_poliva/ HTTP/1.1" 500 242722
 INFO 2021-06-01 17:23:30,570 autoreload  Watching for file changes with StatReloader
 INFO 2021-06-01 17:29:31,548 autoreload  D:\SynologyDrive\my_smart_home\house\core\poliv_view.py changed, reloading.
@@ -522,7 +522,7 @@ Traceback (most recent call last):
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
     return handler(request, *args, **kwargs)
   File "D:\SynologyDrive\my_smart_home\house\core\views.py", line 131, in get
-    arduino_task()  # читает датчики и занозит изменетия в БД
+    arduino_task()  # пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\celery\local.py", line 188, in __call__
     return self._get_current_object()(*a, **kw)
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\celery\app\task.py", line 388, in __call__
@@ -546,7 +546,7 @@ Traceback (most recent call last):
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
     return handler(request, *args, **kwargs)
   File "D:\SynologyDrive\my_smart_home\house\core\views.py", line 131, in get
-    arduino_task()  # читает датчики и занозит изменетия в БД
+    arduino_task()  # пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\celery\local.py", line 188, in __call__
     return self._get_current_object()(*a, **kw)
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\celery\app\task.py", line 388, in __call__
@@ -780,7 +780,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -797,7 +797,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 During handling of the above exception, another exception occurred:
 
@@ -808,7 +808,7 @@ Traceback (most recent call last):
     raise err
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 603, in _connect
     sock.connect(socket_address)
-ConnectionRefusedError: [WinError 10061] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение
+ConnectionRefusedError: [WinError 10061] пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 During handling of the above exception, another exception occurred:
 
@@ -843,7 +843,7 @@ Traceback (most recent call last):
     connection.connect()
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\redis\connection.py", line 563, in connect
     raise ConnectionError(self._error_message(e))
-redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 The above exception was the direct cause of the following exception:
 
@@ -864,7 +864,7 @@ Traceback (most recent call last):
     self.gen.throw(type, value, traceback)
   File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\kombu\connection.py", line 452, in _reraise_as_library_errors
     raise ConnectionError(str(exc)) from exc
-kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение.
+kombu.exceptions.OperationalError: Error 10061 connecting to 127.0.0.1:6379. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 ERROR 2021-06-03 15:23:02,194 basehttp  "GET /house/poliv/zapusk_poliva/ HTTP/1.1" 500 242417
 WARNING 2021-06-03 15:23:02,472 log  Not Found: /favicon.ico
 INFO 2021-06-03 15:33:29,312 autoreload  D:\SynologyDrive\my_smart_home\house\core\tasks.py changed, reloading.
@@ -1097,3 +1097,2150 @@ INFO 2021-06-08 16:05:58,720 basehttp  "GET /accounts/login/?next=/house/ HTTP/1
 INFO 2021-06-08 16:05:58,834 basehttp  "GET /static/css/main.css HTTP/1.1" 304 0
 INFO 2021-06-08 16:06:00,897 basehttp  "GET /house/info/ HTTP/1.1" 200 4509
 INFO 2021-06-08 16:06:28,602 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-01 12:18:16,798 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-01 12:18:20,814 basehttp  "GET / HTTP/1.1" 200 17776
+INFO 2021-07-01 12:18:21,220 basehttp  "GET /static/start/css/custom.css HTTP/1.1" 200 2431
+INFO 2021-07-01 12:18:21,247 basehttp  "GET /static/img/avto.gif HTTP/1.1" 200 11375
+INFO 2021-07-01 12:18:21,264 basehttp  "GET /static/img/flask.gif HTTP/1.1" 200 57553
+INFO 2021-07-01 12:18:21,547 basehttp  "GET /static/img/ava_Alex.gif HTTP/1.1" 200 17631
+INFO 2021-07-01 12:18:21,598 basehttp  "GET /static/img/smart_home.gif HTTP/1.1" 200 47402
+INFO 2021-07-01 12:18:21,683 basehttp  "GET /static/img/smart_home2.gif HTTP/1.1" 200 20246
+INFO 2021-07-01 12:18:21,734 basehttp  "GET /static/img/restoran.gif HTTP/1.1" 200 126582
+INFO 2021-07-01 12:18:22,300 basehttp  "GET /static/favico.ico HTTP/1.1" 200 15406
+INFO 2021-07-01 12:18:23,767 basehttp  "GET /house/ HTTP/1.1" 302 0
+INFO 2021-07-01 12:18:23,838 basehttp  "GET /accounts/login/?next=/house/ HTTP/1.1" 200 2849
+INFO 2021-07-01 12:18:23,919 basehttp  "GET /static/css/main.css HTTP/1.1" 200 596
+INFO 2021-07-01 12:18:23,945 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-01 12:18:29,885 basehttp  "POST /accounts/login/?next=/house/ HTTP/1.1" 200 3129
+INFO 2021-07-01 12:18:34,205 basehttp  "POST /accounts/login/?next=/house/ HTTP/1.1" 302 0
+INFO 2021-07-01 12:18:34,833 basehttp  "GET /house/ HTTP/1.1" 200 12412
+INFO 2021-07-01 12:18:34,933 basehttp  "GET /static/js/send_param.js HTTP/1.1" 200 326
+INFO 2021-07-01 12:18:34,938 basehttp  "GET /static/img/home.gif HTTP/1.1" 200 114599
+INFO 2021-07-16 17:25:48,424 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-16 17:25:54,338 basehttp  "GET / HTTP/1.1" 200 17776
+INFO 2021-07-16 17:25:54,803 basehttp  "GET /static/start/css/custom.css HTTP/1.1" 200 2431
+INFO 2021-07-16 17:25:54,862 basehttp  "GET /static/img/avto.gif HTTP/1.1" 200 11375
+INFO 2021-07-16 17:25:54,906 basehttp  "GET /static/img/restoran.gif HTTP/1.1" 200 126582
+INFO 2021-07-16 17:25:55,193 basehttp  "GET /static/img/ava_Alex.gif HTTP/1.1" 200 17631
+INFO 2021-07-16 17:25:55,278 basehttp  "GET /static/img/smart_home.gif HTTP/1.1" 200 47402
+INFO 2021-07-16 17:25:55,313 basehttp  "GET /static/img/smart_home2.gif HTTP/1.1" 200 20246
+INFO 2021-07-16 17:25:55,329 basehttp  "GET /static/img/flask.gif HTTP/1.1" 200 57553
+INFO 2021-07-16 17:25:55,550 basehttp  "GET /static/favico.ico HTTP/1.1" 200 15406
+INFO 2021-07-16 17:25:57,033 basehttp  "GET /house/ HTTP/1.1" 302 0
+INFO 2021-07-16 17:25:57,106 basehttp  "GET /accounts/login/?next=/house/ HTTP/1.1" 200 2849
+INFO 2021-07-16 17:25:57,292 basehttp  "GET /static/css/main.css HTTP/1.1" 200 596
+INFO 2021-07-16 17:25:57,319 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-16 17:25:57,986 log  Not Found: /favicon.ico
+WARNING 2021-07-16 17:25:57,987 basehttp  "GET /favicon.ico HTTP/1.1" 404 2562
+INFO 2021-07-16 17:26:05,492 basehttp  "POST /accounts/login/?next=/house/ HTTP/1.1" 302 0
+INFO 2021-07-16 17:26:06,047 basehttp  "GET /house/ HTTP/1.1" 200 12432
+INFO 2021-07-16 17:26:06,109 basehttp  "GET /static/js/send_param.js HTTP/1.1" 200 326
+INFO 2021-07-16 17:26:06,114 basehttp  "GET /static/img/home.gif HTTP/1.1" 200 114599
+INFO 2021-07-16 17:26:08,221 basehttp  "GET /house/poliv/index/ HTTP/1.1" 200 4604
+INFO 2021-07-16 17:26:08,265 basehttp  "GET /static/css/poliv.css HTTP/1.1" 200 1208
+INFO 2021-07-16 17:26:08,300 basehttp  "GET /static/img/teplica.gif HTTP/1.1" 200 7174
+INFO 2021-07-16 17:26:08,311 basehttp  "GET /static/img/klumba.gif HTTP/1.1" 200 40964
+INFO 2021-07-16 17:26:08,321 basehttp  "GET /static/img/sad.gif HTTP/1.1" 200 13058
+INFO 2021-07-16 17:26:08,330 basehttp  "GET /static/js/polivScript.js HTTP/1.1" 200 1902
+INFO 2021-07-16 17:26:08,334 basehttp  "GET /static/img/kach.gif HTTP/1.1" 200 27241
+INFO 2021-07-16 17:26:08,342 basehttp  "GET /static/img/elka.gif HTTP/1.1" 200 137794
+INFO 2021-07-16 17:26:08,420 basehttp  "GET /static/img/rastberry.gif HTTP/1.1" 200 207218
+INFO 2021-07-16 17:26:10,233 basehttp  "GET /house/poliv/psik/ HTTP/1.1" 302 0
+INFO 2021-07-16 17:26:10,256 basehttp  "GET /house/poliv/index/ HTTP/1.1" 200 4606
+INFO 2021-07-16 17:26:24,723 basehttp  "GET /house/poliv/psik/ HTTP/1.1" 302 0
+INFO 2021-07-16 17:26:24,786 basehttp  "GET /house/poliv/index/ HTTP/1.1" 200 4604
+INFO 2021-07-16 17:27:15,595 autoreload  Watching for file changes with StatReloader
+ERROR 2021-07-16 17:27:16,387 log  Internal Server Error: /house/poliv/psik/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\house\core\poliv_view.py", line 124, in pshik
+    arduino_pshik(1)
+  File "D:\SynologyDrive\my_smart_home\house\core\main_arduino.py", line 196, in arduino_pshik
+    rele = arduino.read()
+  File "D:\SynologyDrive\my_smart_home\house\core\DebagArduino.py", line 36, in read
+    string_arduino = self.dict_param[self.param]
+KeyError: b'K'
+ERROR 2021-07-16 17:27:16,393 basehttp  "GET /house/poliv/psik/ HTTP/1.1" 500 78942
+ERROR 2021-07-16 17:27:19,293 log  Internal Server Error: /house/poliv/psik/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\house\core\poliv_view.py", line 124, in pshik
+    arduino_pshik(1)
+  File "D:\SynologyDrive\my_smart_home\house\core\main_arduino.py", line 196, in arduino_pshik
+    rele = arduino.read()
+  File "D:\SynologyDrive\my_smart_home\house\core\DebagArduino.py", line 36, in read
+    string_arduino = self.dict_param[self.param]
+KeyError: b'K'
+ERROR 2021-07-16 17:27:19,295 basehttp  "GET /house/poliv/psik/ HTTP/1.1" 500 78780
+WARNING 2021-07-16 17:27:25,262 log  Not Found: /house/poliv/
+WARNING 2021-07-16 17:27:25,263 basehttp  "GET /house/poliv/ HTTP/1.1" 404 6102
+INFO 2021-07-16 17:27:34,772 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-16 17:27:36,617 basehttp  "GET /house/ HTTP/1.1" 200 12432
+INFO 2021-07-16 17:27:38,482 basehttp  "GET /house/poliv/index/ HTTP/1.1" 200 4604
+ERROR 2021-07-16 17:27:39,992 log  Internal Server Error: /house/poliv/psik/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\house\core\poliv_view.py", line 124, in pshik
+    arduino_pshik(1)
+  File "D:\SynologyDrive\my_smart_home\house\core\main_arduino.py", line 196, in arduino_pshik
+    rele = arduino.read()
+  File "D:\SynologyDrive\my_smart_home\house\core\DebagArduino.py", line 36, in read
+    string_arduino = self.dict_param[self.param]
+KeyError: b'K'
+ERROR 2021-07-16 17:27:39,999 basehttp  "GET /house/poliv/psik/ HTTP/1.1" 500 78942
+INFO 2021-07-16 17:28:10,619 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-16 17:28:13,016 basehttp  "GET /house/poliv/psik/ HTTP/1.1" 302 0
+INFO 2021-07-16 17:28:13,063 basehttp  "GET /house/poliv/index/ HTTP/1.1" 200 4606
+INFO 2021-07-16 17:28:14,607 basehttp  "GET /house/poliv/psik/ HTTP/1.1" 302 0
+INFO 2021-07-16 17:28:14,631 basehttp  "GET /house/poliv/index/ HTTP/1.1" 200 4604
+INFO 2021-07-19 10:57:32,479 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 10:57:39,406 basehttp  "GET / HTTP/1.1" 200 17776
+WARNING 2021-07-19 10:57:45,674 log  Not Found: /english
+WARNING 2021-07-19 10:57:45,676 basehttp  "GET /english HTTP/1.1" 404 2550
+INFO 2021-07-19 10:58:38,772 autoreload  D:\SynologyDrive\my_smart_home\start\urls.py changed, reloading.
+INFO 2021-07-19 10:58:41,116 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 10:58:47,179 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 10:58:47,477 basehttp  "GET /english HTTP/1.1" 301 0
+INFO 2021-07-19 10:58:47,501 basehttp  "GET /english/ HTTP/1.1" 200 1954
+INFO 2021-07-19 11:00:50,261 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 11:00:50,605 basehttp  "GET /english/ HTTP/1.1" 200 1964
+WARNING 2021-07-19 11:00:51,190 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:00:51,191 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:04:06,902 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 11:04:13,734 basehttp  "GET /english/ HTTP/1.1" 200 2001
+WARNING 2021-07-19 11:04:14,017 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:04:14,018 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:04:49,191 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 11:04:49,633 basehttp  "GET /english/ HTTP/1.1" 200 2002
+WARNING 2021-07-19 11:04:49,953 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:04:49,955 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:19:10,133 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 11:19:56,460 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 11:20:09,423 basehttp  "GET /english/settings HTTP/1.1" 301 0
+ERROR 2021-07-19 11:20:09,726 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 103, in find_template
+    template, origin = context.template.engine.find_template(
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\engine.py", line 129, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: base_english.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 9, in settings
+    return render(request, 'english/settings.html')
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: base_english.html
+ERROR 2021-07-19 11:20:09,731 basehttp  "GET /english/settings/ HTTP/1.1" 500 131500
+WARNING 2021-07-19 11:20:09,996 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:20:09,997 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:20:31,575 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 11:21:39,310 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 11:21:42,846 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:21:42,847 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:21:48,110 basehttp  "GET /english/ HTTP/1.1" 200 1975
+INFO 2021-07-19 11:21:48,236 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 11:21:48,407 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:21:48,408 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:21:51,353 basehttp  "GET /english/settings/ HTTP/1.1" 200 1947
+INFO 2021-07-19 11:21:51,458 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 11:21:51,668 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:21:51,669 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:24:51,661 autoreload  D:\SynologyDrive\my_smart_home\english\models.py changed, reloading.
+INFO 2021-07-19 11:58:51,455 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 11:58:58,463 basehttp  "GET /english/settings/ HTTP/1.1" 200 2441
+INFO 2021-07-19 11:58:58,651 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 11:58:58,971 log  Not Found: /favicon.ico
+WARNING 2021-07-19 11:58:58,971 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 11:59:59,038 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:00:00,977 basehttp  "GET /english/settings/ HTTP/1.1" 200 2517
+INFO 2021-07-19 12:00:01,048 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:00:01,290 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:00:01,291 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:00:24,498 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:00:24,501 basehttp  "POST /english/settings/ HTTP/1.1" 500 75154
+WARNING 2021-07-19 12:00:24,726 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:00:24,727 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:02:04,441 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:02:05,526 basehttp  "GET /english/settings/ HTTP/1.1" 200 2824
+INFO 2021-07-19 12:02:05,676 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:02:05,866 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:02:05,870 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:02:45,683 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:02:46,139 basehttp  "GET /english/settings/ HTTP/1.1" 200 2981
+INFO 2021-07-19 12:02:46,255 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:02:46,575 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:02:46,575 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:05:18,103 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:05:20,278 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:06:37,784 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:06:42,545 basehttp  "GET /english/settings/ HTTP/1.1" 200 2981
+INFO 2021-07-19 12:06:42,682 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:06:42,925 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:06:42,926 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:06:47,377 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:06:47,384 basehttp  "POST /english/settings/ HTTP/1.1" 500 75142
+WARNING 2021-07-19 12:06:47,605 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:06:47,606 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:07:11,130 basehttp  "GET /english/settings/ HTTP/1.1" 200 2981
+INFO 2021-07-19 12:07:11,317 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:07:11,535 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:07:11,536 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:07:57,800 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:07:57,804 basehttp  "POST /english/settings/ HTTP/1.1" 500 75026
+WARNING 2021-07-19 12:07:58,000 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:07:58,001 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:10:58,908 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 12:11:01,204 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:11:01,205 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:11:04,711 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:11:04,713 basehttp  "POST /english/settings/ HTTP/1.1" 500 75142
+WARNING 2021-07-19 12:11:04,912 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:11:04,913 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 12:11:14,930 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:11:14,931 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:11:18,844 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:11:18,845 basehttp  "POST /english/settings/ HTTP/1.1" 500 75018
+WARNING 2021-07-19 12:11:19,171 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:11:19,172 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:15:18,913 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:15:19,329 basehttp  "GET /english/settings/ HTTP/1.1" 200 2981
+INFO 2021-07-19 12:15:19,564 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:15:19,653 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:15:19,654 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:15:22,788 basehttp  "POST /english/settings/ HTTP/1.1" 302 0
+INFO 2021-07-19 12:15:22,815 basehttp  "GET /english/settings/ HTTP/1.1" 200 2981
+INFO 2021-07-19 12:15:22,882 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:15:23,094 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:15:23,095 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:15:41,498 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:15:44,923 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:17:24,144 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:17:26,017 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:18:10,788 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:18:12,215 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:28:26,029 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:28:27,646 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:29:54,264 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:29:55,354 basehttp  "GET /english/settings/ HTTP/1.1" 200 2981
+INFO 2021-07-19 12:29:55,474 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:29:55,735 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:29:55,737 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:30:06,095 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:30:06,100 basehttp  "POST /english/settings/ HTTP/1.1" 500 75018
+WARNING 2021-07-19 12:30:06,574 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:30:06,576 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:30:30,438 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:31:07,044 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:31:15,727 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 12:31:16,904 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:31:16,906 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:31:28,275 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:31:28,284 basehttp  "POST /english/settings/ HTTP/1.1" 500 75018
+WARNING 2021-07-19 12:31:28,541 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:31:28,542 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:31:46,772 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:36:11,835 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 12:36:14,115 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:36:14,117 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:36:22,195 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:36:22,227 basehttp  "POST /english/settings/ HTTP/1.1" 500 75018
+WARNING 2021-07-19 12:36:22,723 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:36:22,724 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:38:46,140 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:38:47,708 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 12:38:50,676 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:38:50,677 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:38:55,935 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 23, in settings
+    content = file.read()
+AttributeError: 'NoneType' object has no attribute 'read'
+ERROR 2021-07-19 12:38:55,937 basehttp  "POST /english/settings/ HTTP/1.1" 500 73407
+WARNING 2021-07-19 12:38:56,452 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:38:56,453 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:39:11,317 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 12:39:13,417 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:39:13,420 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:39:17,630 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 23, in settings
+    content = file.read()
+AttributeError: 'NoneType' object has no attribute 'read'
+ERROR 2021-07-19 12:39:17,639 basehttp  "POST /english/settings/ HTTP/1.1" 500 75888
+WARNING 2021-07-19 12:39:17,877 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:39:17,878 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:40:51,964 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 12:40:52,689 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:40:52,691 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:41:16,268 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 23, in settings
+    content = file_.read()
+AttributeError: 'NoneType' object has no attribute 'read'
+ERROR 2021-07-19 12:41:16,275 basehttp  "POST /english/settings/ HTTP/1.1" 500 75900
+WARNING 2021-07-19 12:41:16,575 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:41:16,576 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 12:41:45,865 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:41:45,866 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:43:33,520 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 12:43:34,240 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:43:34,243 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:43:38,150 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 23, in settings
+    content = file_.read()
+AttributeError: 'NoneType' object has no attribute 'read'
+ERROR 2021-07-19 12:43:38,154 basehttp  "POST /english/settings/ HTTP/1.1" 500 73419
+WARNING 2021-07-19 12:43:38,427 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:43:38,428 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:43:57,365 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 23, in settings
+    content = file_.read()
+AttributeError: 'NoneType' object has no attribute 'read'
+ERROR 2021-07-19 12:43:57,367 basehttp  "POST /english/settings/ HTTP/1.1" 500 73419
+WARNING 2021-07-19 12:43:57,525 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:43:57,526 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:44:01,412 basehttp  "GET /english/settings/ HTTP/1.1" 200 2990
+INFO 2021-07-19 12:44:01,543 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:44:01,814 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:44:01,815 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:44:02,882 basehttp  "GET /english/settings/ HTTP/1.1" 200 2990
+INFO 2021-07-19 12:44:02,992 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:44:03,276 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:44:03,278 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:44:14,944 autoreload  Watching for file changes with StatReloader
+ERROR 2021-07-19 12:44:17,533 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:44:17,537 basehttp  "POST /english/settings/ HTTP/1.1" 500 77830
+WARNING 2021-07-19 12:44:18,229 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:44:18,230 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:44:43,185 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:44:46,607 basehttp  "GET /english/settings/ HTTP/1.1" 200 2990
+INFO 2021-07-19 12:44:46,719 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:44:47,031 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:44:47,033 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:44:52,893 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:44:52,928 basehttp  "POST /english/settings/ HTTP/1.1" 500 77831
+WARNING 2021-07-19 12:44:53,118 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:44:53,119 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:45:26,568 basehttp  "GET /english/ HTTP/1.1" 200 1975
+INFO 2021-07-19 12:45:26,641 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:45:26,980 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:45:26,982 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:45:28,282 basehttp  "GET /english/settings/ HTTP/1.1" 200 2990
+INFO 2021-07-19 12:45:28,361 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:45:28,591 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:45:28,592 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:45:34,009 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:45:34,014 basehttp  "POST /english/settings/ HTTP/1.1" 500 77838
+WARNING 2021-07-19 12:45:34,247 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:45:34,249 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:47:09,326 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:47:09,897 basehttp  "GET /english/settings/ HTTP/1.1" 200 2992
+INFO 2021-07-19 12:47:10,157 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:47:10,472 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:47:10,472 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:47:17,266 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:47:17,269 basehttp  "POST /english/settings/ HTTP/1.1" 500 75350
+WARNING 2021-07-19 12:47:17,565 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:47:17,566 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:47:35,960 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:47:37,038 basehttp  "GET /english/settings/ HTTP/1.1" 200 2992
+INFO 2021-07-19 12:47:37,118 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:47:37,343 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:47:37,344 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:47:39,805 basehttp  "GET /english/settings/ HTTP/1.1" 200 2992
+INFO 2021-07-19 12:47:39,876 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:47:40,074 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:47:40,075 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:47:45,430 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:47:45,478 basehttp  "POST /english/settings/ HTTP/1.1" 500 77831
+WARNING 2021-07-19 12:47:45,779 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:47:45,780 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:48:42,070 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:48:52,730 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 12:48:53,014 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:48:53,824 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:48:53,833 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:49:07,493 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:49:07,506 basehttp  "POST /english/settings/ HTTP/1.1" 500 77830
+WARNING 2021-07-19 12:49:08,193 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:49:08,200 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 12:49:16,842 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:49:16,851 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 12:49:17,394 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:49:17,403 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 12:49:18,690 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:49:18,698 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:50:45,468 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:50:45,932 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 12:50:46,036 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:50:47,649 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:50:47,650 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:50:52,908 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 12:50:52,909 basehttp  "POST /english/settings/ HTTP/1.1" 500 75349
+WARNING 2021-07-19 12:50:53,174 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:50:53,175 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:52:09,890 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:52:17,295 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:52:45,305 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:52:48,187 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:54:02,804 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:54:03,670 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 12:54:03,784 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:54:03,958 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:54:03,958 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:54:15,405 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 28, in settings
+    for row in data:
+_csv.Error: iterator should return strings, not int (did you open the file in text mode?)
+ERROR 2021-07-19 12:54:15,408 basehttp  "POST /english/settings/ HTTP/1.1" 500 79285
+WARNING 2021-07-19 12:54:15,709 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:54:15,711 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:56:36,011 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 12:56:47,349 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 12:56:47,492 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 12:56:47,832 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:56:47,833 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 12:56:55,496 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 25, in settings
+    content = content.encoder()
+AttributeError: 'bytes' object has no attribute 'encoder'
+ERROR 2021-07-19 12:56:55,501 basehttp  "POST /english/settings/ HTTP/1.1" 500 79392
+WARNING 2021-07-19 12:56:56,142 log  Not Found: /favicon.ico
+WARNING 2021-07-19 12:56:56,143 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 12:57:37,775 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 12:57:41,095 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:00:49,387 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:00:53,471 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 13:00:53,702 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:00:53,949 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:00:53,950 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 13:00:57,601 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 13:00:57,603 basehttp  "POST /english/settings/ HTTP/1.1" 500 75357
+WARNING 2021-07-19 13:00:57,813 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:00:57,814 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:03:09,276 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:03:10,278 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 13:03:10,422 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:03:10,685 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:03:10,686 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:05:49,536 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 13:05:54,155 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:09:44,986 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 13:09:47,924 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:09:47,925 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 13:09:49,232 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 13:09:49,239 basehttp  "POST /english/settings/ HTTP/1.1" 500 75358
+WARNING 2021-07-19 13:09:49,573 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:09:49,573 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:11:18,456 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 13:11:21,726 autoreload  Watching for file changes with StatReloader
+ERROR 2021-07-19 13:11:22,314 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 13:11:22,349 basehttp  "POST /english/settings/ HTTP/1.1" 500 75356
+WARNING 2021-07-19 13:11:22,612 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:11:22,612 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:12:43,127 autoreload  Watching for file changes with StatReloader
+ERROR 2021-07-19 13:12:43,911 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 13:12:43,913 basehttp  "POST /english/settings/ HTTP/1.1" 500 75357
+WARNING 2021-07-19 13:12:44,111 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:12:44,111 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:13:15,130 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 13:13:15,711 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:13:15,712 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 13:13:16,409 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:13:16,410 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 13:13:17,388 log  Internal Server Error: /english/settings/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 186, in _get_response
+    self.check_response(response, callback)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 307, in check_response
+    raise ValueError(
+ValueError: The view english.views.settings didn't return an HttpResponse object. It returned None instead.
+ERROR 2021-07-19 13:13:17,436 basehttp  "POST /english/settings/ HTTP/1.1" 500 75358
+WARNING 2021-07-19 13:13:17,643 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:13:17,644 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:14:49,843 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 13:14:51,643 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:15:11,896 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 13:15:14,325 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:24:03,946 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:24:13,364 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 13:24:13,464 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:24:13,744 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:24:13,746 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:24:28,310 basehttp  "POST /english/settings/ HTTP/1.1" 302 0
+INFO 2021-07-19 13:24:28,351 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 13:24:28,463 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:24:28,897 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:24:28,898 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:25:38,752 basehttp  "POST /english/settings/ HTTP/1.1" 302 0
+INFO 2021-07-19 13:25:38,776 basehttp  "GET /english/settings/ HTTP/1.1" 200 2994
+INFO 2021-07-19 13:25:38,874 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:25:39,193 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:25:39,194 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:28:37,948 autoreload  D:\SynologyDrive\my_smart_home\english\urls.py changed, reloading.
+INFO 2021-07-19 13:28:40,335 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:31:40,357 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 13:31:43,533 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:32:17,974 basehttp  "GET /english/settings/ HTTP/1.1" 200 3112
+INFO 2021-07-19 13:32:18,064 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:32:18,479 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:32:18,480 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:32:21,595 basehttp  "GET /english/clear/ HTTP/1.1" 302 0
+INFO 2021-07-19 13:32:21,630 basehttp  "GET /english/settings/ HTTP/1.1" 200 3112
+INFO 2021-07-19 13:32:21,846 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:32:22,053 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:32:22,054 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:32:32,840 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:33:05,036 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:33:17,805 basehttp  "GET /english/clear/ HTTP/1.1" 302 0
+INFO 2021-07-19 13:33:17,858 basehttp  "GET /english/settings/ HTTP/1.1" 200 3112
+INFO 2021-07-19 13:33:17,941 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:33:18,205 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:33:18,210 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:33:32,900 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 13:33:34,973 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:33:49,137 basehttp  "POST /english/settings/ HTTP/1.1" 302 0
+INFO 2021-07-19 13:33:49,173 basehttp  "GET /english/settings/ HTTP/1.1" 200 3112
+INFO 2021-07-19 13:33:49,273 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:33:49,490 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:33:49,491 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:36:28,848 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 13:36:30,800 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:52:46,887 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:54:13,784 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 13:54:16,809 basehttp  "GET /english/settings/ HTTP/1.1" 200 3255
+INFO 2021-07-19 13:54:17,083 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:54:17,504 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:54:17,505 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 13:54:18,696 log  Not Found: /english/settings/{% url 'list_words'
+WARNING 2021-07-19 13:54:18,697 basehttp  "GET /english/settings/%7B%%20url%20'list_words' HTTP/1.1" 404 3393
+WARNING 2021-07-19 13:54:18,923 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:54:18,924 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 13:54:49,328 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:54:49,329 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 13:54:50,413 log  Not Found: /english/settings/{% url 'list_words'
+WARNING 2021-07-19 13:54:50,414 basehttp  "GET /english/settings/%7B%%20url%20'list_words' HTTP/1.1" 404 3393
+WARNING 2021-07-19 13:54:50,593 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:54:50,594 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 13:54:52,080 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:54:52,081 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:54:53,163 basehttp  "GET /english/settings/ HTTP/1.1" 200 3256
+INFO 2021-07-19 13:54:53,229 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:54:55,238 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:54:55,239 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:54:57,061 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13534
+INFO 2021-07-19 13:54:57,194 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:54:57,670 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:54:57,671 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:55:54,870 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13558
+INFO 2021-07-19 13:55:54,942 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:55:55,302 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:55:55,303 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:56:59,693 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13558
+INFO 2021-07-19 13:56:59,795 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:57:00,215 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:57:00,216 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 13:57:03,077 basehttp  "GET /english/settings/ HTTP/1.1" 200 3256
+INFO 2021-07-19 13:57:03,209 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 13:57:03,664 log  Not Found: /favicon.ico
+WARNING 2021-07-19 13:57:03,665 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:01:33,732 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13558
+INFO 2021-07-19 14:01:33,854 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:01:34,151 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:01:34,158 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:17:49,862 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13558
+INFO 2021-07-19 14:18:02,523 basehttp  "GET /english/settings/ HTTP/1.1" 200 3256
+INFO 2021-07-19 14:31:46,166 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 14:31:49,780 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:40:44,810 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 14:40:47,946 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:42:49,908 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 14:42:52,510 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:43:33,743 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:45:11,553 autoreload  D:\SynologyDrive\my_smart_home\english\urls.py changed, reloading.
+INFO 2021-07-19 14:45:13,532 autoreload  Watching for file changes with StatReloader
+WARNING 2021-07-19 14:45:14,318 log  Not Found: /english/settings/e-r
+WARNING 2021-07-19 14:45:14,321 basehttp  "GET /english/settings/e-r HTTP/1.1" 404 3478
+WARNING 2021-07-19 14:45:29,389 log  Not Found: /english/settings/e_r
+WARNING 2021-07-19 14:45:29,390 basehttp  "GET /english/settings/e_r HTTP/1.1" 404 3478
+INFO 2021-07-19 14:45:40,341 basehttp  "GET /english/e_r HTTP/1.1" 301 0
+ERROR 2021-07-19 14:45:40,688 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 103, in find_template
+    template, origin = context.template.engine.find_template(
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\engine.py", line 129, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: english/base_english
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 46, in get
+    return render(request, 'english/e-r.html')
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: english/base_english
+ERROR 2021-07-19 14:45:40,719 basehttp  "GET /english/e_r/ HTTP/1.1" 500 142306
+INFO 2021-07-19 14:46:05,934 autoreload  Watching for file changes with StatReloader
+ERROR 2021-07-19 14:46:06,505 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 127, in render
+    compiled_parent = self.get_parent(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 124, in get_parent
+    return self.find_template(parent, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 103, in find_template
+    template, origin = context.template.engine.find_template(
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\engine.py", line 129, in find_template
+    raise TemplateDoesNotExist(name, tried=tried)
+django.template.exceptions.TemplateDoesNotExist: english/base_english
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 46, in get
+    return render(request, 'english/e-r.html')
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 63, in render
+    reraise(exc, self.backend)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 84, in reraise
+    raise new from exc
+django.template.exceptions.TemplateDoesNotExist: english/base_english
+ERROR 2021-07-19 14:46:06,513 basehttp  "GET /english/e_r/ HTTP/1.1" 500 142306
+INFO 2021-07-19 14:46:34,860 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:46:35,400 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2488
+INFO 2021-07-19 14:47:13,286 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2488
+INFO 2021-07-19 14:47:13,406 basehttp  "GET /static/js/polivScript.js HTTP/1.1" 200 1902
+INFO 2021-07-19 14:47:13,545 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:47:13,716 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:47:13,717 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:47:53,103 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:47:55,512 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2485
+INFO 2021-07-19 14:47:55,626 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 449
+INFO 2021-07-19 14:47:55,755 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:47:55,855 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:47:55,856 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:49:59,164 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:49:59,849 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2485
+INFO 2021-07-19 14:50:00,147 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 480
+INFO 2021-07-19 14:50:00,219 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:50:00,282 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:50:00,283 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:51:03,195 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:51:03,673 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2578
+INFO 2021-07-19 14:51:03,829 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 14:51:03,896 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 480
+WARNING 2021-07-19 14:51:04,164 log  Forbidden (CSRF token missing or incorrect.): /english/e_r/
+WARNING 2021-07-19 14:51:04,171 basehttp  "POST /english/e_r/ HTTP/1.1" 403 2555
+INFO 2021-07-19 14:51:04,175 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:51:04,331 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:51:04,332 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:51:51,431 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:52:21,298 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:52:22,622 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2578
+INFO 2021-07-19 14:52:22,741 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 480
+INFO 2021-07-19 14:52:22,744 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:52:22,919 log  Forbidden (CSRF token missing or incorrect.): /english/e_r/
+WARNING 2021-07-19 14:52:22,920 basehttp  "POST /english/e_r/ HTTP/1.1" 403 2555
+INFO 2021-07-19 14:52:22,941 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:52:23,012 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:52:23,013 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:56:47,131 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:57:14,284 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 14:57:39,050 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2801
+INFO 2021-07-19 14:57:39,163 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 14:57:39,260 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 480
+WARNING 2021-07-19 14:57:39,460 log  Forbidden (CSRF token missing or incorrect.): /english/e_r/
+WARNING 2021-07-19 14:57:39,461 basehttp  "POST /english/e_r/ HTTP/1.1" 403 2555
+WARNING 2021-07-19 14:57:40,092 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:57:40,093 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:57:41,101 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 14:59:21,510 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2801
+INFO 2021-07-19 14:59:21,622 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 480
+INFO 2021-07-19 14:59:21,623 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:59:21,854 log  Forbidden (CSRF cookie not set.): /english/e_r/
+WARNING 2021-07-19 14:59:21,855 basehttp  "POST /english/e_r/ HTTP/1.1" 403 3340
+INFO 2021-07-19 14:59:22,074 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 14:59:22,144 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:59:22,144 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:59:26,945 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2801
+INFO 2021-07-19 14:59:27,086 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 14:59:27,094 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 480
+WARNING 2021-07-19 14:59:27,259 log  Forbidden (CSRF cookie not set.): /english/e_r/
+WARNING 2021-07-19 14:59:27,260 basehttp  "POST /english/e_r/ HTTP/1.1" 403 3340
+WARNING 2021-07-19 14:59:27,959 log  Not Found: /favicon.ico
+WARNING 2021-07-19 14:59:27,960 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 14:59:29,084 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:00:56,456 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:00:57,215 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:00:57,312 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:00:57,324 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 480
+INFO 2021-07-19 15:00:57,588 basehttp  "POST /english/e_r/ HTTP/1.1" 200 14
+INFO 2021-07-19 15:00:57,716 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:00:57,820 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:00:57,821 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:02:58,669 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:03:01,802 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:03:02,090 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:03:02,388 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 501
+INFO 2021-07-19 15:03:02,603 basehttp  "POST /english/e_r/ HTTP/1.1" 200 14
+INFO 2021-07-19 15:03:02,738 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:03:02,845 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:03:02,846 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:04:10,002 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:04:10,429 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:04:10,715 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:04:10,717 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 513
+INFO 2021-07-19 15:04:11,009 basehttp  "POST /english/e_r/ HTTP/1.1" 200 14
+INFO 2021-07-19 15:04:11,202 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:04:11,289 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:04:11,290 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:05:39,922 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:05:41,699 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:05:41,808 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:05:41,937 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 524
+INFO 2021-07-19 15:05:42,110 basehttp  "POST /english/e_r/ HTTP/1.1" 200 14
+INFO 2021-07-19 15:05:42,218 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:05:42,318 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:05:42,319 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:07:40,051 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:07:41,027 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:07:41,163 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:07:41,329 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 526
+INFO 2021-07-19 15:07:41,687 basehttp  "POST /english/e_r/ HTTP/1.1" 200 14
+INFO 2021-07-19 15:07:41,877 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:07:41,935 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:07:41,936 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:11:59,222 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:12:00,169 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:12:00,289 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 546
+INFO 2021-07-19 15:12:00,302 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:12:00,723 basehttp  "POST /english/e_r/ HTTP/1.1" 200 14
+INFO 2021-07-19 15:12:00,976 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:12:01,180 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:12:01,181 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:14:07,170 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 15:14:09,189 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:14:09,822 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:14:09,990 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:14:10,018 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 546
+INFO 2021-07-19 15:14:10,199 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:14:10,406 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:14:10,464 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:14:10,465 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:24:47,859 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:24:48,007 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:24:48,100 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 597
+INFO 2021-07-19 15:24:48,409 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:24:48,694 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:24:48,738 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:24:48,739 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:25:15,996 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:25:16,097 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:25:16,101 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 600
+INFO 2021-07-19 15:25:16,316 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:25:16,444 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:25:16,532 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:25:16,533 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:28:10,961 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:28:11,106 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:28:11,168 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 663
+INFO 2021-07-19 15:28:11,309 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:28:11,523 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:28:11,641 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:28:11,643 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:28:15,628 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:28:15,740 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:28:15,742 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 663
+INFO 2021-07-19 15:28:16,049 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:28:16,184 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:28:16,261 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:28:16,262 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:28:21,874 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:28:21,976 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:28:21,978 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 663
+INFO 2021-07-19 15:28:22,209 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:28:22,351 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:28:22,848 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:28:22,848 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:28:25,295 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:28:25,422 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:28:25,424 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 663
+INFO 2021-07-19 15:28:25,668 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:28:25,860 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:28:25,957 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:28:25,959 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:29:07,396 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2922
+INFO 2021-07-19 15:29:07,500 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:29:07,504 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 691
+INFO 2021-07-19 15:29:07,833 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:29:08,044 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:29:08,130 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:29:08,131 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:35:02,240 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2932
+INFO 2021-07-19 15:35:02,351 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:35:02,584 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 746
+INFO 2021-07-19 15:35:02,673 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:35:02,953 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:35:03,034 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:35:03,034 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:35:10,690 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2932
+INFO 2021-07-19 15:35:10,798 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:35:10,801 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 746
+INFO 2021-07-19 15:35:10,957 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:35:11,160 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:35:11,231 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:35:11,232 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:35:52,209 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:36:00,382 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2928
+INFO 2021-07-19 15:36:00,499 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:36:00,595 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 746
+INFO 2021-07-19 15:36:00,731 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:36:00,959 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:36:01,057 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:36:01,058 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:36:49,079 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:36:52,780 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2928
+INFO 2021-07-19 15:36:52,871 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:36:53,179 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 746
+INFO 2021-07-19 15:36:53,257 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:36:53,520 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:36:53,617 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:36:53,618 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:37:46,557 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2928
+INFO 2021-07-19 15:37:46,712 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:37:46,719 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 744
+INFO 2021-07-19 15:37:46,926 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:37:47,452 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:37:47,594 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:37:47,595 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:38:11,419 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2928
+INFO 2021-07-19 15:38:11,656 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:38:11,658 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:38:11,811 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:38:12,516 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:38:12,734 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:38:12,735 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:38:14,803 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2928
+INFO 2021-07-19 15:38:14,941 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:38:14,968 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:38:15,132 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:38:15,566 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:38:15,659 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:38:15,660 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:38:16,547 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2928
+INFO 2021-07-19 15:38:16,701 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:38:16,709 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:38:16,907 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:38:17,219 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:38:18,626 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:38:18,627 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:38:19,417 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2928
+INFO 2021-07-19 15:38:19,482 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:38:19,519 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:38:20,169 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:38:20,318 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:38:20,463 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:38:20,464 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:39:30,899 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2934
+INFO 2021-07-19 15:39:31,001 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:39:31,003 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:39:31,348 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:39:31,759 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:39:31,846 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:39:31,847 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:44:38,040 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2920
+INFO 2021-07-19 15:44:38,162 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:44:38,191 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:44:38,507 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:44:38,833 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:44:38,944 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:44:38,945 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:44:43,396 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=sbZxDsX0wERtad6R12mfTdpbPoRwKmf50bSmlFFMwttBcVA9EDZVn1dbAFDLFJ63 HTTP/1.1" 200 2920
+INFO 2021-07-19 15:44:43,503 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:44:43,508 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:44:43,748 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=sbZxDsX0wERtad6R12mfTdpbPoRwKmf50bSmlFFMwttBcVA9EDZVn1dbAFDLFJ63 HTTP/1.1" 200 30
+INFO 2021-07-19 15:44:44,028 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:44:44,165 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:44:44,166 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 15:45:15,185 log  Internal Server Error: /english/list_words/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: english_words
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 40, in list_words
+    return render(request, 'english/list_words.html', {'words': all})
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: english_words
+ERROR 2021-07-19 15:45:15,193 basehttp  "GET /english/list_words/ HTTP/1.1" 500 205376
+WARNING 2021-07-19 15:45:15,535 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:45:15,536 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 15:45:20,419 log  Internal Server Error: /english/list_words/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: english_words
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 40, in list_words
+    return render(request, 'english/list_words.html', {'words': all})
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: english_words
+ERROR 2021-07-19 15:45:20,423 basehttp  "GET /english/list_words/ HTTP/1.1" 500 205135
+WARNING 2021-07-19 15:45:20,704 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:45:20,705 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 15:47:05,586 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:47:05,590 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 15:47:09,036 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:47:09,038 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:47:11,875 basehttp  "GET /english/settings/ HTTP/1.1" 200 3256
+INFO 2021-07-19 15:47:12,034 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:47:12,435 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:47:12,436 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 15:47:14,668 log  Internal Server Error: /english/list_words/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: english_words
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 40, in list_words
+    return render(request, 'english/list_words.html', {'words': all})
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: english_words
+ERROR 2021-07-19 15:47:14,759 basehttp  "GET /english/list_words/ HTTP/1.1" 500 205296
+WARNING 2021-07-19 15:47:14,931 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:47:14,933 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:48:16,533 autoreload  Watching for file changes with StatReloader
+ERROR 2021-07-19 15:48:17,429 log  Internal Server Error: /english/list_words/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: english_words
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 40, in list_words
+    return render(request, 'english/list_words.html', {'words': all})
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: english_words
+ERROR 2021-07-19 15:48:17,446 basehttp  "GET /english/list_words/ HTTP/1.1" 500 205181
+WARNING 2021-07-19 15:48:17,795 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:48:17,796 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 15:48:23,017 log  Internal Server Error: /english/list_words/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: english_words
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 40, in list_words
+    return render(request, 'english/list_words.html', {'words': all})
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: english_words
+ERROR 2021-07-19 15:48:23,024 basehttp  "GET /english/list_words/ HTTP/1.1" 500 205181
+WARNING 2021-07-19 15:48:23,408 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:48:23,409 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:48:42,808 autoreload  Watching for file changes with StatReloader
+ERROR 2021-07-19 15:48:56,874 log  Internal Server Error: /english/list_words/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: english_words
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 40, in list_words
+    return render(request, 'english/list_words.html', {'words': all})
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\backends\django.py", line 61, in render
+    return self.template.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 170, in render
+    return self._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 150, in render
+    return compiled_parent._render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 162, in _render
+    return self.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 938, in render
+    bit = node.render_annotated(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\base.py", line 905, in render_annotated
+    return self.render(context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\template\defaulttags.py", line 168, in render
+    len_values = len(values)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 269, in __len__
+    self._fetch_all()
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 1308, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\query.py", line 53, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\models\sql\compiler.py", line 1156, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\db\backends\sqlite3\base.py", line 413, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: english_words
+ERROR 2021-07-19 15:48:56,895 basehttp  "GET /english/list_words/ HTTP/1.1" 500 205127
+WARNING 2021-07-19 15:48:57,274 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:48:57,275 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:49:33,556 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:50:00,655 basehttp  "GET /english/list_words/ HTTP/1.1" 200 2285
+INFO 2021-07-19 15:50:00,913 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:50:01,142 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:50:01,142 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:50:05,345 basehttp  "GET /english/settings/ HTTP/1.1" 200 3259
+INFO 2021-07-19 15:50:05,491 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:50:05,719 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:50:05,720 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:50:19,691 basehttp  "GET /english/list_words/ HTTP/1.1" 200 10371
+INFO 2021-07-19 15:50:19,802 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:50:20,188 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:50:20,188 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:52:01,526 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13466
+INFO 2021-07-19 15:52:01,686 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:52:02,113 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:52:02,114 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+WARNING 2021-07-19 15:52:02,954 log  Not Found: /english/list_words/{% url 'e_r'
+WARNING 2021-07-19 15:52:02,956 basehttp  "GET /english/list_words/%7B%%20url%20'e_r' HTTP/1.1" 404 3549
+WARNING 2021-07-19 15:52:03,208 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:52:03,209 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:52:10,707 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13466
+INFO 2021-07-19 15:52:10,845 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:52:11,097 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:52:11,098 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:52:23,875 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13467
+INFO 2021-07-19 15:52:23,981 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:52:24,366 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:52:24,367 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:52:26,339 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 15:52:27,928 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:52:28,116 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:52:28,394 basehttp  "POST /english/e_r/ HTTP/1.1" 200 30
+INFO 2021-07-19 15:52:29,354 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 15:52:29,433 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:52:29,434 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:52:40,882 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=UuVwu40X1g8OSEzeRJEvMVwO9Uymh676suOlchIJ15KWUm3wukhbgJkOUbkBctY4 HTTP/1.1" 200 2935
+INFO 2021-07-19 15:52:41,056 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=UuVwu40X1g8OSEzeRJEvMVwO9Uymh676suOlchIJ15KWUm3wukhbgJkOUbkBctY4 HTTP/1.1" 200 30
+INFO 2021-07-19 15:52:43,810 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=4KnX0ZUPNgFE3oxhu6bpUgWugPyRyl1aCKgMIcCBN5hM561z7HO5o4Ku16k6tIS8 HTTP/1.1" 200 2935
+INFO 2021-07-19 15:52:43,968 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=4KnX0ZUPNgFE3oxhu6bpUgWugPyRyl1aCKgMIcCBN5hM561z7HO5o4Ku16k6tIS8 HTTP/1.1" 200 30
+INFO 2021-07-19 15:52:46,795 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=QmE1SH3ZvySUVAoa5TdBUbRff0Edtfp1omxQAULLvnu2XiSsIuQhoZFf0hqsoCgZ HTTP/1.1" 200 2935
+INFO 2021-07-19 15:52:46,942 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=QmE1SH3ZvySUVAoa5TdBUbRff0Edtfp1omxQAULLvnu2XiSsIuQhoZFf0hqsoCgZ HTTP/1.1" 200 30
+INFO 2021-07-19 15:52:49,847 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=eGE7bmLNszn79bTkAHsSEjfH9h3fHpqrMGxWTztzsoZfbTnCdi5y873HUyPuCMhp HTTP/1.1" 200 2935
+INFO 2021-07-19 15:52:49,989 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=eGE7bmLNszn79bTkAHsSEjfH9h3fHpqrMGxWTztzsoZfbTnCdi5y873HUyPuCMhp HTTP/1.1" 200 30
+INFO 2021-07-19 15:53:31,891 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 15:53:33,813 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:53:34,854 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13467
+INFO 2021-07-19 15:53:36,162 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+ERROR 2021-07-19 15:53:36,487 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 51, in post
+    response = JsonResponse(all)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\http\response.py", line 560, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2021-07-19 15:53:36,489 basehttp  "POST /english/e_r/ HTTP/1.1" 500 89002
+INFO 2021-07-19 15:53:41,158 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+ERROR 2021-07-19 15:53:41,706 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 51, in post
+    response = JsonResponse(all)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\http\response.py", line 560, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2021-07-19 15:53:41,712 basehttp  "POST /english/e_r/ HTTP/1.1" 500 88783
+INFO 2021-07-19 15:54:22,162 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 15:54:24,139 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:54:45,536 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 15:54:47,278 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:57:07,815 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 15:57:09,964 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:57:42,790 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 15:57:44,959 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:57:46,649 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 15:57:46,848 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 15:57:46,858 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+ERROR 2021-07-19 15:57:47,559 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    return JsonResponse(data)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\http\response.py", line 560, in __init__
+    raise TypeError(
+TypeError: In order to allow non-dict objects to be serialized set the safe parameter to False.
+ERROR 2021-07-19 15:57:47,584 basehttp  "POST /english/e_r/ HTTP/1.1" 500 104613
+WARNING 2021-07-19 15:57:48,164 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:57:48,165 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 15:57:49,072 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:58:08,673 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 15:58:09,879 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 15:58:09,989 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 15:58:10,020 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+WARNING 2021-07-19 15:58:11,523 log  Not Found: /favicon.ico
+WARNING 2021-07-19 15:58:11,524 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:00:32,123 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:00:33,673 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:00:33,804 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:00:33,923 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+ERROR 2021-07-19 16:00:34,708 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: ''
+ERROR 2021-07-19 16:00:34,772 basehttp  "POST /english/e_r/ HTTP/1.1" 500 83485
+WARNING 2021-07-19 16:00:35,335 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:00:35,336 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:00:36,471 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:00:40,061 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:00:40,180 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:00:40,182 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+ERROR 2021-07-19 16:00:40,450 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: ''
+ERROR 2021-07-19 16:00:40,452 basehttp  "POST /english/e_r/ HTTP/1.1" 500 83485
+WARNING 2021-07-19 16:00:41,061 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:00:41,062 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:00:43,435 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:00:43,573 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:00:43,575 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+ERROR 2021-07-19 16:00:43,763 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: ''
+ERROR 2021-07-19 16:00:43,766 basehttp  "POST /english/e_r/ HTTP/1.1" 500 83485
+WARNING 2021-07-19 16:00:44,393 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:00:44,394 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:01:05,693 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:01:07,003 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:01:07,302 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:01:07,475 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+ERROR 2021-07-19 16:01:07,979 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: ''
+ERROR 2021-07-19 16:01:07,996 basehttp  "POST /english/e_r/ HTTP/1.1" 500 85966
+WARNING 2021-07-19 16:01:08,599 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:01:08,599 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:01:15,070 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:01:17,708 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13467
+INFO 2021-07-19 16:01:17,836 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:01:18,191 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:01:18,193 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:01:19,788 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:01:19,914 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:01:19,918 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+ERROR 2021-07-19 16:01:20,516 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: ''
+ERROR 2021-07-19 16:01:20,518 basehttp  "POST /english/e_r/ HTTP/1.1" 500 85966
+WARNING 2021-07-19 16:01:21,153 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:01:21,154 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:01:22,165 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:01:32,422 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:01:32,550 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:01:32,556 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+WARNING 2021-07-19 16:01:33,982 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:01:33,983 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 16:01:56,419 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: ''
+ERROR 2021-07-19 16:01:56,455 basehttp  "POST /english/e_r/ HTTP/1.1" 500 85966
+INFO 2021-07-19 16:02:55,940 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:02:56,986 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:02:57,103 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:02:57,208 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+WARNING 2021-07-19 16:02:58,790 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:02:58,791 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:03:41,804 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:03:53,053 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:03:53,200 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:03:53,389 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+WARNING 2021-07-19 16:03:54,699 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:03:54,700 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 16:04:01,463 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: 'в данный момент'
+ERROR 2021-07-19 16:04:01,490 basehttp  "POST /english/e_r/ HTTP/1.1" 500 85959
+INFO 2021-07-19 16:04:13,859 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:04:40,017 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:04:40,925 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:04:41,030 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:04:41,036 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+WARNING 2021-07-19 16:04:42,465 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:04:42,466 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 16:05:29,769 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[item.english] = context[item.russian]
+KeyError: 'в данный момент'
+ERROR 2021-07-19 16:05:29,785 basehttp  "POST /english/e_r/ HTTP/1.1" 500 85959
+INFO 2021-07-19 16:06:15,545 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:06:16,612 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:06:16,824 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 16:06:16,830 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:06:18,362 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:06:18,363 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+ERROR 2021-07-19 16:06:22,866 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[str(item.english)] = str(context[item.russian])
+KeyError: 'в данный момент'
+ERROR 2021-07-19 16:06:22,890 basehttp  "POST /english/e_r/ HTTP/1.1" 500 85979
+INFO 2021-07-19 16:06:58,229 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:06:58,916 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:06:59,139 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 16:06:59,298 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+ERROR 2021-07-19 16:06:59,727 log  Internal Server Error: /english/e_r/
+Traceback (most recent call last):
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\exception.py", line 47, in inner
+    response = get_response(request)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\core\handlers\base.py", line 179, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\Alex\.virtualenvs\my_smart_home\lib\site-packages\django\views\generic\base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "D:\SynologyDrive\my_smart_home\english\views.py", line 53, in post
+    context[str(item.english)] = str(context[item.russian])
+KeyError: 'в данный момент'
+ERROR 2021-07-19 16:06:59,760 basehttp  "POST /english/e_r/ HTTP/1.1" 500 83524
+WARNING 2021-07-19 16:07:00,336 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:07:00,337 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:07:01,880 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:07:29,511 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:07:30,995 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:07:31,000 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 16:07:31,011 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+WARNING 2021-07-19 16:07:32,470 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:07:32,471 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:08:01,414 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 16:08:05,612 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:09:14,131 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:09:15,035 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2935
+INFO 2021-07-19 16:09:15,143 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:09:15,259 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 16:09:15,394 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:09:15,883 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:09:16,018 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:09:16,018 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:09:25,650 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=45yarHN11LUYJ6fbJp8KW3BK5TKtZH8oC5rZ9UvN1Aw6LOJtm0LqqRpKQawIU4Zm HTTP/1.1" 200 2935
+INFO 2021-07-19 16:09:25,842 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:09:25,872 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 16:09:25,984 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=45yarHN11LUYJ6fbJp8KW3BK5TKtZH8oC5rZ9UvN1Aw6LOJtm0LqqRpKQawIU4Zm HTTP/1.1" 200 7260
+INFO 2021-07-19 16:09:26,386 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:09:26,438 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:09:26,439 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:09:28,706 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=9W0UWsjrytw66QpEWOhaS0rUtu1QQsMeHWTJEF1dyi8e8yTWzpUQmOfUeLN5LPDc HTTP/1.1" 200 2935
+INFO 2021-07-19 16:09:28,935 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 16:09:28,939 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:09:29,137 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=9W0UWsjrytw66QpEWOhaS0rUtu1QQsMeHWTJEF1dyi8e8yTWzpUQmOfUeLN5LPDc HTTP/1.1" 200 7260
+INFO 2021-07-19 16:09:29,455 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:09:29,541 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:09:29,542 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:09:31,244 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=37EwkIoPOQlNZJWGHMsmdkaU3j2Qj8IvB7xl2V6BOFXV1rqYkn52H8YUOAO5evzt HTTP/1.1" 200 2935
+INFO 2021-07-19 16:09:31,372 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:09:31,374 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 726
+INFO 2021-07-19 16:09:31,575 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=37EwkIoPOQlNZJWGHMsmdkaU3j2Qj8IvB7xl2V6BOFXV1rqYkn52H8YUOAO5evzt HTTP/1.1" 200 7260
+INFO 2021-07-19 16:09:31,861 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:09:31,960 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:09:31,961 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:13:23,032 autoreload  D:\SynologyDrive\my_smart_home\english\views.py changed, reloading.
+INFO 2021-07-19 16:13:24,930 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:13:31,423 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=PvetnnNRxuf6trpGvST6xxyPinlOQu2wnv7i5AvDxjRev9TY8twM1lmP3E73LRTu HTTP/1.1" 200 2937
+INFO 2021-07-19 16:13:31,566 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:13:31,714 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 762
+INFO 2021-07-19 16:13:31,791 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=PvetnnNRxuf6trpGvST6xxyPinlOQu2wnv7i5AvDxjRev9TY8twM1lmP3E73LRTu HTTP/1.1" 200 7260
+INFO 2021-07-19 16:13:32,188 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:13:32,414 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:13:32,415 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:19:41,908 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:19:42,575 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=PvetnnNRxuf6trpGvST6xxyPinlOQu2wnv7i5AvDxjRev9TY8twM1lmP3E73LRTu HTTP/1.1" 200 2948
+INFO 2021-07-19 16:19:42,739 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:19:42,766 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 877
+INFO 2021-07-19 16:19:43,075 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=PvetnnNRxuf6trpGvST6xxyPinlOQu2wnv7i5AvDxjRev9TY8twM1lmP3E73LRTu HTTP/1.1" 200 7260
+INFO 2021-07-19 16:19:43,313 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:19:43,454 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:19:43,455 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:19:44,344 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13377
+INFO 2021-07-19 16:19:44,585 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:19:44,753 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:19:44,754 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:19:46,894 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:19:46,978 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:19:47,007 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 877
+INFO 2021-07-19 16:19:47,169 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:19:47,545 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:19:47,666 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:19:47,667 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:20:07,402 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:20:07,499 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:20:07,506 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 886
+INFO 2021-07-19 16:20:07,715 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:20:08,133 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:20:08,193 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:20:08,195 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:20:13,018 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=fNxIszBHee8S4wnEgYGQtwJH7UUka38vNNqxaMjte3K06eRWTzjwXkxHSbGz5qZt HTTP/1.1" 200 2948
+INFO 2021-07-19 16:20:13,183 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:20:13,186 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 886
+INFO 2021-07-19 16:20:13,684 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=fNxIszBHee8S4wnEgYGQtwJH7UUka38vNNqxaMjte3K06eRWTzjwXkxHSbGz5qZt HTTP/1.1" 200 7260
+INFO 2021-07-19 16:20:13,926 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:20:14,015 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:20:14,015 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:20:50,728 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=2v1tecb0Spo3jGNuZStvgDbGtD7rRue8AvUiWpTMSe0blohMCt6bKrZGeUTGMR56 HTTP/1.1" 200 2948
+INFO 2021-07-19 16:20:51,000 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 886
+INFO 2021-07-19 16:20:51,001 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:20:51,165 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=2v1tecb0Spo3jGNuZStvgDbGtD7rRue8AvUiWpTMSe0blohMCt6bKrZGeUTGMR56 HTTP/1.1" 200 7260
+INFO 2021-07-19 16:20:51,621 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:20:51,709 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:20:51,710 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:27:24,111 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13377
+INFO 2021-07-19 16:27:24,226 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:27:24,908 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:27:24,908 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:27:25,415 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:27:25,584 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:27:25,678 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 886
+INFO 2021-07-19 16:27:25,801 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:27:26,141 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:27:26,499 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:27:26,500 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:27:41,226 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=s3zIYLmWpzd3yJvIXMVUOzd9DZraptX003sxGY4IpoPbArZ0AnyAin19ogdpkQOY HTTP/1.1" 200 2948
+INFO 2021-07-19 16:27:41,336 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 886
+INFO 2021-07-19 16:27:41,343 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:27:41,538 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=s3zIYLmWpzd3yJvIXMVUOzd9DZraptX003sxGY4IpoPbArZ0AnyAin19ogdpkQOY HTTP/1.1" 200 7260
+INFO 2021-07-19 16:27:41,824 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:27:42,024 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:27:42,025 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:05,702 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=s3zIYLmWpzd3yJvIXMVUOzd9DZraptX003sxGY4IpoPbArZ0AnyAin19ogdpkQOY HTTP/1.1" 200 2948
+INFO 2021-07-19 16:29:05,835 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:29:05,837 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:29:06,162 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:06,214 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:06,218 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:09,066 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13377
+INFO 2021-07-19 16:29:09,162 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:09,440 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:09,440 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:10,409 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:29:10,476 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:29:10,533 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:29:10,828 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:10,931 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:10,933 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:16,686 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13377
+INFO 2021-07-19 16:29:16,795 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:17,078 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:17,079 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:18,678 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13377
+INFO 2021-07-19 16:29:18,773 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:18,977 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:18,978 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:19,912 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:29:19,998 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:29:20,001 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:29:20,254 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:20,335 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:20,337 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:27,942 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:29:28,048 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:29:28,049 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:29:28,480 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:28,583 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:28,584 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:46,502 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:29:49,501 basehttp  "GET /english/ HTTP/1.1" 200 2134
+INFO 2021-07-19 16:29:49,657 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:49,814 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:49,815 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:51,588 basehttp  "GET /english/settings/ HTTP/1.1" 200 3271
+INFO 2021-07-19 16:29:51,707 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:52,166 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:52,168 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:53,546 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13377
+INFO 2021-07-19 16:29:53,685 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:54,093 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:54,093 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:29:56,437 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:29:56,517 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:29:56,524 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:29:56,920 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:29:56,970 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:29:56,971 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:31:08,739 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2948
+INFO 2021-07-19 16:31:09,031 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:31:09,033 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 892
+INFO 2021-07-19 16:31:09,696 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:31:09,832 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:31:09,912 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:31:09,912 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:31:12,650 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=S58m9xIRh81FTpQeeT3SVj9sTcx7RaoIq51bRKqDhXDNV7kwRuGyp7XsEtjmMxfG HTTP/1.1" 200 2948
+INFO 2021-07-19 16:31:12,906 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 892
+INFO 2021-07-19 16:31:12,907 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:31:13,073 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=S58m9xIRh81FTpQeeT3SVj9sTcx7RaoIq51bRKqDhXDNV7kwRuGyp7XsEtjmMxfG HTTP/1.1" 200 7260
+INFO 2021-07-19 16:31:13,435 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:31:13,575 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:31:13,576 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:33:00,386 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:33:04,070 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2993
+INFO 2021-07-19 16:33:04,195 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:33:04,252 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 892
+INFO 2021-07-19 16:33:04,498 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:33:04,880 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:33:04,947 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:33:04,948 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:33:08,899 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=CcGa8zo6kVWC7IqViEpWkJwV963BxZ6iaczZQM6SkKyK9qUdVf2COxkVUnPQsmXg HTTP/1.1" 200 2993
+INFO 2021-07-19 16:33:09,026 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:33:09,203 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 892
+INFO 2021-07-19 16:33:09,390 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=CcGa8zo6kVWC7IqViEpWkJwV963BxZ6iaczZQM6SkKyK9qUdVf2COxkVUnPQsmXg HTTP/1.1" 200 7260
+INFO 2021-07-19 16:33:09,745 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:33:09,925 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:33:09,926 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:33:17,597 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=NhGTEhxhAW2dFTXSsvJP8sEHDwsCgF8BlhzImuf3ALElHBra56mvCgsHoNeRb2Zz HTTP/1.1" 200 2993
+INFO 2021-07-19 16:33:17,737 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:33:17,741 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 892
+INFO 2021-07-19 16:33:18,044 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=NhGTEhxhAW2dFTXSsvJP8sEHDwsCgF8BlhzImuf3ALElHBra56mvCgsHoNeRb2Zz HTTP/1.1" 200 7260
+INFO 2021-07-19 16:33:18,201 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:33:18,289 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:33:18,291 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:33:53,708 basehttp  "GET /english/e_r/ HTTP/1.1" 200 2993
+INFO 2021-07-19 16:33:53,833 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:33:53,855 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:33:54,188 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:33:54,408 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:33:54,482 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:33:54,483 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:33:59,038 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=Mss0LYX7a50ezhUsuRxlbwgEt5rg3tpokslPtbFTaUCmBZoK7sa1Fk4EemdvYQgm HTTP/1.1" 200 2993
+INFO 2021-07-19 16:33:59,164 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:33:59,200 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:33:59,347 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=Mss0LYX7a50ezhUsuRxlbwgEt5rg3tpokslPtbFTaUCmBZoK7sa1Fk4EemdvYQgm HTTP/1.1" 200 7260
+INFO 2021-07-19 16:33:59,648 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:33:59,917 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:33:59,918 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:34:06,207 basehttp  "GET /english/e_r/?csrfmiddlewaretoken=3tKIGA18yZWXgB6DkXXU2MtOL3TgnTcvBtDxoNJUyOy5ijAVXyAAwAhOwkFvig3t HTTP/1.1" 200 2993
+INFO 2021-07-19 16:34:06,295 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:34:06,300 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 891
+INFO 2021-07-19 16:34:06,594 basehttp  "POST /english/e_r/?csrfmiddlewaretoken=3tKIGA18yZWXgB6DkXXU2MtOL3TgnTcvBtDxoNJUyOy5ijAVXyAAwAhOwkFvig3t HTTP/1.1" 200 7260
+INFO 2021-07-19 16:34:06,898 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:34:07,027 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:34:07,028 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:37:38,536 basehttp  "GET /english/list_words/ HTTP/1.1" 200 13377
+INFO 2021-07-19 16:37:38,746 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:37:39,128 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:37:39,129 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:37:39,994 basehttp  "GET /english/e_r/ HTTP/1.1" 200 3034
+INFO 2021-07-19 16:37:40,124 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:37:40,195 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 1007
+INFO 2021-07-19 16:37:40,323 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:37:40,681 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:37:40,846 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:37:40,847 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670
+INFO 2021-07-19 16:38:25,605 autoreload  Watching for file changes with StatReloader
+INFO 2021-07-19 16:38:26,635 basehttp  "GET /english/e_r/ HTTP/1.1" 200 3025
+INFO 2021-07-19 16:38:26,772 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+INFO 2021-07-19 16:38:26,864 basehttp  "GET /static/english/e-r.js HTTP/1.1" 200 1007
+INFO 2021-07-19 16:38:27,129 basehttp  "POST /english/e_r/ HTTP/1.1" 200 7260
+INFO 2021-07-19 16:38:28,025 basehttp  "GET /static/selection_avto/jquery/jquery-3.5.1.js HTTP/1.1" 200 287630
+WARNING 2021-07-19 16:38:28,116 log  Not Found: /favicon.ico
+WARNING 2021-07-19 16:38:28,118 basehttp  "GET /favicon.ico HTTP/1.1" 404 2670

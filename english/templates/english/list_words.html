@@ -1,0 +1,25 @@
+{% extends "english/base_english.html" %}
+
+{% block main %}
+
+    <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">english</th>
+      <th scope="col">russian</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for word in words %}
+    <tr>
+      <th scope="row">{{word.id}}</th>
+      <td>{{word.english}}</td>
+      <td>{{word.russian}}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

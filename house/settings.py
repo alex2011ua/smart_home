@@ -57,7 +57,8 @@ INSTALLED_APPS = [
     'house.core',
     'start',
     'myviberbot',
-    'selection_avto'
+    'selection_avto',
+    'english'
 
 ]
 
