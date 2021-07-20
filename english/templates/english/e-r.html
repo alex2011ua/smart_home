@@ -10,7 +10,7 @@
 {% csrf_token %}
   <div id="start" class="form-group">
     <label for="exampleFormControlInput1">Перевод:</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="...">
+    <input type="text" autocomplete="off" class="form-control" id="exampleFormControlInput1" placeholder="...">
   </div>
   <button type="submit">Submit form</button>
 </form>
@@ -23,6 +23,7 @@
 <div id="error" class="alert alert-success" role="alert" style="display: none">
   Верно! Удалено.
 </div>
+Загружено слов - <span id="count_is">{{count}}</span>
 {% endblock %}
 
 {% block script %}

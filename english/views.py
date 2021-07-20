@@ -10,9 +10,10 @@ def index(request):
 
 def settings(request):
     if request.method == 'GET':
+        count = Words.objects.all().count()
         form_list_words = LoadWordsForm()
         form_word = LoadWordForm()
-        return render(request, 'english/settings.html', {'form_word': form_word, 'form_list_words': form_list_words})
+        return render(request, 'english/settings.html', {'form_word': form_word, 'form_list_words': form_list_words, 'count':count})
     if request.method == 'POST':
         if request.POST.get('english'):
             form = LoadWordForm(request.POST)

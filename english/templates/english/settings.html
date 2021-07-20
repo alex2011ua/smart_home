@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block main %}
+Загружено слов - <span id="count_is">{{count}}</span>
 <h1>Вставить слово</h1>
 <form action="" method="post" autocomplete="off">
     {% csrf_token %}
