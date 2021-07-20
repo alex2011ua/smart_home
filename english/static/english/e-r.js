@@ -36,14 +36,14 @@ let answer = document.getElementById("result");             // правильн�
 document.getElementById("word").innerHTML = words_list[ind];
 
 function start(){
-    console.log('submit');
-    let inp = document.getElementById("exampleFormControlInput1").value;
-    if (inp == words_obj[words_list[ind]]){
+    let inp = document.getElementById("exampleFormControlInput1").value.trim();
+    if (inp.toLowerCase() == words_obj[words_list[ind]].toLowerCase()){
         console.log('верно - удаляю');
+        answer.innerText = words_obj[words_list[ind]] + " - " + words_list[ind];
         delete words_obj[words_list[ind]];
         words_list = Object.keys(words_obj);
         document.getElementById("exampleFormControlInput1").value = '';
-        answer.innerText = 'верно';
+
         let ok =  document.getElementById("ok");
         ok.style.display = 'none';
         let err = document.getElementById("error");
@@ -73,7 +73,7 @@ function start(){
     //do processing
 
     }
-    console.log(inp);
+
     ind = Math.floor(Math.random() * words_list.length);
 
     console.log(words_obj[words_list[ind]], words_list[ind]);
