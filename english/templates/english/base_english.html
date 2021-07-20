@@ -22,30 +22,32 @@
   <body>
           <ul class="nav nav-pills nav-fill">
           <li class="nav-item">
-            <a class="nav-link " href="{% url 'list_words' %}">Список всех слов</a>
+            <a class="nav-link {% if request.path == "/english/list_words/" %} active {% endif %} " href="{% url 'list_words' %}">Список всех слов</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="{% url 'e_r' %}">English to Russian</a>
+            <a class="nav-link {% if request.path == "/english/e_r/" %} active {% endif %} " href="{% url 'e_r' %}">English to Russian</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'r_e' %}">Russian to English</a>
+            <a class="nav-link {% if request.path == "/english/r_e/" %} active {% endif %} " href="{% url 'r_e' %}">Russian to English</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Random</a>
+            <a class="nav-link {% if request.path == "/english/random/" %} active {% endif %} " href="{% url 'random' %}">Random</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled active" href="{% url 'settings' %} " tabindex="-1" aria-disabled="true">Управление</a>
+            <a class="nav-link disabled {% if request.path == "/english/settings/" %} active {% endif %}" href="{% url 'settings' %} " tabindex="-1" aria-disabled="true">Управление</a>
           </li>
         </ul>
 
 
 {% block main %}
           <h1>Изучение слов!</h1>
+
 {% endblock %}
 
 {% block footer %}
-
+Загружено слов - <span id="count_is">-{{count}}-</span>
 {% endblock %}
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -55,6 +57,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="{% static 'selection_avto/jquery/jquery-3.5.1.js'%}"></script>
+{% block script %}{% endblock %}
+
   </body>
 </html>

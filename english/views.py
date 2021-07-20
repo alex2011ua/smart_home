@@ -37,7 +37,7 @@ def clear(request):
 
 def list_words(request):
     all = Words.objects.all()
-    return render(request, 'english/list_words.html', {'words': all})
+    return render(request, 'english/list_words.html', {'words': all, 'count': len(all)})
 
 
 class E_R(View):
@@ -60,7 +60,7 @@ class E_R(View):
 class R_E(View):
     @staticmethod
     def get(request):
-        return render(request, 'english/r-e.html')
+        return render(request, 'english/e-r.html')
 
     @staticmethod
     def post(request):
@@ -69,6 +69,24 @@ class R_E(View):
         for item in all:
             try:
                 context[item.russian] = item.english
+            except:
+                print('error')
+        return JsonResponse(context)
+
+
+class Random(View):
+    @staticmethod
+    def get(request):
+        return render(request, 'english/e-r.html')
+
+    @staticmethod
+    def post(request):
+        all = Words.objects.all()
+        context = {}
+        for item in all:
+            try:
+                context[item.russian] = item.english
+                context[item.english] = item.russian
             except:
                 print('error')
         return JsonResponse(context)

@@ -5,6 +5,7 @@
 <div id="word" class="alert alert-primary" role="alert">
   Это основное уведомление — check it out!
 </div>
+
 <form onsubmit="start();return false">
 {% csrf_token %}
   <div id="start" class="form-group">
@@ -13,9 +14,17 @@
   </div>
   <button type="submit">Submit form</button>
 </form>
-<script type="text/javascript" src='{% static "english/e-r.js" %}'></script>
+<hr>
+<span id="result" class="btn btn-primary btn-lg" style="display: none">Answer</span>
+<div id="ok" class="alert alert-danger" role="alert" style="display: none">
+  Не верно.
+</div>
+<button id="dellete_word" type="button" class="btn btn-danger" style="display: none">Удалить?</button>
+<div id="error" class="alert alert-success" role="alert" style="display: none">
+  Верно! Удалено.
+</div>
+{% endblock %}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
+{% block script %}
+  <script type="text/javascript" src='{% static "english/e-r.js" %}'></script>
 {% endblock %}

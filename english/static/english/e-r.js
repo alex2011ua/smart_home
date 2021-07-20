@@ -28,15 +28,57 @@ let words_obj=0;
 console.log(words_obj);
 let words_list = Object.keys(words_obj);
 let ind = Math.floor(Math.random() * words_list.length);
-
+var dellete_word_button = document.getElementById('dellete_word'); // кнопка для удаления слова
+var count_words = document.getElementById("count_is");                 // счетчик слов
+count_words.innerHTML = words_list.length;
 console.log(words_obj[words_list[ind]], words_list[ind]);
-
+let answer = document.getElementById("result");             // правильный ответ
 document.getElementById("word").innerHTML = words_list[ind];
+
 function start(){
     console.log('submit');
-    let ind = Math.floor(Math.random() * words_list.length);
+    let inp = document.getElementById("exampleFormControlInput1").value;
+    if (inp == words_obj[words_list[ind]]){
+        console.log('верно - удаляю');
+        delete words_obj[words_list[ind]];
+        words_list = Object.keys(words_obj);
+        document.getElementById("exampleFormControlInput1").value = '';
+        answer.innerText = 'верно';
+        let ok =  document.getElementById("ok");
+        ok.style.display = 'none';
+        let err = document.getElementById("error");
+        err.style.display = 'block';
+        dellete_word_button.style.display = 'none';
+        answer.style.display = 'block'
+    }
+    else{
+        document.getElementById("exampleFormControlInput1").value = '';
+        console.log("не верно");
+        answer.style.display = 'block'
+        answer.innerText = words_obj[words_list[ind]] + " - " + words_list[ind];
+        let ok =  document.getElementById("ok");
+        ok.style.display = 'block'
+        ok.innerText = "не верно: "+  inp;
+        let err = document.getElementById("error");
+        err.style.display = 'none';
 
-console.log(words_obj[words_list[ind]], words_list[ind]);
+        dellete_word_button.style.display = 'block';
+        let to_del = ind;
+        dellete_word_button.onclick = function() {
+            delete words_obj[words_list[to_del]];
+            console.log('Хоть и не верно  - удаляю');
+            dellete_word_button.style.display = 'none'
 
-document.getElementById("word").innerHTML = words_list[ind];
+        }
+    //do processing
+
+    }
+    console.log(inp);
+    ind = Math.floor(Math.random() * words_list.length);
+
+    console.log(words_obj[words_list[ind]], words_list[ind]);
+
+    document.getElementById("word").innerHTML = words_list[ind];
+
+    count_words.innerHTML = words_list.length;
 }
