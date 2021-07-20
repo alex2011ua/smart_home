@@ -75,10 +75,7 @@ function start(){
     }
 
     ind = Math.floor(Math.random() * words_list.length);
-
     console.log(words_obj[words_list[ind]], words_list[ind]);
-
     document.getElementById("word").innerHTML = words_list[ind];
-
     count_words.innerHTML = words_list.length;
 }
