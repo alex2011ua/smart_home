@@ -41,7 +41,11 @@
 
 {% block main %}
           <h1>Изучение слов!</h1>
-
+    <form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{form_word_param.as_ul}}
+    <button type="submit" class="btn btn-primary">Применить</button>
+</form>
 {% endblock %}
 
 

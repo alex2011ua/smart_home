@@ -1,12 +1,23 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .form import LoadWordForm, LoadWordsForm
-from .models import Words
+from .form import LoadWordForm, LoadWordsForm, WordsParamForm
+from .models import Words, WordParams
 from django.http import JsonResponse
 
 def index(request):
-    return render(request, 'english/base_english.html')
-
+    if request.method == 'GET':
+        try:
+            params = WordParams.objects.get(id=1)
+        except:
+            params = WordParams.objects.create(id=1)
+        form_word_param = WordsParamForm(instance=params)
+        return render(request, 'english/base_english.html', {'form_word_param': form_word_param})
+    if request.method == 'POST':
+        params = WordParams.objects.get()
+        form = WordsParamForm(request.POST, instance=params)
+        if form.is_valid():
+            form.save()
+        return redirect('english_index')
 
 def settings(request):
     if request.method == 'GET':
@@ -82,7 +93,7 @@ class Random(View):
 
     @staticmethod
     def post(request):
-        all = Words.objects.all()
+        all = Words.objects.filter(learned=None)
         context = {}
         for item in all:
             try:

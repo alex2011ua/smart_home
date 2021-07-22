@@ -66,6 +66,7 @@ function start(){
         let to_del = ind;
         dellete_word_button.onclick = function() {
             delete words_obj[words_list[to_del]];
+            words_list = Object.keys(words_obj);
             console.log('Хоть и не верно  - удаляю');
             dellete_word_button.style.display = 'none'
 

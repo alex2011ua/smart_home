@@ -1,3 +1,14 @@
 from django.contrib import admin
+from english.models import Words
 
-# Register your models here.
+
+@admin.register(Words)
+class WordsAdmin(admin.ModelAdmin):
+    list_display = (
+                    'lesson',
+                    'english',
+                    'russian',
+                    'heavy',
+                    'learned',
+                    'info'
+                    )

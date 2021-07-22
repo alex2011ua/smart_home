@@ -68,9 +68,3 @@ class ParamsAdmin(admin.ModelAdmin):
     )
 
 
-@admin.register(Words)
-class WordsAdmin(admin.ModelAdmin):
-    list_display = ('english',
-                    'russian',
-
-                    )

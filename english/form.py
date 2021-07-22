@@ -1,5 +1,5 @@
 from django import forms
-from .models import Words
+from .models import Words, WordParams
 
 
 class LoadWordsForm(forms.Form):
@@ -10,13 +10,25 @@ class LoadWordForm(forms.ModelForm):
     class Meta:
         model = Words
         fields = (
+            'lesson',
             'english',
-            'russian'
+            'russian',
+            'info'
         )
         labels = {
-            'english':'english',
-            'russian':'russian'
+            'lesson': 'lesson',
+            'english': 'english',
+            'russian': 'russian',
+            'info': 'info'
         }
 
 
+class WordsParamForm(forms.ModelForm):
+    class Meta:
+        model = WordParams
+        fields = '__all__'
+        labels = {
+            'learned': 'Выученые слова',
+            'heavy': 'сложные слова'
+        }
 
