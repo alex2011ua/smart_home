@@ -10,9 +10,11 @@
 {% csrf_token %}
   <div id="start" class="form-group">
     <label for="exampleFormControlInput1">Перевод:</label>
+    <button id="learned" type="button" class="btn btn-outline-success" >Выучено</button>
     <input type="text" autocomplete="off" class="form-control" id="exampleFormControlInput1" placeholder="...">
   </div>
   <button type="submit">Submit form</button>
+  <button id="heavy" type="button" class="btn btn-outline-dark" >Сложное</button>
 </form>
 <hr>
 <span id="result" class="btn btn-primary btn-lg" style="display: none">Answer</span>

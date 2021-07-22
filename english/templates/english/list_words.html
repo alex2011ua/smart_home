@@ -6,8 +6,12 @@
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Урок</th>
       <th scope="col">english</th>
       <th scope="col">russian</th>
+      <th scope="col">выучено</th>
+      <th scope="col">сложное</th>
+      <th scope="col">info</th>
 
     </tr>
   </thead>
@@ -15,8 +19,13 @@
   {% for word in words %}
     <tr>
       <th scope="row">{{word.id}}</th>
+      <td>{{word.lesson}}</td>
       <td>{{word.english}}</td>
       <td>{{word.russian}}</td>
+      <td>{{word.learned}}</td>
+      <td>{{word.heavy}}</td>
+      <td>{{word.info}}</td>
+
 
     </tr>
     {% endfor %}

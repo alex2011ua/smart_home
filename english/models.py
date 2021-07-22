@@ -12,6 +12,7 @@ class Words(models.Model):
 class WordParams(models.Model):
     learned = models.BooleanField(default=False)
     heavy = models.BooleanField(default=False)
+    lesson_0 = models.BooleanField(default=False)
     lesson_1 = models.BooleanField(default=False)
     lesson_2 = models.BooleanField(default=False)
     lesson_3 = models.BooleanField(default=False)

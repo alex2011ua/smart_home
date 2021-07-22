@@ -28,7 +28,8 @@ class WordsParamForm(forms.ModelForm):
         model = WordParams
         fields = '__all__'
         labels = {
-            'learned': 'Выученые слова',
-            'heavy': 'сложные слова'
+            'learned': 'Не показывать выученые слова',
+            'heavy': 'Только сложные слова',
+            'lesson_0': 'Слова без привязки к уроку'
         }
 

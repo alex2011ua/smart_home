@@ -29,6 +29,8 @@ console.log(words_obj);
 let words_list = Object.keys(words_obj);
 let ind = Math.floor(Math.random() * words_list.length);
 var dellete_word_button = document.getElementById('dellete_word'); // кнопка для удаления слова
+var learned = document.getElementById('learned'); // кнопка для выученого слова
+var heavy = document.getElementById('heavy'); // кнопка для сложного слова
 var count_words = document.getElementById("count_is");                 // счетчик слов
 count_words.innerHTML = words_list.length;
 console.log(words_obj[words_list[ind]], words_list[ind]);
@@ -50,6 +52,26 @@ function start(){
         err.style.display = 'block';
         dellete_word_button.style.display = 'none';
         answer.style.display = 'block'
+        learned.onclick = function () {
+                console.log(words_list[ind]);
+             $.ajax({
+                url: 'learned',
+                method: 'POST',
+                data: words_list[ind],
+                 async: false,
+                success: function (text) {
+                    console.log('__ok__');
+
+                words_obj = text;
+                },
+                error: function (text) {
+                    console.log('__error__');
+                    console.log(text);
+                    alert('error');
+                },
+            });
+
+        }
     }
     else{
         document.getElementById("exampleFormControlInput1").value = '';
@@ -64,6 +86,25 @@ function start(){
 
         dellete_word_button.style.display = 'block';
         let to_del = ind;
+        heavy.onclick = function () {
+            console.log(words_list[to_del]);
+            $.ajax({
+                url: 'heavy',
+                method: 'POST',
+                data: words_list[to_del],
+                async: false,
+                success: function (text) {
+                    console.log('__ok__');
+
+                    words_obj = text;
+                },
+                error: function (text) {
+                    console.log('__error__');
+                    console.log(text);
+                    alert('error');
+                },
+            });
+        }
         dellete_word_button.onclick = function() {
             delete words_obj[words_list[to_del]];
             words_list = Object.keys(words_obj);
