@@ -25,7 +25,7 @@
             <a class="nav-link {% if request.path == "/english/" %} active {% endif %} " href="{% url 'english_index' %}">Start</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/list_words/" %} active {% endif %} " href="{% url 'list_words' %}">Список всех слов</a>
+            <a class="nav-link {% if request.path == "/english/list_words/" %} active {% endif %} " href="{% url 'list_words' %}">Список выбранных слов</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {% if request.path == "/english/e_r/" %} active {% endif %} " href="{% url 'e_r' %}">English to Russian</a>
@@ -43,7 +43,7 @@
 
 
 {% block main %}
-          <h1>Изучение слов!</h1>
+          <h2>Изучение слов!</h2>
     <form action="" method="post" autocomplete="off">
     {% csrf_token %}
     {{form_word_param.as_ul}}

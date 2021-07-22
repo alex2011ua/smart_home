@@ -25,7 +25,6 @@ let words_obj=0;
     },
 });
 
-console.log(words_obj);
 let words_list = Object.keys(words_obj);
 let ind = Math.floor(Math.random() * words_list.length);
 var dellete_word_button = document.getElementById('dellete_word'); // кнопка для удаления слова
@@ -52,26 +51,7 @@ function start(){
         err.style.display = 'block';
         dellete_word_button.style.display = 'none';
         answer.style.display = 'block'
-        learned.onclick = function () {
-                console.log(words_list[ind]);
-             $.ajax({
-                url: 'learned',
-                method: 'POST',
-                data: words_list[ind],
-                 async: false,
-                success: function (text) {
-                    console.log('__ok__');
 
-                words_obj = text;
-                },
-                error: function (text) {
-                    console.log('__error__');
-                    console.log(text);
-                    alert('error');
-                },
-            });
-
-        }
     }
     else{
         document.getElementById("exampleFormControlInput1").value = '';
@@ -115,7 +95,26 @@ function start(){
     //do processing
 
     }
+        learned.onclick = function () {
+                console.log(words_list[ind]);
+             $.ajax({
+                url: 'learned',
+                method: 'POST',
+                data: words_list[ind],
+                 async: false,
+                success: function (text) {
+                    console.log('__ok__');
 
+                words_obj = text;
+                },
+                error: function (text) {
+                    console.log('__error__');
+                    console.log(text);
+                    alert('error');
+                },
+            });
+
+        }
     ind = Math.floor(Math.random() * words_list.length);
     console.log(words_obj[words_list[ind]], words_list[ind]);
     document.getElementById("word").innerHTML = words_list[ind];
