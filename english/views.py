@@ -152,3 +152,26 @@ def get_param_qwery():
     if params.lesson_13:
         p['lesson__in'].append(13)
     return p
+
+def mod(request):
+    if '/e_r/' in request.path:
+        language = 'english'
+    else:
+        language = 'russian'
+
+    if request.GET.get('learned'):
+        mod = 'learned'
+        word = {language: request.GET.get('learned')}
+    elif request.GET.get('heavy'):
+        mod = 'heavy'
+        word = {language: request.GET.get('heavy')}
+
+    s = Words.objects.filter(**word)
+    for w in s:
+        if mod == 'learned':
+            w.learned = True
+        else:
+            w.heavy = True
+        w.save()
+    context = {'status': 200}
+    return JsonResponse(context)
