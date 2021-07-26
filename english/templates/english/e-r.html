@@ -3,7 +3,7 @@
 {% block main %}
 <!--<script type="text/javascript" src="{% static 'selection_avto/jquery/jquery-3.5.1.js'%}"></script>-->
 {% csrf_token %}
-<button id="learned" type="button" class="btn btn-outline-success" >Выучено</button>
+
 <div id="word" class="alert alert-primary" role="alert">
   Это основное уведомление — check it out!
 </div>
@@ -25,6 +25,7 @@
 </div>
 <button id="dellete_word" type="button" class="btn btn-danger" style="display: none">Удалить?</button>
 <button id="heavy" type="button" class="btn btn-outline-dark" style="display: inline" >Сложное</button>
+<button id="learned" type="button" class="btn btn-outline-success" style="display: inline" >Выучено</button>
 
 <div id="error" class="alert alert-success" role="alert" style="display: none">
   Верно! Удалено.

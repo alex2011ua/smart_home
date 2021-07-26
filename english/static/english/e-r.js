@@ -27,6 +27,8 @@ let words_obj=0;
 
 let words_list = Object.keys(words_obj);
 let ind = Math.floor(Math.random() * words_list.length);
+let word = words_list[ind];
+let translate = words_obj[words_list[ind]];
 var dellete_word_button = document.getElementById('dellete_word'); // кнопка для удаления слова
 var learned = document.getElementById('learned'); // кнопка для выученого слова
 var heavy = document.getElementById('heavy'); // кнопка для сложного слова
@@ -37,94 +39,92 @@ count_words.innerHTML = words_list.length;
 console.log(words_obj[words_list[ind]], words_list[ind]);
 let answer = document.getElementById("result");             // правильный ответ
 document.getElementById("word").innerHTML = words_list[ind];
-
-
+let ok =  document.getElementById("ok");
+let err = document.getElementById("error");
 function start(){
     let inp = document.getElementById("vvod").value.trim();
-    if (inp.toLowerCase() == words_obj[words_list[ind]].toLowerCase()){
+
+    if (inp.toLowerCase() == translate.toLowerCase()){
         console.log('верно - удаляю');
-        answer.innerText = words_obj[words_list[ind]] + " - " + words_list[ind];
-        delete words_obj[words_list[ind]];
+        answer.innerText = translate + " - " + word;
+        delete words_obj[word];
         words_list = Object.keys(words_obj);
         document.getElementById("vvod").value = '';
-
-        let ok =  document.getElementById("ok");
         ok.style.display = 'none';
-        let err = document.getElementById("error");
         err.style.display = 'block';
         dellete_word_button.style.display = 'none';
         answer.style.display = 'block'
-
     }
     else{
         document.getElementById("vvod").value = '';
         console.log("не верно");
         answer.style.display = 'block'
-        answer.innerText = words_obj[words_list[ind]] + " - " + words_list[ind];
-        let ok =  document.getElementById("ok");
+        answer.innerText = translate + " - " + word;
         ok.style.display = 'block'
         ok.innerText = "не верно: "+  inp;
-        let err = document.getElementById("error");
         err.style.display = 'none';
 
         dellete_word_button.style.display = 'inline';
-        let to_del = ind;
-        heavy.onclick = function () {
-            console.log(words_list[to_del]);
-            $.ajax({
-                url: 'mod/',
-                method: 'GET',
-                data: {'heavy': words_list[to_del]},
-                success: function (text) {
-                    console.log('__ok__');
-                },
-                error: function (text) {
-                    console.log('__error__');
-                    console.log(text);
-                    alert('error');
-                },
-            });
+
         }
+    let to_del = word;
         dellete_word_button.onclick = function() {
-            delete words_obj[words_list[to_del]];
+            delete words_obj[to_del];
             words_list = Object.keys(words_obj);
+
             console.log('Хоть и не верно  - удаляю');
             dellete_word_button.style.display = 'none'
 
         }
+    heavy.onclick = function () {
+        console.log(to_del);
+        $.ajax({
+            url: 'mod/',
+            method: 'GET',
+            data: {'heavy': to_del},
+        success: function (text) {
+                console.log('__ok__');
+            },
+        error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+    }
+    learned.onclick = function () {
+        console.log(to_del);
+        $.ajax({
+            url: 'mod/',
+            method: 'GET',
+            data: {'learned': to_del},
+        success: function (text) {
+                console.log('__ok__');
+        },
+        error: function (text) {
+            console.log('__error__');
+            console.log(text);
+            alert('error');
+        },
+     });
     //do processing
 
     }
-        learned.onclick = function () {
-                console.log(words_list[ind]);
-             $.ajax({
-                url: 'mod/',
-                method: 'GET',
-                data: {'learned': words_list[ind]},
-                success: function (text) {
-                    console.log('__ok__');
-                },
-                error: function (text) {
-                    console.log('__error__');
-                    console.log(text);
-                    alert('error');
-                },
-            });
 
-        }
     ind = Math.floor(Math.random() * words_list.length);
+    word = words_list[ind];
+    translate = words_obj[words_list[ind]];
     console.log(words_obj[words_list[ind]], words_list[ind]);
     document.getElementById("word").innerHTML = words_list[ind];
     count_words.innerHTML = words_list.length;
-
 }
 
 submit_button.onclick = function(){
-    start()
+    start();
 };
 
 vvod.onsubmit = function(){
-    start()
+    start();
 };
 // Make sure this code gets executed after the DOM is loaded.
 document.querySelector("#vvod").addEventListener("keyup", event => {

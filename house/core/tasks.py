@@ -296,6 +296,7 @@ def bot_task_watering_analiz():
     corect = -1
     water_time = 25 # время полива
     limit_rain = 15 # мм
+
     for day in weather:
         if day.temp_max > 25:
             water_time += 1
@@ -312,7 +313,7 @@ def bot_task_watering_analiz():
         poliv.value = water_time
         poliv.label = 'выключен'
     if sum_rain < limit_rain:
-        bot.send_message(f'Полив включен. Количество осадков: {sum_rain}. Время полива {water_time}, порог включения {limit_rain}мм.')
+        bot.send_message(f'Полив включен. Количество осадков: {sum_rain}. Время полива {water_time - sum_rain}, порог включения {limit_rain}мм.')
         poliv.value = water_time - sum_rain
         poliv.label = 'включен'
     poliv.save()
