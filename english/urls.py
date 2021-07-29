@@ -1,10 +1,10 @@
 from django.urls import path
-from english.views import index, settings, clear, list_words, E_R, R_E, Random, mod
+from english.views import index, Settings, clear, list_words, E_R, R_E, Random, mod
 
 
 urlpatterns = [
     path('', index, name='english_index'),
-    path('settings/', settings, name='settings'),
+    path('settings/', Settings.as_view(), name='settings'),
     path('clear/', clear, name='clear'),
     path('list_words/', list_words, name='list_words'),
 

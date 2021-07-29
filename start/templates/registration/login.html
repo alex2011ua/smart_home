@@ -11,7 +11,9 @@
             <form class="form-signin" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            {{ form }}
+            Имя прльзователя: {{ form.username }} <br>
+                Пароль: {{ form.password }}<br>
+
             <button type="submit" class="btn btn-primary">Log in</button>
             </form>
 

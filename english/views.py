@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .form import LoadWordForm, LoadWordsForm, WordsParamForm, LoadIrregularVerbsForm
 from .models import Words, WordParams, IrregularVerbs
 from django.http import JsonResponse
@@ -21,8 +22,9 @@ def index(request):
         return redirect('english_index')
 
 
-def settings(request):
-    if request.method == 'GET':
+class Settings(LoginRequiredMixin, View):
+    @staticmethod
+    def get(request):
         count = Words.objects.all().count()
         form_list_words = LoadWordsForm()
         form_word = LoadWordForm()
@@ -31,7 +33,8 @@ def settings(request):
                                                          'form_list_words': form_list_words,
                                                          'LoadIrregularVerbsForm': form_IrregularVerbsForm,
                                                          'count': count})
-    if request.method == 'POST':
+    @staticmethod
+    def post(request):
         if request.POST.get('english'):
             form = LoadWordForm(request.POST)
             if form.is_valid():
