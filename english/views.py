@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .form import LoadWordForm, LoadWordsForm, WordsParamForm
-from .models import Words, WordParams
+from .form import LoadWordForm, LoadWordsForm, WordsParamForm, LoadIrregularVerbsForm
+from .models import Words, WordParams, IrregularVerbs
 from django.http import JsonResponse
+
 
 def index(request):
     if request.method == 'GET':
@@ -19,15 +20,25 @@ def index(request):
             form.save()
         return redirect('english_index')
 
+
 def settings(request):
     if request.method == 'GET':
         count = Words.objects.all().count()
         form_list_words = LoadWordsForm()
         form_word = LoadWordForm()
-        return render(request, 'english/settings.html', {'form_word': form_word, 'form_list_words': form_list_words, 'count':count})
+        form_IrregularVerbsForm = LoadIrregularVerbsForm()
+        return render(request, 'english/settings.html', {'form_word': form_word,
+                                                         'form_list_words': form_list_words,
+                                                         'LoadIrregularVerbsForm': form_IrregularVerbsForm,
+                                                         'count': count})
     if request.method == 'POST':
         if request.POST.get('english'):
             form = LoadWordForm(request.POST)
+            if form.is_valid():
+                form.save()
+            return redirect('settings')
+        elif request.POST.get('infinitive'):
+            form = LoadIrregularVerbsForm(request.POST)
             if form.is_valid():
                 form.save()
             return redirect('settings')
@@ -49,17 +60,21 @@ def settings(request):
 
 
 def clear(request):
-    p_list = get_param_qwery()
-    all = Words.objects.filter(**p_list)
-    for item in all:
-        item.delete()
+    # p_list = get_param_qwery()
+    # all = Words.objects.filter(**p_list)
+    # for item in all:
+    #     item.delete()
     return redirect('settings')
 
 
 def list_words(request):
-    p_list = get_param_qwery()
-    all = Words.objects.filter(**p_list)
-    return render(request, 'english/list_words.html', {'words': all, 'count': len(all)})
+    params = WordParams.objects.get(id=1)
+    if params.irregular_verbs:
+        all = get_irregular_werbs()
+        return render(request, 'english/list_irregular_words.html', {'words': all, 'count': len(all)})
+    else:
+        all = get_param_qwery()
+        return render(request, 'english/list_words.html', {'words': all, 'count': len(all)})
 
 
 class E_R(View):
@@ -69,15 +84,27 @@ class E_R(View):
 
     @staticmethod
     def post(request):
-        p_list = get_param_qwery()
-        all = Words.objects.filter(**p_list)
-        context = {}
-        for item in all:
-            try:
-                context[item.english] = item.russian
-            except:
-                print('error')
-        return JsonResponse(context)
+        params = WordParams.objects.get(id=1)
+        if params.irregular_verbs:
+            all = get_irregular_werbs()
+            context = {}
+            for item in all:
+                try:
+                    context[item.infinitive] = item.russian
+                    context[item.past_simple] = item.russian
+                    context[item.past_participle] = item.russian
+                except:
+                    print('error')
+            return JsonResponse(context)
+        else:
+            all = get_param_qwery()
+            context = {}
+            for item in all:
+                try:
+                    context[item.english] = item.russian
+                except:
+                    print('error')
+            return JsonResponse(context)
 
 
 class R_E(View):
@@ -87,15 +114,25 @@ class R_E(View):
 
     @staticmethod
     def post(request):
-        p_list = get_param_qwery()
-        all = Words.objects.filter(**p_list)
-        context = {}
-        for item in all:
-            try:
-                context[item.russian] = item.english
-            except:
-                print('error')
-        return JsonResponse(context)
+        params = WordParams.objects.get(id=1)
+        if params.irregular_verbs:
+            all = get_irregular_werbs()
+            context = {}
+            for item in all:
+                try:
+                    context[item.russian] = ';'.join([item.infinitive, item.past_simple, item.past_participle])
+                except:
+                    print('error')
+            return JsonResponse(context)
+        else:
+            all = get_param_qwery()
+            context = {}
+            for item in all:
+                try:
+                    context[item.russian] = item.english
+                except:
+                    print('error')
+            return JsonResponse(context)
 
 
 class Random(View):
@@ -105,16 +142,20 @@ class Random(View):
 
     @staticmethod
     def post(request):
-        p_list = get_param_qwery()
-        all = Words.objects.filter(**p_list)
-        context = {}
-        for item in all:
-            try:
-                context[item.russian] = item.english
-                context[item.english] = item.russian
-            except:
-                print('error')
-        return JsonResponse(context)
+        params = WordParams.objects.get(id=1)
+        if params.irregular_verbs:
+            pass
+        else:
+            all = get_param_qwery()
+            context = {}
+            for item in all:
+                try:
+                    context[item.russian] = item.english
+                    context[item.english] = item.russian
+                except:
+                    print('error')
+            return JsonResponse(context)
+
 
 def get_param_qwery():
     params = WordParams.objects.get(id=1)
@@ -151,7 +192,19 @@ def get_param_qwery():
         p['lesson__in'].append(12)
     if params.lesson_13:
         p['lesson__in'].append(13)
-    return p
+    all = Words.objects.filter(**p)
+    return all
+
+def get_irregular_werbs():
+    params = WordParams.objects.get(id=1)
+    p = {}
+    if params.learned:
+        p['learned'] = False
+    if params.heavy:
+        p['heavy'] = True
+    all = IrregularVerbs.objects.filter(**p)
+    return all
+
 
 def mod(request):
     if '/e_r/' in request.path:

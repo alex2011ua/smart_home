@@ -1,5 +1,5 @@
 from django import forms
-from .models import Words, WordParams
+from .models import Words, WordParams, IrregularVerbs
 
 
 class LoadWordsForm(forms.Form):
@@ -33,3 +33,14 @@ class WordsParamForm(forms.ModelForm):
             'lesson_0': 'Слова без привязки к уроку'
         }
 
+
+class LoadIrregularVerbsForm(forms.ModelForm):
+    class Meta:
+        model = IrregularVerbs
+        fields = (
+            'infinitive',
+            'past_simple',
+            'past_participle',
+            'russian'
+
+        )

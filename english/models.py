@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Words(models.Model):
     english = models.CharField(max_length=128)
     russian = models.CharField(max_length=128)
@@ -26,5 +27,13 @@ class WordParams(models.Model):
     lesson_11 = models.BooleanField(default=False)
     lesson_12 = models.BooleanField(default=False)
     lesson_13 = models.BooleanField(default=False)
+    irregular_verbs = models.BooleanField(default=False)
 
 
+class IrregularVerbs(models.Model):
+    infinitive = models.CharField(max_length=128)
+    past_simple = models.CharField(max_length=128)
+    past_participle = models.CharField(max_length=128)
+    russian = models.CharField(max_length=128)
+    learned = models.BooleanField(default=False)
+    heavy = models.BooleanField(default=False)
