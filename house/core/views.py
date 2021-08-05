@@ -20,10 +20,8 @@ DEBUG = settings.PLACE
 
 class ControllerView(LoginRequiredMixin, View):
     """Оснавная страница"""
-
     @staticmethod
     def get(request):
-
         context = {}
         date_time_now = datetime.datetime.now()
         #Инфо о ошибках датчиков

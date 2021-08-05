@@ -17,11 +17,11 @@
     <button type="submit" class="btn btn-primary">Отправить</button>
 </form>
 <hr>
-Добавить Irregular Verb
+<h1>Добавить Irregular Verb</h1>
 <form action="" method="post" autocomplete="off">
     {% csrf_token %}
     {{LoadIrregularVerbsForm}}
-    <button type="submit" class="btn btn-primary">Вставить непраильный глагол</button>
+    <button type="submit" class="btn btn-primary">Вставить неправильный глагол</button>
 </form>
 <a href="{% url 'clear' %}" ><button type="button" class="btn btn-warning">Удалить все слова</button></a>
 {% endblock %}

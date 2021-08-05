@@ -83,6 +83,7 @@ def list_words(request):
 class E_R(View):
     @staticmethod
     def get(request):
+
         return render(request, 'english/e-r.html')
 
     @staticmethod
@@ -210,24 +211,25 @@ def get_irregular_werbs():
 
 
 def mod(request):
-    if '/e_r/' in request.path:
-        language = 'english'
-    else:
-        language = 'russian'
-
-    if request.GET.get('learned'):
-        mod = 'learned'
-        word = {language: request.GET.get('learned')}
-    elif request.GET.get('heavy'):
-        mod = 'heavy'
-        word = {language: request.GET.get('heavy')}
-
-    s = Words.objects.filter(**word)
-    for w in s:
-        if mod == 'learned':
-            w.learned = True
+    if request.user.username:
+        if '/e_r/' in request.path:
+            language = 'english'
         else:
-            w.heavy = True
-        w.save()
+            language = 'russian'
+
+        if request.GET.get('learned'):
+            mod = 'learned'
+            word = {language: request.GET.get('learned')}
+        elif request.GET.get('heavy'):
+            mod = 'heavy'
+            word = {language: request.GET.get('heavy')}
+
+        s = Words.objects.filter(**word)
+        for w in s:
+            if mod == 'learned':
+                w.learned = True
+            else:
+                w.heavy = True
+            w.save()
     context = {'status': 200}
     return JsonResponse(context)
