@@ -134,7 +134,8 @@ class R_E(View):
 
         for item in all:
             try:
-                context[item.russian] = item.english
+                if item.russian not in context:
+                    context[item.russian] = item.english
             except:
                 print('error')
         return JsonResponse(context)
