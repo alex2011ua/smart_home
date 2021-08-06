@@ -119,24 +119,25 @@ class R_E(View):
     @staticmethod
     def post(request):
         params = WordParams.objects.get(id=1)
+        context = {}
         if params.irregular_verbs:
             all = get_irregular_werbs()
-            context = {}
+
             for item in all:
                 try:
                     context[item.russian] = ';'.join([item.infinitive, item.past_simple, item.past_participle])
                 except:
                     print('error')
-            return JsonResponse(context)
-        else:
-            all = get_param_qwery()
-            context = {}
-            for item in all:
-                try:
-                    context[item.russian] = item.english
-                except:
-                    print('error')
-            return JsonResponse(context)
+
+
+        all = get_param_qwery()
+
+        for item in all:
+            try:
+                context[item.russian] = item.english
+            except:
+                print('error')
+        return JsonResponse(context)
 
 
 class Random(View):
