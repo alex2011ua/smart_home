@@ -19,6 +19,7 @@ from django.conf import settings
 logger = logging.getLogger('django')
 DEBUG = settings.PLACE
 
+
 @cellery_app.task()
 def restart_cam_task():
     print('Start restart_cam_task')
@@ -124,8 +125,6 @@ def arduino_task():
             if temp.temp_teplica < min_temp_teplica.value:
                 min_temp_teplica.value = round(temp.temp_teplica)
                 min_temp_teplica.save()
-
-
 
         if dic_param.get('temp_voda'):
             temp.temp_voda = dic_param['temp_voda']
@@ -327,17 +326,17 @@ def poliv(force=None):
     if poliv.label == 'включен' or force:
         Params.objects.create(poliv=poliv.value, date_t_h=datetime.now())
         arduino_poliv(poliv.value)
-        bot.send_message(f'Полив завершен: {poliv.value} min.'+ "(принудительно)" if force else '')
+        bot.send_message(f'Полив завершен: {poliv.value} min.' + "(принудительно)" if force else '')
+
 
 @cellery_app.task()
 def pshik(force=None):
     """включениe режима пшик"""
-
     pshik = Setting.objects.get(controller_name="pshik")
     if poliv.label == 'включен' or force:
         Params.objects.create(poliv=pshik.value, date_t_h=datetime.now())
         arduino_poliv(poliv.value)
-        bot.send_message(f'Полив завершен: {poliv.value} min.'+ "(принудительно)" if force else '')
+        bot.send_message(f'Полив завершен: {poliv.value} min.' + "(принудительно)" if force else '')
 
 
 
