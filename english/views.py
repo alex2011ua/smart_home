@@ -249,6 +249,8 @@ class SearchWord(View):
         input_word = request.POST.get('word')
         english_words = Words.objects.filter(english__icontains=input_word)
         russian_words = Words.objects.filter(russian__icontains=input_word)
+        count = len(english_words)+len(russian_words)
         return render(request, 'english/search_word.html', {'form': form,
                                                             'english_words': english_words,
-                                                            'russian_words': russian_words})
+                                                            'russian_words': russian_words,
+                                                            'count': count})

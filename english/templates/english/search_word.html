@@ -1,13 +1,14 @@
 {% extends "english/base_english.html" %}
 
 {% block main %}
-Загружено слов - <span id="count_is">{{count}}</span>
 <form action="" method="post" autocomplete="off">
     {% csrf_token %}
     {{form}}
     <button type="submit" class="btn btn-primary">Найти</button>
 </form>
-
+{% if count %}
+найдено слов: {{count}}
+{% endif %}
 {% if english_words %}
     <table class="table table-sm">
   <thead>
