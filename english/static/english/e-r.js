@@ -61,7 +61,7 @@ function start(){
         answer.style.display = 'block'
         answer.innerText = translate + " - " + word;
         ok.style.display = 'block'
-        ok.innerText = "не верно: "+  inp;
+        ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
 
         dellete_word_button.style.display = 'inline';
