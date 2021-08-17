@@ -49,8 +49,9 @@
           <h2>Изучение слов!</h2>
     <form action="" method="post" autocomplete="off">
     {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Применить</button>
     {{form_word_param.as_ul}}
-    <button type="submit" class="btn btn-primary">Применить</button>
+
 </form>
 {% endblock %}
 
