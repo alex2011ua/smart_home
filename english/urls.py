@@ -1,5 +1,5 @@
 from django.urls import path
-from english.views import index, Settings, clear, list_words, E_R, R_E, Random, mod
+from english.views import index, Settings, clear, list_words, E_R, R_E, Random, mod, SearchWord
 
 
 urlpatterns = [
@@ -13,5 +13,5 @@ urlpatterns = [
     path('r_e/mod/', mod),
     path('r_e/', R_E.as_view(), name='r_e'),
     path('random/', Random.as_view(), name='random'),
-
+    path('search/', SearchWord.as_view(), name='SearchWord'),
 ]

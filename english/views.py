@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .form import LoadWordForm, LoadWordsForm, WordsParamForm, LoadIrregularVerbsForm
+from .form import LoadWordForm, LoadWordsForm, WordsParamForm, LoadIrregularVerbsForm, SearchWordForm
 from .models import Words, WordParams, IrregularVerbs
 from django.http import JsonResponse
 
@@ -235,3 +235,20 @@ def mod(request):
             w.save()
     context = {'status': 200}
     return JsonResponse(context)
+
+class SearchWord(View):
+    @staticmethod
+    def get(request):
+        form = SearchWordForm()
+        return render(request, 'english/search_word.html', {'form': form})
+
+
+    @staticmethod
+    def post(request):
+        form = SearchWordForm()
+        input_word = request.POST.get('word')
+        english_words = Words.objects.filter(english__icontains=input_word)
+        russian_words = Words.objects.filter(russian__icontains=input_word)
+        return render(request, 'english/search_word.html', {'form': form,
+                                                            'english_words': english_words,
+                                                            'russian_words': russian_words})

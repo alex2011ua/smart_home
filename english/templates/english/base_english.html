@@ -36,6 +36,9 @@
           <li class="nav-item">
             <a class="nav-link {% if request.path == "/english/random/" %} active {% endif %} " href="{% url 'random' %}">Random</a>
           </li>
+              <li class="nav-item">
+            <a class="nav-link {% if request.path == "/english/search/" %} active {% endif %} " href="{% url 'SearchWord' %}">Search</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link disabled {% if request.path == "/english/settings/" %} active {% endif %}" href="{% url 'settings' %} " tabindex="-1" aria-disabled="true">Управление</a>
           </li>

@@ -44,3 +44,6 @@ class LoadIrregularVerbsForm(forms.ModelForm):
             'russian'
 
         )
+
+class SearchWordForm(forms.Form):
+    word = forms.CharField(label='слово')
