@@ -76,7 +76,7 @@ def list_words(request):
         all = get_irregular_werbs()
         return render(request, 'english/list_irregular_words.html', {'words': all, 'count': len(all)})
     else:
-        all = get_param_qwery()
+        all, p = get_param_qwery()
         return render(request, 'english/list_words.html', {'words': all, 'count': len(all)})
 
 
@@ -101,7 +101,7 @@ class E_R(View):
                     print('error')
             return JsonResponse(context)
         else:
-            all = get_param_qwery()
+            all, p = get_param_qwery()
             context = {}
             for item in all:
                 try:
@@ -130,7 +130,7 @@ class R_E(View):
                     print('error')
 
 
-        all = get_param_qwery()
+        all, p = get_param_qwery()
 
         for item in all:
             try:
@@ -152,7 +152,7 @@ class Random(View):
         if params.irregular_verbs:
             pass
         else:
-            all = get_param_qwery()
+            all, p = get_param_qwery()
             context = {}
             for item in all:
                 try:
@@ -198,8 +198,10 @@ def get_param_qwery():
         p['lesson__in'].append(12)
     if params.lesson_13:
         p['lesson__in'].append(13)
+
     all = Words.objects.filter(**p)
-    return all
+    return all, p
+
 
 def get_irregular_werbs():
     params = WordParams.objects.get(id=1)
@@ -214,6 +216,9 @@ def get_irregular_werbs():
 
 def mod(request):
     if request.user.username:
+        all, p = get_param_qwery()
+
+        word = {'lesson__in': p['lesson__in']}
         if '/e_r/' in request.path:
             language = 'english'
         else:
@@ -221,10 +226,10 @@ def mod(request):
 
         if request.GET.get('learned'):
             mod = 'learned'
-            word = {language: request.GET.get('learned')}
+            word[language] = request.GET.get('learned')
         elif request.GET.get('heavy'):
             mod = 'heavy'
-            word = {language: request.GET.get('heavy')}
+            word[language] = request.GET.get('heavy')
 
         s = Words.objects.filter(**word)
         for w in s:
