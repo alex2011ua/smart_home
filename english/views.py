@@ -63,10 +63,10 @@ class Settings(LoginRequiredMixin, View):
 
 
 def clear(request):
-    # p_list = get_param_qwery()
-    # all = Words.objects.filter(**p_list)
-    # for item in all:
-    #     item.delete()
+    all, p = get_param_qwery()
+    for item in all:
+        item.learned = False
+        item.save()
     return redirect('settings')
 
 
