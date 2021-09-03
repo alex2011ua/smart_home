@@ -43,7 +43,7 @@ let ok =  document.getElementById("ok");
 let err = document.getElementById("error");
 function start(){
     let inp = document.getElementById("vvod").value.trim();
-
+    let to_del = word;
     if (inp.toLowerCase() == translate.toLowerCase()){
         console.log('верно - удаляю');
         answer.innerText = translate + " - " + word;
@@ -53,7 +53,9 @@ function start(){
         ok.style.display = 'none';
         err.style.display = 'block';
         dellete_word_button.style.display = 'none';
-        answer.style.display = 'block'
+        answer.style.display = 'block';
+        learnedFunc();
+
     }
     else{
         document.getElementById("vvod").value = '';
@@ -66,16 +68,37 @@ function start(){
 
         dellete_word_button.style.display = 'inline';
 
+
         }
-    let to_del = word;
+
         dellete_word_button.onclick = function() {
             delete words_obj[to_del];
             words_list = Object.keys(words_obj);
 
             console.log('Хоть и не верно  - удаляю');
-            dellete_word_button.style.display = 'none'
+            dellete_word_button.style.display = 'none';
 
         }
+
+        function learnedFunc() {
+            console.log(to_del);
+            $.ajax({
+                url: 'mod/',
+                method: 'GET',
+                data: {'learned': to_del},
+            success: function (text) {
+                    console.log('__ok__');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+        },
+     });
+    }
+
+    learned.onclick = learnedFunc;
+
     heavy.onclick = function () {
         console.log(to_del);
         $.ajax({
@@ -92,24 +115,7 @@ function start(){
             },
         });
     }
-    learned.onclick = function () {
-        console.log(to_del);
-        $.ajax({
-            url: 'mod/',
-            method: 'GET',
-            data: {'learned': to_del},
-        success: function (text) {
-                console.log('__ok__');
-        },
-        error: function (text) {
-            console.log('__error__');
-            console.log(text);
-            alert('error');
-        },
-     });
-    //do processing
 
-    }
 
     ind = Math.floor(Math.random() * words_list.length);
     word = words_list[ind];
@@ -132,3 +138,4 @@ document.querySelector("#vvod").addEventListener("keyup", event => {
     document.querySelector("#submit_button").click(); // Things you want to do.
     event.preventDefault(); // No need to `return false;`.
 });
+
