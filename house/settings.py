@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'start',
     'myviberbot',
     'selection_avto',
-    'english'
+    'english',
+    'english_2'
 
 ]
 

@@ -1,7 +1,7 @@
 from django.urls import path
-from english.views import index, Settings, clear, list_words, E_R, R_E, Random, mod, SearchWord
+from english_2.views import index, Settings, clear, list_words, E_R, R_E, Random, mod, SearchWord
 
-app_name = 'level_1'
+app_name = 'level_2'
 urlpatterns = [
     path('', index, name='english_index'),
     path('settings/', Settings.as_view(), name='settings'),

@@ -1,4 +1,4 @@
-{% extends "english/base_english.html" %}
+{% extends "english_2/base_english.html" %}
 {% load static %}
 
 {% block main %}
@@ -17,14 +17,8 @@
     <button type="submit" class="btn btn-primary">Отправить</button>
 </form>
 <hr>
-<h1>Добавить Irregular Verb</h1>
-<form action="" method="post" autocomplete="off">
-    {% csrf_token %}
-    {{LoadIrregularVerbsForm}}
-    <button type="submit" class="btn btn-primary">Вставить неправильный глагол</button>
-</form>
-<a href="{% url 'level_2:clear' %}" ><button type="button" class="btn btn-warning">Сбросить выученые слова</button></a>
 
+<a href="{% url 'level_2:clear' %}" ><button type="button" class="btn btn-warning">Сбросить выученые слова</button></a>
 
 
 {% endblock %}

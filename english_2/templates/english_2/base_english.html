@@ -12,7 +12,7 @@
 
       {% block css %}
     {% endblock %}
-    <title>{% block title %}English{% endblock %}</title>
+    <title>{% block title %}English level 2{% endblock %}</title>
     {% block head %}{% endblock %}
 
     <meta property="og:title" content="My smart home">
@@ -22,25 +22,25 @@
   <body>
           <ul class="nav nav-pills nav-fill" style="background-color: #dde5c0;">
           <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/" %} active {% endif %} " href="{% url 'level_1:english_index' %}">Start</a>
+            <a class="nav-link {% if request.path == "/english2/" %} active {% endif %} " href="{% url 'level_2:english_index' %}">Start</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/list_words/" %} active {% endif %} " href="{% url 'level_1:list_words' %}">Список выбранных слов</a>
+            <a class="nav-link {% if request.path == "/english2/list_words/" %} active {% endif %} " href="{% url 'level_2:list_words' %}">Список выбранных слов</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/e_r/" %} active {% endif %} " href="{% url 'level_1:e_r' %}">English to Russian</a>
+            <a class="nav-link {% if request.path == "/english2/e_r/"        %} active {% endif %} " href="{% url 'level_2:e_r'        %}">English to Russian</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/r_e/" %} active {% endif %} " href="{% url 'level_1:r_e' %}">Russian to English</a>
+            <a class="nav-link {% if request.path == "/english2/r_e/" %} active {% endif %} " href="{% url 'level_2:r_e' %}">Russian to English</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/random/" %} active {% endif %} " href="{% url 'level_1:random' %}">Random</a>
+            <a class="nav-link {% if request.path == "/english2/random/" %} active {% endif %} " href="{% url 'level_2:random' %}">Random</a>
           </li>
               <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/search/" %} active {% endif %} " href="{% url 'level_1:SearchWord' %}">Search</a>
+            <a class="nav-link {% if request.path == "/english2/search/" %} active {% endif %} " href="{% url 'level_2:SearchWord' %}">Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled {% if request.path == "/english/settings/" %} active {% endif %}" href="{% url 'level_1:settings' %} " tabindex="-1" aria-disabled="true">Управление</a>
+            <a class="nav-link disabled {% if request.path == "/english2/settings/" %} active {% endif %}" href="{% url 'level_2:settings' %} " tabindex="-1" aria-disabled="true">Управление</a>
           </li>
         </ul>
 
@@ -51,8 +51,9 @@
     {% csrf_token %}
         <button type="submit" class="btn btn-primary">Применить</button>
     {{form_word_param.as_ul}}
-    <a href="../english/" ><button type="button" class="btn btn-warning">Уровень 1</button></a>
+        <a href="../english/" ><button type="button" class="btn btn-warning">Уровень 1</button></a>
         <a href="../english2/" ><button type="button" class="btn btn-warning">Уровень 2</button></a>
+
 </form>
 {% endblock %}
 
