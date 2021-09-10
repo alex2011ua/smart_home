@@ -293,8 +293,8 @@ def bot_task_watering_analiz():
     poliv = Setting.objects.get(controller_name="poliv")
     sum_rain = 0
     corect = -1
-    water_time = 25 # время полива
-    limit_rain = 15 # мм
+    water_time = 30 # время полива
+    limit_rain = 1 # мм
 
     for day in weather:
         if day.temp_max > 25:
