@@ -48,8 +48,24 @@ class Settings(LoginRequiredMixin, View):
             content = file_.decode('utf-8').split('\r\n')
             for item in content:
                 try:
-                    w = item.split(';')
-                    Words.objects.create(english=w[0].strip(), russian=w[1].strip(), lesson=lesson)
+                    item = item.replace('’',"'")
+
+                    if ';' in item:
+                        english, russian = item.split(';')
+                    elif '•' in item:
+                        english, russian = item.split('•')
+                    elif '-' in item:
+                        english, russian = item.split('-')
+
+                    english = english.replace('(to)', 'to', 1)
+                    english = english.strip()
+                    russian = russian.strip()
+
+                    other_word = Words.objects.filter(russian=russian)
+                    for word in other_word:
+                        if word.english != english:
+                            russian = russian+' ('+str(lesson)+')'
+                    Words.objects.create(english=english, russian=russian, lesson=lesson)
                 except:
                     pass
         return redirect('level_2:settings')
