@@ -80,9 +80,38 @@ def clear(request):
 
 
 def list_words(request):
+    if request.method == "GET":
+        all, p = get_param_qwery()
+        return render(request, 'english_2/list_words.html', {'words': all, 'count': len(all)})
 
-    all, p = get_param_qwery()
-    return render(request, 'english_2/list_words.html', {'words': all, 'count': len(all)})
+def word_update(request, id):
+    if request.method == "GET":
+        word = Words.objects.get(pk=id)
+        context = {'word': word}
+        return render(request, 'english_2/word_form.html', context)
+    else:
+        english = (request.POST.get('english'))
+        russian = (request.POST.get('russian'))
+        info = (request.POST.get('info'))
+        heavy = (request.POST.get('heavy'))
+        learned = (request.POST.get('learned'))
+        lesson = (request.POST.get('lesson'))
+        word = Words.objects.get(pk=id)
+        word.english = english
+        word.russian = russian
+        word.info = info
+
+        if heavy:
+            word.heavy = True
+        else:
+            word.heavy = False
+        if learned:
+            word.learned = True
+        else:
+            word.learned = False
+        word.lesson = int(lesson)
+        word.save()
+        return redirect('level_2:list_words')
 
 
 class E_R(View):

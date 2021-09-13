@@ -20,9 +20,14 @@
       <td>{{word.lesson}}</td>
       <td>{{word.english}}</td>
       <td>{{word.russian}}</td>
-      <td>{{word.heavy}}</td>
-      <td>{{word.learned}}</td>
+      <td>{% if word.heavy %} <a class="heavy" href="{% url 'level_2:update' word.id %}"   title="Heavy">Heavy</a> {% endif %} </td>
+      <td>{% if word.learned %} <a class="learned" href="{% url 'level_2:update' word.id %}"   title="Learned">Learned</a> {% endif %} </td>
       <td>{{word.info}}</td>
+      <td>
+        <a href="{% url 'level_2:update' word.id %}" class="btn text-secondary px-0">
+          <i class="far fa-edit fa-lg">Изменить</i>
+        </a>
+      </td>
 
 
     </tr>
