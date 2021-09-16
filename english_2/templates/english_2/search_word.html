@@ -67,4 +67,122 @@
   </tbody>
 </table>
 {% endif %}
+
+{% if english_l1 %}
+Слова из 1 курса
+   <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Урок</th>
+      <th scope="col">english</th>
+      <th scope="col">russian</th>
+      <th scope="col">сложное</th>
+      <th scope="col">выучено</th>
+      <th scope="col">info</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for word in english_l1 %}
+    <tr>
+      <td>{{word.lesson}}</td>
+      <td>{{word.english}}</td>
+      <td>{{word.russian}}</td>
+      <td>{{word.heavy}}</td>
+      <td>{{word.learned}}</td>
+      <td>{{word.info}}</td>
+
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if russian_l1 %}
+Слова из 1 курса
+   <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Урок</th>
+      <th scope="col">english</th>
+      <th scope="col">russian</th>
+      <th scope="col">сложное</th>
+      <th scope="col">выучено</th>
+      <th scope="col">info</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for word in russian_l1 %}
+    <tr>
+      <td>{{word.lesson}}</td>
+      <td>{{word.english}}</td>
+      <td>{{word.russian}}</td>
+      <td>{{word.heavy}}</td>
+      <td>{{word.learned}}</td>
+      <td>{{word.info}}</td>
+
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if i_v_russion %}
+Неправильные глаголы
+   <table class="table table-sm">
+  <thead>
+    <tr>
+
+      <th scope="col">infinitive</th>
+      <th scope="col">past_simple</th>
+      <th scope="col">past_participle</th>
+      <th scope="col">russian</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for word in i_v_russion %}
+    <tr>
+
+      <td>{{word.infinitive}}</td>
+      <td>{{word.past_simple}}</td>
+      <td>{{word.past_participle}}</td>
+      <td>{{word.russian}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if i_v_english %}
+Неправильные глаголы
+   <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">infinitive</th>
+      <th scope="col">past_simple</th>
+      <th scope="col">past_participle</th>
+      <th scope="col">russian</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for word in i_v_english %}
+    <tr>
+      <td>{{word.infinitive}}</td>
+      <td>{{word.past_simple}}</td>
+      <td>{{word.past_participle}}</td>
+      <td>{{word.russian}}</td>
+
+
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
 {% endblock %}

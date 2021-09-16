@@ -3,7 +3,10 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm
 from .models import Words, WordParams
+from english.models import Words as Words_l1
+from english.models import IrregularVerbs
 from django.http import JsonResponse
+from django.db.models import Q
 
 
 def index(request):
@@ -248,8 +251,21 @@ class SearchWord(View):
         input_word = request.POST.get('word')
         english_words = Words.objects.filter(english__icontains=input_word)
         russian_words = Words.objects.filter(russian__icontains=input_word)
-        count = len(english_words)+len(russian_words)
+        english_words_l1 = Words_l1.objects.filter(english__icontains=input_word)
+        russian_words_l1 = Words_l1.objects.filter(russian__icontains=input_word)
+
+
+        i_v_russion = IrregularVerbs.objects.filter(russian__icontains=input_word)
+        i_v_english = IrregularVerbs.objects.filter(Q(infinitive__icontains=input_word) | Q(past_simple__icontains=input_word) | Q(past_participle__icontains=input_word))
+
+        count = len(english_words)+len(russian_words)+len(english_words_l1)+\
+                len(russian_words_l1)+len(i_v_english)+len(i_v_russion)
+
         return render(request, 'english_2/search_word.html', {'form': form,
                                                             'english_words': english_words,
                                                             'russian_words': russian_words,
+                                                              'english_l1': english_words_l1,
+                                                              'russian_l1': russian_words_l1,
+                                                              'i_v_russion': i_v_russion,
+                                                              'i_v_english': i_v_english,
                                                             'count': count})
