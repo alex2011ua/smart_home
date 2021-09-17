@@ -54,11 +54,11 @@ class Settings(LoginRequiredMixin, View):
                     item = item.replace('’',"'")
 
                     if ';' in item:
-                        english, russian = item.split(';')
+                        english, russian = item.split(';',1)
                     elif '•' in item:
-                        english, russian = item.split('•')
+                        english, russian = item.split('•',1)
                     elif '-' in item:
-                        english, russian = item.split('-')
+                        english, russian = item.split('-',1)
 
                     english = english.replace('(to)', 'to', 1)
                     english = english.strip()
