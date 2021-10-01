@@ -125,7 +125,7 @@ def word_update(request, id):
             word.irregular_verbs = False
         word.lesson = int(lesson)
         word.save()
-        return redirect('level_2:list_words')
+        return render(request, 'english_2/back.html')
 
 
 class E_R(View):
