@@ -203,3 +203,4 @@ LOGGING = {
         },
     },
 }
+api_key_tmdb = os.environ.get('api_key_tmdb')

@@ -1,7 +1,8 @@
 from django.urls import include, path
 from django.contrib.auth import views
 from myviberbot.views import trx_bot
-from .start_views import IndexView
+from .start_views import IndexView, VideoRating
+
 
 
 
@@ -17,5 +18,5 @@ urlpatterns = [
 
     path('english/', include('english.urls', namespace='level_1')),
     path('english2/', include('english_2.urls', namespace='level_2')),
-
+    path('filmd/',VideoRating.as_view(), name='video')
 ]

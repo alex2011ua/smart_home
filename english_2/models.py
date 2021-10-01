@@ -8,6 +8,9 @@ class Words(models.Model):
     heavy = models.BooleanField(default=False)
     info = models.CharField(max_length=128, blank=True)
     lesson = models.PositiveIntegerField(blank=True, default=0)
+    phrasal_verbs = models.BooleanField(default=False)
+    irregular_verbs = models.BooleanField(default=False)
+
 
 
 class WordParams(models.Model):
