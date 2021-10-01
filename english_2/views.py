@@ -104,6 +104,7 @@ def word_update(request, id):
         word.russian = russian
         word.info = info
 
+
         if heavy:
             word.heavy = True
         else:

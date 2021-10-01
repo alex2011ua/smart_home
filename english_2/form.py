@@ -13,13 +13,17 @@ class LoadWordForm(forms.ModelForm):
             'lesson',
             'english',
             'russian',
-            'info'
+            'info',
+            'phrasal_verbs',
+            'irregular_verbs',
         )
         labels = {
             'lesson': 'lesson',
             'english': 'english',
             'russian': 'russian',
-            'info': 'info'
+            'info': 'info',
+            'phrasal_verbs': 'Только фразовые глаголы',
+            'irregular_verbs': 'Только неправильные глаголы',
         }
 
 
@@ -30,7 +34,9 @@ class WordsParamForm(forms.ModelForm):
         labels = {
             'learned': 'Не показывать выученые слова',
             'heavy': 'Только сложные слова',
-            'lesson_0': 'Слова без привязки к уроку'
+            'lesson_0': 'Слова без привязки к уроку',
+            'phrasal_verbs': 'Только фразовые глаголы',
+            'irregular_verbs': 'Только неправильные глаголы',
         }
 
 

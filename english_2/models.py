@@ -14,6 +14,8 @@ class Words(models.Model):
 
 
 class WordParams(models.Model):
+    phrasal_verbs = models.BooleanField(default=False)
+    irregular_verbs = models.BooleanField(default=False)
     learned = models.BooleanField(default=False)
     heavy = models.BooleanField(default=False)
     lesson_0 = models.BooleanField(default=False)
