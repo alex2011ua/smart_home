@@ -75,7 +75,7 @@ class Settings(LoginRequiredMixin, View):
 
 
 def clear(request):
-    all, p = get_param_qwery()
+    all = get_param_qwery()
     for item in all:
         item.learned = False
         item.save()
@@ -84,7 +84,7 @@ def clear(request):
 
 def list_words(request):
     if request.method == "GET":
-        all, p = get_param_qwery()
+        all = get_param_qwery()
         return render(request, 'english_2/list_words.html', {'words': all, 'count': len(all)})
 
 def word_update(request, id):
@@ -99,6 +99,8 @@ def word_update(request, id):
         heavy = (request.POST.get('heavy'))
         learned = (request.POST.get('learned'))
         lesson = (request.POST.get('lesson'))
+        phrasal = (request.POST.get('phrasal'))
+        irregular = (request.POST.get('irregular'))
         word = Words.objects.get(pk=id)
         word.english = english
         word.russian = russian
@@ -113,6 +115,14 @@ def word_update(request, id):
             word.learned = True
         else:
             word.learned = False
+        if phrasal:
+            word.phrasal_verbs = True
+        else:
+            word.phrasal_verbs = False
+        if irregular:
+            word.irregular_verbs = True
+        else:
+            word.irregular_verbs = False
         word.lesson = int(lesson)
         word.save()
         return redirect('level_2:list_words')
@@ -125,7 +135,7 @@ class E_R(View):
 
     @staticmethod
     def post(request):
-        all, p = get_param_qwery()
+        all = get_param_qwery()
         context = {}
         for item in all:
             try:
@@ -143,7 +153,7 @@ class R_E(View):
     @staticmethod
     def post(request):
         context = {}
-        all, p = get_param_qwery()
+        all = get_param_qwery()
 
         for item in all:
             try:
@@ -161,7 +171,7 @@ class Random(View):
 
     @staticmethod
     def post(request):
-        all, p = get_param_qwery()
+        all = get_param_qwery()
         context = {}
         for item in all:
             try:
@@ -174,48 +184,51 @@ class Random(View):
 
 def get_param_qwery():
     params = WordParams.objects.get(id=1)
-    p = {'lesson__in': []}
-    if params.learned:
-        p['learned'] = False
-    if params.heavy:
-        p['heavy'] = True
-    if params.lesson_0:
-        p['lesson__in'].append(0)
-    if params.lesson_1:
-        p['lesson__in'].append(1)
-    if params.lesson_2:
-        p['lesson__in'].append(2)
-    if params.lesson_3:
-        p['lesson__in'].append(3)
-    if params.lesson_4:
-        p['lesson__in'].append(4)
-    if params.lesson_5:
-        p['lesson__in'].append(5)
-    if params.lesson_6:
-        p['lesson__in'].append(6)
-    if params.lesson_7:
-        p['lesson__in'].append(7)
-    if params.lesson_8:
-        p['lesson__in'].append(8)
-    if params.lesson_9:
-        p['lesson__in'].append(9)
-    if params.lesson_10:
-        p['lesson__in'].append(10)
-    if params.lesson_11:
-        p['lesson__in'].append(11)
-    if params.lesson_12:
-        p['lesson__in'].append(12)
-    if params.lesson_13:
-        p['lesson__in'].append(13)
+    if params.irregular_verbs:
+        all = Words.objects.filter(irregular_verbs=True)
+    elif params.phrasal_verbs:
+        all = Words.objects.filter(phrasal_verbs=True)
+    else:
+        p = {'lesson__in': []}
+        if params.learned:
+            p['learned'] = False
+        if params.heavy:
+            p['heavy'] = True
+        if params.lesson_0:
+            p['lesson__in'].append(0)
+        if params.lesson_1:
+            p['lesson__in'].append(1)
+        if params.lesson_2:
+            p['lesson__in'].append(2)
+        if params.lesson_3:
+            p['lesson__in'].append(3)
+        if params.lesson_4:
+            p['lesson__in'].append(4)
+        if params.lesson_5:
+            p['lesson__in'].append(5)
+        if params.lesson_6:
+            p['lesson__in'].append(6)
+        if params.lesson_7:
+            p['lesson__in'].append(7)
+        if params.lesson_8:
+            p['lesson__in'].append(8)
+        if params.lesson_9:
+            p['lesson__in'].append(9)
+        if params.lesson_10:
+            p['lesson__in'].append(10)
+        if params.lesson_11:
+            p['lesson__in'].append(11)
+        if params.lesson_12:
+            p['lesson__in'].append(12)
+        if params.lesson_13:
+            p['lesson__in'].append(13)
+        all = Words.objects.filter(**p)
 
-    all = Words.objects.filter(**p)
-    return all, p
+    return all
 
 
 def mod(request):
     if request.user.username:
-        all, p = get_param_qwery()
-
         word = {'lesson__in': p['lesson__in']}
         if '/e_r/' in request.path:
             language = 'english'
