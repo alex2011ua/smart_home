@@ -75,7 +75,7 @@ class Settings(LoginRequiredMixin, View):
 
 
 def clear(request):
-    all = get_param_qwery()
+    all, p = WordParams.params()
     for item in all:
         item.learned = False
         item.save()
@@ -84,7 +84,7 @@ def clear(request):
 
 def list_words(request):
     if request.method == "GET":
-        all = get_param_qwery()
+        all, p = WordParams.params()
         return render(request, 'english_2/list_words.html', {'words': all, 'count': len(all)})
 
 def word_update(request, id):
@@ -135,8 +135,9 @@ class E_R(View):
 
     @staticmethod
     def post(request):
-        all = get_param_qwery()
-        context = {}
+        all, p = WordParams.params()
+        params = WordParams.objects.get(id=1)
+        context = {'control_state': params.control_state}
         for item in all:
             try:
                 context[item.english] = item.russian
@@ -152,8 +153,9 @@ class R_E(View):
 
     @staticmethod
     def post(request):
-        context = {}
-        all = get_param_qwery()
+        params = WordParams.objects.get(id=1)
+        context = {'control_state': params.control_state}
+        all, p = WordParams.params()
 
         for item in all:
             try:
@@ -171,7 +173,7 @@ class Random(View):
 
     @staticmethod
     def post(request):
-        all = get_param_qwery()
+        all, p = WordParams.params()
         context = {}
         for item in all:
             try:
@@ -182,59 +184,14 @@ class Random(View):
         return JsonResponse(context)
 
 
-def get_param_qwery():
-    params = WordParams.objects.get(id=1)
-    if params.irregular_verbs:
-        all = Words.objects.filter(irregular_verbs=True)
-    elif params.phrasal_verbs:
-        all = Words.objects.filter(phrasal_verbs=True)
-    else:
-        p = {'lesson__in': []}
-        if params.learned:
-            p['learned'] = False
-        if params.heavy:
-            p['heavy'] = True
-        if params.lesson_0:
-            p['lesson__in'].append(0)
-        if params.lesson_1:
-            p['lesson__in'].append(1)
-        if params.lesson_2:
-            p['lesson__in'].append(2)
-        if params.lesson_3:
-            p['lesson__in'].append(3)
-        if params.lesson_4:
-            p['lesson__in'].append(4)
-        if params.lesson_5:
-            p['lesson__in'].append(5)
-        if params.lesson_6:
-            p['lesson__in'].append(6)
-        if params.lesson_7:
-            p['lesson__in'].append(7)
-        if params.lesson_8:
-            p['lesson__in'].append(8)
-        if params.lesson_9:
-            p['lesson__in'].append(9)
-        if params.lesson_10:
-            p['lesson__in'].append(10)
-        if params.lesson_11:
-            p['lesson__in'].append(11)
-        if params.lesson_12:
-            p['lesson__in'].append(12)
-        if params.lesson_13:
-            p['lesson__in'].append(13)
-        all = Words.objects.filter(**p)
-
-    return all
-
-
 def mod(request):
+    all, p = WordParams.params()
     if request.user.username:
         word = {'lesson__in': p['lesson__in']}
         if '/e_r/' in request.path:
             language = 'english'
         else:
             language = 'russian'
-
         if request.GET.get('learned'):
             mod = 'learned'
             word[language] = request.GET.get('learned')
@@ -252,12 +209,12 @@ def mod(request):
     context = {'status': 200}
     return JsonResponse(context)
 
+
 class SearchWord(View):
     @staticmethod
     def get(request):
         form = SearchWordForm()
         return render(request, 'english_2/search_word.html', {'form': form})
-
 
     @staticmethod
     def post(request):
@@ -268,18 +225,18 @@ class SearchWord(View):
         english_words_l1 = Words_l1.objects.filter(english__icontains=input_word)
         russian_words_l1 = Words_l1.objects.filter(russian__icontains=input_word)
 
-
         i_v_russion = IrregularVerbs.objects.filter(russian__icontains=input_word)
         i_v_english = IrregularVerbs.objects.filter(Q(infinitive__icontains=input_word) | Q(past_simple__icontains=input_word) | Q(past_participle__icontains=input_word))
 
         count = len(english_words)+len(russian_words)+len(english_words_l1)+\
                 len(russian_words_l1)+len(i_v_english)+len(i_v_russion)
 
-        return render(request, 'english_2/search_word.html', {'form': form,
-                                                            'english_words': english_words,
-                                                            'russian_words': russian_words,
-                                                              'english_l1': english_words_l1,
-                                                              'russian_l1': russian_words_l1,
-                                                              'i_v_russion': i_v_russion,
-                                                              'i_v_english': i_v_english,
-                                                            'count': count})
+        return render(request, 'english_2/search_word.html', {  'form': form,
+                                                                'english_words': english_words,
+                                                                'russian_words': russian_words,
+                                                                'english_l1': english_words_l1,
+                                                                'russian_l1': russian_words_l1,
+                                                                'i_v_russion': i_v_russion,
+                                                                'i_v_english': i_v_english,
+                                                                'count': count
+                                                                })

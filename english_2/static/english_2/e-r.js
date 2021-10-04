@@ -21,10 +21,11 @@ let words_obj=0;
     error: function (text) {
         console.log('__error__');
         console.log(text);
-        alert('error');
+        alert('"Не получен "');
     },
 });
-
+let control_state = words_obj['control_state'];
+delete words_obj['control_state'];
 let words_list = Object.keys(words_obj);
 let ind = Math.floor(Math.random() * words_list.length);
 let word = words_list[ind];
@@ -54,7 +55,9 @@ function start(){
         err.style.display = 'block';
         dellete_word_button.style.display = 'none';
         answer.style.display = 'block';
-
+        if (control_state === true){
+            learnedFunc();
+        }
     }
     else{
         document.getElementById("vvod").value = '';

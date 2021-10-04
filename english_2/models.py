@@ -14,11 +14,8 @@ class Words(models.Model):
 
 
 class WordParams(models.Model):
-    phrasal_verbs = models.BooleanField(default=False)
-    irregular_verbs = models.BooleanField(default=False)
     learned = models.BooleanField(default=False)
     heavy = models.BooleanField(default=False)
-    lesson_0 = models.BooleanField(default=False)
     lesson_1 = models.BooleanField(default=False)
     lesson_2 = models.BooleanField(default=False)
     lesson_3 = models.BooleanField(default=False)
@@ -32,3 +29,53 @@ class WordParams(models.Model):
     lesson_11 = models.BooleanField(default=False)
     lesson_12 = models.BooleanField(default=False)
     lesson_13 = models.BooleanField(default=False)
+    lesson_0 = models.BooleanField(default=False)
+    phrasal_verbs = models.BooleanField(default=False)
+    irregular_verbs = models.BooleanField(default=False)
+    control_state = models.BooleanField(default=False)
+
+    @staticmethod
+    def params():
+        params = WordParams.objects.get(id=1)
+        p = {'lesson__in': []}
+        if params.learned:
+            p['learned'] = False
+        if params.heavy:
+            p['heavy'] = True
+        if params.lesson_0:
+            p['lesson__in'].append(0)
+        if params.lesson_1:
+            p['lesson__in'].append(1)
+        if params.lesson_2:
+            p['lesson__in'].append(2)
+        if params.lesson_3:
+            p['lesson__in'].append(3)
+        if params.lesson_4:
+            p['lesson__in'].append(4)
+        if params.lesson_5:
+            p['lesson__in'].append(5)
+        if params.lesson_6:
+            p['lesson__in'].append(6)
+        if params.lesson_7:
+            p['lesson__in'].append(7)
+        if params.lesson_8:
+            p['lesson__in'].append(8)
+        if params.lesson_9:
+            p['lesson__in'].append(9)
+        if params.lesson_10:
+            p['lesson__in'].append(10)
+        if params.lesson_11:
+            p['lesson__in'].append(11)
+        if params.lesson_12:
+            p['lesson__in'].append(12)
+        if params.lesson_13:
+            p['lesson__in'].append(13)
+
+        if params.irregular_verbs:
+            p['irregular_verbs'] = True
+        if params.phrasal_verbs:
+            p['phrasal_verbs'] = True
+
+        all = Words.objects.filter(**p)
+
+        return all, p
