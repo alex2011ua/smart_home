@@ -75,6 +75,9 @@ class Settings(LoginRequiredMixin, View):
 
 
 def clear(request):
+    params = WordParams.objects.get(id=1)
+    params.learned = False
+    params.save()
     all, p = WordParams.params()
     for item in all:
         item.learned = False
