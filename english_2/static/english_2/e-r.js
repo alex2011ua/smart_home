@@ -69,7 +69,13 @@ function start(){
         err.style.display = 'none';
 
         dellete_word_button.style.display = 'inline';
+        if (control_state === true){
+           delete words_obj[to_del];
+            words_list = Object.keys(words_obj);
 
+            console.log('Хоть и не верно  - удаляю');
+            dellete_word_button.style.display = 'none';
+        }
 
         }
 
