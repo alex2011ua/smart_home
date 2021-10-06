@@ -42,3 +42,8 @@ class WordsParamForm(forms.ModelForm):
 
 class SearchWordForm(forms.Form):
     word = forms.CharField(label='слово')
+
+
+class CompareWordForm(forms.Form):
+    first_word = forms.CharField(label='1 слово')
+    second_word = forms.CharField(label='2 слово')

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm
+from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm, CompareWordForm
 from .models import Words, WordParams
 from english.models import Words as Words_l1
 from english.models import IrregularVerbs
@@ -243,3 +243,29 @@ class SearchWord(View):
                                                                 'i_v_english': i_v_english,
                                                                 'count': count
                                                                 })
+class CompareWords(View):
+    @staticmethod
+    def get(request):
+        form = CompareWordForm()
+        return render(request, 'english_2/compare_word.html', {'form': form})
+
+    @staticmethod
+    def post(request):
+        import difflib as df
+        form = CompareWordForm()
+        first_word = request.POST.get('first_word')
+        second_word = request.POST.get('second_word')
+        if first_word == second_word:
+            answer = 'Строки одинаковы'
+        else:
+            d = df.Differ()
+            diff = d.compare(first_word, second_word)
+            answer = ''.join(diff)
+        return render(request, 'english_2/compare_word.html', {
+            'form': form,
+            'answer': answer,
+            'first_word':first_word,
+            'second_word':second_word,
+
+
+        })

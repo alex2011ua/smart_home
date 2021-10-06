@@ -1,5 +1,5 @@
 from django.urls import path
-from english_2.views import index, Settings, clear, list_words, E_R, R_E, Random, mod, SearchWord, word_update
+from english_2.views import index, Settings, clear, list_words, E_R, R_E, Random, mod, SearchWord, word_update, CompareWords
 
 app_name = 'level_2'
 urlpatterns = [
@@ -16,4 +16,5 @@ urlpatterns = [
     path('r_e/', R_E.as_view(), name='r_e'),
     path('random/', Random.as_view(), name='random'),
     path('search/', SearchWord.as_view(), name='SearchWord'),
+    path('compare/', CompareWords.as_view(), name='CompareWords'),
 ]
