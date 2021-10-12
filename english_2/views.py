@@ -46,7 +46,7 @@ class Settings(LoginRequiredMixin, View):
                 name_file, _ = (request.FILES.get('file').name).split('.')
                 lesson = int(name_file)
             except:
-                lesson = 0
+                lesson = None
             file_ = request.FILES.get('file').read()
             content = file_.decode('utf-8').split('\r\n')
             for item in content:
