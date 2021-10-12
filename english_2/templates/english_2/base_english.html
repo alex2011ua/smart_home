@@ -21,7 +21,7 @@
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="{% url 'level_2:english_index' %}">English</a>
+  <a class="navbar-brand" href="{% url 'level_2:english_index' %}"><img src="/static/english_2/favicon.ico" alt="AK" width="50"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -32,13 +32,13 @@
         <a class="nav-link" href="{% url 'level_2:english_index' %}">Start <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item {% if request.path == "/english2/list_words/" %} active {% endif %}">
-        <a class="nav-link" href="{% url 'level_2:list_words' %}">Список выбранных слов <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'level_2:list_words' %}">Список<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item {% if request.path == "/english2/e_r/" %} active {% endif %}">
-        <a class="nav-link" href="{% url 'level_2:e_r'        %}">English to Russian <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'level_2:e_r'        %}">English<span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item {% if request.path == "/english2/r_e/" %} active {% endif %}">
-        <a class="nav-link" href="{% url 'level_2:r_e' %}">Russian to English <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'level_2:r_e' %}">Russian<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item {% if request.path == "/english2/random/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'level_2:random' %}">Random <span class="sr-only">(current)</span></a>
@@ -46,7 +46,7 @@
 <li class="nav-item {% if request.path == "/english2/search/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'level_2:SearchWord' %}">Search <span class="sr-only">(current)</span></a>
       </li>
-        <li class="nav-item {% if request.path == "/english2/compare/" %} active {% endif %}">
+        <li class="nav-item {% if request.path == '/english2/compare/' %} active {% endif %}">
         <a class="nav-link" href="{% url 'level_2:CompareWords' %}">Сравнение <span class="sr-only">(current)</span></a>
       </li>
 
@@ -101,14 +101,7 @@
 .irregular:hover{background: #513c35;color:#ffffff;border:4px solid #513e35;transition: all 0.2s ease;}
 </style>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"-->
-<!--        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"-->
-<!--        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"-->
-<!--        crossorigin="anonymous"></script>-->
+
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

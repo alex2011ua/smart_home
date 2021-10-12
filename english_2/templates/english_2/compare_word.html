@@ -3,7 +3,7 @@
 {% block main %}
 <form action="" method="post" autocomplete="off">
     {% csrf_token %}
-    {{form}}
+    {{form.as_ul}}
     <button type="submit" class="btn btn-primary">Найти</button>
 </form>
 {% if second_word %}
