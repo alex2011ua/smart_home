@@ -74,7 +74,7 @@ class WordParams(models.Model):
 
         if params.irregular_verbs:
             p['irregular_verbs'] = True
-            p['lesson__in'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
+            del p['lesson__in']
         if params.phrasal_verbs:
             p['phrasal_verbs'] = True
 

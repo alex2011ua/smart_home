@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
 from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm, CompareWordForm
 from .models import Words, WordParams
 from english.models import Words as Words_l1
 from english.models import IrregularVerbs
 from django.http import JsonResponse
 from django.db.models import Q
+
 
 
 def index(request):
@@ -42,35 +44,53 @@ class Settings(LoginRequiredMixin, View):
                 form.save()
             return redirect('level_2:settings')
         if request.FILES.get('file'):
+            name_file, _ = (request.FILES.get('file').name).split('.')
+            irregular_verbs = False
+            phrasal_verbs = False
+
             try:
-                name_file, _ = (request.FILES.get('file').name).split('.')
                 lesson = int(name_file)
             except:
-                lesson = None
+                lesson = 99
+
+            if name_file == 'irregular_verbs':
+                irregular_verbs = True
+            elif name_file == 'phrasal_verbs':
+                phrasal_verbs = True
             file_ = request.FILES.get('file').read()
             content = file_.decode('utf-8').split('\r\n')
             for item in content:
                 try:
-                    item = item.replace('’',"'")
+                    item = item.replace('’', "'")
 
                     if ';' in item:
-                        english, russian = item.split(';',1)
+                        english, russian = item.split(';', 1)
                     elif '•' in item:
-                        english, russian = item.split('•',1)
+                        english, russian = item.split('•', 1)
                     elif '-' in item:
-                        english, russian = item.split('-',1)
+                        english, russian = item.split('-', 1)
 
                     english = english.replace('(to)', 'to', 1)
                     english = english.strip()
                     russian = russian.strip()
 
                     other_word = Words.objects.filter(russian=russian)
-                    for word in other_word:
-                        if word.english != english:
-                            russian = russian+' ('+str(lesson)+')'
-                    Words.objects.create(english=english, russian=russian, lesson=lesson)
-                except:
-                    pass
+                    try:
+                        _ = Words.objects.get(russian=russian, english=english)
+                    except ObjectDoesNotExist:
+
+                        for word in other_word:
+                            if word.english != english:
+                                russian = russian+' (' + str(lesson) + ')'
+                        Words.objects.get(russian=russian, english=english)
+                        Words.objects.create(english=english,
+                                             russian=russian,
+                                             lesson=lesson,
+                                             irregular_verbs=irregular_verbs,
+                                             phrasal_verbs=phrasal_verbs
+                                             )
+                except Exception as ex:
+                    print(ex)
         return redirect('level_2:settings')
 
 
