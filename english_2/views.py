@@ -82,7 +82,7 @@ class Settings(LoginRequiredMixin, View):
                         for word in other_word:
                             if word.english != english:
                                 russian = russian+' (' + str(lesson) + ')'
-                        Words.objects.get(russian=russian, english=english)
+
                         Words.objects.create(english=english,
                                              russian=russian,
                                              lesson=lesson,
