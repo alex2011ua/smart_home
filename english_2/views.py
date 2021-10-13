@@ -99,7 +99,7 @@ def clear(request):
 
     for item in params:
         item.delete()
-        item.save()
+
 
 
     # params = WordParams.objects.get(id=1)
