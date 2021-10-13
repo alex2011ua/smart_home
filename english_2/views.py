@@ -95,20 +95,13 @@ class Settings(LoginRequiredMixin, View):
 
 
 def clear(request):
-    params = Words.objects.filter(lesson=99)
-
-    for item in params:
-        item.delete()
-
-
-
-    # params = WordParams.objects.get(id=1)
-    # params.learned = False
-    # params.save()
-    # all, p = WordParams.params()
-    # for item in all:
-    #     item.learned = False
-    #     item.save()
+    params = WordParams.objects.get(id=1)
+    params.learned = False
+    params.save()
+    all, p = WordParams.params()
+    for item in all:
+        item.learned = False
+        item.save()
 
 
     return redirect('level_2:settings')
