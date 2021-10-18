@@ -221,6 +221,7 @@ class Rele(LoginRequiredMixin, View):
                 rele_light_tree(0)
                 rele.value = 0
                 rele.save()
+        # балкон
         if rele_id == 3:
             rele = Setting.objects.get(controller_name='light_perim')
             if rele.value == 0:
@@ -295,7 +296,6 @@ class Alarms(LoginRequiredMixin, View):
 
 class Info(View):
     """Info"""
-
     @staticmethod
     def get(request):
         context = {}
@@ -312,5 +312,4 @@ class Info(View):
         context['sensors']['humidity_teplica'] = temp.humidity_teplica
         context['max_temp_teplica'] = max_temp_teplica
         context['min_temp_teplica'] = min_temp_teplica
-
         return render(request, "core/info.html", context)

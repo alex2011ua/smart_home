@@ -14,7 +14,7 @@ cellery_app.autodiscover_tasks()
 
 from house.core.tasks import restart_cam_task, weather_task, arduino_task, \
     bot_task, \
-    bot_task_1_hour, bot_task_11_hour, bot_task_watering_analiz, poliv
+    bot_task_1_hour, bot_task_11_hour, bot_task_watering_analiz, poliv, lights_off, lights_on
 
 from celery.exceptions import SoftTimeLimitExceeded
 
@@ -97,19 +97,50 @@ def setup_periodic_task_22_hour(sender, **kwargs):
         name='bot_task_11_hour')
 
 
-@cellery_app.on_after_configure.connect()
-def setup_periodic_task_watering_analiz(sender, **kwargs):
-    """анализ необходимости полива"""
-    sender.add_periodic_task(
-        crontab(minute=3, hour=6),  # +3
-        bot_task_watering_analiz.s(),
-        name='periodic_task_watering_analiz')
+# раскоментировать весной
+# @cellery_app.on_after_configure.connect()
+# def setup_periodic_task_watering_analiz(sender, **kwargs):
+#     """анализ необходимости полива"""
+#     sender.add_periodic_task(
+#         crontab(minute=3, hour=6),  # +3
+#         bot_task_watering_analiz.s(),
+#         name='periodic_task_watering_analiz')
+#
+#
+# @cellery_app.on_after_configure.connect()
+# def setup_periodic_task_watering_start_if_need(sender, **kwargs):
+#     """включеие полива по рассписанию"""
+#     sender.add_periodic_task(
+#         crontab(minute=11, hour=24-3),
+#         poliv.s(),
+#         name='task_watering_start_if_need')
 
 
-@cellery_app.on_after_configure.connect()
-def setup_periodic_task_watering_start_if_need(sender, **kwargs):
-    """включеие полива по рассписанию"""
-    sender.add_periodic_task(
-        crontab(minute=11, hour=24-3),
-        poliv.s(),
-        name='task_watering_start_if_need')
+
+#  включение иллюминации по рассписанию
+@cellery_app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    try:
+        sender.add_periodic_task(
+            crontab(minute=1,
+                    hour=18-3),
+            lights_on.s(),
+            name='lights_on')
+    except SoftTimeLimitExceeded as err:
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            title_log='Celery',
+                            description_log=f'{err}- превышен лимит времени')
+
+#  ВЫключение иллюминации по рассписанию
+@cellery_app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    try:
+        sender.add_periodic_task(
+            crontab(minute=15,
+                    hour=21-3),
+            lights_off.s(),
+            name='lights_off')
+    except SoftTimeLimitExceeded as err:
+        Logs.objects.create(date_log=datetime.datetime.now(),
+                            title_log='Celery',
+                            description_log=f'{err}- превышен лимит времени')

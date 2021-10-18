@@ -321,13 +321,11 @@ def bot_task_watering_analiz():
 @cellery_app.task()
 def poliv(force=None):
     """включениe полива"""
-
     poliv = Setting.objects.get(controller_name="poliv")
     if poliv.label == 'включен' or force:
         Params.objects.create(poliv=poliv.value, date_t_h=datetime.now())
         arduino_poliv(poliv.value)
         bot.send_message(f'Полив завершен: {poliv.value} min.' + "(принудительно)" if force else '')
-
 
 @cellery_app.task()
 def pshik(force=None):
@@ -338,7 +336,20 @@ def pshik(force=None):
         arduino_poliv(poliv.value)
         bot.send_message(f'Полив завершен: {poliv.value} min.' + "(принудительно)" if force else '')
 
+@cellery_app.task()
+def lights_on():
+    """включениe иллюминации балкона"""
+    rele = Setting.objects.get(controller_name='light_perim')
+    if rele.value == 0:
+        rele_light_perim(1)
+        rele.value = 1
+        rele.save()
 
-
-
-
+@cellery_app.task()
+def lights_off():
+    """ВЫключениe иллюминации балкона"""
+    rele = Setting.objects.get(controller_name='light_perim')
+    if rele.value == 1:
+        rele_light_perim(0)
+        rele.value = 0
+        rele.save()
