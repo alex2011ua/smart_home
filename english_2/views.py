@@ -191,24 +191,6 @@ class R_E(View):
         return JsonResponse(context)
 
 
-class Random(View):
-    @staticmethod
-    def get(request):
-        return render(request, 'english_2/e-r.html')
-
-    @staticmethod
-    def post(request):
-        all, p = WordParams.params()
-        context = {}
-        for item in all:
-            try:
-                context[item.russian] = item.english
-                context[item.english] = item.russian
-            except:
-                print('error')
-        return JsonResponse(context)
-
-
 def mod(request):
     all, p = WordParams.params()
     if request.user.username:
