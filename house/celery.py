@@ -119,7 +119,7 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 
 #  включение иллюминации по рассписанию
 @cellery_app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
+def setup_periodic_tasks_on_lights(sender, **kwargs):
     try:
         sender.add_periodic_task(
             crontab(minute=1,
@@ -133,11 +133,11 @@ def setup_periodic_tasks(sender, **kwargs):
 
 #  ВЫключение иллюминации по рассписанию
 @cellery_app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
+def setup_periodic_tasks_off_lights(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute=15,
-                    hour=21-3),
+            crontab(minute=4,
+                    hour=22-3),
             lights_off.s(),
             name='lights_off')
     except SoftTimeLimitExceeded as err:
