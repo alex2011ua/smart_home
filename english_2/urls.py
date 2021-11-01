@@ -1,11 +1,13 @@
 from django.urls import path
-from english_2.views import index, Settings, clear, list_words, E_R, R_E, mod, SearchWord, word_update, CompareWords
+from english_2.views import index, Settings, clear, list_words, E_R, R_E, mod, SearchWord, word_update, CompareWords, \
+    test
 
 app_name = 'level_2'
 urlpatterns = [
     path('', index, name='english_index'),
     path('settings/', Settings.as_view(), name='settings'),
     path('clear/', clear, name='clear'),
+    path('test/', test, name='test'),
     path('list_words/', list_words, name='list_words'),
     path('list_words/<int:id>/', word_update, name='update'),
 

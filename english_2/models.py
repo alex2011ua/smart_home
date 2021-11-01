@@ -12,7 +12,6 @@ class Words(models.Model):
     irregular_verbs = models.BooleanField(default=False)
 
 
-
 class WordParams(models.Model):
     learned = models.BooleanField(default=False)
     heavy = models.BooleanField(default=False)
@@ -29,6 +28,10 @@ class WordParams(models.Model):
     lesson_11 = models.BooleanField(default=False)
     lesson_12 = models.BooleanField(default=False)
     lesson_13 = models.BooleanField(default=False)
+
+    level_1 = models.BooleanField(default=False)
+    level_2 = models.BooleanField(default=False)
+    level_3 = models.BooleanField(default=False)
 
     lesson_0 = models.BooleanField(default=False)
     phrasal_verbs = models.BooleanField(default=False)
@@ -72,9 +75,15 @@ class WordParams(models.Model):
         if params.lesson_13:
             p['lesson__in'].append(13)
 
+        if params.level_1:
+            p['lesson__in'].append(100)
+        if params.level_2:
+            p['lesson__in'].append(200)
+        if params.level_3:
+            p['lesson__in'].extend([0,1,2,3,4,5,6,7,8,9,10,11,12,13])
         if params.irregular_verbs:
             p['irregular_verbs'] = True
-            p['lesson__in'] = [99]
+            p['lesson__in'].append(99)
         if params.phrasal_verbs:
             p['phrasal_verbs'] = True
 

@@ -106,6 +106,58 @@ def clear(request):
 
     return redirect('level_2:settings')
 
+def test(request):
+    del_100 = Words.objects.filter(lesson=100)
+    for w in del_100:
+        w.delete()
+    del_200 = Words.objects.filter(lesson=200)
+    for w in del_200:
+        w.delete()
+
+    words_l1 = Words_l1.objects.all()
+    for word in words_l1:
+        english = word.english
+        russian = word.russian
+
+        other_word = Words.objects.filter(russian=russian, lesson=100)
+        try:
+            _ = Words.objects.get(russian=russian, english=english, lesson=100)
+        except ObjectDoesNotExist:
+            for o_word in other_word:
+                if o_word.english != english:
+                    russian = russian + ' (' + str(word.lesson) + ')'
+
+            Words.objects.create(english=english,
+                                 russian=russian,
+                                 learned=word.learned,
+                                 heavy=word.heavy,
+                                 lesson=100,
+                                 irregular_verbs=False,
+                                 phrasal_verbs=False
+                                 )
+        word.delete()
+    words_l2 = Words.objects.filter(lesson__in=[0,1,2,3,4,5,6,7,8,9,10,11,12,13])
+    for word in words_l2:
+        english = word.english
+        russian = word.russian
+
+        other_word = Words.objects.filter(russian=russian, lesson=200)
+        try:
+            _ = Words.objects.get(russian=russian, english=english, lesson=200)
+        except ObjectDoesNotExist:
+            for o_word in other_word:
+                if o_word.english != english:
+                    russian = russian + ' (' + str(word.lesson) + ')'
+
+            Words.objects.create(english=english,
+                                 russian=russian,
+                                 irregular_verbs=word.irregular_verbs,
+                                 phrasal_verbs=word.phrasal_verbs,
+                                 lesson=200,
+
+                                 )
+        word.delete()
+    return render(request, 'english_2/back.html')
 
 def list_words(request):
     if request.method == "GET":
