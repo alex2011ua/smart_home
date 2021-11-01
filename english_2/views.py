@@ -107,6 +107,8 @@ def clear(request):
     return redirect('level_2:settings')
 
 def test(request):
+    '''для перехода на следующий уровень'''
+    return render(request, 'english_2/back.html')
     words_l1 = Words_l1.objects.all()
     for word in words_l1:
         english = word.english
