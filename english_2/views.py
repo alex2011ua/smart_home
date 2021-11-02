@@ -74,21 +74,17 @@ class Settings(LoginRequiredMixin, View):
                     english = english.strip()
                     russian = russian.strip()
 
-                    other_word = Words.objects.filter(russian=russian)
-                    try:
-                        _ = Words.objects.get(russian=russian, english=english)
-                    except ObjectDoesNotExist:
+                    other_word = Words.objects.filter(russian=russian, lesson__in=(1,2,3,4,5,6,7,8,9,10,11,12,13))
+                    for word in other_word:
+                        if word.english != english:
+                            russian = russian+' (' + str(lesson) + ')'
 
-                        for word in other_word:
-                            if word.english != english:
-                                russian = russian+' (' + str(lesson) + ')'
-
-                        Words.objects.create(english=english,
-                                             russian=russian,
-                                             lesson=lesson,
-                                             irregular_verbs=irregular_verbs,
-                                             phrasal_verbs=phrasal_verbs
-                                             )
+                    Words.objects.create(english=english,
+                                         russian=russian,
+                                         lesson=lesson,
+                                         irregular_verbs=irregular_verbs,
+                                         phrasal_verbs=phrasal_verbs
+                                         )
                 except Exception as ex:
                     print(ex)
         return redirect('level_2:settings')
@@ -269,22 +265,12 @@ class SearchWord(View):
         input_word = request.POST.get('word')
         english_words = Words.objects.filter(english__icontains=input_word)
         russian_words = Words.objects.filter(russian__icontains=input_word)
-        english_words_l1 = Words_l1.objects.filter(english__icontains=input_word)
-        russian_words_l1 = Words_l1.objects.filter(russian__icontains=input_word)
 
-        i_v_russion = IrregularVerbs.objects.filter(russian__icontains=input_word)
-        i_v_english = IrregularVerbs.objects.filter(Q(infinitive__icontains=input_word) | Q(past_simple__icontains=input_word) | Q(past_participle__icontains=input_word))
-
-        count = len(english_words)+len(russian_words)+len(english_words_l1)+\
-                len(russian_words_l1)+len(i_v_english)+len(i_v_russion)
+        count = len(english_words)+len(russian_words)
 
         return render(request, 'english_2/search_word.html', {  'form': form,
                                                                 'english_words': english_words,
                                                                 'russian_words': russian_words,
-                                                                'english_l1': english_words_l1,
-                                                                'russian_l1': russian_words_l1,
-                                                                'i_v_russion': i_v_russion,
-                                                                'i_v_english': i_v_english,
                                                                 'count': count
                                                                 })
 class CompareWords(View):
