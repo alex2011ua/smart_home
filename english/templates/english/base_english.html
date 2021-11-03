@@ -2,6 +2,17 @@
 {% load static %}
 <html lang="en">
   <head>
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180075682-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-180075682-1');
+    </script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +23,7 @@
 
       {% block css %}
     {% endblock %}
-    <title>{% block title %}English{% endblock %}</title>
+    <title>{% block title %}English level 2{% endblock %}</title>
     {% block head %}{% endblock %}
 
     <meta property="og:title" content="My smart home">
@@ -20,29 +31,44 @@
     <meta property="og:image" content="static/og.gif">
   </head>
   <body>
-          <ul class="nav nav-pills nav-fill" style="background-color: #dde5c0;">
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/" %} active {% endif %} " href="{% url 'level_1:english_index' %}">Start</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/list_words/" %} active {% endif %} " href="{% url 'level_1:list_words' %}">Список выбранных слов</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/e_r/" %} active {% endif %} " href="{% url 'level_1:e_r' %}">English to Russian</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/r_e/" %} active {% endif %} " href="{% url 'level_1:r_e' %}">Russian to English</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/random/" %} active {% endif %} " href="{% url 'level_1:random' %}">Random</a>
-          </li>
-              <li class="nav-item">
-            <a class="nav-link {% if request.path == "/english/search/" %} active {% endif %} " href="{% url 'level_1:SearchWord' %}">Search</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled {% if request.path == "/english/settings/" %} active {% endif %}" href="{% url 'level_1:settings' %} " tabindex="-1" aria-disabled="true">Управление</a>
-          </li>
-        </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
+  <a class="navbar-brand" {% if params.control_state %} style="background-color: rgba(224,90,90,0.49);" {% endif %} href="{% url 'english:english_index' %}"><img src="/static/english/AK.png" alt="AK" width="65"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item {% if request.path == "/english/list_words/" %} active {% endif %}">
+        <a class="nav-link" href="{% url 'english:list_words' %}">Список<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item {% if request.path == "/english/e_r/" %} active {% endif %}">
+        <a class="nav-link" href="{% url 'english:e_r'        %}">English<span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item {% if request.path == "/english/r_e/" %} active {% endif %}">
+        <a class="nav-link" href="{% url 'english:r_e' %}">Russian<span class="sr-only">(current)</span></a>
+      </li>
+
+        <li class="nav-item  {% if request.path == '/english/settings/' %} active {% endif %}">
+        <a class="nav-link disabled" href="{% url 'english:settings' %}">Управление <span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Курс
+        </a>
+
+      </li>
+
+    </ul>
+    <form action="/english/search/" class="form-inline my-2 my-lg-0" method="post" target="_blank">
+    {% csrf_token %}
+
+      <input class="form-control mr-sm-2" type="text" name="word" required="" id="id_word">
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
 
 
 {% block main %}
@@ -51,21 +77,28 @@
     {% csrf_token %}
         <button type="submit" class="btn btn-primary">Применить</button>
     {{form_word_param.as_ul}}
-    <a href="../english/" ><button type="button" class="btn btn-warning">Уровень 1</button></a>
-        <a href="../english2/" ><button type="button" class="btn btn-warning">Уровень 2</button></a>
 </form>
 {% endblock %}
 
+<style>
+/* Стили кнопки */
+.learned{display: inline-block;cursor: pointer; font-size:14px;text-decoration:none;padding:5px 9px; color:#0ac93a;background:#dfe8e1;border-radius:50px;border:2px solid #354251;}
+.learned:hover{background:#354251;color:#ffffff;border:4px solid #354251;transition: all 0.2s ease;}
+.heavy{display: inline-block;cursor: pointer; font-size:15px;text-decoration:none;padding:3px 9px; color:#252f66;background:#8797e0;border-radius:31px;border:4px solid #354251;}
+.heavy:hover{background:#354251;color:#ffffff;border:4px solid #354251;transition: all 0.2s ease;}
+
+.phrasal{display: inline-block;cursor: pointer; font-size:15px;text-decoration:none;padding:3px 9px; color: #9a8030;background: #e0d187;border-radius:31px;border:4px solid #514b35;}
+.phrasal:hover{background: #514a35;color:#ffffff;border:4px solid #514d35;transition: all 0.2s ease;}
+
+.irregular{display: inline-block;cursor: pointer; font-size:15px;text-decoration:none;padding:3px 9px; color: #664725;background: #e0ab87;border-radius:31px;border:4px solid #513935;}
+.irregular:hover{background: #513c35;color:#ffffff;border:4px solid #513e35;transition: all 0.2s ease;}
+</style>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 <script type="text/javascript" src="{% static 'selection_avto/jquery/jquery-3.5.1.js'%}"></script>
 {% block script %}{% endblock %}

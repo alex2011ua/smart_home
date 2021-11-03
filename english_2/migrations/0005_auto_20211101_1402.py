@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('english_2', '0004_wordparams_control_state'),
+        ('english', '0004_wordparams_control_state'),
     ]
 
     operations = [

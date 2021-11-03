@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('webhook2020/', trx_bot),
 
-    path('english/', include('english.urls', namespace='level_1')),
-    path('english2/', include('english_2.urls', namespace='level_2')),
+    path('english/', include('english.urls', namespace='english')),
+    #path('english2/', include('english_2.urls', namespace='level_2')),
     path('filmd/',VideoRating.as_view(), name='video')
 ]

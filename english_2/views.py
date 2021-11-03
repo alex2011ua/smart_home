@@ -4,8 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm, CompareWordForm
 from .models import Words, WordParams
-from english.models import Words as Words_l1
-from english.models import IrregularVerbs
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -18,7 +16,8 @@ def index(request):
         except:
             params = WordParams.objects.create(id=1)
         form_word_param = WordsParamForm(instance=params)
-        return render(request, 'english_2/base_english.html', {'form_word_param': form_word_param})
+
+        return render(request, 'english_2/base_english.html', {'form_word_param': form_word_param, 'params': params})
     if request.method == 'POST':
         params = WordParams.objects.get(id=1)
         form = WordsParamForm(request.POST, instance=params)
@@ -105,29 +104,6 @@ def clear(request):
 def test(request):
     '''для перехода на следующий уровень'''
     return render(request, 'english_2/back.html')
-    words_l1 = Words_l1.objects.all()
-    for word in words_l1:
-        english = word.english
-        russian = word.russian
-
-        other_word = Words.objects.filter(russian=russian, lesson=100)
-        try:
-            _ = Words.objects.get(russian=russian, english=english, lesson=100)
-        except ObjectDoesNotExist:
-            for o_word in other_word:
-                if o_word.english != english:
-                    russian = russian + ' (' + str(word.lesson) + ')'
-
-            Words.objects.create(english=english,
-                                 russian=russian,
-                                 learned=word.learned,
-                                 heavy=word.heavy,
-                                 lesson=100,
-                                 irregular_verbs=False,
-                                 phrasal_verbs=False,
-                                 info=str(word.lesson),
-                                 )
-        word.delete()
     words_l2 = Words.objects.filter(lesson__in=[0,1,2,3,4,5,6,7,8,9,10,11,12,13])
     for word in words_l2:
         english = word.english
@@ -146,6 +122,7 @@ def test(request):
 def list_words(request):
     if request.method == "GET":
         all, p = WordParams.params()
+
         return render(request, 'english_2/list_words.html', {'words': all, 'count': len(all)})
 
 def word_update(request, id):
@@ -192,7 +169,8 @@ def word_update(request, id):
 class E_R(View):
     @staticmethod
     def get(request):
-        return render(request, 'english_2/e-r.html')
+        params = WordParams.objects.get(id=1)
+        return render(request, 'english_2/e-r.html', {'params':params})
 
     @staticmethod
     def post(request):
@@ -210,7 +188,8 @@ class E_R(View):
 class R_E(View):
     @staticmethod
     def get(request):
-        return render(request, 'english_2/e-r.html')
+        params = WordParams.objects.get(id=1)
+        return render(request, 'english_2/e-r.html', {'params':params})
 
     @staticmethod
     def post(request):
@@ -296,6 +275,4 @@ class CompareWords(View):
             'answer': answer,
             'first_word':first_word,
             'second_word':second_word,
-
-
         })

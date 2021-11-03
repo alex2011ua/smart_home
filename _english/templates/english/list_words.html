@@ -1,0 +1,32 @@
+{% extends "english/base_english.html" %}
+
+{% block main %}
+Загружено слов - <span id="count_is">{{count}}</span>
+    <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Урок</th>
+      <th scope="col">english</th>
+      <th scope="col">russian</th>
+      <th scope="col">сложное</th>
+      <th scope="col">выучено</th>
+      <th scope="col">info</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for word in words %}
+    <tr>
+      <td>{{word.lesson}}</td>
+      <td>{{word.english}}</td>
+      <td>{{word.russian}}</td>
+      <td>{{word.heavy}}</td>
+      <td>{{word.learned}}</td>
+      <td>{{word.info}}</td>
+
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

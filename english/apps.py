@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class EnglishConfig(AppConfig):
+class englishConfig(AppConfig):
     name = 'english'
