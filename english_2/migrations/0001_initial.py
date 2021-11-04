@@ -31,6 +31,10 @@ class Migration(migrations.Migration):
                 ('lesson_11', models.BooleanField(default=False)),
                 ('lesson_12', models.BooleanField(default=False)),
                 ('lesson_13', models.BooleanField(default=False)),
+                ('control_state', models.BooleanField(default=False)),
+                ('irregular_verbs', models.BooleanField(default=False)),
+                ('level_1', models.BooleanField(default=False)),
+
             ],
         ),
         migrations.CreateModel(

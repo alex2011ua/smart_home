@@ -31,7 +31,6 @@ class WordParams(models.Model):
 
     level_1 = models.BooleanField(default=False)
     level_2 = models.BooleanField(default=False)
-    english = models.BooleanField(default=False)
     level_3 = models.BooleanField(default=False)
 
     lesson_0 = models.BooleanField(default=False)
