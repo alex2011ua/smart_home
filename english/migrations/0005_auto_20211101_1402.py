@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='wordparams',
-            name='english',
+            name='level_2',
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
