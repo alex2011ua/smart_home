@@ -6,7 +6,7 @@ from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm, C
 from .models import Words, WordParams
 from django.http import JsonResponse
 from django.db.models import Q
-from english_2.models import Words as OldWords
+
 
 
 def index(request):
@@ -103,16 +103,6 @@ def clear(request):
 
 def test(request):
     '''для перехода на следующий уровень'''
-    all_w = OldWords.objects.all()
-    for i in all_w:
-        Words.objects.create(english=i.english,
-                             russian=i.russian,
-                             learned=i.learned,
-                             heavy=i.heavy,
-                             info=i.info,
-                             lesson=i.lesson,
-                             phrasal_verbs=i.phrasal_verbs,
-                             irregular_verbs=i.irregular_verbs)
     return render(request, 'english/back.html')
     words_l2 = Words.objects.filter(lesson__in=[0,1,2,3,4,5,6,7,8,9,10,11,12,13])
     for word in words_l2:

@@ -28,7 +28,6 @@ class WordParams(models.Model):
     lesson_11 = models.BooleanField(default=False)
     lesson_12 = models.BooleanField(default=False)
     lesson_13 = models.BooleanField(default=False)
-
     level_1 = models.BooleanField(default=False)
     level_2 = models.BooleanField(default=False)
     level_3 = models.BooleanField(default=False)
