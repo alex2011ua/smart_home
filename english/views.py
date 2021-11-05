@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 from django.core.exceptions import ObjectDoesNotExist
 from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm, CompareWordForm
 from .models import Words, WordParams
@@ -8,13 +10,13 @@ from django.http import JsonResponse
 from django.db.models import Q
 
 
-
+@login_required
 def index(request):
     if request.method == 'GET':
         try:
-            params = WordParams.objects.get(id=1)
+            params = WordParams.objects.get(user=request.user)
         except:
-            params = WordParams.objects.create(id=1)
+            params = WordParams.objects.get(id=1)
         form_word_param = WordsParamForm(instance=params)
 
         return render(request, 'english/base_english.html', {'form_word_param': form_word_param, 'params': params})

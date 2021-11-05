@@ -1,27 +1,25 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% block title %}Login{% endblock %}
-
+{% load crispy_forms_tags %}
 {% block main %}
 <div class="container-fluid bg-info">
 
     <div  class="row justify-content-center">
         <div  class="col-4">
+
             <h4 class="h4 mb-3 font-weight-normal">Вход в аккаунт.</h4>
             <form class="form-signin" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}">
-            Имя прльзователя: {{ form.username }} <br>
-                Пароль: {{ form.password }}<br>
-
+            {{ form.username|as_crispy_field }} <br>
+            {{ form.password|as_crispy_field }}<br>
             <button type="submit" class="btn btn-primary">Log in</button>
+                <a href="{% url 'register' %}">  <button type="button" class="btn badge-success footer_button"  >Sing in</button></a>
+
             </form>
-
-
         </div>
-
     </div>
-
 </div>
 <div  class="row justify-content-center">
     <div  class="col-4">

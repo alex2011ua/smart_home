@@ -59,10 +59,11 @@ INSTALLED_APPS = [
     'myviberbot',
     'selection_avto',
     'english',
+    'crispy_forms',
     #'english_2'
 
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -144,7 +145,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
+LOGIN_REDIRECT_URL = '/english/'
 
 if DEBUG:
     STATIC_DIR = os.path.join(BASE_DIR, 'static')

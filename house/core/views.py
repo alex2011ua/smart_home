@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import Logs, DHT_MQ, Weather, Setting
 from .tasks import boiler_task_on, boiler_task_off, bot_task_11_hour
 
@@ -18,8 +19,9 @@ logger = logging.getLogger('django')
 DEBUG = settings.PLACE
 
 
-class ControllerView(LoginRequiredMixin, View):
+class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
     """Оснавная страница"""
+    permission_required = 'is_staff'
     @staticmethod
     def get(request):
         context = {}
@@ -128,9 +130,10 @@ class ControllerView(LoginRequiredMixin, View):
         return render(request, "core/control.html", context)
 
 
-class RestartCam(LoginRequiredMixin, View):
+class RestartCam(LoginRequiredMixin, PermissionRequiredMixin, View):
     """Restart my cemeras"""
 
+    permission_required = 'is_staff'
     @staticmethod
     def get(request):
         restart_cam_task()
@@ -138,8 +141,9 @@ class RestartCam(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class Temp(LoginRequiredMixin, View):
+class Temp(LoginRequiredMixin, PermissionRequiredMixin, View):
     """Обновляет информацию о температуре и прогнозе погоды в БД"""
+    permission_required = 'is_staff'
 
     @staticmethod
     def get(request):
@@ -148,7 +152,9 @@ class Temp(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class ResetArduino(LoginRequiredMixin, View):
+class ResetArduino(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'is_staff'
+
     @staticmethod
     def get(request):
         try:
@@ -166,7 +172,9 @@ class ResetArduino(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class Boiler(LoginRequiredMixin, View):
+class Boiler(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'is_staff'
+
     @staticmethod
     def get(request):
         boiler = Setting.objects.get(controller_name='boiler')
@@ -195,8 +203,9 @@ class Boiler(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class Rele(LoginRequiredMixin, View):
+class Rele(LoginRequiredMixin, PermissionRequiredMixin, View):
     """Включение и выключение реле"""
+    permission_required = 'is_staff'
 
     @staticmethod
     def get(request, rele_id):
@@ -235,14 +244,18 @@ class Rele(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class Light(LoginRequiredMixin, View):
+class Light(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'is_staff'
+
     @staticmethod
     def get(request):
         bot_task_11_hour()
         return redirect(reverse_lazy('form'))
 
 
-class Printer(LoginRequiredMixin, View):
+class Printer(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'is_staff'
+
     @staticmethod
     def get(request):
         printer = Setting.objects.get(controller_name='printer')
@@ -278,7 +291,9 @@ class Printer(LoginRequiredMixin, View):
         return redirect(reverse_lazy('form'))
 
 
-class Alarms(LoginRequiredMixin, View):
+class Alarms(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'is_staff'
+
     @staticmethod
     def get(request):
         alarms = Setting.objects.get(controller_name='alarms')

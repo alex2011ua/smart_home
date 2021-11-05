@@ -1,5 +1,6 @@
 <!doctype html>
 {% load static %}
+{% load crispy_forms_tags %}
 <html lang="en">
   <head>
           <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -62,8 +63,11 @@
         <a class="nav-link disabled" href="{% url 'english:settings' %}">Управление <span class="sr-only">(current)</span></a>
       </li>
 
-
     </ul>
+      <a class="nav-link disabled"    href="#" >
+
+            Hello: {{user.get_username}}
+        </a>
     <form action="/english/search/" class="form-inline my-2 my-lg-0" method="post" target="_blank">
     {% csrf_token %}
 
@@ -79,7 +83,11 @@
     <form action="" method="post" autocomplete="off">
     {% csrf_token %}
         <button type="submit" class="btn btn-primary">Применить</button>
-    {{form_word_param.as_ul}}
+
+    {{form_word_param|crispy}}
+
+    {{ form_word_param.control_state|as_crispy_field }}
+
 </form>
 {% endblock %}
 

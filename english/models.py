@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class Words(models.Model):
     english = models.CharField(max_length=128)
@@ -13,6 +13,8 @@ class Words(models.Model):
 
 
 class WordParams(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     learned = models.BooleanField(default=False)
     heavy = models.BooleanField(default=False)
     lesson_1 = models.BooleanField(default=False)
