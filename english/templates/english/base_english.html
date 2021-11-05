@@ -89,20 +89,7 @@
 
   <div class="row">
     <div class="col-sm">
-        <h4> Выбрать вес курс целиком</h4>
-      {{ form_word_param.level_1|as_crispy_field }}
-        {{ form_word_param.level_2|as_crispy_field }}
-        {{ form_word_param.level_3|as_crispy_field }}
-    </div>
-    <div class="col-sm">
-<h4> Дополнительные параметры фильтрации </h4>
-        {{ form_word_param.learned|as_crispy_field }}
-        {{ form_word_param.heavy|as_crispy_field }}
-        {{ form_word_param.phrasal_verbs|as_crispy_field }}
-        {{ form_word_param.irregular_verbs|as_crispy_field }}
-    </div>
-    <div class="col-sm">
-<h4> Выбор уроков</h4>
+        <h4> Выбор уроков</h4>
         {{ form_word_param.lesson_1|as_crispy_field }}
         {{ form_word_param.lesson_2|as_crispy_field }}
         {{ form_word_param.lesson_3|as_crispy_field }}
@@ -118,13 +105,26 @@
         {{ form_word_param.lesson_13|as_crispy_field }}
         {{ form_word_param.lesson_0|as_crispy_field }}
     </div>
+    <div class="col-sm">
+<h4> Дополнительные параметры фильтрации </h4>
+        {{ form_word_param.learned|as_crispy_field }}
+        {{ form_word_param.heavy|as_crispy_field }}
+        {{ form_word_param.phrasal_verbs|as_crispy_field }}
+        {{ form_word_param.irregular_verbs|as_crispy_field }}
+    </div>
+    <div class="col-sm">
+<h4> Выбрать вес курс целиком</h4>
+      {{ form_word_param.level_1|as_crispy_field }}
+        {{ form_word_param.level_2|as_crispy_field }}
+        {{ form_word_param.level_3|as_crispy_field }}
+    </div>
   </div>
     <br>
 </div>
-
+ {% if user.is_staff %}
 <br>
     {{ form_word_param.control_state|as_crispy_field }}
-
+{% endif %}
 </form>
 {% endblock %}
 
