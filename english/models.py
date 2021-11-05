@@ -41,9 +41,11 @@ class WordParams(models.Model):
     control_state = models.BooleanField(default=False)
 
     @staticmethod
-    def params():
-        params = WordParams.objects.get(id=1)
+    def params(user_id):
+        params = WordParams.objects.get(user=user_id)
         p = {'lesson__in': []}
+        if params.control_state:
+            p['control'] = False
         if params.learned:
             p['learned'] = False
         if params.heavy:

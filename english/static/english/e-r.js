@@ -57,7 +57,8 @@ function start(){
         answer.style.display = 'block';
         if (control_state === true){
             learnedFunc();
-        }
+            control();
+        };
     }
     else{
         document.getElementById("vvod").value = '';
@@ -75,6 +76,7 @@ function start(){
 
             console.log('Хоть и не верно  - удаляю');
             dellete_word_button.style.display = 'none';
+            control();
         }
 
         }
@@ -103,6 +105,22 @@ function start(){
                 alert('error');
         },
      });
+    }
+
+    function control(){
+        console.log(to_del);
+        $.ajax({
+            url: 'mod/',
+            method: 'GET',
+            data: {'control':to_del},
+            success: function (text) {
+                console.log('control ok'+ to_del)
+            },
+            error: function (text) {
+                console.log(text);
+                alert(text);
+            },
+        });
     }
 
     learned.onclick = learnedFunc;

@@ -58,15 +58,16 @@
         <li class="nav-item {% if request.path == '/english/compare/' %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:CompareWords' %}">Сравнение <span class="sr-only">(current)</span></a>
       </li>
-
+        {% if user.is_staff %}
         <li class="nav-item  {% if request.path == '/english/settings/' %} active {% endif %}">
         <a class="nav-link disabled" href="{% url 'english:settings' %}">Управление <span class="sr-only">(current)</span></a>
       </li>
+        {% endif%}
 
     </ul>
       <a class="nav-link disabled"    href="#" >
 
-            Hello: {{user.get_username}}
+
         </a>
     <form action="/english/search/" class="form-inline my-2 my-lg-0" method="post" target="_blank">
     {% csrf_token %}
@@ -79,13 +80,49 @@
 
 
 {% block main %}
-          <h2>Изучение слов!</h2>
+          <h2>Изучение слов! Hello: {{user.get_username}}</h2>
+
     <form action="" method="post" autocomplete="off">
     {% csrf_token %}
         <button type="submit" class="btn btn-primary">Применить</button>
+<div class="container">
 
-    {{form_word_param|crispy}}
+  <div class="row">
+    <div class="col-sm">
+        <h4> Выбрать вес курс целиком</h4>
+      {{ form_word_param.level_1|as_crispy_field }}
+        {{ form_word_param.level_2|as_crispy_field }}
+        {{ form_word_param.level_3|as_crispy_field }}
+    </div>
+    <div class="col-sm">
+<h4> Дополнительные параметры фильтрации </h4>
+        {{ form_word_param.learned|as_crispy_field }}
+        {{ form_word_param.heavy|as_crispy_field }}
+        {{ form_word_param.phrasal_verbs|as_crispy_field }}
+        {{ form_word_param.irregular_verbs|as_crispy_field }}
+    </div>
+    <div class="col-sm">
+<h4> Выбор уроков</h4>
+        {{ form_word_param.lesson_1|as_crispy_field }}
+        {{ form_word_param.lesson_2|as_crispy_field }}
+        {{ form_word_param.lesson_3|as_crispy_field }}
+        {{ form_word_param.lesson_4|as_crispy_field }}
+        {{ form_word_param.lesson_5|as_crispy_field }}
+        {{ form_word_param.lesson_6|as_crispy_field }}
+        {{ form_word_param.lesson_7|as_crispy_field }}
+        {{ form_word_param.lesson_8|as_crispy_field }}
+        {{ form_word_param.lesson_9|as_crispy_field }}
+        {{ form_word_param.lesson_10|as_crispy_field }}
+        {{ form_word_param.lesson_11|as_crispy_field }}
+        {{ form_word_param.lesson_12|as_crispy_field }}
+        {{ form_word_param.lesson_13|as_crispy_field }}
+        {{ form_word_param.lesson_0|as_crispy_field }}
+    </div>
+  </div>
+    <br>
+</div>
 
+<br>
     {{ form_word_param.control_state|as_crispy_field }}
 
 </form>

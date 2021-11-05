@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm, CompareWordForm
 from .models import Words, WordParams
@@ -21,14 +21,16 @@ def index(request):
 
         return render(request, 'english/base_english.html', {'form_word_param': form_word_param, 'params': params})
     if request.method == 'POST':
-        params = WordParams.objects.get(id=1)
+        params = WordParams.objects.get(user=request.user)
         form = WordsParamForm(request.POST, instance=params)
         if form.is_valid():
             form.save()
         return redirect('english:english_index')
 
 
-class Settings(LoginRequiredMixin, View):
+class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'is_staff'
+
     @staticmethod
     def get(request):
         count = Words.objects.all().count()
@@ -92,12 +94,12 @@ class Settings(LoginRequiredMixin, View):
 
 
 def clear(request):
-    params = WordParams.objects.get(id=1)
-    params.learned = False
+    params = WordParams.objects.get(user=request.user)
+    params.control_state = False
     params.save()
-    all, p = WordParams.params()
+    all, p = WordParams.params(request.user.id)
     for item in all:
-        item.learned = False
+        item.control = False
         item.save()
 
 
@@ -123,7 +125,7 @@ def test(request):
 
 def list_words(request):
     if request.method == "GET":
-        all, p = WordParams.params()
+        all, p = WordParams.params(request.user.id)
 
         return render(request, 'english/list_words.html', {'words': all, 'count': len(all)})
 
@@ -171,13 +173,13 @@ def word_update(request, id):
 class E_R(View):
     @staticmethod
     def get(request):
-        params = WordParams.objects.get(id=1)
+        params = WordParams.objects.get(user=request.user)
         return render(request, 'english/e-r.html', {'params':params})
 
     @staticmethod
     def post(request):
-        all, p = WordParams.params()
-        params = WordParams.objects.get(id=1)
+        all, p = WordParams.params(request.user.id)
+        params = WordParams.objects.get(user=request.user)
         context = {'control_state': params.control_state}
         for item in all:
             try:
@@ -190,14 +192,14 @@ class E_R(View):
 class R_E(View):
     @staticmethod
     def get(request):
-        params = WordParams.objects.get(id=1)
+        params = WordParams.objects.get(user=request.user)
         return render(request, 'english/e-r.html', {'params':params})
 
     @staticmethod
     def post(request):
-        params = WordParams.objects.get(id=1)
+        params = WordParams.objects.get(user=request.user)
         context = {'control_state': params.control_state}
-        all, p = WordParams.params()
+        all, p = WordParams.params(request.user.id)
 
         for item in all:
             try:
@@ -209,26 +211,33 @@ class R_E(View):
 
 
 def mod(request):
-    all, p = WordParams.params()
+    all, p = WordParams.params(request.user.id)
     if request.user.username:
         word = {'lesson__in': p['lesson__in']}
         if '/e_r/' in request.path:
             language = 'english'
         else:
             language = 'russian'
+
         if request.GET.get('learned'):
             mod = 'learned'
             word[language] = request.GET.get('learned')
         elif request.GET.get('heavy'):
             mod = 'heavy'
             word[language] = request.GET.get('heavy')
+        elif request.GET.get('control'):
+            mod = 'control'
+            word[language] = request.GET.get('control')
 
         s = Words.objects.filter(**word)
         for w in s:
             if mod == 'learned':
                 w.learned = True
-            else:
+            elif mod == 'heavy':
                 w.heavy = True
+            elif mod == 'control':
+                w.control = True
+
             w.save()
     context = {'status': 200}
     return JsonResponse(context)

@@ -30,7 +30,31 @@ class LoadWordForm(forms.ModelForm):
 class WordsParamForm(forms.ModelForm):
     class Meta:
         model = WordParams
-        fields = '__all__'
+        fields = (
+                'learned',
+                'heavy',
+                'lesson_1' ,
+                'lesson_2' ,
+                'lesson_3' ,
+                'lesson_4' ,
+                'lesson_5' ,
+                'lesson_6' ,
+                'lesson_7' ,
+                'lesson_8' ,
+                'lesson_9',
+                'lesson_10' ,
+                'lesson_11' ,
+                'lesson_12' ,
+                'lesson_13' ,
+                'level_1' ,
+                'level_2' ,
+                'level_3' ,
+                'lesson_0' ,
+                'phrasal_verbs' ,
+                'irregular_verbs' ,
+                'control_state' ,
+        )
+
         labels = {
             'learned': 'Не показывать выученые слова',
             'heavy': 'Только сложные слова',
