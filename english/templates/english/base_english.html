@@ -39,6 +39,9 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent" >
     <ul class="navbar-nav mr-auto">
+<!--      <li class="nav-item {% if request.path == "/english/" %} active {% endif %}">-->
+<!--        <a class="nav-link" href="{% url 'english:english_index' %}">Start <span class="sr-only">(current)</span></a>-->
+<!--      </li>-->
       <li class="nav-item {% if request.path == "/english/list_words/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:list_words' %}">Список<span class="sr-only">(current)</span></a>
       </li>
@@ -47,6 +50,12 @@
       </li>
         <li class="nav-item {% if request.path == "/english/r_e/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:r_e' %}">Russian<span class="sr-only">(current)</span></a>
+      </li>
+<li class="nav-item {% if request.path == "/english/search/" %} active {% endif %}">
+        <a class="nav-link" href="{% url 'english:SearchWord' %}">Search <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item {% if request.path == '/english/compare/' %} active {% endif %}">
+        <a class="nav-link" href="{% url 'english:CompareWords' %}">Сравнение <span class="sr-only">(current)</span></a>
       </li>
 
         <li class="nav-item  {% if request.path == '/english/settings/' %} active {% endif %}">
