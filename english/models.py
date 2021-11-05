@@ -10,6 +10,7 @@ class Words(models.Model):
     lesson = models.PositiveIntegerField(blank=True, default=0)
     phrasal_verbs = models.BooleanField(default=False)
     irregular_verbs = models.BooleanField(default=False)
+    control = models.BooleanField(default=False)
 
 
 class WordParams(models.Model):
