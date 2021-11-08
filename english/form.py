@@ -31,28 +31,28 @@ class WordsParamForm(forms.ModelForm):
     class Meta:
         model = WordParams
         fields = (
-                'learned',
-                'heavy',
-                'lesson_1' ,
-                'lesson_2' ,
-                'lesson_3' ,
-                'lesson_4' ,
-                'lesson_5' ,
-                'lesson_6' ,
-                'lesson_7' ,
-                'lesson_8' ,
-                'lesson_9',
-                'lesson_10' ,
-                'lesson_11' ,
-                'lesson_12' ,
-                'lesson_13' ,
-                'level_1' ,
-                'level_2' ,
-                'level_3' ,
-                'lesson_0' ,
-                'phrasal_verbs' ,
-                'irregular_verbs' ,
-                'control_state' ,
+            'learned',
+            'heavy',
+            'lesson_1',
+            'lesson_2',
+            'lesson_3',
+            'lesson_4',
+            'lesson_5',
+            'lesson_6',
+            'lesson_7',
+            'lesson_8',
+            'lesson_9',
+            'lesson_10',
+            'lesson_11',
+            'lesson_12',
+            'lesson_13',
+            'level_1',
+            'level_2',
+            'level_3',
+            'lesson_0',
+            'phrasal_verbs',
+            'irregular_verbs',
+            'control_state',
         )
 
         labels = {
@@ -69,5 +69,5 @@ class SearchWordForm(forms.Form):
 
 
 class CompareWordForm(forms.Form):
-    first_word = forms.CharField(label='1 слово')
-    second_word = forms.CharField(label='2 слово')
+    first_word = forms.CharField(label='1 строка')
+    second_word = forms.CharField(label='2 строка')

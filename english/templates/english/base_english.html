@@ -80,7 +80,7 @@
 
 
 {% block main %}
-          <h2>Изучение слов! Hello: {{user.get_username}}</h2>
+          <h2>Hello: {{user.get_username}} Выбрано слов - {{count}}</h2>
 
     <form action="" method="post" autocomplete="off">
     {% csrf_token %}

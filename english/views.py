@@ -3,6 +3,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ObjectDoesNotExist
 from .form import LoadWordForm, LoadWordsForm, WordsParamForm, SearchWordForm, CompareWordForm
 from .models import Words, WordParams
@@ -12,14 +13,19 @@ from django.db.models import Q
 
 @login_required
 def index(request):
+    '''
+    Выбор списка слов
+    :param request:
+    :return:
+    '''
     if request.method == 'GET':
         try:
             params = WordParams.objects.get(user=request.user)
         except:
             params = WordParams.objects.get(id=1)
         form_word_param = WordsParamForm(instance=params)
-
-        return render(request, 'english/base_english.html', {'form_word_param': form_word_param, 'params': params})
+        all, p = WordParams.params(request.user.id)
+        return render(request, 'english/base_english.html', {'form_word_param': form_word_param, 'params': params, 'count': len(all)})
     if request.method == 'POST':
         params = WordParams.objects.get(user=request.user)
         form = WordsParamForm(request.POST, instance=params)
@@ -29,6 +35,9 @@ def index(request):
 
 
 class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
+    '''
+    Add new words
+    '''
     permission_required = 'is_staff'
 
     @staticmethod
@@ -39,6 +48,7 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
         return render(request, 'english/settings.html', {'form_word': form_word,
                                                          'form_list_words': form_list_words,
                                                          'count': count})
+
     @staticmethod
     def post(request):
         if request.POST.get('english'):
@@ -47,7 +57,7 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
                 form.save()
             return redirect('english:settings')
         if request.FILES.get('file'):
-            name_file, _ = (request.FILES.get('file').name).split('.')
+            name_file, _ = request.FILES.get('file').name.split('.')
             irregular_verbs = False
             phrasal_verbs = False
 
@@ -93,7 +103,14 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
         return redirect('english:settings')
 
 
+@login_required()
+@permission_required('is_staff')
 def clear(request):
+    '''
+    clear control lable
+    :param request:
+    :return:
+    '''
     params = WordParams.objects.get(user=request.user)
     params.control_state = False
     params.save()
@@ -101,12 +118,11 @@ def clear(request):
     for item in all:
         item.control = False
         item.save()
-
-
     return redirect('english:settings')
 
+
 def test(request):
-    '''для перехода на следующий уровень'''
+    '''для перехода на следующий уровень. не использовать.'''
     return render(request, 'english/back.html')
     words_l2 = Words.objects.filter(lesson__in=[0,1,2,3,4,5,6,7,8,9,10,11,12,13])
     for word in words_l2:
@@ -123,13 +139,27 @@ def test(request):
         word.delete()
     return render(request, 'english/back.html')
 
+
 def list_words(request):
+    """
+    list checking words
+    :param request:
+    :return:
+    """
     if request.method == "GET":
         all, p = WordParams.params(request.user.id)
-
         return render(request, 'english/list_words.html', {'words': all, 'count': len(all)})
 
+
+@login_required()
+@permission_required('is_staff')
 def word_update(request, id):
+    """
+    crud operations
+    :param request:
+    :param id:
+    :return:
+    """
     if request.method == "GET":
         word = Words.objects.get(pk=id)
         context = {'word': word}
@@ -147,7 +177,6 @@ def word_update(request, id):
         word.english = english
         word.russian = russian
         word.info = info
-
 
         if heavy:
             word.heavy = True
@@ -171,6 +200,9 @@ def word_update(request, id):
 
 
 class E_R(View):
+    """
+    english to russian translation
+    """
     @staticmethod
     def get(request):
         params = WordParams.objects.get(user=request.user)
@@ -184,12 +216,16 @@ class E_R(View):
         for item in all:
             try:
                 context[item.english] = item.russian
-            except:
+            except Exception:
                 print('error')
         return JsonResponse(context)
 
 
 class R_E(View):
+    """
+    russian to english translation
+    """
+
     @staticmethod
     def get(request):
         params = WordParams.objects.get(user=request.user)
@@ -210,9 +246,15 @@ class R_E(View):
         return JsonResponse(context)
 
 
+@login_required()
 def mod(request):
-    all, p = WordParams.params(request.user.id)
-    if request.user.username:
+    """
+    change lables
+    :param request:
+    :return:
+    """
+    if request.user.is_staff:
+        all, p = WordParams.params(request.user.id)
         word = {'lesson__in': p['lesson__in']}
         if '/e_r/' in request.path:
             language = 'english'
@@ -244,6 +286,9 @@ def mod(request):
 
 
 class SearchWord(View):
+    """
+    search words in my bd
+    """
     @staticmethod
     def get(request):
         form = SearchWordForm()
@@ -258,12 +303,17 @@ class SearchWord(View):
 
         count = len(english_words)+len(russian_words)
 
-        return render(request, 'english/search_word.html', {  'form': form,
-                                                                'english_words': english_words,
-                                                                'russian_words': russian_words,
-                                                                'count': count
-                                                                })
+        return render(request, 'english/search_word.html', {'form': form,
+                                                            'english_words': english_words,
+                                                            'russian_words': russian_words,
+                                                            'count': count
+                                                            })
+
+
 class CompareWords(View):
+    """
+    compare two lines to find differences
+    """
     @staticmethod
     def get(request):
         form = CompareWordForm()
