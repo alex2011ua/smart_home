@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'selection_avto',
     'english',
     'crispy_forms',
-    #'english_2'
+
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
