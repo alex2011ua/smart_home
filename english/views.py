@@ -24,7 +24,7 @@ def index(request):
         except:
             params = WordParams.objects.get(id=1)
         form_word_param = WordsParamForm(instance=params)
-        all, p = WordParams.params(request.user.id)
+        all = WordParams.get_words(request.user.id)
         return render(request, 'english/base_english.html', {'form_word_param': form_word_param, 'params': params, 'count': len(all)})
     if request.method == 'POST':
         params = WordParams.objects.get(user=request.user)
@@ -114,7 +114,7 @@ def clear(request):
     params = WordParams.objects.get(user=request.user)
     params.control_state = False
     params.save()
-    all, p = WordParams.params(request.user.id)
+    all = WordParams.get_words(request.user.id)
     for item in all:
         item.control = False
         item.save()
@@ -123,6 +123,15 @@ def clear(request):
 
 def test(request):
     '''для перехода на следующий уровень. не использовать.'''
+    all = Words.objects.all()
+    for i in all:
+        if i.learned:
+            i.add_learned(request.user.id)
+        if i.heavy:
+            i.add_heavy(request.user.id)
+        if i.control:
+            i.add_control(request.user.id)
+
     return render(request, 'english/back.html')
     words_l2 = Words.objects.filter(lesson__in=[0,1,2,3,4,5,6,7,8,9,10,11,12,13])
     for word in words_l2:
@@ -147,12 +156,12 @@ def list_words(request):
     :return:
     """
     if request.method == "GET":
-        all, p = WordParams.params(request.user.id)
+        all = WordParams.get_words(request.user.id)
         return render(request, 'english/list_words.html', {'words': all, 'count': len(all)})
 
 
 @login_required()
-@permission_required('is_staff')
+
 def word_update(request, id):
     """
     crud operations
@@ -179,13 +188,13 @@ def word_update(request, id):
         word.info = info
 
         if heavy:
-            word.heavy = True
+            word.add_heavy(request.user.id)
         else:
-            word.heavy = False
+            word.dell_heavy(request.user.id)
         if learned:
-            word.learned = True
+            word.add_learned(request.user.id)
         else:
-            word.learned = False
+            word.dell_learned(request.user.id)
         if phrasal:
             word.phrasal_verbs = True
         else:
@@ -210,7 +219,7 @@ class E_R(View):
 
     @staticmethod
     def post(request):
-        all, p = WordParams.params(request.user.id)
+        all = WordParams.get_words(request.user.id)
         params = WordParams.objects.get(user=request.user)
         context = {'control_state': params.control_state}
         for item in all:
@@ -235,7 +244,7 @@ class R_E(View):
     def post(request):
         params = WordParams.objects.get(user=request.user)
         context = {'control_state': params.control_state}
-        all, p = WordParams.params(request.user.id)
+        all = WordParams.get_words(request.user.id)
 
         for item in all:
             try:
@@ -253,34 +262,32 @@ def mod(request):
     :param request:
     :return:
     """
-    if request.user.is_staff:
-        all, p = WordParams.params(request.user.id)
-        word = {'lesson__in': p['lesson__in']}
-        if '/e_r/' in request.path:
-            language = 'english'
-        else:
-            language = 'russian'
 
-        if request.GET.get('learned'):
-            mod = 'learned'
-            word[language] = request.GET.get('learned')
-        elif request.GET.get('heavy'):
-            mod = 'heavy'
-            word[language] = request.GET.get('heavy')
-        elif request.GET.get('control'):
-            mod = 'control'
-            word[language] = request.GET.get('control')
+    p = WordParams.params(request.user.id)
+    word = {'lesson__in': p['lesson__in']}
+    if '/e_r/' in request.path:
+        language = 'english'
+    else:
+        language = 'russian'
 
-        s = Words.objects.filter(**word)
-        for w in s:
-            if mod == 'learned':
-                w.learned = True
-            elif mod == 'heavy':
-                w.heavy = True
-            elif mod == 'control':
-                w.control = True
+    if request.GET.get('learned'):
+        mod = 'learned'
+        word[language] = request.GET.get('learned')
+    elif request.GET.get('heavy'):
+        mod = 'heavy'
+        word[language] = request.GET.get('heavy')
+    elif request.GET.get('control'):
+        mod = 'control'
+        word[language] = request.GET.get('control')
 
-            w.save()
+    s = Words.objects.filter(**word)
+    for w in s:
+        if mod == 'learned':
+            w.add_learned(request.user.id)
+        elif mod == 'heavy':
+            w.add_heavy(request.user.id)
+        elif mod == 'control':
+            w.add_control(request.user.id)
     context = {'status': 200}
     return JsonResponse(context)
 

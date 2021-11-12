@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+import json
+
+
 
 class Words(models.Model):
     english = models.CharField(max_length=128)
@@ -11,6 +14,99 @@ class Words(models.Model):
     phrasal_verbs = models.BooleanField(default=False)
     irregular_verbs = models.BooleanField(default=False)
     control = models.BooleanField(default=False)
+
+    learned_list = models.CharField(max_length=256, default='')
+    heavy_list = models.CharField(max_length=256, default='')
+    control_list = models.CharField(max_length=256, default='')
+
+    @staticmethod
+    def serialize(st):
+        try:
+            a = json.loads(st)
+        except json.JSONDecodeError:
+            return []
+        return a
+
+    def add_learned(self, user_id):
+        learned = self.learned_list
+        learned_list = Words.serialize(learned)
+        if user_id in learned_list:
+            return
+        learned_list.append(user_id)
+        learned = json.dumps(learned_list)
+        self.learned_list = learned
+        self.save()
+
+    def dell_learned(self, user_id):
+        learned = self.learned_list
+        learned_list = Words.serialize(learned)
+        if user_id not in learned_list:
+            return
+        learned_list.remove(user_id)
+        learned = json.dumps(learned_list)
+        self.learned_list = learned
+        self.save()
+
+    def get_learned(self, user_id):
+        learned = self.learned_list
+        learned_list = Words.serialize(learned)
+        if user_id in learned_list:
+            return True
+        return False
+
+    def add_heavy(self, user_id):
+        heavy = self.heavy_list
+        heavy_list = Words.serialize(heavy)
+        if user_id in heavy_list:
+            return
+        heavy_list.append(user_id)
+        heavy = json.dumps(heavy_list)
+        self.heavy_list = heavy
+        self.save()
+
+    def dell_heavy(self, user_id):
+        heavy = self.heavy_list
+        heavy_list = Words.serialize(heavy)
+        if user_id not in heavy_list:
+            return
+        heavy_list.remove(user_id)
+        heavy = json.dumps(heavy_list)
+        self.heavy_list = heavy
+        self.save()
+
+    def get_heavy(self, user_id):
+        heavy = self.heavy_list
+        heavy_list = Words.serialize(heavy)
+        if user_id in heavy_list:
+            return True
+        return False
+
+    def add_control(self, user_id):
+        control = self.control_list
+        control_list = Words.serialize(control)
+        if user_id in control_list:
+            return
+        control_list.append(user_id)
+        control = json.dumps(control_list)
+        self.heavy_list = control
+        self.save()
+
+    def dell_control(self, user_id):
+        control = self.control_list
+        control_list = Words.serialize(control)
+        if user_id not in control_list:
+            return
+        control_list.remove(user_id)
+        control = json.dumps(control_list)
+        self.heavy_list = control
+        self.save()
+
+    def get_control(self, user_id):
+        control = self.control_list
+        control_list = Words.serialize(control)
+        if user_id in control_list:
+            return True
+        return False
 
 
 class WordParams(models.Model):
@@ -44,12 +140,7 @@ class WordParams(models.Model):
     def params(user_id):
         params = WordParams.objects.get(user=user_id)
         p = {'lesson__in': []}
-        if params.control_state:
-            p['control'] = False
-        if params.learned:
-            p['learned'] = False
-        if params.heavy:
-            p['heavy'] = True
+
         if params.lesson_0:
             p['lesson__in'].append(0)
         if params.lesson_1:
@@ -91,6 +182,33 @@ class WordParams(models.Model):
         if params.phrasal_verbs:
             p['phrasal_verbs'] = True
 
+        return p
+
+    @staticmethod
+    def get_words(user_id):
+        params = WordParams.objects.get(user=user_id)
+
+        p = WordParams.params(user_id)
         all = Words.objects.filter(**p)
 
-        return all, p
+        add_to = []
+        for item in all:
+
+            if params.control_state:
+                if item.get_control(user_id):
+                    continue
+            if params.learned:
+                if item.get_learned(user_id):
+                    continue
+            if params.heavy:
+                if not item.get_heavy(user_id):
+                    continue
+            item.learned = item.get_learned(user_id)
+            item.heavy = item.get_heavy(user_id)
+            item.control = item.get_control(user_id)
+            item.save()
+            add_to.append(item)
+
+
+
+        return add_to
