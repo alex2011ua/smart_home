@@ -88,8 +88,10 @@ class Words(models.Model):
             return
         control_list.append(user_id)
         control = json.dumps(control_list)
-        self.heavy_list = control
+        self.control_list = control
         self.save()
+        return
+
 
     def dell_control(self, user_id):
         control = self.control_list
@@ -98,7 +100,7 @@ class Words(models.Model):
             return
         control_list.remove(user_id)
         control = json.dumps(control_list)
-        self.heavy_list = control
+        self.control_list = control
         self.save()
 
     def get_control(self, user_id):

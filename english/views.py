@@ -287,7 +287,8 @@ def mod(request):
         elif mod == 'heavy':
             w.add_heavy(request.user.id)
         elif mod == 'control':
-            w.add_control(request.user.id)
+            a = w.add_control(request.user.id)
+            print (a)
     context = {'status': 200}
     return JsonResponse(context)
 
