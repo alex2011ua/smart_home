@@ -189,13 +189,10 @@ class WordParams(models.Model):
     @staticmethod
     def get_words(user_id):
         params = WordParams.objects.get(user=user_id)
-
         p = WordParams.params(user_id)
         all = Words.objects.filter(**p)
-
         add_to = []
         for item in all:
-
             if params.control_state:
                 if item.get_control(user_id):
                     continue

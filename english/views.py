@@ -104,8 +104,7 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
 
 
 @login_required()
-@permission_required('is_staff')
-def clear(request):
+def clear_control(request):
     '''
     clear control lable
     :param request:
@@ -116,10 +115,25 @@ def clear(request):
     params.save()
     all = WordParams.get_words(request.user.id)
     for item in all:
-        item.control = False
-        item.save()
-    return redirect('english:settings')
+        item.dell_control(request.user.id)
 
+
+    return redirect('english:english_index')
+
+@login_required()
+def clear_learned(request):
+    '''
+    clear learned lable
+    :param request:
+    :return:
+    '''
+    params = WordParams.objects.get(user=request.user)
+    params.learned = False
+    params.save()
+    all = WordParams.get_words(request.user.id)
+    for item in all:
+        item.dell_learned(request.user.id)
+    return redirect('english:english_index')
 
 def test(request):
     '''для перехода на следующий уровень. не использовать.'''
@@ -161,7 +175,6 @@ def list_words(request):
 
 
 @login_required()
-
 def word_update(request, id):
     """
     crud operations

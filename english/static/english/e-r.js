@@ -1,14 +1,13 @@
-console.log('start script')
-
 let csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
 $.ajaxSetup({
-        headers: {
-            'X-CSRFToken': csrftoken
-        }
-    });
+    headers: {
+        'X-CSRFToken': csrftoken
+    }
+});
 
 let words_obj=0;
- $.ajax({
+$.ajax({
     url: '',
     method: 'POST',
     data: 'data',
@@ -24,6 +23,7 @@ let words_obj=0;
         alert('"Не получен "');
     },
 });
+
 let control_state = words_obj['control_state'];
 delete words_obj['control_state'];
 let words_list = Object.keys(words_obj);
@@ -42,10 +42,11 @@ let answer = document.getElementById("result");             // правильн�
 document.getElementById("word").innerHTML = words_list[ind];
 let ok =  document.getElementById("ok");
 let err = document.getElementById("error");
+
 function start(){
     let inp = document.getElementById("vvod").value.trim();
     let to_del = word;
-    if (inp.toLowerCase() == translate.toLowerCase()){
+    if (inp.toLowerCase() === translate.toLowerCase()){
         console.log('верно - удаляю');
         answer.innerText = translate + " - " + word;
         delete words_obj[word];
@@ -60,6 +61,7 @@ function start(){
             control();
         };
     }
+
     else{
         document.getElementById("vvod").value = '';
         console.log("не верно");
@@ -73,38 +75,36 @@ function start(){
         if (control_state === true){
            delete words_obj[to_del];
             words_list = Object.keys(words_obj);
-
             console.log('Хоть и не верно  - удаляю');
             dellete_word_button.style.display = 'none';
             control();
         }
+    }
 
-        }
+    dellete_word_button.onclick = function() {
+        delete words_obj[to_del];
+        words_list = Object.keys(words_obj);
 
-        dellete_word_button.onclick = function() {
-            delete words_obj[to_del];
-            words_list = Object.keys(words_obj);
+        console.log('Хоть и не верно  - удаляю');
+        dellete_word_button.style.display = 'none';
 
-            console.log('Хоть и не верно  - удаляю');
-            dellete_word_button.style.display = 'none';
+    }
 
-        }
-
-        function learnedFunc() {
-            console.log(to_del);
-            $.ajax({
-                url: 'mod/',
-                method: 'GET',
-                data: {'learned': to_del},
-            success: function (text) {
-                    console.log('__ok__');
-            },
-            error: function (text) {
-                console.log('__error__');
-                console.log(text);
-                alert('error');
+    function learnedFunc() {
+        console.log(to_del);
+        $.ajax({
+            url: 'mod/',
+            method: 'GET',
+            data: {'learned': to_del},
+        success: function (text) {
+                console.log('__ok__');
         },
-     });
+        error: function (text) {
+            console.log('__error__');
+            console.log(text);
+            alert('error');
+        },
+        });
     }
 
     function control(){

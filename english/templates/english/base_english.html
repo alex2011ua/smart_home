@@ -121,12 +121,14 @@
   </div>
     <br>
 </div>
- {% if user.is_staff %}
+
 <br>
     {{ form_word_param.control_state|as_crispy_field }}
-{% endif %}
+
 </form>
-{% endblock %}
+  <a href="{% url 'english:clear_learned' %}" ><button type="button" class="btn btn-warning">Сбросить выученые слова</button></a>
+  <a href="{% url 'english:clear' %}" ><button type="button" class="btn btn-warning">Сбросить 'control state'</button></a>
+  {% endblock %}
 
 <style>
 /* Стили кнопки */
