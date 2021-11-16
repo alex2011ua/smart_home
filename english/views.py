@@ -275,6 +275,15 @@ def mod(request):
     :param request:
     :return:
     """
+    def mod_db(mod, word):
+        s = Words.objects.filter(**word)
+        for w in s:
+            if mod == 'learned':
+                w.add_learned(request.user.id)
+            elif mod == 'heavy':
+                w.add_heavy(request.user.id)
+            elif mod == 'control':
+                w.add_control(request.user.id)
 
     p = WordParams.params(request.user.id)
     word = {'lesson__in': p['lesson__in']}
@@ -282,26 +291,21 @@ def mod(request):
         language = 'english'
     else:
         language = 'russian'
-
+    print(request.GET)
     if request.GET.get('learned'):
         mod = 'learned'
         word[language] = request.GET.get('learned')
-    elif request.GET.get('heavy'):
+        mod_db(mod, word)
+    if request.GET.get('heavy'):
         mod = 'heavy'
         word[language] = request.GET.get('heavy')
-    elif request.GET.get('control'):
+        mod_db(mod, word)
+    if request.GET.get('control'):
         mod = 'control'
         word[language] = request.GET.get('control')
+        mod_db(mod, word)
 
-    s = Words.objects.filter(**word)
-    for w in s:
-        if mod == 'learned':
-            w.add_learned(request.user.id)
-        elif mod == 'heavy':
-            w.add_heavy(request.user.id)
-        elif mod == 'control':
-            a = w.add_control(request.user.id)
-            print (a)
+
     context = {'status': 200}
     return JsonResponse(context)
 

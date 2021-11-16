@@ -58,7 +58,6 @@ function start(){
         answer.style.display = 'block';
         if (control_state === true){
             learnedFunc();
-            control();
         };
     }
 
@@ -92,10 +91,14 @@ function start(){
 
     function learnedFunc() {
         console.log(to_del);
+        let data = {'learned': to_del};
+        if (control_state === true){
+            data['control'] = to_del;
+        }
         $.ajax({
             url: 'mod/',
             method: 'GET',
-            data: {'learned': to_del},
+            data: data,
         success: function (text) {
                 console.log('__ok__');
         },
@@ -154,10 +157,10 @@ function start(){
 submit_button.onclick = function(){
     start();
 };
-
 vvod.onsubmit = function(){
     start();
 };
+
 // Make sure this code gets executed after the DOM is loaded.
 document.querySelector("#vvod").addEventListener("keyup", event => {
     if(event.key !== "Enter") return; // Use `.key` instead.
