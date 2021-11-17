@@ -7,39 +7,45 @@
 <form action="" method="post">
 {% csrf_token %}
 
-<div class="mb-3">
+<div class="">
     <label for="english" class="form-label">English</label>
     <input type="text" class="form-control" name="english" value="{{ word.english }}" >
   </div>
-    <div class="mb-3">
+    <div class="">
         <label for="russian" class="form-label">russian</label>
         <input type="text" class="form-control" name="russian" value="{{ word.russian }}" >
     </div>
-  <div class="mb-3">
+  <div class="">
     <label for="info" class="form-label">info</label>
     <input type="text" class="form-control" name="info" value="{{ word.info }}" >
   </div>
-     <div class="mb-3">
+
+     <div class="row">
+         <div class="col card">
     <label for="learned" class="form-label">learned</label>
     <input type="checkbox" class="form-control" name="learned" {% if word.learned  %} checked {% endif %} >
-  </div>
-      </div>
-     <div class="mb-3">
+         </div>
+
+
+     <div class="col card"
     <label for="heavy" class="form-label">heavy</label>
     <input type="checkbox" class="form-control" name="heavy" {% if word.heavy  %} checked {% endif %} >
+     </div>
   </div>
-    <div class="mb-3">
+    <div class="mb-1">
     <label for="lesson" class="form-label">lesson</label>
     <input type="text" class="form-control" name="lesson" value="{{ word.lesson }}" >
   </div>
 
-   <div class="mb-3">
+   <div class="row">
+         <div class="col card">
     <label for="phrasal" class="form-label">Exam</label>
     <input type="checkbox" class="form-control" name="phrasal" {% if word.phrasal_verbs  %} checked {% endif %} >
    </div>
-       <div class="mb-3">
+<div class="col card">
     <label for="irregular" class="form-label">irregular</label>
     <input type="checkbox" class="form-control" name="irregular" {% if word.irregular_verbs  %} checked {% endif %} >
+   </div>
    </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
