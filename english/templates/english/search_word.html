@@ -19,6 +19,7 @@
       <th scope="col">сложное</th>
       <th scope="col">выучено</th>
       <th scope="col">info</th>
+      <th scope="col">edit</th>
 
     </tr>
   </thead>
@@ -31,7 +32,9 @@
       <td>{{word.heavy}}</td>
       <td>{{word.learned}}</td>
       <td>{{word.info}}</td>
-
+      <td><a href="{% url 'english:update' word.id %}" class="btn text-secondary px-0">
+          <i class="far fa-edit fa-lg">Изменить</i>
+        </a></td>
 
     </tr>
     {% endfor %}
@@ -50,6 +53,8 @@
       <th scope="col">выучено</th>
       <th scope="col">info</th>
 
+      <th scope="col">edit</th>
+
     </tr>
   </thead>
   <tbody>
@@ -61,6 +66,11 @@
       <td>{{word.heavy}}</td>
       <td>{{word.learned}}</td>
       <td>{{word.info}}</td>
+
+      <td><a href="{% url 'english:update' word.id %}" class="btn text-secondary px-0">
+          <i class="far fa-edit fa-lg">Изменить</i>
+        </a></td>
+
 
 
     </tr>

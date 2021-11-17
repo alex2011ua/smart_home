@@ -175,6 +175,7 @@ def list_words(request):
 
 
 @login_required()
+@permission_required('is_staff')
 def word_update(request, id):
     """
     crud operations

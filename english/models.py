@@ -11,7 +11,7 @@ class Words(models.Model):
     heavy = models.BooleanField(default=False)
     info = models.CharField(max_length=128, blank=True)
     lesson = models.PositiveIntegerField(blank=True, default=0)
-    phrasal_verbs = models.BooleanField(default=False)
+    phrasal_verbs = models.BooleanField(default=False, verbose_name='exam')
     irregular_verbs = models.BooleanField(default=False)
     control = models.BooleanField(default=False)
 
@@ -177,7 +177,7 @@ class WordParams(models.Model):
         if params.level_2:
             p['lesson__in'].append(200)
         if params.level_3:
-            p['lesson__in'].extend([0,1,2,3,4,5,6,7,8,9,10,11,12,13])
+            p['lesson__in'].extend([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
         if params.irregular_verbs:
             p['irregular_verbs'] = True
             p['lesson__in'].append(99)

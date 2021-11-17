@@ -22,7 +22,7 @@ class LoadWordForm(forms.ModelForm):
             'english': 'english',
             'russian': 'russian',
             'info': 'info',
-            'phrasal_verbs': 'Только фразовые глаголы',
+            'phrasal_verbs': 'Только слова для экзамена',
             'irregular_verbs': 'Только неправильные глаголы',
         }
 
@@ -59,7 +59,7 @@ class WordsParamForm(forms.ModelForm):
             'learned': 'Не показывать выученые слова',
             'heavy': 'Только сложные слова',
             'lesson_0': 'Слова без привязки к уроку',
-            'phrasal_verbs': 'Только фразовые глаголы',
+            'phrasal_verbs': 'Только слова для экзамена',
             'irregular_verbs': 'Только неправильные глаголы',
         }
 
