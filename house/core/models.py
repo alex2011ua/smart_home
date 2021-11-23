@@ -67,6 +67,9 @@ class Params(models.Model):
     poliv = models.IntegerField(null=True)
     min_temp_teplica = models.IntegerField(null=True)
     max_temp_teplica = models.IntegerField(null=True)
+    ping = models.FloatField(null=True)
+    download = models.FloatField(null=True)
+    upload = models.FloatField(null=True)
 
 
 class Message(models.Model):
