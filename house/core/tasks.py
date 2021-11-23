@@ -15,6 +15,7 @@ from .analiz import button_analiz, gaz_analiz, temp_alert
 import logging
 from django.conf import settings
 
+import speedtest
 
 logger = logging.getLogger('django')
 DEBUG = settings.PLACE
@@ -245,6 +246,12 @@ def bot_task_1_hour():
     print('Start bot_task_1_hour')
     alarms = Setting.objects.get(controller_name="alarms")
     temp_alert(alarms.value)
+    st = speedtest.Speedtest()
+    download = float(st.download())//1024//1024//8
+    upload = float(st.upload())//1024//1024//8
+    ping = st.results.ping
+    Params.objects.create(ping=ping, download=download, upload=upload, date_t_h=datetime.now())
+
     print('Stop bot_task_1_hour')
 
 

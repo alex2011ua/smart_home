@@ -18,3 +18,4 @@ telebot
 pytelegrambotapi
 viberbot==1.0.11
 django-crispy-forms
+speedtest-cli

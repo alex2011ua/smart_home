@@ -58,7 +58,10 @@ class ParamsAdmin(admin.ModelAdmin):
     list_display = ('date_t_h',
                     'poliv',
                     'min_temp_teplica',
-                    'max_temp_teplica'
+                    'max_temp_teplica',
+                    'ping',
+                    'download',
+                    'upload'
                     )
     list_filter = (
         'date_t_h',
