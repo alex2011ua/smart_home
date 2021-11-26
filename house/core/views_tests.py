@@ -13,6 +13,7 @@ from .analiz import button_analiz
 from .main_arduino import read_ser
 DEBUG = settings.PLACE
 from django.http import HttpResponse, JsonResponse
+from .tasks import bot_task_1_hour
 
 
 class Test(LoginRequiredMixin, View):
@@ -85,6 +86,15 @@ class Bot_task_view(View):
     def get(request):
 
         button_analiz(True)
+
+        return redirect(reverse_lazy('form'))
+
+
+class PingTaskView(View):
+    @staticmethod
+    def get(request):
+
+        bot_task_1_hour()
 
         return redirect(reverse_lazy('form'))
 
