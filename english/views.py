@@ -221,6 +221,19 @@ def word_update(request, id):
         word.save()
         return render(request, 'english/back.html')
 
+@login_required()
+@permission_required('is_staff')
+def word_delete(request, id):
+    """
+    crud operations
+    :param request:
+    :param id:
+    :return:
+    """
+    w = Words.objects.get(id=id)
+    w.delete()
+    return redirect('english:list_words')
+
 
 class E_R(View):
     """

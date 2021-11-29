@@ -247,10 +247,11 @@ def bot_task_1_hour():
     alarms = Setting.objects.get(controller_name="alarms")
     temp_alert(alarms.value)
     st = speedtest.Speedtest()
-    download = float(st.download())//1024//1024//8
-    upload = float(st.upload())//1024//1024//8
+    download = st.download()/1024/1024/8
+    upload = st.upload()/1024/1024/8
     ping = st.results.ping
-    bot.send_message(f'download:{download}, upload: {upload}, ping: {ping}')
+
+    bot.send_message(f'download:{round(download,2)}, upload: {round(upload,2)}, ping: {ping}')
     Params.objects.create(ping=ping, download=download, upload=upload, date_t_h=datetime.now())
 
     print('Stop bot_task_1_hour')

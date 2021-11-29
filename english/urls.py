@@ -1,6 +1,6 @@
 from django.urls import path
 from english.views import index, Settings, clear_control, clear_learned, list_words, E_R, R_E, mod, SearchWord, word_update, CompareWords, \
-    test
+    test, word_delete
 
 app_name = 'english'
 urlpatterns = [
@@ -11,6 +11,7 @@ urlpatterns = [
     path('test/', test, name='test'),
     path('list_words/', list_words, name='list_words'),
     path('list_words/<int:id>/', word_update, name='update'),
+    path('list_words/del/<int:id>/', word_delete, name='delete'),
 
 
     path('e_r/mod/', mod),

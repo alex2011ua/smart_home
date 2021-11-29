@@ -12,6 +12,7 @@
       <th scope="col">выучено</th>
       <th scope="col">Exam</th>
       <th scope="col">Irregular</th>
+      <th scope="col">del</th>
 
 
     </tr>
@@ -30,6 +31,11 @@
       <td>
         <a href="{% url 'english:update' word.id %}" class="btn text-secondary px-0">
           <i class="far fa-edit fa-lg">Изменить</i>
+        </a>
+      </td>
+            <td>
+        <a href="{% url 'english:delete' word.id %}" class="btn text-secondary px-0">
+          <i class="far fa-edit fa-lg">Del</i>
         </a>
       </td>
 
