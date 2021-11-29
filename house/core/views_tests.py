@@ -2,9 +2,9 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from .models import Logs
+from .models import Logs, Params
 from .main_arduino import testing, sound
-import datetime
+
 from .mail import send_test_mail
 from .Telegram import bot
 from myviberbot.viber_bot import send_viber
@@ -14,6 +14,8 @@ from .main_arduino import read_ser
 DEBUG = settings.PLACE
 from django.http import HttpResponse, JsonResponse
 
+import speedtest
+import datetime
 
 class Test(LoginRequiredMixin, View):
     @staticmethod
@@ -85,6 +87,21 @@ class Bot_task_view(View):
     def get(request):
 
         button_analiz(True)
+
+        return redirect(reverse_lazy('form'))
+
+
+class PingTaskView(View):
+    @staticmethod
+    def get(request):
+
+        st = speedtest.Speedtest()
+
+        download = float(st.download()) // 1024 // 1024 // 8
+        upload = float(st.upload()) // 1024 // 1024 // 8
+        ping = st.results.ping
+        bot.send_message(f'download:{download}, upload: {upload}, ping: {ping}')
+        Params.objects.create(ping=ping, download=download, upload=upload, date_t_h=datetime.now())
 
         return redirect(reverse_lazy('form'))
 

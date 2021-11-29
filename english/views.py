@@ -22,7 +22,7 @@ def index(request):
         try:
             params = WordParams.objects.get(user=request.user)
         except:
-            params = WordParams.objects.get(id=1)
+            params = WordParams.objects.create(user=request.user)
         form_word_param = WordsParamForm(instance=params)
         all = WordParams.get_words(request.user.id)
         return render(request, 'english/base_english.html', {'form_word_param': form_word_param, 'params': params, 'count': len(all)})
