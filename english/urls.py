@@ -1,6 +1,8 @@
 from django.urls import path
 from english.views import index, Settings, clear_control, clear_learned, list_words, E_R, R_E, mod, SearchWord, word_update, CompareWords, \
     test, word_delete
+from english.view_game import GenrundGame
+
 
 app_name = 'english'
 urlpatterns = [
@@ -21,4 +23,6 @@ urlpatterns = [
 
     path('search/', SearchWord.as_view(), name='SearchWord'),
     path('compare/', CompareWords.as_view(), name='CompareWords'),
+    path('game_gerund/', GenrundGame.as_view(), name='GenundGame'),
+
 ]

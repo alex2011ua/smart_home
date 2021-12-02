@@ -5,19 +5,27 @@ import json
 
 
 class Words(models.Model):
+    '''
+    lesson 88 = play
+    lesson 100 = 1 cours
+    lesson 200 = 2 cours
+    '''
     english = models.CharField(max_length=128)
     russian = models.CharField(max_length=128)
+    lesson = models.PositiveIntegerField(blank=True, default=0)
+
     learned = models.BooleanField(default=False)
     heavy = models.BooleanField(default=False)
-    info = models.CharField(max_length=128, blank=True)
-    lesson = models.PositiveIntegerField(blank=True, default=0)
+    control = models.BooleanField(default=False)
+
     phrasal_verbs = models.BooleanField(default=False, verbose_name='exam')
     irregular_verbs = models.BooleanField(default=False)
-    control = models.BooleanField(default=False)
 
     learned_list = models.CharField(max_length=256, default='')
     heavy_list = models.CharField(max_length=256, default='')
     control_list = models.CharField(max_length=256, default='')
+
+    info = models.CharField(max_length=128, blank=True)
 
     @staticmethod
     def serialize(st):
@@ -133,6 +141,7 @@ class WordParams(models.Model):
     level_2 = models.BooleanField(default=False)
     level_3 = models.BooleanField(default=False)
 
+
     lesson_0 = models.BooleanField(default=False)
     phrasal_verbs = models.BooleanField(default=False)
     irregular_verbs = models.BooleanField(default=False)
@@ -207,7 +216,4 @@ class WordParams(models.Model):
             item.control = item.get_control(user_id)
             item.save()
             add_to.append(item)
-
-
-
         return add_to
