@@ -23,6 +23,6 @@ urlpatterns = [
 
     path('search/', SearchWord.as_view(), name='SearchWord'),
     path('compare/', CompareWords.as_view(), name='CompareWords'),
-    path('game_gerund/', GenrundGame.as_view(), name='GenundGame'),
+    path('game/', GenrundGame.as_view(), name='GenundGame'),
 
 ]

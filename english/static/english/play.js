@@ -53,10 +53,10 @@ let err = document.getElementById("error");
 function start(button_pressed){
      let inp = button_pressed;
 
-     if (inp.toLowerCase() === word.russian){
+     if (inp.toLowerCase() === word.gerund){
          console.log('верно - удаляю');
-         answer.innerText = translate + " - " + word;
-         delete words_obj[ind];
+         answer.innerText = " - " + word;
+         delete words_obj[word];
          ok.style.display = 'none';
          err.style.display = 'block';
          answer.style.display = 'block';
@@ -65,7 +65,7 @@ function start(button_pressed){
     else{
 
          answer.style.display = 'block'
-         answer.innerText = translate + " - " + word;
+         answer.innerText = " - " + word;
          ok.style.display = 'block'
          ok.innerText = inp + " - не верно.";
          err.style.display = 'none';
