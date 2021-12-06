@@ -1,5 +1,8 @@
 {% extends "english/base_english.html" %}
 {% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href='{% static "english/css/english.css" %}'>
+{% endblock %}
 {% block main %}
 
 {% csrf_token %}
@@ -10,15 +13,17 @@
 </h4>
 
 <div id="start" class="form-group">
-  <button id="gerund_button" type="button" class="btn-outline-success"   style="height:50px; width:100px; display: inline" >Gerund</button>
-  <button id="infinitive_button" type="button" class="btn-outline-info" style="height:50px; width:100px; display: inline" >Infinitive</button>
-  <button id="all_of_them" type="button" class="btn-outline-warning" style="height:50px; width:100px; display: inline" >All</button>
+  <button id="gerund_button" type="button" class="btn-outline-success play-button" >Gerund(ing)</button>
+  <button id="infinitive_button" type="button" class="btn-outline-info play-button" >Infinitive(to)</button>
+  <button id="all_of_them" type="button" class="btn-outline-warning play-button" >All(ing or to)</button>
+  <button id="to_button" type="button" class="btn-outline-success play-button" >To</button>
+  <button id="for_button" type="button" class="btn-outline-info play-button"  >For</button>
 </div>
 
 <hr>
 <h4 class="alert-heading">
   <span id="result" class="alert alert-success" style="display: none">Answer</span>
-  <div id="ok" class="alert alert-danger" role="alert" style="display: none">
+  <div id="error" class="alert alert-danger" role="alert" style="display: none">
     Не верно.
   </div>
 </h4>
@@ -27,11 +32,11 @@
 
 <button id="learned" type="button" class="btn btn-outline-success" style="display: inline" >Выучено</button>
 
-<div id="error" class="alert alert-success" role="alert" style="display: none">
-  Верно! Удалено.
+<div id="ok" class="alert alert-success" role="alert" style="display: none">
+  Верно!
 </div>
 <hr>
-Загружено слов - <span id="count_is">{{count}}</span>
+Загружено слов - <span id="count_is">{{count}}</span> правильно отвечено: <span id="count_true">0</span>  Не правильно отвечено:<span id="count_false">0</span>
 {% endblock %}
 
 {% block script %}

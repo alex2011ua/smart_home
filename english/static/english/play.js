@@ -35,26 +35,61 @@ console.log(words_obj)
 
 
 
-var gerund = document.getElementById('gerund_button'); // кнопка для выученого слова
-var infinitiv = document.getElementById('infinitive_button'); // кнопка для сложного слова
-var all_of_them = document.getElementById("all_of_them");    // счетчик слов
+let gerund = document.getElementById('gerund_button'); // кнопка для выученого слова
+let infinitive = document.getElementById('infinitive_button'); // кнопка для сложного слова
+let all_of_them = document.getElementById("all_of_them");    // счетчик слов
+let to_button = document.getElementById('to_button'); // кнопка для сложного слова
+let for_button = document.getElementById("for_button");    // счетчик слов
+let count_words = document.getElementById("count_is");    // счетчик слов
 
-var count_words = document.getElementById("count_is");    // счетчик слов
-
-
-
+let count_true = 0;
+let count_false = 0;
+let c_true = document.getElementById('count_true');
+let c_false = document.getElementById('count_false');
 
 let answer = document.getElementById("result");             // правильный ответ
 document.getElementById("word").innerHTML = word.english;
 let ok =  document.getElementById("ok");
 let err = document.getElementById("error");
 
-var uptate_scrieen = function(){
+let uptate_scrieen = function(){
     ind = Math.floor(Math.random() * words_obj.length);
      word = words_obj[ind];
-
+     c_true.innerHTML = count_true;
+     c_false.innerHTML = count_false;
      document.getElementById("word").innerHTML = word.word;
      count_words.innerHTML = words_obj.length;
+
+     if(word.buttons.includes('gerund')){
+             gerund.style.display='inline';
+         }
+         else{
+             gerund.style.display='none';
+         }
+     if(word.buttons.includes('infinitive')){
+             infinitive.style.display='inline';
+         }
+         else{
+             infinitive.style.display='none';
+         }
+     if(word.buttons.includes('all')){
+             all_of_them.style.display='inline';
+         }
+         else{
+             all_of_them.style.display='none';
+         }
+     if(word.buttons.includes('to')){
+             to_button.style.display='inline';
+         }
+         else{
+             to_button.style.display='none';
+         }
+     if(word.buttons.includes('for')){
+             for_button.style.display='inline';
+         }
+         else{
+             for_button.style.display='none';
+         }
 }
 uptate_scrieen();
 
@@ -63,20 +98,22 @@ function start(button_pressed){
 
      if (inp.toLowerCase() === word.answer){
          console.log('верно - удаляю');
-         answer.innerText = " - " + word;
-         delete words_obj[word];
-         ok.style.display = 'none';
-         err.style.display = 'block';
+         answer.innerText = word.word + " - " + word.answer +' '+ word.russian;
+         count_true ++;
+         words_obj.splice(ind, 1)
+         ok.style.display = 'block';
+         err.style.display = 'none';
          answer.style.display = 'block';
      }
 
     else{
-
+         count_false ++;
          answer.style.display = 'block'
-         answer.innerText = " - " + word;
-         ok.style.display = 'block'
-         ok.innerText = inp + " - не верно.";
-         err.style.display = 'none';
+         answer.innerText = word.word + " - " + word.answer +' '+ word.russian;
+         ok.style.display = 'none';
+         err.innerText = inp + " - не верно.";
+         err.style.display = 'block';
+         words_obj.splice(ind, 1)
      }
 
      uptate_scrieen();
@@ -85,10 +122,15 @@ function start(button_pressed){
 gerund.onclick = function(){
      start('gerund');
 };
-infinitiv.onclick = function(){
+infinitive.onclick = function(){
      start('infinitive');
 };
 all_of_them.onclick = function(){
      start('all');
 };
-
+to_button.onclick = function(){
+     start('to');
+};
+for_button.onclick = function(){
+     start('for');
+};

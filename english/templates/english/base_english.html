@@ -22,14 +22,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-      {% block css %}
-    {% endblock %}
+
     <title>{% block title %}English level 2{% endblock %}</title>
     {% block head %}{% endblock %}
 
     <meta property="og:title" content="My smart home">
     <meta property="og:type" content="home website">
     <meta property="og:image" content="static/og.gif">
+  {% block css %}
+  {% endblock %}
   </head>
   <body>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary" >
@@ -55,7 +56,9 @@
         <li class="nav-item {% if request.path == "/english/r_e/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:r_e' %}">Russian<span class="sr-only">(current)</span></a>
       </li>
-
+        <li class="nav-item {% if request.path == "/english/game/" %} active {% endif %}">
+        <a class="nav-link" href="{% url 'english:game' %}">Game<span class="sr-only">(current)</span></a>
+      </li>
         <li class="nav-item {% if request.path == '/english/compare/' %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:CompareWords' %}">Compare <span class="sr-only">(current)</span></a>
       </li>

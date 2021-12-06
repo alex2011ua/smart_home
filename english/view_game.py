@@ -16,11 +16,13 @@ class GenrundGame(LoginRequiredMixin, View):
         words_all = Words.objects.filter(lesson=88)
         for _word in words_all:
             word, buttons = _word.english.split('-')
+            answer, russian = _word.russian.split('-')
             buttons = buttons.split(',')
             d_word = {
                 'word': word,
                 'buttons': buttons,
-                'answer': _word.russian,
+                'answer': answer,
+                'russian': russian,
                 'id': _word.id,
                       }
             content.append(d_word)

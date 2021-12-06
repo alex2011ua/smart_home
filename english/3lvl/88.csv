@@ -1,129 +1,129 @@
-bring-to,for; to
-give-to,for; to
-hand-to,for; to
-lend-to,for; to
-mail-to,for; to
-offer-to,for; to
-pass-to,for; to
-pay-to,for; to
-promise-to,for; to
-read-to,for; to
-recommend-to,for; to
-sell-to,for; to
-send-to,for; to
-show-to,for; to
-sing-to,for; to
-take-to,for; to
-teach-to,for; to
-tell-to,for; to
-throw-to,for; to
-write-to,for; to
-wish-to,for; to
-bake-to,for; for
-book-to,for; for
-build-to,for; for
-buy-to,for; for
-catch-to,for; for
-choose-to,for; for
-cook-to,for; for
-cut-to,for; for
-find-to,for; for
-get=buy-to,for; for
-keep-to,for; for
-make-to,for; for
-order-to,for; for
-paint-to,for; for
-peel-to,for; for
-pour-to,for; for
-prepare-to,for; for
-reserve-to,for; for
-save-to,for; for
-win-to,for; for
-admit-gerund,infinitive,all; gerund
-appreciate-gerund,infinitive,all; gerund
-avoid-gerund,infinitive,all; gerund
-complete-gerund,infinitive,all; gerund
-consider-gerund,infinitive,all; gerund
-delay-gerund,infinitive,all; gerund
-deny-gerund,infinitive,all; gerund
-discuss-gerund,infinitive,all; gerund
-dislike-gerund,infinitive,all; gerund
-enjoy-gerund,infinitive,all; gerund
-finish-gerund,infinitive,all; gerund
-give up-gerund,infinitive,all; gerund
-keep-gerund,infinitive,all; gerund
-not mind-gerund,infinitive,all; gerund
-miss-gerund,infinitive,all; gerund
-practice-gerund,infinitive,all; gerund
-put off-gerund,infinitive,all; gerund
-quit-gerund,infinitive,all; gerund
-recommend-gerund,infinitive,all; gerund
-resist-gerund,infinitive,all; gerund
-risk-gerund,infinitive,all; gerund
-suggest-gerund,infinitive,all; gerund
-understand-gerund,infinitive,all; gerund
-less-count,uncount; uncount
-fewer-count,uncount; count
-agree-gerund,infinitive,all; infinitive
-ask-gerund,infinitive,all; infinitive
-choose-gerund,infinitive,all; infinitive
-dicided-gerund,infinitive,all; infinitive
-hope-gerund,infinitive,all; infinitive
-indend-gerund,infinitive,all; infinitive
-manage-gerund,infinitive,all; infinitive
-need-gerund,infinitive,all; infinitive
-offer-gerund,infinitive,all; infinitive
-plan-gerund,infinitive,all; infinitive
-promise-gerund,infinitive,all; infinitive
-want-gerund,infinitive,all; infinitive
-delighted-gerund,infinitive,all; infinitive
-glad-gerund,infinitive,all; infinitive
-happy-gerund,infinitive,all; infinitive
-excited-gerund,infinitive,all; infinitive
-nice-gerund,infinitive,all; infinitive
-pleased-gerund,infinitive,all; infinitive
-sad-gerund,infinitive,all; infinitive
-smart-gerund,infinitive,all; infinitive
-sorry-gerund,infinitive,all; infinitive
-stupid-gerund,infinitive,all; infinitive
-be busy-gerund,infinitive,all; gerund
-can't help-gerund,infinitive,all; gerund
-it's no use-gerund,infinitive,all; gerund
-it's not worth-gerund,infinitive,all; gerund
-it's worth-gerund,infinitive,all; gerund
-need help-gerund,infinitive,all; gerund
-have an amazing time-gerund,infinitive,all; gerund
-have a difficult time-gerund,infinitive,all; gerund
-have a fun time-gerund,infinitive,all; gerund
-have a good time-gerund,infinitive,all; gerund
-have a great time-gerund,infinitive,all; gerund
-have a hard time-gerund,infinitive,all; gerund
-have a terrible time-gerund,infinitive,all; gerund
-have a trouble-gerund,infinitive,all; gerund
-look forward to-gerund,infinitive,all; gerund
-save money-gerund,infinitive,all; gerund
-lose time-gerund,infinitive,all; gerund
-waste money-gerund,infinitive,all; gerund
-spend time-gerund,infinitive,all; gerund
-apologize for-gerund,infinitive,all; gerund
-be excited about-gerund,infinitive,all; gerund
-have an excuse for-gerund,infinitive,all; gerund
-tank somebody for-gerund,infinitive,all; gerund
-be interested in-gerund,infinitive,all; gerund
-be tired of-gerund,infinitive,all; gerund
-be opposed to-gerund,infinitive,all; gerund
-look forward to-gerund,infinitive,all; gerund
-insist on-gerund,infinitive,all; gerund
-talk about/of-gerund,infinitive,all; gerund
-dream about/of-gerund,infinitive,all; gerund
-think about-gerund,infinitive,all; gerund
-complain about-gerund,infinitive,all; gerund
-worry about-gerund,infinitive,all; gerund
-begin-gerund,infinitive,all; all
-like-gerund,infinitive,all; all
-start-gerund,infinitive,all; all
-continue-gerund,infinitive,all; all
-love-gerund,infinitive,all; all
-hate-gerund,infinitive,all; all
-prefer-gerund,infinitive,all; all
-cant't stand-gerund,infinitive,all; all
+bring-to,for; to-приносить
+give-to,for; to-дать, подать, дарить
+hand-to,for; to-передать, вручить
+lend-to,for; to-одолжить кому-то
+mail-to,for; to-отправить по почте
+offer-to,for; to-предлагать
+pass-to,for; to-передать
+pay-to,for; to-платить
+promise-to,for; to-обещать
+read-to,for; to-читать
+recommend-to,for; to-рекомендовать
+sell-to,for; to-продавать
+send-to,for; to-посылать, отправлять, отсылать
+show-to,for; to-показывать
+sing-to,for; to-петь, напевать
+take-to,for; to-брать, хватать, взять
+teach-to,for; to-учить, обучать
+tell-to,for; to-рассказывать
+throw-to,for; to-бросать, кидать, метать
+write-to,for; to-писать, записывать
+wish-to,for; to-желать
+bake-to,for; for-печь выпекать
+book-to,for; for-бронировать
+build-to,for; for-строить, сооружать
+buy-to,for; for-покупать, приобретать
+catch-to,for; for-ловить, поймать, схватить
+choose-to,for; for-выбирать
+cook-to,for; for-готовить еду
+cut-to,for; for-резать, разрезать, нарезать
+find-to,for; for-находить, обнаруживать
+get=buy-to,for; for-покупать
+keep-to,for; for-хранить, сохранять, поддерживать, продолжать
+make-to,for; for-делать
+order-to,for; for-заказывать
+paint-to,for; for-красить; рисовать красками
+peel-to,for; for-отслаиваться, отшелушиваться
+pour-to,for; for-облить, налить
+prepare-to,for; for-подготовить
+reserve-to,for; for-бронировать
+save-to,for; for-сохранить, приберечь
+win-to,for; for-победить, выиграть
+admit-gerund,infinitive,all; gerund-признавать
+appreciate-gerund,infinitive,all; gerund-ценить
+avoid-gerund,infinitive,all; gerund-избегать
+complete-gerund,infinitive,all; gerund-завершать
+consider-gerund,infinitive,all; gerund-рассматривать, обдумувать
+delay-gerund,infinitive,all; gerund-откладывать
+deny-gerund,infinitive,all; gerund-отрицать
+discuss-gerund,infinitive,all; gerund-обсуждать
+dislike-gerund,infinitive,all; gerund-не нравиться
+enjoy-gerund,infinitive,all; gerund-наслаждаться, получать удовольствие от
+finish-gerund,infinitive,all; gerund-заканчивать
+give up-gerund,infinitive,all; gerund-дать, подать, дарить
+keep-gerund,infinitive,all; gerund-хранить, сохранять, поддерживать
+not mind-gerund,infinitive,all; gerund-быть не против, не возражать
+miss-gerund,infinitive,all; gerund-пропускать; скучать
+practice-gerund,infinitive,all; gerund-практиковать
+put off-gerund,infinitive,all; gerund-отложить на время
+quit-gerund,infinitive,all; gerund-бросать, переставать (что-то делать), покидать
+recommend-gerund,infinitive,all; gerund-рекомендовать
+resist-gerund,infinitive,all; gerund-оказывать сопротивление
+risk-gerund,infinitive,all; gerund-рисковать
+suggest-gerund,infinitive,all; gerund-предложить
+understand-gerund,infinitive,all; gerund-понимать, постигать
+less-count,uncount; uncount-меньше
+fewer-count,uncount; count-меньше
+agree-gerund,infinitive,all; infinitive-соглашаться
+ask-gerund,infinitive,all; infinitive-просить
+choose-gerund,infinitive,all; infinitive-выбирать, избирать
+decide-gerund,infinitive,all; infinitive-принимать решение
+hope-gerund,infinitive,all; infinitive-надеяться
+intend-gerund,infinitive,all; infinitive-намереваться
+manage-gerund,infinitive,all; infinitive-управлять, справляться
+need-gerund,infinitive,all; infinitive-нуждаться
+offer-gerund,infinitive,all; infinitive-предлагать
+plan-gerund,infinitive,all; infinitive-планировать
+promise-gerund,infinitive,all; infinitive-обещать
+want-gerund,infinitive,all; infinitive-хотеть
+delighted-gerund,infinitive,all; infinitive-восхищенный
+glad-gerund,infinitive,all; infinitive-рад
+happy-gerund,infinitive,all; infinitive-счастливый
+excited-gerund,infinitive,all; infinitive-в восторге, взволнованный
+nice-gerund,infinitive,all; infinitive-милый приятный
+pleased-gerund,infinitive,all; infinitive-довольный
+sad-gerund,infinitive,all; infinitive-печальный
+smart-gerund,infinitive,all; infinitive-умный
+sorry-gerund,infinitive,all; infinitive-
+stupid-gerund,infinitive,all; infinitive-глупый
+be busy-gerund,infinitive,all; gerund-быть занятым
+can't help-gerund,infinitive,all; gerund-не в состоянии удержаться
+it's no use-gerund,infinitive,all; gerund-это бесполезно
+it's not worth-gerund,infinitive,all; gerund-это не стоит того, чтобы
+it's worth-gerund,infinitive,all; gerund-это стоит того, чтобы
+need help-gerund,infinitive,all; gerund-
+have an amazing time-gerund,infinitive,all; gerund-
+have a difficult time-gerund,infinitive,all; gerund-
+have a fun time-gerund,infinitive,all; gerund-
+have a good time-gerund,infinitive,all; gerund-
+have a great time-gerund,infinitive,all; gerund-
+have a hard time-gerund,infinitive,all; gerund-
+have a terrible time-gerund,infinitive,all; gerund-
+have a trouble-gerund,infinitive,all; gerund-
+look forward to-gerund,infinitive,all; gerund-
+save money-gerund,infinitive,all; gerund-
+lose time-gerund,infinitive,all; gerund-
+waste money-gerund,infinitive,all; gerund-
+spend time-gerund,infinitive,all; gerund-
+apologize for-gerund,infinitive,all; gerund-
+be excited about-gerund,infinitive,all; gerund-
+have an excuse for-gerund,infinitive,all; gerund-
+tank somebody for-gerund,infinitive,all; gerund-
+be interested in-gerund,infinitive,all; gerund-
+be tired of-gerund,infinitive,all; gerund-
+be opposed to-gerund,infinitive,all; gerund-
+look forward to-gerund,infinitive,all; gerund-
+insist on-gerund,infinitive,all; gerund-
+talk about/of-gerund,infinitive,all; gerund-
+dream about/of-gerund,infinitive,all; gerund-
+think about-gerund,infinitive,all; gerund-
+complain about-gerund,infinitive,all; gerund-
+worry about-gerund,infinitive,all; gerund-
+begin-gerund,infinitive,all; all-
+like-gerund,infinitive,all; all-
+start-gerund,infinitive,all; all-
+continue-gerund,infinitive,all; all-
+love-gerund,infinitive,all; all-
+hate-gerund,infinitive,all; all-
+prefer-gerund,infinitive,all; all-
+cant't stand-gerund,infinitive,all; all-
