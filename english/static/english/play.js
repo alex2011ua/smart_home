@@ -32,8 +32,7 @@ console.log(words_obj)
 // let control_state = words_obj['control_state'];
 // delete words_obj['control_state'];
 // let words_list = Object.keys(words_obj);
-let ind = Math.floor(Math.random() * words_obj.length);
-let word = words_obj[ind];
+
 
 
 var gerund = document.getElementById('gerund_button'); // кнопка для выученого слова
@@ -42,7 +41,7 @@ var all_of_them = document.getElementById("all_of_them");    // счетчик �
 
 var count_words = document.getElementById("count_is");    // счетчик слов
 
-count_words.innerHTML = words_obj.length;
+
 
 
 let answer = document.getElementById("result");             // правильный ответ
@@ -50,10 +49,19 @@ document.getElementById("word").innerHTML = word.english;
 let ok =  document.getElementById("ok");
 let err = document.getElementById("error");
 
+var uptate_scrieen = function(){
+    ind = Math.floor(Math.random() * words_obj.length);
+     word = words_obj[ind];
+
+     document.getElementById("word").innerHTML = word.word;
+     count_words.innerHTML = words_obj.length;
+}
+uptate_scrieen();
+
 function start(button_pressed){
      let inp = button_pressed;
 
-     if (inp.toLowerCase() === word.gerund){
+     if (inp.toLowerCase() === word.answer){
          console.log('верно - удаляю');
          answer.innerText = " - " + word;
          delete words_obj[word];
@@ -71,19 +79,16 @@ function start(button_pressed){
          err.style.display = 'none';
      }
 
-     ind = Math.floor(Math.random() * words_obj.length);
-     word = words_obj[ind];
-
-     document.getElementById("word").innerHTML = word.english;
-     count_words.innerHTML = words_list.length;
+     uptate_scrieen();
 }
 
 gerund.onclick = function(){
      start('gerund');
 };
 infinitiv.onclick = function(){
-     start('infinitiv');
+     start('infinitive');
 };
 all_of_them.onclick = function(){
-     start('all_of_them');
+     start('all');
 };
+

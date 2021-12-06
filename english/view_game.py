@@ -14,11 +14,14 @@ class GenrundGame(LoginRequiredMixin, View):
     def post(request):
         content = []
         words_all = Words.objects.filter(lesson=88)
-        for word in words_all:
+        for _word in words_all:
+            word, buttons = _word.english.split('-')
+            buttons = buttons.split(',')
             d_word = {
-                'english': word.english,
-                'gerund': word.russian,
-                'id': word.id,
+                'word': word,
+                'buttons': buttons,
+                'answer': _word.russian,
+                'id': _word.id,
                       }
             content.append(d_word)
         return JsonResponse(content, safe=False)
