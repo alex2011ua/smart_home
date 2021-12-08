@@ -7,6 +7,7 @@ import json
 class Words(models.Model):
     '''
     lesson 88 = play
+    lesson 99 = list irregular verbs
     lesson 100 = 1 cours
     lesson 200 = 2 cours
     '''

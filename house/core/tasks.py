@@ -240,14 +240,14 @@ def bot_task():
 @cellery_app.task()
 def bot_task_1_hour():
     """
-    каждый час проверяет температуру теплицы.
+    каждый час проверяет температуру теплицы и качество интернета
     :return:
     """
     print('Start bot_task_1_hour')
     alarms = Setting.objects.get(controller_name="alarms")
     temp_alert(alarms.value)
-    st = speedtest.Speedtest()
 
+    st = speedtest.Speedtest()
     download = float(st.download())//1024//1024//8
     upload = float(st.upload())//1024//1024//8
     ping = st.results.ping

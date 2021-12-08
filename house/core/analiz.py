@@ -105,7 +105,8 @@ def temp_alert(alarm):
     temp = DHT_MQ.objects.all().order_by('-date_t_h')[0]  # arduino state
     if temp.temp_teplica > 35 and alarm:
         bot.send_message(f"Температура в теплице: {temp.temp_teplica}")
-    if datetime.now().hour == 23:
+
+    if datetime.now().hour == 18:
         max_temp = Setting.objects.get(controller_name='max_temp_teplica')
         min_temp = Setting.objects.get(controller_name='min_temp_teplica')
 
@@ -116,3 +117,6 @@ def temp_alert(alarm):
         max_temp.value = 0
         min_temp.save()
         max_temp.save()
+        if temp.temp_voda:
+            if temp.temp_voda <= 2:
+                bot.send_message(f"Температура в летней кухне: {temp.temp_voda}")
