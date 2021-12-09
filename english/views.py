@@ -82,8 +82,8 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
                         english, russian = item.split('•', 1)
                     elif '-' in item:
                         english, russian = item.split('-', 1)
-
-                    english = english.replace('(to)', 'to', 1)
+                    if english.startswith('(to)'):
+                        english = english.replace('(to)', 'to', 1)
                     english = english.strip()
                     russian = russian.strip()
 
@@ -91,13 +91,15 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
                     for word in other_word:
                         if word.english != english:
                             russian = russian+' (' + str(lesson) + ')'
-
-                    Words.objects.create(english=english,
-                                         russian=russian,
-                                         lesson=lesson,
-                                         irregular_verbs=irregular_verbs,
-                                         phrasal_verbs=phrasal_verbs
-                                         )
+                    try:
+                        Words.objects.get(english=english, russian=russian, lesson=lesson)
+                    except ObjectDoesNotExist:
+                        Words.objects.create(english=english,
+                                             russian=russian,
+                                             lesson=lesson,
+                                             irregular_verbs=irregular_verbs,
+                                             phrasal_verbs=phrasal_verbs
+                                             )
                 except Exception as ex:
                     print(ex)
         return redirect('english:settings')

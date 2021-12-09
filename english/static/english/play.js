@@ -35,11 +35,14 @@ console.log(words_obj)
 
 
 
-let gerund = document.getElementById('gerund_button'); // кнопка для выученого слова
-let infinitive = document.getElementById('infinitive_button'); // кнопка для сложного слова
-let all_of_them = document.getElementById("all_of_them");    // счетчик слов
-let to_button = document.getElementById('to_button'); // кнопка для сложного слова
-let for_button = document.getElementById("for_button");    // счетчик слов
+let gerund = document.getElementById('gerund_button');
+let infinitive = document.getElementById('infinitive_button');
+let all_of_them = document.getElementById("all_of_them");
+let to_button = document.getElementById('to_button');
+let for_button = document.getElementById("for_button");
+let make_button = document.getElementById('make_button');
+let do_button = document.getElementById('do_button')
+
 let count_words = document.getElementById("count_is");    // счетчик слов
 
 let count_true = 0;
@@ -90,6 +93,22 @@ let uptate_scrieen = function(){
          else{
              for_button.style.display='none';
          }
+     if(word.buttons.includes('make')){
+             make_button.style.display='inline';
+         }
+         else{
+             make_button.style.display='none';
+         }
+     if(word.buttons.includes('do')){
+             do_button.style.display='inline';
+         }
+         else{
+             do_button.style.display='none';
+         }
+
+
+
+
 }
 uptate_scrieen();
 
@@ -133,4 +152,10 @@ to_button.onclick = function(){
 };
 for_button.onclick = function(){
      start('for');
+};
+make_button.onclick = function(){
+     start('make');
+};
+do_button.onclick = function(){
+     start('do');
 };
