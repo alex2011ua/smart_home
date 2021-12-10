@@ -42,8 +42,8 @@ let to_button = document.getElementById('to_button');
 let for_button = document.getElementById("for_button");
 let make_button = document.getElementById('make_button');
 let do_button = document.getElementById('do_button')
-let countable_button = document.getElementById('make_button');
-let uncountable_button = document.getElementById('do_button')
+let countable_button = document.getElementById('countable_button');
+let uncountable_button = document.getElementById('uncountable_button')
 
 let count_words = document.getElementById("count_is");    // счетчик слов
 
