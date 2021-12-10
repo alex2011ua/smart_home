@@ -42,6 +42,8 @@ let to_button = document.getElementById('to_button');
 let for_button = document.getElementById("for_button");
 let make_button = document.getElementById('make_button');
 let do_button = document.getElementById('do_button')
+let countable_button = document.getElementById('make_button');
+let uncountable_button = document.getElementById('do_button')
 
 let count_words = document.getElementById("count_is");    // счетчик слов
 
@@ -55,60 +57,59 @@ document.getElementById("word").innerHTML = word.english;
 let ok =  document.getElementById("ok");
 let err = document.getElementById("error");
 
-let uptate_scrieen = function(){
+let uptate_scrieen = function() {
     ind = Math.floor(Math.random() * words_obj.length);
-     word = words_obj[ind];
-     c_true.innerHTML = count_true;
-     c_false.innerHTML = count_false;
-     document.getElementById("word").innerHTML = word.word;
-     count_words.innerHTML = words_obj.length;
+    word = words_obj[ind];
+    c_true.innerHTML = count_true;
+    c_false.innerHTML = count_false;
+    document.getElementById("word").innerHTML = word.word;
+    count_words.innerHTML = words_obj.length;
 
-     if(word.buttons.includes('gerund')){
-             gerund.style.display='inline';
-         }
-         else{
-             gerund.style.display='none';
-         }
-     if(word.buttons.includes('infinitive')){
-             infinitive.style.display='inline';
-         }
-         else{
-             infinitive.style.display='none';
-         }
-     if(word.buttons.includes('all')){
-             all_of_them.style.display='inline';
-         }
-         else{
-             all_of_them.style.display='none';
-         }
-     if(word.buttons.includes('to')){
-             to_button.style.display='inline';
-         }
-         else{
-             to_button.style.display='none';
-         }
-     if(word.buttons.includes('for')){
-             for_button.style.display='inline';
-         }
-         else{
-             for_button.style.display='none';
-         }
-     if(word.buttons.includes('make')){
-             make_button.style.display='inline';
-         }
-         else{
-             make_button.style.display='none';
-         }
-     if(word.buttons.includes('do')){
-             do_button.style.display='inline';
-         }
-         else{
-             do_button.style.display='none';
-         }
-
-
-
-
+    if (word.buttons.includes('gerund')) {
+        gerund.style.display = 'inline';
+    } else {
+        gerund.style.display = 'none';
+    }
+    if (word.buttons.includes('infinitive')) {
+        infinitive.style.display = 'inline';
+    } else {
+        infinitive.style.display = 'none';
+    }
+    if (word.buttons.includes('all')) {
+        all_of_them.style.display = 'inline';
+    } else {
+        all_of_them.style.display = 'none';
+    }
+    if (word.buttons.includes('to')) {
+        to_button.style.display = 'inline';
+    } else {
+        to_button.style.display = 'none';
+    }
+    if (word.buttons.includes('for')) {
+        for_button.style.display = 'inline';
+    } else {
+        for_button.style.display = 'none';
+    }
+    if (word.buttons.includes('make')) {
+        make_button.style.display = 'inline';
+    } else {
+        make_button.style.display = 'none';
+    }
+    if (word.buttons.includes('do')) {
+        do_button.style.display = 'inline';
+    } else {
+        do_button.style.display = 'none';
+    }
+    if (word.buttons.includes('count')) {
+        countable_button.style.display = 'inline';
+    } else {
+        countable_button.style.display = 'none';
+    }
+    if (word.buttons.includes('uncount')) {
+        uncountable_button.style.display = 'inline';
+    } else {
+        uncountable_button.style.display = 'none';
+    }
 }
 uptate_scrieen();
 
@@ -159,3 +160,10 @@ make_button.onclick = function(){
 do_button.onclick = function(){
      start('do');
 };
+countable_button.onclick = function(){
+     start('count');
+};
+uncountable_button.onclick = function(){
+     start('uncount');
+};
+
