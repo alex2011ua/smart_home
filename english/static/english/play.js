@@ -6,16 +6,16 @@ $.ajaxSetup({
     }
 });
 
-let words_obj=0;
+let words_obj = 0;
 $.ajax({
     url: '',
     method: 'POST',
     data: 'data',
-     async: false,
+    async: false,
     success: function (text) {
         console.log('__ok__');
 
-    words_obj = text;
+        words_obj = text;
     },
     error: function (text) {
         console.log('__error__');
@@ -26,13 +26,10 @@ $.ajax({
 console.log(words_obj)
 
 
-
-
 //
 // let control_state = words_obj['control_state'];
 // delete words_obj['control_state'];
 // let words_list = Object.keys(words_obj);
-
 
 
 let gerund = document.getElementById('gerund_button');
@@ -54,10 +51,10 @@ let c_false = document.getElementById('count_false');
 
 let answer = document.getElementById("result");             // правильный ответ
 document.getElementById("word").innerHTML = word.english;
-let ok =  document.getElementById("ok");
+let ok = document.getElementById("ok");
 let err = document.getElementById("error");
 
-let uptate_scrieen = function() {
+let uptate_scrieen = function () {
     ind = Math.floor(Math.random() * words_obj.length);
     word = words_obj[ind];
     c_true.innerHTML = count_true;
@@ -113,57 +110,55 @@ let uptate_scrieen = function() {
 }
 uptate_scrieen();
 
-function start(button_pressed){
-     let inp = button_pressed;
+function start(button_pressed) {
+    let inp = button_pressed;
 
-     if (inp.toLowerCase() === word.answer){
-         console.log('верно - удаляю');
-         answer.innerText = word.word + " - " + word.answer +' '+ word.russian;
-         count_true ++;
-         words_obj.splice(ind, 1)
-         ok.style.display = 'block';
-         err.style.display = 'none';
-         answer.style.display = 'block';
-     }
+    if (inp.toLowerCase() === word.answer) {
+        console.log('верно - удаляю');
+        answer.innerText = word.word + " - " + word.answer + ' ' + word.russian;
+        count_true++;
+        words_obj.splice(ind, 1)
+        ok.style.display = 'block';
+        err.style.display = 'none';
+        answer.style.display = 'block';
+    } else {
+        count_false++;
+        answer.style.display = 'block'
+        answer.innerText = word.word + " - " + word.answer + ' ' + word.russian;
+        ok.style.display = 'none';
+        err.innerText = inp + " - не верно.";
+        err.style.display = 'block';
+        words_obj.splice(ind, 1)
+    }
 
-    else{
-         count_false ++;
-         answer.style.display = 'block'
-         answer.innerText = word.word + " - " + word.answer +' '+ word.russian;
-         ok.style.display = 'none';
-         err.innerText = inp + " - не верно.";
-         err.style.display = 'block';
-         words_obj.splice(ind, 1)
-     }
-
-     uptate_scrieen();
+    uptate_scrieen();
 }
 
-gerund.onclick = function(){
-     start('gerund');
+gerund.onclick = function () {
+    start('gerund');
 };
-infinitive.onclick = function(){
-     start('infinitive');
+infinitive.onclick = function () {
+    start('infinitive');
 };
-all_of_them.onclick = function(){
-     start('all');
+all_of_them.onclick = function () {
+    start('all');
 };
-to_button.onclick = function(){
-     start('to');
+to_button.onclick = function () {
+    start('to');
 };
-for_button.onclick = function(){
-     start('for');
+for_button.onclick = function () {
+    start('for');
 };
-make_button.onclick = function(){
-     start('make');
+make_button.onclick = function () {
+    start('make');
 };
-do_button.onclick = function(){
-     start('do');
+do_button.onclick = function () {
+    start('do');
 };
-countable_button.onclick = function(){
-     start('count');
+countable_button.onclick = function () {
+    start('count');
 };
-uncountable_button.onclick = function(){
-     start('uncount');
+uncountable_button.onclick = function () {
+    start('uncount');
 };
 

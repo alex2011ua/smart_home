@@ -5,6 +5,7 @@ from django.http import JsonResponse
 
 from .models import Words
 
+
 class GenrundGame(LoginRequiredMixin, View):
     @staticmethod
     def get(request):
@@ -30,6 +31,6 @@ class GenrundGame(LoginRequiredMixin, View):
                 'answer': answer.strip(),
                 'russian': russian,
                 'id': _word.id,
-                      }
+            }
             content.append(d_word)
         return JsonResponse(content, safe=False)

@@ -298,6 +298,8 @@ def mod(request):
                 w.add_learned(request.user.id)
             elif mod == 'heavy':
                 w.add_heavy(request.user.id)
+            elif mod == 'not_heavy':
+                w.dell_heavy(request.user.id)
             elif mod == 'control':
                 w.add_control(request.user.id)
 
@@ -315,6 +317,10 @@ def mod(request):
     if request.GET.get('heavy'):
         mod = 'heavy'
         word[language] = request.GET.get('heavy')
+        mod_db(mod, word)
+    if request.GET.get('not_heavy'):
+        mod = 'not_heavy'
+        word[language] = request.GET.get('not_heavy')
         mod_db(mod, word)
     if request.GET.get('control'):
         mod = 'control'

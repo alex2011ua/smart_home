@@ -6,16 +6,16 @@ $.ajaxSetup({
     }
 });
 
-let words_obj=0;
+let words_obj = 0;
 $.ajax({
     url: '',
     method: 'POST',
     data: 'data',
-     async: false,
+    async: false,
     success: function (text) {
         console.log('__ok__');
 
-    words_obj = text;
+        words_obj = text;
     },
     error: function (text) {
         console.log('__error__');
@@ -33,6 +33,7 @@ let translate = words_obj[words_list[ind]];
 var dellete_word_button = document.getElementById('dellete_word'); // кнопка для удаления слова
 var learned = document.getElementById('learned'); // кнопка для выученого слова
 var heavy = document.getElementById('heavy'); // кнопка для сложного слова
+var not_heavy = document.getElementById('not_heavy'); // кнопка для сложного слова
 var count_words = document.getElementById("count_is");    // счетчик слов
 var submit_button = document.getElementById("submit_button");    // счетчик слов
 var vvod = document.getElementById("vvod");    // счетчик слов
@@ -40,13 +41,13 @@ count_words.innerHTML = words_list.length;
 console.log(words_obj[words_list[ind]], words_list[ind]);
 let answer = document.getElementById("result");             // правильный ответ
 document.getElementById("word").innerHTML = words_list[ind];
-let ok =  document.getElementById("ok");
+let ok = document.getElementById("ok");
 let err = document.getElementById("error");
 
-function start(){
+function start() {
     let inp = document.getElementById("vvod").value.trim();
     let to_del = word;
-    if (inp.toLowerCase() === translate.toLowerCase()){
+    if (inp.toLowerCase() === translate.toLowerCase()) {
         console.log('верно - удаляю');
         answer.innerText = translate + " - " + word;
         delete words_obj[word];
@@ -56,12 +57,11 @@ function start(){
         err.style.display = 'block';
         dellete_word_button.style.display = 'none';
         answer.style.display = 'block';
-        if (control_state === true){
+        if (control_state === true) {
             learnedFunc();
-        };
-    }
-
-    else{
+        }
+        ;
+    } else {
         document.getElementById("vvod").value = '';
         console.log("не верно");
         answer.style.display = 'block'
@@ -71,8 +71,8 @@ function start(){
         err.style.display = 'none';
 
         dellete_word_button.style.display = 'inline';
-        if (control_state === true){
-           delete words_obj[to_del];
+        if (control_state === true) {
+            delete words_obj[to_del];
             words_list = Object.keys(words_obj);
             console.log('Хоть и не верно  - удаляю');
             dellete_word_button.style.display = 'none';
@@ -80,7 +80,7 @@ function start(){
         }
     }
 
-    dellete_word_button.onclick = function() {
+    dellete_word_button.onclick = function () {
         delete words_obj[to_del];
         words_list = Object.keys(words_obj);
 
@@ -92,32 +92,32 @@ function start(){
     function learnedFunc() {
         console.log(to_del);
         let data = {'learned': to_del};
-        if (control_state === true){
+        if (control_state === true) {
             data['control'] = to_del;
         }
         $.ajax({
             url: 'mod/',
             method: 'GET',
             data: data,
-        success: function (text) {
+            success: function (text) {
                 console.log('__ok__');
-        },
-        error: function (text) {
-            console.log('__error__');
-            console.log(text);
-            alert('error');
-        },
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
         });
     }
 
-    function control(){
+    function control() {
         console.log(to_del);
         $.ajax({
             url: 'mod/',
             method: 'GET',
-            data: {'control':to_del},
+            data: {'control': to_del},
             success: function (text) {
-                console.log('control ok'+ to_del)
+                console.log('control ok' + to_del)
             },
             error: function (text) {
                 console.log(text);
@@ -134,10 +134,26 @@ function start(){
             url: 'mod/',
             method: 'GET',
             data: {'heavy': to_del},
-        success: function (text) {
+            success: function (text) {
                 console.log('__ok__');
             },
-        error: function (text) {
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+    }
+        not_heavy.onclick = function () {
+        console.log(to_del);
+        $.ajax({
+            url: 'mod/',
+            method: 'GET',
+            data: {'not_heavy': to_del},
+            success: function (text) {
+                console.log('__ok__');
+            },
+            error: function (text) {
                 console.log('__error__');
                 console.log(text);
                 alert('error');
@@ -154,16 +170,16 @@ function start(){
     count_words.innerHTML = words_list.length;
 }
 
-submit_button.onclick = function(){
+submit_button.onclick = function () {
     start();
 };
-vvod.onsubmit = function(){
+vvod.onsubmit = function () {
     start();
 };
 
 // Make sure this code gets executed after the DOM is loaded.
 document.querySelector("#vvod").addEventListener("keyup", event => {
-    if(event.key !== "Enter") return; // Use `.key` instead.
+    if (event.key !== "Enter") return; // Use `.key` instead.
     document.querySelector("#submit_button").click(); // Things you want to do.
     event.preventDefault(); // No need to `return false;`.
 });
