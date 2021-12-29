@@ -16,10 +16,11 @@ import logging
 from django.conf import settings
 
 import speedtest
+from .is_dayoff import DayOff
 
 logger = logging.getLogger('django')
 DEBUG = settings.PLACE
-
+day_off = DayOff()
 
 @cellery_app.task()
 def restart_cam_task():
@@ -341,6 +342,7 @@ def poliv(force=None):
         arduino_poliv(poliv.value)
         bot.send_message(f'Полив завершен: {poliv.value} min.' + "(принудительно)" if force else '')
 
+
 @cellery_app.task()
 def pshik(force=None):
     """включениe режима пшик"""
@@ -350,18 +352,26 @@ def pshik(force=None):
         arduino_poliv(poliv.value)
         bot.send_message(f'Полив завершен: {poliv.value} min.' + "(принудительно)" if force else '')
 
+
 @cellery_app.task()
 def lights_on():
     """включениe иллюминации балкона"""
+
     rele = Setting.objects.get(controller_name='light_perim')
     if rele.value == 0:
         rele_light_perim(1)
         rele.value = 1
         rele.save()
 
+
 @cellery_app.task()
 def lights_off():
     """ВЫключениe иллюминации балкона"""
+    today = datetime.now()
+    date_ny = datetime.date(2021, 12, 31)
+
+    if today.date() == date_ny:
+        return
     rele = Setting.objects.get(controller_name='light_perim')
     if rele.value == 1:
         rele_light_perim(0)
