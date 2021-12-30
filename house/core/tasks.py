@@ -285,19 +285,11 @@ def bot_task_11_hour():
     light_perim = Setting.objects.get(controller_name='light_perim')
     open_controll = button(DEBUG)  # {'Garaz': True, 'Dor_street': False}
     if open_controll['Garaz'] is True or open_controll['Dor_street'] is True:
-        rele_light_perim(1)
-        light_perim.value = 1
-        light_perim.save()
+
         bot.send_message('Не закрыты дверь или гараж!')
         send_viber('Не закрыты дверь или гараж!')
 
-    else:
-        if light_perim.value == 1:
-            rele_light_perim(0)
-            light_perim.value = 0
-            light_perim.save()
-            bot.send_message('Выключена иллюминация!')
-            send_viber('Выключена иллюминация!')
+
     print('Stop bot_task_11_hour')
 
 
