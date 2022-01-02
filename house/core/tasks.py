@@ -359,11 +359,6 @@ def lights_on():
 @cellery_app.task()
 def lights_off():
     """ВЫключениe иллюминации балкона"""
-    today = datetime.now()
-    date_ny = datetime.date(2021, 12, 31)
-
-    if today.date() == date_ny:
-        return
     rele = Setting.objects.get(controller_name='light_perim')
     if rele.value == 1:
         rele_light_perim(0)
