@@ -20,7 +20,7 @@ from celery.exceptions import SoftTimeLimitExceeded
 
 from .core.models import Logs
 import datetime
-
+time_correct = 2
 
 # запуск рестарта камер
 @cellery_app.on_after_configure.connect
@@ -42,7 +42,7 @@ def setup_periodic_tasks(sender, **kwargs):
 def setup_periodic_tasks_weather(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute=2, hour=1),
+            crontab(minute=2, hour=1-time_correct),
             weather_task.s(),
             name='Weather_task')
     except SoftTimeLimitExceeded as err:
@@ -92,7 +92,7 @@ def setup_periodic_task_1_hour(sender, **kwargs):
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_22_hour(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(minute=0, hour=20),
+        crontab(minute=17, hour=22-time_correct),
         bot_task_11_hour.s(),
         name='bot_task_11_hour')
 
@@ -102,7 +102,7 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 # def setup_periodic_task_watering_analiz(sender, **kwargs):
 #     """анализ необходимости полива"""
 #     sender.add_periodic_task(
-#         crontab(minute=3, hour=6),  # +3
+#         crontab(minute=3, hour=6-time_correct),  # +3
 #         bot_task_watering_analiz.s(),
 #         name='periodic_task_watering_analiz')
 #
@@ -111,7 +111,7 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 # def setup_periodic_task_watering_start_if_need(sender, **kwargs):
 #     """включеие полива по рассписанию"""
 #     sender.add_periodic_task(
-#         crontab(minute=11, hour=24-3),
+#         crontab(minute=11, hour=24-time_correct),
 #         poliv.s(),
 #         name='task_watering_start_if_need')
 
@@ -123,7 +123,7 @@ def setup_periodic_tasks_on_lights(sender, **kwargs):
     try:
         sender.add_periodic_task(
             crontab(minute=1,
-                    hour=18-3),
+                    hour=18-time_correct),
             lights_on.s(),
             name='lights_on')
     except SoftTimeLimitExceeded as err:
@@ -137,7 +137,7 @@ def setup_periodic_tasks_off_lights(sender, **kwargs):
     try:
         sender.add_periodic_task(
             crontab(minute=4,
-                    hour=22-3),
+                    hour=22-time_correct),
             lights_off.s(),
             name='lights_off')
     except SoftTimeLimitExceeded as err:
