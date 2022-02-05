@@ -6,20 +6,28 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_logs_status'),
+        ("core", "0002_logs_status"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Message',
+            name="Message",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_message', models.DateTimeField()),
-                ('controller_name', models.CharField(max_length=40, unique=True)),
-                ('label', models.CharField(max_length=100, null=True)),
-                ('value_int', models.IntegerField(null=True)),
-                ('value_float', models.FloatField(null=True)),
-                ('state', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_message", models.DateTimeField()),
+                ("controller_name", models.CharField(max_length=40, unique=True)),
+                ("label", models.CharField(max_length=100, null=True)),
+                ("value_int", models.IntegerField(null=True)),
+                ("value_float", models.FloatField(null=True)),
+                ("state", models.BooleanField(default=False)),
             ],
         ),
     ]

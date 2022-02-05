@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('english', '0009_words_control'),
+        ("english", "0009_words_control"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='words',
-            name='control_list',
-            field=models.CharField(default='', max_length=256),
+            model_name="words",
+            name="control_list",
+            field=models.CharField(default="", max_length=256),
         ),
         migrations.AddField(
-            model_name='words',
-            name='heavy_list',
-            field=models.CharField(default='', max_length=256),
+            model_name="words",
+            name="heavy_list",
+            field=models.CharField(default="", max_length=256),
         ),
         migrations.AddField(
-            model_name='words',
-            name='learned_list',
-            field=models.CharField(default='', max_length=256),
+            model_name="words",
+            name="learned_list",
+            field=models.CharField(default="", max_length=256),
         ),
     ]

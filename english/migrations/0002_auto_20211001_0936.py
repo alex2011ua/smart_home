@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('english', '0001_initial'),
+        ("english", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='words',
-            name='irregular_verbs',
+            model_name="words",
+            name="irregular_verbs",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='words',
-            name='phrasal_verbs',
+            model_name="words",
+            name="phrasal_verbs",
             field=models.BooleanField(default=False),
         ),
     ]

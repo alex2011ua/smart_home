@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('english', '0004_wordparams_control_state'),
+        ("english", "0004_wordparams_control_state"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='wordparams',
-            name='level_1',
+            model_name="wordparams",
+            name="level_1",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='wordparams',
-            name='level_2',
+            model_name="wordparams",
+            name="level_2",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='wordparams',
-            name='level_3',
+            model_name="wordparams",
+            name="level_3",
             field=models.BooleanField(default=False),
         ),
     ]

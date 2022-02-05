@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0008_auto_20210602_1548'),
+        ("core", "0008_auto_20210602_1548"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='params',
-            name='max_temp_teplica',
+            model_name="params",
+            name="max_temp_teplica",
             field=models.IntegerField(null=True),
         ),
         migrations.AddField(
-            model_name='params',
-            name='min_temp_teplica',
+            model_name="params",
+            name="min_temp_teplica",
             field=models.IntegerField(null=True),
         ),
     ]

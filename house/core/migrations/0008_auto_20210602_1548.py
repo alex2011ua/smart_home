@@ -6,26 +6,34 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0007_auto_20210422_1307'),
+        ("core", "0007_auto_20210422_1307"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Params',
+            name="Params",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_t_h', models.DateTimeField()),
-                ('poliv', models.IntegerField(null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_t_h", models.DateTimeField()),
+                ("poliv", models.IntegerField(null=True)),
             ],
         ),
         migrations.AddField(
-            model_name='dht_mq',
-            name='ackData',
+            model_name="dht_mq",
+            name="ackData",
             field=models.CharField(max_length=50, null=True),
         ),
         migrations.AddField(
-            model_name='dht_mq',
-            name='myData',
+            model_name="dht_mq",
+            name="myData",
             field=models.CharField(max_length=50, null=True),
         ),
     ]

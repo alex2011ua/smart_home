@@ -1,6 +1,7 @@
-import time as t
-import smbus
 import sys
+import time as t
+
+import smbus
 
 DEVICE_BUS = 1
 DEVICE_ADDR = 0x10

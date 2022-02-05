@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0009_auto_20210604_1729'),
+        ("core", "0009_auto_20210604_1729"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='params',
-            name='download',
+            model_name="params",
+            name="download",
             field=models.FloatField(null=True),
         ),
         migrations.AddField(
-            model_name='params',
-            name='ping',
+            model_name="params",
+            name="ping",
             field=models.FloatField(null=True),
         ),
         migrations.AddField(
-            model_name='params',
-            name='upload',
+            model_name="params",
+            name="upload",
             field=models.FloatField(null=True),
         ),
     ]

@@ -6,19 +6,27 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0003_message'),
+        ("core", "0003_message"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Christmas',
+            name="Christmas",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_state', models.DateTimeField()),
-                ('general', models.BooleanField(default=False)),
-                ('first_line', models.BooleanField(default=False)),
-                ('second_line', models.BooleanField(default=False)),
-                ('third_line', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_state", models.DateTimeField()),
+                ("general", models.BooleanField(default=False)),
+                ("first_line", models.BooleanField(default=False)),
+                ("second_line", models.BooleanField(default=False)),
+                ("third_line", models.BooleanField(default=False)),
             ],
         ),
     ]

@@ -6,33 +6,33 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0006_auto_20201204_1027'),
+        ("core", "0006_auto_20201204_1027"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='dht_mq',
-            name='temp_room',
+            model_name="dht_mq",
+            name="temp_room",
             field=models.FloatField(null=True),
         ),
         migrations.AlterField(
-            model_name='weather',
-            name='rain',
+            model_name="weather",
+            name="rain",
             field=models.FloatField(default=0),
         ),
         migrations.AlterField(
-            model_name='weather',
-            name='snow',
+            model_name="weather",
+            name="snow",
             field=models.FloatField(default=0),
         ),
         migrations.AlterField(
-            model_name='weather',
-            name='temp_max',
+            model_name="weather",
+            name="temp_max",
             field=models.FloatField(default=0),
         ),
         migrations.AlterField(
-            model_name='weather',
-            name='temp_min',
+            model_name="weather",
+            name="temp_min",
             field=models.FloatField(default=0),
         ),
     ]

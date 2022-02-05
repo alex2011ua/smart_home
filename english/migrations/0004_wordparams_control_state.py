@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('english', '0003_auto_20211001_1003'),
+        ("english", "0003_auto_20211001_1003"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='wordparams',
-            name='control_state',
+            model_name="wordparams",
+            name="control_state",
             field=models.BooleanField(default=False),
         ),
     ]

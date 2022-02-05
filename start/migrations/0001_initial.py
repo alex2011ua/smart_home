@@ -7,22 +7,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Avto',
+            name="Avto",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date_message', models.DateTimeField()),
-                ('autoId', models.CharField(max_length=40, unique=True)),
-                ('raceInt', models.IntegerField(null=True)),
-                ('value_int', models.IntegerField(null=True)),
-                ('year', models.IntegerField(null=True)),
-                ('markName', models.CharField(max_length=40)),
-                ('modelName', models.CharField(max_length=40)),
-                ('linkToView', models.CharField(max_length=140)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date_message", models.DateTimeField()),
+                ("autoId", models.CharField(max_length=40, unique=True)),
+                ("raceInt", models.IntegerField(null=True)),
+                ("value_int", models.IntegerField(null=True)),
+                ("year", models.IntegerField(null=True)),
+                ("markName", models.CharField(max_length=40)),
+                ("modelName", models.CharField(max_length=40)),
+                ("linkToView", models.CharField(max_length=140)),
             ],
         ),
     ]

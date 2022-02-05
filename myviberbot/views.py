@@ -1,16 +1,19 @@
+import json
+
 from django.shortcuts import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+
 from house.core.Telegram import bot
-import json
+
 from .viber_bot import send_viber
 
 
 @csrf_exempt
 def trx_bot(request):
     try:
-        json_answer = json.loads(request.body.decode('utf-8'))
-        if json_answer['event'] == 'message':
-            message = json_answer['message']['text']
+        json_answer = json.loads(request.body.decode("utf-8"))
+        if json_answer["event"] == "message":
+            message = json_answer["message"]["text"]
             bot.send_message(message)
             send_viber(message)
             return HttpResponse(status=200)
@@ -18,8 +21,6 @@ def trx_bot(request):
             return HttpResponse(status=200)
     except Exception as err:
         bot.send_message(err)
-
-
 
 
 """

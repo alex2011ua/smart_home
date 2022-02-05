@@ -57,6 +57,7 @@ class DHT_MQ(models.Model):
     muve_kitchen = models.IntegerField(null=True)
     myData = models.CharField(max_length=50, null=True)
     ackData = models.CharField(max_length=50, null=True)
+
     def __str__(self):
         return str(self.date_t_h)
 
