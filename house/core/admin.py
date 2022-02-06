@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from english.models import Words
 
-from .models import DHT_MQ, Logs, Params, Setting, Weather
+from .models import DHT_MQ, Logs, Params, Setting, Weather, Avto
 
 
 @admin.register(DHT_MQ)
@@ -75,3 +75,7 @@ class ParamsAdmin(admin.ModelAdmin):
         "min_temp_teplica",
         "max_temp_teplica",
     )
+
+@admin.register(Avto)
+class AvtoAdmin(admin.ModelAdmin):
+    list_display = ("pk", "car_id", "link_car")
