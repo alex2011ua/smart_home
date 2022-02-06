@@ -26,13 +26,13 @@ def get_list_car(params):
         "api_key": apy_key,
         "category_id": 1,
         "s_yers": [2016],
-        "po_yers": [2018],
-        "price_ot": 10000,
-        "price_do": 10500,
+        "po_yers": [2017],
+        "price_ot": 11000,
+        "price_do": 13500,
         "type": [
-            1,  # бенз
+            # 1,  # бенз
             # 2,  # дизель
-            4,  # газ
+            # 4,  # газ
             6,  # электро
         ],
         "gearbox": [

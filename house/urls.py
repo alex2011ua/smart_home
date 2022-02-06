@@ -15,8 +15,18 @@ import os
 from django.contrib import admin
 from django.urls import include, path, re_path
 
-from house.core.views import (Alarms, Boiler, ControllerView, Info, Light,
-                              Printer, Rele, ResetArduino, RestartCam, Temp)
+from house.core.views import (
+    Alarms,
+    Boiler,
+    ControllerView,
+    Info,
+    Light,
+    Printer,
+    Rele,
+    ResetArduino,
+    RestartCam,
+    Temp,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -33,4 +43,5 @@ urlpatterns = [
     path("alarms/", Alarms.as_view(), name="alarms"),
     path("solnce/", include("house.core.solnce_urls")),
     path("info/", Info.as_view(), name="info"),
+
 ]

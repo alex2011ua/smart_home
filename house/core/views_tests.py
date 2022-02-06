@@ -10,6 +10,7 @@ from .analiz import button_analiz
 from .mail import send_test_mail
 from .main_arduino import read_ser, sound, testing
 from .models import Logs, Params
+from .tasks import report_10_am
 from .Telegram import bot
 
 DEBUG = settings.PLACE
@@ -169,3 +170,9 @@ def string_to_bot(request):
     rp = {"data": dic_param}
     rp["status"] = 200
     return JsonResponse(rp)
+
+class CheckAvtoView(View):
+    @staticmethod
+    def get(request):
+        report_10_am()
+        return redirect(reverse_lazy("form"))

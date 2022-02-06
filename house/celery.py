@@ -18,10 +18,19 @@ import datetime
 
 from celery.exceptions import SoftTimeLimitExceeded
 
-from house.core.tasks import (arduino_task, bot_task, bot_task_1_hour,
-                              bot_task_11_hour, bot_task_watering_analiz,
-                              lights_off, lights_on, poliv, restart_cam_task,
-                              weather_task)
+from house.core.tasks import (
+    arduino_task,
+    bot_task,
+    bot_task_1_hour,
+    bot_task_11_hour,
+    bot_task_watering_analiz,
+    lights_off,
+    lights_on,
+    poliv,
+    report_10_am,
+    restart_cam_task,
+    weather_task,
+)
 
 from .core.models import Logs
 
@@ -145,6 +154,20 @@ def setup_periodic_tasks_off_lights(sender, **kwargs):
     try:
         sender.add_periodic_task(
             crontab(minute=4, hour=22 - time_correct), lights_off.s(), name="lights_off"
+        )
+    except SoftTimeLimitExceeded as err:
+        Logs.objects.create(
+            date_log=datetime.datetime.now(),
+            title_log="Celery",
+            description_log=f"{err}- превышен лимит времени",
+        )
+
+#  ВЫключение иллюминации по рассписанию
+@cellery_app.on_after_configure.connect
+def setup_periodic_tasks_report_on_10(sender, **kwargs):
+    try:
+        sender.add_periodic_task(
+            crontab(minute=4, hour=10 - time_correct), report_10_am.s(), name="report_10_am"
         )
     except SoftTimeLimitExceeded as err:
         Logs.objects.create(

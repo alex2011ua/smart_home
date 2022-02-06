@@ -1,7 +1,6 @@
 from django.conf.urls import url
 
-from .poliv_view import (V24, Poliv, ch_value_time, poliv_on_of, pshik,
-                         zapusk_poliva)
+from .poliv_view import V24, Poliv, ch_value_time, poliv_on_of, pshik, zapusk_poliva
 
 urlpatterns = [
     url(r"index/$", Poliv.as_view(), name="poliv_index"),

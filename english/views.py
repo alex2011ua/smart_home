@@ -1,14 +1,12 @@
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        PermissionRequiredMixin)
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 
-from .form import (CompareWordForm, LoadWordForm, LoadWordsForm,
-                   SearchWordForm, WordsParamForm)
+from .form import CompareWordForm, LoadWordForm, LoadWordsForm, SearchWordForm, WordsParamForm
 from .models import WordParams, Words
 
 

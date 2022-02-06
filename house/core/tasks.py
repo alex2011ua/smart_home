@@ -11,16 +11,22 @@ from django.db.utils import IntegrityError
 
 from myviberbot.viber_bot import send_viber
 
-from ..celery import cellery_app
 from .analiz import button_analiz, gaz_analiz, temp_alert
+from .avto_leaf import check, get_avto
 from .is_dayoff import DayOff
-from .main_arduino import (arduino_poliv, arduino_restart_5v,
-                           get_arduino_answer, rele_light_balkon,
-                           rele_light_perim, rele_light_tree)
-from .models import DHT_MQ, Logs, Params, Setting, Weather
+from .main_arduino import (
+    arduino_poliv,
+    arduino_restart_5v,
+    get_arduino_answer,
+    rele_light_balkon,
+    rele_light_perim,
+    rele_light_tree,
+)
+from .models import DHT_MQ, Avto, Logs, Params, Setting, Weather
 from .raspberry import boiler_off, boiler_on, button, restart_cam
 from .Telegram import bot
 from .weather_rain import rain_yesterday, weather_6_day
+from ..celery import cellery_app
 
 logger = logging.getLogger("django")
 DEBUG = settings.PLACE
@@ -400,3 +406,26 @@ def lights_off():
         rele_light_perim(0)
         rele.value = 0
         rele.save()
+
+@cellery_app.task()
+def report_10_am():
+    """check new car"""
+    list_all_cars = check()
+    list_new_car = []
+    for car in list_all_cars:
+        try:
+            Avto.objects.get(car_id=int(car))
+        except ObjectDoesNotExist:
+            Avto.objects.create(car_id=car)
+            list_new_car.append(int(car))
+
+    for new_car in list_new_car:
+        link = "https://auto.ria.com/uk" + get_avto(new_car)['linkToView']
+        bot.send_message(link)
+        avto = Avto.objects.get(car_id=new_car)
+        avto.link_car = link
+        avto.save()
+
+
+
+

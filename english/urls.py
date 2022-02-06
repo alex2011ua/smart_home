@@ -1,9 +1,21 @@
 from django.urls import path
 
 from english.view_game import GenrundGame
-from english.views import (E_R, R_E, CompareWords, SearchWord, Settings,
-                           clear_control, clear_learned, index, list_words,
-                           mod, test, word_delete, word_update)
+from english.views import (
+    E_R,
+    R_E,
+    CompareWords,
+    SearchWord,
+    Settings,
+    clear_control,
+    clear_learned,
+    index,
+    list_words,
+    mod,
+    test,
+    word_delete,
+    word_update,
+)
 
 app_name = "english"
 urlpatterns = [

@@ -2,16 +2,14 @@ import datetime
 import logging
 
 from django.conf import settings
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        PermissionRequiredMixin)
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 
 from house.core.tasks import arduino_task, restart_cam_task, weather_task
 
-from .main_arduino import (rele_light_balkon, rele_light_perim,
-                           rele_light_tree, reset)
+from .main_arduino import rele_light_balkon, rele_light_perim, rele_light_tree, reset
 from .models import DHT_MQ, Logs, Setting, Weather
 from .raspberry import button, printer_off, printer_on, raspberry
 from .tasks import boiler_task_off, boiler_task_on, bot_task_11_hour
