@@ -45,11 +45,7 @@ def try_read_data(channel=0):
         while radio.available():
             len = radio.getDynamicPayloadSize()
             receive_payload = radio.read(len)
-            print(
-                'Got payload size={} value="{}"'.format(
-                    len, receive_payload.decode("utf-8")
-                )
-            )
+            print('Got payload size={} value="{}"'.format(len, receive_payload.decode("utf-8")))
             # First, stop listening so we can talk
             radio.stopListening()
 
@@ -79,9 +75,7 @@ radio.printDetails()
 print(" ************ Role Setup *********** ")
 while (inp_role != "0") and (inp_role != "1"):
     inp_role = str(
-        input(
-            "Choose a role: Enter 0 for receiver, 1 for transmitter (CTRL+C to exit) "
-        )
+        input("Choose a role: Enter 0 for receiver, 1 for transmitter (CTRL+C to exit) ")
     )
 
 if inp_role == "0":
@@ -131,11 +125,7 @@ while 1:
             receive_payload = radio.read(len)
 
             # Spew it
-            print(
-                'got response size={} value="{}"'.format(
-                    len, receive_payload.decode("utf-8")
-                )
-            )
+            print('got response size={} value="{}"'.format(len, receive_payload.decode("utf-8")))
 
         # Update size for next time.
         next_payload_size += payload_size_increments_by

@@ -14,6 +14,6 @@ while True:
             t.sleep(1)
             bus.write_byte_data(DEVICE_ADDR, i, 0x00)
             t.sleep(1)
-    except KeyboardInterrupt as e:
+    except KeyboardInterrupt:
         print("Quit the Loop")
         sys.exit()

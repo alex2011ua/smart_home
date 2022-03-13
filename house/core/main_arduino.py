@@ -56,9 +56,7 @@ def parse_arduino_answer(read_arduino, context):
             context["control_error"] = errors
         param = param.replace("'", '"')
     except Exception as err:
-        context["status"].append(
-            '{}, parce Arduino answer:"{}"'.format(str(err), read_arduino)
-        )
+        context["status"].append('{}, parce Arduino answer:"{}"'.format(str(err), read_arduino))
         return context
     try:
         json_answer = json.loads(param)

@@ -4,7 +4,6 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from english.models import WordParams
-from house.core.Telegram import bot
 from house.settings import api_key_tmdb
 
 from .registration_form import UserRegistrationForm
@@ -13,7 +12,6 @@ from .registration_form import UserRegistrationForm
 class IndexView(View):
     @staticmethod
     def get(request):
-
         context = {
             "s_yers": [2016],
             "po_yers": [2018],

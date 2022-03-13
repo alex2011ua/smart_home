@@ -22,6 +22,5 @@ urlpatterns = [
     url(r"task/$", Bot_task_view.as_view(), name="task"),
     url(r"ping/$", PingTaskView.as_view(), name="ping"),
     url(r"avto/$", CheckAvtoView.as_view(), name="avto"),
-
     url(r"string_arduino_to_bot/$", string_to_bot, name="string_arduino_to_bot"),
 ]

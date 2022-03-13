@@ -69,8 +69,7 @@ def weather_task():
             date_log=datetime.now(),
             status="Error",
             title_log="Task weather_task",
-            description_log="Ошибка openweathermap.org Exeption изменилось API"
-            + str(err),
+            description_log="Ошибка openweathermap.org Exeption изменилось API" + str(err),
         )
         return None
     if six_day["status_code"] != 200 or yesterday["status_code"] != 200:
@@ -291,9 +290,7 @@ def bot_task_1_hour():
         ping = st.results.ping
         if download < 5 or upload < 5 or ping > 100:
             bot.send_message(f"download:{download}, upload: {upload}, ping: {ping}")
-    Params.objects.create(
-        ping=ping, download=download, upload=upload, date_t_h=datetime.now()
-    )
+    Params.objects.create(ping=ping, download=download, upload=upload, date_t_h=datetime.now())
 
     print("Stop bot_task_1_hour")
 
@@ -370,9 +367,7 @@ def poliv(force=None):
     if poliv.label == "включен" or force:
         Params.objects.create(poliv=poliv.value, date_t_h=datetime.now())
         arduino_poliv(poliv.value)
-        bot.send_message(
-            f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else ""
-        )
+        bot.send_message(f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else "")
 
 
 @cellery_app.task()
@@ -382,9 +377,7 @@ def pshik(force=None):
     if poliv.label == "включен" or force:
         Params.objects.create(poliv=pshik.value, date_t_h=datetime.now())
         arduino_poliv(poliv.value)
-        bot.send_message(
-            f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else ""
-        )
+        bot.send_message(f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else "")
 
 
 @cellery_app.task()
@@ -407,6 +400,7 @@ def lights_off():
         rele.value = 0
         rele.save()
 
+
 @cellery_app.task()
 def report_10_am():
     """check new car"""
@@ -420,12 +414,8 @@ def report_10_am():
             list_new_car.append(int(car))
 
     for new_car in list_new_car:
-        link = "https://auto.ria.com/uk" + get_avto(new_car)['linkToView']
+        link = "https://auto.ria.com/uk" + get_avto(new_car)["linkToView"]
         bot.send_message(link)
         avto = Avto.objects.get(car_id=new_car)
         avto.link_car = link
         avto.save()
-
-
-
-

@@ -1,18 +1,10 @@
-import json
-from datetime import date
-
-import pytest
-from django.conf import settings
-
 from .main_arduino import get_arduino_answer, testing
 from .tasks import arduino_task
 
 
 class TestArduino:
     def test_arduino(self, db):
-
         assert testing() == {"status": ["Test-OK"]}
-
         assert arduino_task() is None
         print(get_arduino_answer())
         assert get_arduino_answer() == {

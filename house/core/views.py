@@ -130,9 +130,9 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
         # Извлечение логов с ошибками из БД за последний день
         date_now = datetime.date.today()
         result_date = date_now - datetime.timedelta(days=1)
-        logs = Logs.objects.filter(status="Error", date_log__gte=result_date).order_by(
-            "-date_log"
-        )[0:5]
+        logs = Logs.objects.filter(status="Error", date_log__gte=result_date).order_by("-date_log")[
+            0:5
+        ]
         context["logs"] = logs
 
         return render(request, "core/control.html", context)

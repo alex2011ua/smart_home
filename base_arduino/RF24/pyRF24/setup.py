@@ -40,8 +40,6 @@ else:
 process_configparams()
 crossunixccompiler.register()
 
-module_RF24 = setuptools.Extension(
-    "RF24", libraries=["rf24", BOOST_LIB], sources=["pyRF24.cpp"]
-)
+module_RF24 = setuptools.Extension("RF24", libraries=["rf24", BOOST_LIB], sources=["pyRF24.cpp"])
 
 setuptools.setup(name="RF24", version=version, ext_modules=[module_RF24])

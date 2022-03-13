@@ -55,12 +55,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Installed apps
+    "crispy_forms",
+    "rest_framework",
+    # Custom apps
     "house.core",
     "start",
     "myviberbot",
     "selection_avto",
     "english",
-    "crispy_forms",
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 MIDDLEWARE = [
@@ -92,6 +95,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "house.wsgi.application"
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
+    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    # "PAGE_SIZE": 10,
+}
 
 
 # Database

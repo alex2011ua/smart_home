@@ -72,9 +72,7 @@ def setup_periodic_tasks_weather(sender, **kwargs):
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_arduino(sender, **kwargs):
     try:
-        sender.add_periodic_task(
-            crontab(minute="*/15"), arduino_task.s(), name="arduino_task"
-        )
+        sender.add_periodic_task(crontab(minute="*/15"), arduino_task.s(), name="arduino_task")
     except SoftTimeLimitExceeded as err:
         Logs.objects.create(
             date_log=datetime.datetime.now(),
@@ -99,9 +97,7 @@ def setup_periodic_task_bot(sender, **kwargs):
 # ежечасный мониторинг температуры теплицы
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_1_hour(sender, **kwargs):
-    sender.add_periodic_task(
-        crontab(minute=6), bot_task_1_hour.s(), name="bot_task_hour"
-    )
+    sender.add_periodic_task(crontab(minute=6), bot_task_1_hour.s(), name="bot_task_hour")
 
 
 # мониторинг включенной илюминации
@@ -161,6 +157,7 @@ def setup_periodic_tasks_off_lights(sender, **kwargs):
             title_log="Celery",
             description_log=f"{err}- превышен лимит времени",
         )
+
 
 #  ВЫключение иллюминации по рассписанию
 @cellery_app.on_after_configure.connect
