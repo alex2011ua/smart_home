@@ -39,7 +39,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
       <span class="navbar-brand navbar-toggler ">
-        <a class="navbar-brand" href="{% url 'english:r_e' %}">Russian<span class="sr-only">(current)</span></a>
+        <a class="navbar-brand" href="{% url 'english:repeat' %}">Repeat<span class="sr-only">(current)</span></a>
       </span>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent" >
@@ -58,7 +58,8 @@
       </li>
         <li class="nav-item {% if request.path == "/english/game/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:game' %}">Game<span class="sr-only">(current)</span></a>
-      </li><li class="nav-item {% if request.path == "/english/repeet/" %} active {% endif %}">
+
+      </li><li class="nav-item {% if request.path == "/english/repeat/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:repeat' %}">Repeat<span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item {% if request.path == '/english/compare/' %} active {% endif %}">
@@ -80,7 +81,7 @@
 
       <input class="form-control mr-sm-2" type="text" name="word" required="" id="id_word">
 <!--      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
-    </form>cont
+    </form>
   </div>
 </nav>
 

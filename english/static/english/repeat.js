@@ -67,7 +67,7 @@ function start() {
     let to_del = random_word;
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
         console.log('верно - удаляю');
-        answer.innerText = random_word.english + " - " + inp;
+        answer.innerText = random_word.english + " - " + random_word.russian;
         if (random_word.repeat_learn >= 1) {
             $.ajax({
                 url: '/english/api/word/' + random_word.id + "/",
@@ -126,7 +126,7 @@ function start() {
         document.getElementById("vvod").value = '';
         console.log("не верно");
         answer.style.display = 'block'
-        answer.innerText = random_word.english + " - " + word;
+        answer.innerText = random_word.english + " - " + random_word.russian;
         ok.style.display = 'block'
         ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
