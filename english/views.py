@@ -431,8 +431,6 @@ class Repeat(View):
                 word.repeat_in_progress = True
                 word.save()
             load_words = Words.objects.filter(repeat_in_progress=True)
-
-        params = {"count": len(load_words)}
         return render(request, "english/repeat.html", {"count": len(load_words)})
 
     @staticmethod

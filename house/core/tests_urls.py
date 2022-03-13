@@ -12,7 +12,7 @@ from house.core.views_tests import (
     string_to_bot,
 )
 
-from . import test_views
+
 
 urlpatterns = [
     url(r"test/$", Test.as_view(), name="test"),

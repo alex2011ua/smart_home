@@ -11,7 +11,7 @@ class WordsAdmin(admin.ModelAdmin):
 
 
 @admin.register(WordParams)
-class WordParamsAdmin(admin.ModelAdmin):
+class WordsAdmin(admin.ModelAdmin):
     list_display = (
         "user",
         "learned",
