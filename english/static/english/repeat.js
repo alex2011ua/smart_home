@@ -67,7 +67,7 @@ function start() {
     let to_del = random_word;
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
         console.log('верно - удаляю');
-        answer.innerText = random_word.english + " - " + word;
+        answer.innerText = random_word.english + " - " + inp;
         if (random_word.repeat_learn >= 1) {
             $.ajax({
                 url: '/english/api/word/' + random_word.id + "/",
