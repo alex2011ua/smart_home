@@ -50,7 +50,7 @@ russian: "невеста"
 let random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
 
 var dellete_word_button = document.getElementById('dellete_word'); // кнопка для удаления слова
-var learned = document.getElementById('learned'); // кнопка для выученого слова
+
 var count_words = document.getElementById("count_is");    // счетчик слов
 var submit_button = document.getElementById("submit_button");    // счетчик слов
 var vvod = document.getElementById("vvod");    // счетчик слов
@@ -68,7 +68,7 @@ function start() {
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
         console.log('верно - удаляю');
         answer.innerText = random_word.english + " - " + word;
-        if (random_word.repeat_learn > 1) {
+        if (random_word.repeat_learn >= 1) {
             $.ajax({
                 url: '/english/api/word/' + random_word.id + "/",
                 method: 'PATCH',
@@ -82,6 +82,21 @@ function start() {
                 },
             });
         }
+        else{
+            $.ajax({
+                url: '/english/api/word/' + random_word.id + "/",
+                method: 'PATCH',
+                data: {'repeat_in_progress': true},
+                success: function (text) {
+                    console.log(text)
+                },
+                error: function (text) {
+                    console.log(text);
+                    alert(text);
+                },
+            });
+        }
+
         var word_index = words_obj.indexOf(random_word);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
@@ -120,84 +135,12 @@ function start() {
     }
 
     dellete_word_button.onclick = function () {
-        delete words_obj[to_del];
-        words_list = Object.keys(words_obj);
-
+        var word_index = words_obj.indexOf(to_del);
+        if (word_index !== -1) {
+            words_obj.splice(word_index, 1);
+        }
         console.log('Хоть и не верно  - удаляю');
         dellete_word_button.style.display = 'none';
-
-    }
-
-    function learnedFunc() {
-        console.log(to_del);
-        let data = {'learned': to_del};
-        if (control_state === true) {
-            data['control'] = to_del;
-        }
-        $.ajax({
-            url: 'mod/',
-            method: 'GET',
-            data: data,
-            success: function (text) {
-                console.log('__ok__');
-            },
-            error: function (text) {
-                console.log('__error__');
-                console.log(text);
-                alert('error');
-            },
-        });
-    }
-
-    function control() {
-        console.log(to_del);
-        $.ajax({
-            url: 'mod/',
-            method: 'GET',
-            data: {'control': to_del},
-            success: function (text) {
-                console.log('control ok' + to_del)
-            },
-            error: function (text) {
-                console.log(text);
-                alert(text);
-            },
-        });
-    }
-
-    learned.onclick = learnedFunc;
-
-    heavy.onclick = function () {
-        console.log(to_del);
-        $.ajax({
-            url: 'mod/',
-            method: 'GET',
-            data: {'heavy': to_del},
-            success: function (text) {
-                console.log('__ok__');
-            },
-            error: function (text) {
-                console.log('__error__');
-                console.log(text);
-                alert('error');
-            },
-        });
-    }
-        not_heavy.onclick = function () {
-        console.log(to_del);
-        $.ajax({
-            url: 'mod/',
-            method: 'GET',
-            data: {'not_heavy': to_del},
-            success: function (text) {
-                console.log('__ok__');
-            },
-            error: function (text) {
-                console.log('__error__');
-                console.log(text);
-                alert('error');
-            },
-        });
     }
     random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
     document.getElementById("word").innerHTML = random_word.russian;

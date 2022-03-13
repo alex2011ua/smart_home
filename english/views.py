@@ -423,24 +423,4 @@ class Repeat(View):
 
     @staticmethod
     def get(request):
-        load_words = Words.objects.filter(repeat_in_progress=True)
-        count = 20 - len(load_words)
-        if count > 0:
-            add_words = Words.objects.all().order_by("?")[0:count]
-            for word in add_words:
-                word.repeat_in_progress = True
-                word.save()
-            load_words = Words.objects.filter(repeat_in_progress=True)
-        return render(request, "english/repeat.html", {"count": len(load_words)})
-
-    @staticmethod
-    def post(request):
-        all = Words.objects.filter(repeat_in_progress=True)
-
-        context = {}
-        for item in all:
-            try:
-                context[item.english] = item.russian
-            except Exception:
-                print("error")
-        return JsonResponse(context)
+        return render(request, "english/repeat.html", {"count": 20})
