@@ -135,6 +135,35 @@ function start() {
     }
 
     dellete_word_button.onclick = function () {
+
+        if (random_word.repeat_learn >= 1) {
+            $.ajax({
+                url: '/english/api/word/' + to_del.id + "/",
+                method: 'PATCH',
+                data: {'repeat_learn': to_del.repeat_learn-1},
+                success: function (text) {
+                    console.log(text)
+                },
+                error: function (text) {
+                    console.log(text);
+                    alert(text);
+                },
+            });
+        }
+        else{
+            $.ajax({
+                url: '/english/api/word/' + to_del.id + "/",
+                method: 'PATCH',
+                data: {'repeat_in_progress': true},
+                success: function (text) {
+                    console.log(text)
+                },
+                error: function (text) {
+                    console.log(text);
+                    alert(text);
+                },
+            });
+        }
         var word_index = words_obj.indexOf(to_del);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
