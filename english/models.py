@@ -23,9 +23,9 @@ class Words(models.Model):
     phrasal_verbs = models.BooleanField(default=False, verbose_name="exam")
     irregular_verbs = models.BooleanField(default=False)
 
-    learned_list = models.ManyToManyField(User, related_name="user_learned")
-    heavy_list = models.ManyToManyField(User, related_name="user_heavy")
-    control_list = models.ManyToManyField(User, related_name="user_control")
+    learned_list = models.ManyToManyField(User, related_name="user_learned", blank=True)
+    heavy_list = models.ManyToManyField(User, related_name="user_heavy", blank=True)
+    control_list = models.ManyToManyField(User, related_name="user_control", blank=True)
 
     info = models.CharField(max_length=128, blank=True)
 
