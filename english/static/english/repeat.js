@@ -164,14 +164,21 @@ function start() {
                 },
             });
         }
-        var word_index = words_obj.indexOf(to_del);
-        if (word_index !== -1) {
-            words_obj.splice(word_index, 1);
+        var word_index_to_dell = words_obj.indexOf(to_del);
+        if (word_index_to_dell !== -1) {
+            words_obj.splice(word_index_to_dell, 1);
         }
         console.log('Хоть и не верно  - удаляю');
         dellete_word_button.style.display = 'none';
+        count_words.innerHTML = words_obj.length;
     }
+    console.log('words_obj.length-', words_obj.length)
+
+
     random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
+    if (random_word == undefined){
+        alert("Слова закончились, отдохни!!!");
+    }
     document.getElementById("word").innerHTML = random_word.russian;
     count_words.innerHTML = words_obj.length;
 }
