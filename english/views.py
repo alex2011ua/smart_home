@@ -423,4 +423,21 @@ class Repeat(View):
 
     @staticmethod
     def get(request):
-        return render(request, "english/repeat.html", {"count": 20})
+        count_all = Words.objects.all().count() - 183
+        count_learn = Words.objects.filter(repeat_in_progress=True).count() - 183
+        count_5 = Words.objects.filter(repeat_in_progress=False, repeat_learn__gt=4).count()
+        count_4 = Words.objects.filter(repeat_in_progress=False, repeat_learn=4).count()
+        count_3 = Words.objects.filter(repeat_in_progress=False, repeat_learn=3).count()
+        count_2 = Words.objects.filter(repeat_in_progress=False, repeat_learn=2).count()
+        count_1 = Words.objects.filter(repeat_in_progress=False, repeat_learn=1).count()
+
+        return render(request, "english/repeat.html", {
+            "count": 20,
+            "count_all": count_all,
+            "count_learn": count_learn,
+            "count_5": count_5,
+            "count_4": count_4,
+            "count_3": count_3,
+            "count_2": count_2,
+            "count_1": count_1,
+        })

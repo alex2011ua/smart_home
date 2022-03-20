@@ -97,7 +97,7 @@ function start() {
             });
         }
 
-        var word_index = words_obj.indexOf(random_word);
+        let word_index = words_obj.indexOf(random_word);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
         }
