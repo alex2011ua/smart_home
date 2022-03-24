@@ -11,4 +11,4 @@ class WordRUD(generics.RetrieveUpdateDestroyAPIView):
 
 class WordListCreateView(generics.CreateAPIView, generics.ListAPIView):
     serializer_class = WordsSerializer
-    queryset = Words.objects.filter(repeat_in_progress=False).order_by("-repeat_learn", "?")[0:20]
+    queryset = Words.objects.filter(repeat_in_progress=False).order_by("-repeat_learn", "?")[0:50]

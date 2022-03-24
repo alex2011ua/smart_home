@@ -423,7 +423,7 @@ class Repeat(View):
 
     @staticmethod
     def get(request):
-        count_all = Words.objects.all().count() - 183
+        count_all = Words.objects.all().count() - 183  # count game words
         count_learn = Words.objects.filter(repeat_in_progress=True).count() - 183
         count_5 = Words.objects.filter(repeat_in_progress=False, repeat_learn__gt=4).count()
         count_4 = Words.objects.filter(repeat_in_progress=False, repeat_learn=4).count()
