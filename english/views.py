@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
@@ -82,6 +81,8 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
                 phrasal_verbs = True
             file_ = request.FILES.get("file").read()
             content = file_.decode("utf-8").split("\r\n")
+            if len(content) < 2:  # git modify text file and delete \r
+                content = file_.decode("utf-8").split("\n")
             for item in content:
                 try:
                     item = item.replace("’", "'")
@@ -105,9 +106,7 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
                         if word.english != english:
                             russian = russian + " (" + str(lesson) + ")"
                     try:
-                        Words.objects.get(
-                            english=english, russian=russian, lesson=lesson
-                        )
+                        Words.objects.get(english=english, russian=russian, lesson=lesson)
                     except ObjectDoesNotExist:
                         Words.objects.create(
                             english=english,
@@ -166,9 +165,7 @@ def test(request):
             i.add_control(request.user.id)
 
     return render(request, "english/back.html")
-    words_l2 = Words.objects.filter(
-        lesson__in=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-    )
+    words_l2 = Words.objects.filter(lesson__in=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
     for word in words_l2:
         english = word.english
         russian = word.russian
@@ -192,9 +189,7 @@ def list_words(request):
     """
     if request.method == "GET":
         all = WordParams.get_words(request.user.id)
-        return render(
-            request, "english/list_words.html", {"words": all, "count": len(all)}
-        )
+        return render(request, "english/list_words.html", {"words": all, "count": len(all)})
 
 
 @login_required()
@@ -419,3 +414,30 @@ class CompareWords(View):
                 "second_word": second_word,
             },
         )
+
+
+class Repeat(View):
+    """
+    Repeat all learned words
+    """
+
+    @staticmethod
+    def get(request):
+        count_all = Words.objects.all().count() - 183  # count game words
+        count_learn = Words.objects.filter(repeat_in_progress=True).count() - 183
+        count_5 = Words.objects.filter(repeat_in_progress=False, repeat_learn__gt=4).count()
+        count_4 = Words.objects.filter(repeat_in_progress=False, repeat_learn=4).count()
+        count_3 = Words.objects.filter(repeat_in_progress=False, repeat_learn=3).count()
+        count_2 = Words.objects.filter(repeat_in_progress=False, repeat_learn=2).count()
+        count_1 = Words.objects.filter(repeat_in_progress=False, repeat_learn=1).count()
+
+        return render(request, "english/repeat.html", {
+            "count": 20,
+            "count_all": count_all,
+            "count_learn": count_learn,
+            "count_5": count_5,
+            "count_4": count_4,
+            "count_3": count_3,
+            "count_2": count_2,
+            "count_1": count_1,
+        })

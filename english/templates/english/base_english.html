@@ -39,7 +39,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
       <span class="navbar-brand navbar-toggler ">
-        <a class="navbar-brand" href="{% url 'english:r_e' %}">Russian<span class="sr-only">(current)</span></a>
+        <a class="navbar-brand" href="{% url 'english:repeat' %}">Repeat<span class="sr-only">(current)</span></a>
       </span>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent" >
@@ -58,6 +58,9 @@
       </li>
         <li class="nav-item {% if request.path == "/english/game/" %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:game' %}">Game<span class="sr-only">(current)</span></a>
+
+      </li><li class="nav-item {% if request.path == "/english/repeat/" %} active {% endif %}">
+        <a class="nav-link" href="{% url 'english:repeat' %}">Repeat<span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item {% if request.path == '/english/compare/' %} active {% endif %}">
         <a class="nav-link" href="{% url 'english:CompareWords' %}">Compare <span class="sr-only">(current)</span></a>

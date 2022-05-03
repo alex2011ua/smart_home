@@ -81,8 +81,7 @@ class Message(models.Model):
     value_float = models.FloatField(null=True)
     state = models.BooleanField(default=False)
 
+
 class Avto(models.Model):
     car_id = models.IntegerField(unique=True)
     link_car = models.CharField(max_length=150, blank=True, null=True)
-
-

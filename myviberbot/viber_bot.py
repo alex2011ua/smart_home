@@ -18,6 +18,4 @@ viber = Api(bot_configuration)
 
 
 def send_viber(text):
-    viber.send_messages(
-        to="/VKJ0H7uV9L0SBS0KG821g==", messages=[TextMessage(text=text)]
-    )
+    viber.send_messages(to="/VKJ0H7uV9L0SBS0KG821g==", messages=[TextMessage(text=text)])

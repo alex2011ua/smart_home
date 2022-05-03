@@ -101,13 +101,11 @@ def make_baza_avto(car_list):
             #  высчитываем среднюю цену
             price = int(car_baze.USD)
             baza_avto[name_avto]["price"] = (
-                baza_avto[name_avto]["count_item"] * baza_avto[name_avto]["price"]
-                + price
+                baza_avto[name_avto]["count_item"] * baza_avto[name_avto]["price"] + price
             ) // (baza_avto[name_avto]["count_item"] + 1)
             raceInt = int(car_baze.raceInt)
             baza_avto[name_avto]["raceInt"] = (
-                baza_avto[name_avto]["count_item"] * baza_avto[name_avto]["raceInt"]
-                + raceInt
+                baza_avto[name_avto]["count_item"] * baza_avto[name_avto]["raceInt"] + raceInt
             ) // (baza_avto[name_avto]["count_item"] + 1)
 
             baza_avto[name_avto]["count_item"] += 1

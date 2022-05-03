@@ -1,12 +1,7 @@
-import json
-import unittest
+
 from unittest.mock import Mock, patch
 
-import pytest
-import responses
-from django.conf import settings
 
-from house.core.tasks import tessty
 
 
 class TestViews:

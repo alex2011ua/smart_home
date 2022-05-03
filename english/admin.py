@@ -5,7 +5,7 @@ from english.models import WordParams, Words
 
 @admin.register(Words)
 class WordsAdmin(admin.ModelAdmin):
-    list_display = ("lesson", "english", "russian", "heavy", "learned", "info")
+    list_display = ("lesson", "english", "russian", "repeat_learn", "repeat_in_progress", "heavy", "learned", "info")
 
     list_filter = ("lesson", "heavy", "learned")
 

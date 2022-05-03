@@ -85,9 +85,7 @@ def gaz_analiz(MQ4, MQ135):
     try:
         gaz = Message.objects.get(controller_name="gaz")
     except ObjectDoesNotExist:
-        gaz = Message.objects.create(
-            controller_name="gaz", date_message=datetime(2000, 1, 1)
-        )
+        gaz = Message.objects.create(controller_name="gaz", date_message=datetime(2000, 1, 1))
     date_now = datetime.now()
     time_delta = (date_now - gaz.date_message) // 60  # minutes
     if time_delta.seconds > 60:

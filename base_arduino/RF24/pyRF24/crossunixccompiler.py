@@ -17,9 +17,7 @@ def try_remove_all(lst, starts):
 
 class CrossUnixCCompiler(unixccompiler.UnixCCompiler):
     def _compile(self, obj, src, ext, cc_args, extra_postargs, pp_opts):
-        try_remove_all(
-            self.compiler_so, ("-m64", "-fstack-protector-strong", "-mtune=generic")
-        )
+        try_remove_all(self.compiler_so, ("-m64", "-fstack-protector-strong", "-mtune=generic"))
         try_remove_all(cc_args, "-I/usr")
         try_remove_all(pp_opts, "-I/usr")
         return unixccompiler.UnixCCompiler._compile(

@@ -46,9 +46,7 @@ def get_status_poliv():
     try:
         pshik = Setting.objects.get(controller_name="pshik")
     except ObjectDoesNotExist:
-        pshik = Setting.objects.create(
-            controller_name="pshik", label="выключен", value=0
-        )
+        pshik = Setting.objects.create(controller_name="pshik", label="выключен", value=0)
 
     try:
         poliv_elki = Setting.objects.get(controller_name="poliv_elki")
@@ -58,9 +56,7 @@ def get_status_poliv():
         poliv_sad = Setting.objects.get(controller_name="poliv_sad")
         poliv_strawberry = Setting.objects.get(controller_name="poliv_strawberry")
     except ObjectDoesNotExist:
-        poliv_elki = Setting.objects.create(
-            controller_name="poliv_elki", label="выключен", value=0
-        )
+        poliv_elki = Setting.objects.create(controller_name="poliv_elki", label="выключен", value=0)
         poliv_garaz = Setting.objects.create(
             controller_name="poliv_garaz", label="выключен", value=0
         )
@@ -70,9 +66,7 @@ def get_status_poliv():
         poliv_teplica = Setting.objects.create(
             controller_name="poliv_teplica", label="выключен", value=0
         )
-        poliv_sad = Setting.objects.create(
-            controller_name="poliv_sad", label="выключен", value=0
-        )
+        poliv_sad = Setting.objects.create(controller_name="poliv_sad", label="выключен", value=0)
         poliv_strawberry = Setting.objects.create(
             controller_name="poliv_strawberry", label="выключен", value=0
         )

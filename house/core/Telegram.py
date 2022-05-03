@@ -13,8 +13,10 @@ class TelegramBot:
     def __init__(self, token):
         self.token = token
         self.api_url = "https://api.telegram.org/bot{}/".format(token)
-        self.api_setWebhook = "https://api.telegram.org/bot{}/setWebhook?url=https://alexua.pp.ua:8443/{}/".format(
-            token, token
+        self.api_setWebhook = (
+            "https://api.telegram.org/bot{}/setWebhook?url=https://alexua.pp.ua:8443/{}/".format(
+                token, token
+            )
         )
 
     def send_message(self, text, chat_id=810867568):

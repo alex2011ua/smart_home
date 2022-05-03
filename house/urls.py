@@ -43,5 +43,4 @@ urlpatterns = [
     path("alarms/", Alarms.as_view(), name="alarms"),
     path("solnce/", include("house.core.solnce_urls")),
     path("info/", Info.as_view(), name="info"),
-
 ]

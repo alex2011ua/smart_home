@@ -1,10 +1,11 @@
-from django.urls import path
+from django.urls import include, path
 
 from english.view_game import GenrundGame
 from english.views import (
     E_R,
     R_E,
     CompareWords,
+    Repeat,
     SearchWord,
     Settings,
     clear_control,
@@ -19,6 +20,7 @@ from english.views import (
 
 app_name = "english"
 urlpatterns = [
+    path("api/", include("english.api.ruouter")),
     path("", index, name="english_index"),
     path("settings/", Settings.as_view(), name="settings"),
     path("clear/", clear_control, name="clear"),
@@ -34,4 +36,5 @@ urlpatterns = [
     path("search/", SearchWord.as_view(), name="SearchWord"),
     path("compare/", CompareWords.as_view(), name="CompareWords"),
     path("game/", GenrundGame.as_view(), name="game"),
+    path("repeat/", Repeat.as_view(), name="repeat"),
 ]

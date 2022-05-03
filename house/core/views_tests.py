@@ -115,9 +115,7 @@ class PingTaskView(View):
         upload = float(st.upload()) // 1024 // 1024 // 8
         ping = st.results.ping
         bot.send_message(f"download:{download}, upload: {upload}, ping: {ping}")
-        Params.objects.create(
-            ping=ping, download=download, upload=upload, date_t_h=datetime.now()
-        )
+        Params.objects.create(ping=ping, download=download, upload=upload, date_t_h=datetime.now())
 
         return redirect(reverse_lazy("form"))
 
@@ -170,6 +168,7 @@ def string_to_bot(request):
     rp = {"data": dic_param}
     rp["status"] = 200
     return JsonResponse(rp)
+
 
 class CheckAvtoView(View):
     @staticmethod
