@@ -17,6 +17,7 @@ def refresh():
     ax.set_title("Температура")  # Add a title to the axes.
     cdf = matplotlib.dates.ConciseDateFormatter(ax.xaxis.get_major_locator())
     ax.xaxis.set_major_formatter(cdf)
+    ax.grid(True)
     ax.set_xlabel('Date')  # Add an x-label to the axes.
     ax.set_ylabel('Temp')  # Add a y-label to the axes.
     ax.legend()  # Add a legend.
