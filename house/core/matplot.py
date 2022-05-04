@@ -6,7 +6,7 @@ import os
 
 def refresh():
 
-    l = DHT_MQ.objects.order_by("-date_t_h").all()[:200]
+    l = DHT_MQ.objects.order_by("-date_t_h").all()[:600]
     dat = [item.date_t_h for item in l]
     temp_strit = [item.temp_street for item in l]
     temp_tepl = [item.temp_teplica for item in l]
