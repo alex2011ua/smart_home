@@ -111,22 +111,22 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 
 
 # раскоментировать весной
-# @cellery_app.on_after_configure.connect()
-# def setup_periodic_task_watering_analiz(sender, **kwargs):
-#     """анализ необходимости полива"""
-#     sender.add_periodic_task(
-#         crontab(minute=3, hour=6-time_correct),  # +3
-#         bot_task_watering_analiz.s(),
-#         name='periodic_task_watering_analiz')
-#
-#
-# @cellery_app.on_after_configure.connect()
-# def setup_periodic_task_watering_start_if_need(sender, **kwargs):
-#     """включеие полива по рассписанию"""
-#     sender.add_periodic_task(
-#         crontab(minute=11, hour=24-time_correct),
-#         poliv.s(),
-#         name='task_watering_start_if_need')
+@cellery_app.on_after_configure.connect()
+def setup_periodic_task_watering_analiz(sender, **kwargs):
+    """анализ необходимости полива"""
+    sender.add_periodic_task(
+        crontab(minute=3, hour=6-time_correct),  # +3
+        bot_task_watering_analiz.s(),
+        name='periodic_task_watering_analiz')
+
+
+@cellery_app.on_after_configure.connect()
+def setup_periodic_task_watering_start_if_need(sender, **kwargs):
+    """включеие полива по рассписанию"""
+    sender.add_periodic_task(
+        crontab(minute=11, hour=24-time_correct),
+        poliv.s(),
+        name='task_watering_start_if_need')
 
 
 #  включение иллюминации по рассписанию

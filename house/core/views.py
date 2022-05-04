@@ -349,3 +349,13 @@ class Info(View):
         context["max_temp_teplica"] = max_temp_teplica
         context["min_temp_teplica"] = min_temp_teplica
         return render(request, "core/info.html", context)
+
+
+class RefreshTestDiagram(View):
+    """test refresh"""
+
+    @staticmethod
+    def get(request):
+        from .matplot import refresh
+        refresh()
+        return redirect(reverse_lazy("info"))

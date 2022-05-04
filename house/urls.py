@@ -26,6 +26,7 @@ from house.core.views import (
     ResetArduino,
     RestartCam,
     Temp,
+    RefreshTestDiagram,
 )
 
 urlpatterns = [
@@ -43,4 +44,5 @@ urlpatterns = [
     path("alarms/", Alarms.as_view(), name="alarms"),
     path("solnce/", include("house.core.solnce_urls")),
     path("info/", Info.as_view(), name="info"),
+    path("info/refresh/", RefreshTestDiagram.as_view(), name="refresh")
 ]
