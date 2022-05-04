@@ -16,7 +16,7 @@ def refresh():
         ax.set_xlim(xmin=yrs[0], xmax=yrs[-1])
         fig.tight_layout()
 
-        fig.savefig('/static/test.png')
+        fig.savefig('test.png')
 
         print("test")
         #fig.savefig('../../static/test.png')
