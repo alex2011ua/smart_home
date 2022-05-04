@@ -12,8 +12,8 @@ def refresh():
     temp_tepl = [item.temp_teplica for item in l]
     fig, ax = plt.subplots(figsize=(10, 5))
 
-    ax.plot(dat, temp_strit, label="Темературф на улице")
-    ax.plot(dat, temp_tepl, label="Темературф в теплице")
+    ax.plot(dat, temp_strit, label="Темература на улице")
+    ax.plot(dat, temp_tepl, label="Темература в теплице")
     ax.set_title("Температура")  # Add a title to the axes.
     cdf = matplotlib.dates.ConciseDateFormatter(ax.xaxis.get_major_locator())
     ax.xaxis.set_major_formatter(cdf)
