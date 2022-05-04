@@ -15,6 +15,7 @@ from .raspberry import button, printer_off, printer_on, raspberry
 from .tasks import boiler_task_off, boiler_task_on, bot_task_11_hour
 from .Telegram import bot
 from .weather_rain import weather_now
+from .matplot import refresh
 
 logger = logging.getLogger("django")
 DEBUG = settings.PLACE
@@ -27,6 +28,7 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     @staticmethod
     def get(request):
+        refresh()
         context = {}
         date_time_now = datetime.datetime.now()
         # Инфо о ошибках датчиков
@@ -356,6 +358,5 @@ class RefreshTestDiagram(View):
 
     @staticmethod
     def get(request):
-        from .matplot import refresh
         refresh()
         return redirect(reverse_lazy("info"))
