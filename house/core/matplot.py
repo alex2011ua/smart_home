@@ -16,7 +16,11 @@ def refresh():
         ax.set_ylabel('Total debt')
         ax.set_xlim(xmin=yrs[0], xmax=yrs[-1])
         fig.tight_layout()
-        os.remove('static/test.png')
+        if os.path.exists('static/test.png'):
+            os.remove('static/test.png')
+        else:
+            print("The file does not exist")
+
         fig.savefig('static/test.png')
 
         print("test")
