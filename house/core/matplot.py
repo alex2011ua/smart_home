@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 def refresh():
     try:
+        import os
         rng = np.arange(50)
         rnd = np.random.randint(0, 10, size=(3, rng.size))
         yrs = 1960 + rng
@@ -15,8 +16,8 @@ def refresh():
         ax.set_ylabel('Total debt')
         ax.set_xlim(xmin=yrs[0], xmax=yrs[-1])
         fig.tight_layout()
-
-        fig.savefig('static/test1.png')
+        os.remove('static/test.png')
+        fig.savefig('static/test.png')
 
         print("test")
         #fig.savefig('../../static/test.png')
