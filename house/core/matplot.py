@@ -1,31 +1,27 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import matplotlib
+from house.core.models import DHT_MQ
+import os
 
 def refresh():
-    try:
-        import os
-        rng = np.arange(50)
-        rnd = np.random.randint(0, 10, size=(3, rng.size))
-        yrs = 1960 + rng
 
-        fig, ax = plt.subplots(figsize=(5, 3))
-        ax.stackplot(yrs, rng + rnd, labels=['Eastasia', 'Eurasia', 'Oceania'])
-        ax.set_title('Combined debt growth over time')
-        ax.legend(loc='upper left')
-        ax.set_ylabel('Total debt')
-        ax.set_xlim(xmin=yrs[0], xmax=yrs[-1])
-        fig.tight_layout()
-        if os.path.exists('static/test.png'):
-            os.remove('static/test.png')
-        else:
-            print("The file does not exist")
+    l = DHT_MQ.objects.all()[:50]
+    dat = [item.date_t_h for item in l]
+    temp_strit = [item.temp_street for item in l]
 
-        fig.savefig('static/test.png')
+    fig, ax = plt.subplots(figsize=(15, 2.5))
 
-        print("test")
-        #fig.savefig('../../static/test.png')
-        plt.close()
-    except(Exception) as err:
-        print(err)
-        print(err.text)
+    data = np.cumsum(np.random.randn(len(dat)))
+    print(dat)
+    ax.plot(dat, temp_strit)
+    cdf = matplotlib.dates.ConciseDateFormatter(ax.xaxis.get_major_locator())
+    ax.xaxis.set_major_formatter(cdf)
+
+    if os.path.exists('static/test.png'):
+        os.remove('static/test.png')
+    else:
+        print("The file does not exist")
+
+    fig.savefig('static/test.png')
+    plt.close()
