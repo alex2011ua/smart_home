@@ -6,18 +6,20 @@ import os
 
 def refresh():
 
-    l = DHT_MQ.objects.order_by("-date_t_h").all()[:100]
+    l = DHT_MQ.objects.order_by("-date_t_h").all()[:200]
     dat = [item.date_t_h for item in l]
     temp_strit = [item.temp_street for item in l]
+    temp_tepl = [item.temp_teplica for item in l]
+    fig, ax = plt.subplots(figsize=(12, 4))
 
-    fig, ax = plt.subplots(figsize=(15, 2.5))
-
-    data = np.cumsum(np.random.randn(len(dat)))
-    print(dat)
-    ax.plot(dat, temp_strit)
+    ax.plot(dat, temp_strit, label="Темературф на улице")
+    ax.plot(dat, temp_tepl, label="Темературф в теплице")
+    ax.set_title("Температура")  # Add a title to the axes.
     cdf = matplotlib.dates.ConciseDateFormatter(ax.xaxis.get_major_locator())
     ax.xaxis.set_major_formatter(cdf)
-
+    ax.set_xlabel('x label')  # Add an x-label to the axes.
+    ax.set_ylabel('y label')  # Add a y-label to the axes.
+    ax.legend()  # Add a legend.
     if os.path.exists('static/test.png'):
         os.remove('static/test.png')
     else:
