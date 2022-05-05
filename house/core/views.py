@@ -15,7 +15,7 @@ from .raspberry import button, printer_off, printer_on, raspberry
 from .tasks import boiler_task_off, boiler_task_on, bot_task_11_hour
 from .Telegram import bot
 from .weather_rain import weather_now
-
+from .matplot import refresh, calend
 
 logger = logging.getLogger("django")
 DEBUG = settings.PLACE
@@ -160,6 +160,8 @@ class Temp(LoginRequiredMixin, PermissionRequiredMixin, View):
     def get(request):
         arduino_task()  # читает датчики и занозит изменетия в БД
         weather_task()  # Запрашивает по АПИ прогноз погоды и вносит в БД
+        refresh()
+        calend()
         return redirect(reverse_lazy("form"))
 
 
