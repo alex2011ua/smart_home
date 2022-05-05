@@ -22,6 +22,7 @@ from .main_arduino import (
     rele_light_perim,
     rele_light_tree,
 )
+from .matplot import refresh, calend
 from .models import DHT_MQ, Avto, Logs, Params, Setting, Weather
 from .raspberry import boiler_off, boiler_on, button, restart_cam
 from .Telegram import bot
@@ -273,10 +274,11 @@ def bot_task():
 @cellery_app.task()
 def bot_task_1_hour():
     """
-    каждый час проверяет температуру теплицы и качество интернета
+    каждый час проверяет температуру теплицы и качество интернета и строит график температуры
     :return:
     """
     print("Start bot_task_1_hour")
+    refresh()
     alarms = Setting.objects.get(controller_name="alarms")
     temp_alert(alarms.value)
 
@@ -403,7 +405,8 @@ def lights_off():
 
 @cellery_app.task()
 def report_10_am():
-    """check new car"""
+    """check new car and make plot calendar"""
+    calend()
     list_all_cars = check()
     list_new_car = []
     for car in list_all_cars:

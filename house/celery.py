@@ -130,18 +130,18 @@ def setup_periodic_task_watering_start_if_need(sender, **kwargs):
 
 
 #  включение иллюминации по рассписанию
-@cellery_app.on_after_configure.connect
-def setup_periodic_tasks_on_lights(sender, **kwargs):
-    try:
-        sender.add_periodic_task(
-            crontab(minute=1, hour=18 - time_correct), lights_on.s(), name="lights_on"
-        )
-    except SoftTimeLimitExceeded as err:
-        Logs.objects.create(
-            date_log=datetime.datetime.now(),
-            title_log="Celery",
-            description_log=f"{err}- превышен лимит времени",
-        )
+# @cellery_app.on_after_configure.connect
+# def setup_periodic_tasks_on_lights(sender, **kwargs):
+#     try:
+#         sender.add_periodic_task(
+#             crontab(minute=1, hour=18 - time_correct), lights_on.s(), name="lights_on"
+#         )
+#     except SoftTimeLimitExceeded as err:
+#         Logs.objects.create(
+#             date_log=datetime.datetime.now(),
+#             title_log="Celery",
+#             description_log=f"{err}- превышен лимит времени",
+#         )
 
 
 #  ВЫключение иллюминации по рассписанию
@@ -149,7 +149,7 @@ def setup_periodic_tasks_on_lights(sender, **kwargs):
 def setup_periodic_tasks_off_lights(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute=4, hour=22 - time_correct), lights_off.s(), name="lights_off"
+            crontab(minute=58, hour=25 - time_correct), lights_off.s(), name="lights_off"
         )
     except SoftTimeLimitExceeded as err:
         Logs.objects.create(
@@ -159,7 +159,7 @@ def setup_periodic_tasks_off_lights(sender, **kwargs):
         )
 
 
-#  ВЫключение иллюминации по рассписанию
+#  check new car
 @cellery_app.on_after_configure.connect
 def setup_periodic_tasks_report_on_10(sender, **kwargs):
     try:
