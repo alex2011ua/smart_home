@@ -48,7 +48,7 @@ def calendar_plot(
     month_label=True,
     value_format="int",
     title=True,
-    ncols=4,
+    ncols=2,
     figsize=None,
     **kwargs,
 ):
@@ -69,7 +69,9 @@ def calendar_plot(
         elif ncols == 4:
             figsize = (14, 2 + nrows * 2)
         elif ncols == 3:
-            figsize = (12, 2 + nrows * 2)
+            figsize = (10, 2 + nrows * 2)
+        elif ncols == 2:
+            figsize = (8, 3 + nrows * 2)
 
     fig, axes = plt.subplots(nrows, ncols, figsize=figsize)
 
@@ -95,8 +97,8 @@ def calendar_plot(
         ax.set_visible(False)
 
     plt.subplots_adjust(wspace=0.75, hspace=0.5)
-    if title:
-        plt.suptitle(get_calendar_title(years), fontsize="x-large", y=1.03)
+    # if title:
+    #     plt.suptitle(get_calendar_title(years), fontsize="x-large", y=1.03)
 
     if os.path.exists("static/calend.png"):
         os.remove("static/calend.png")
