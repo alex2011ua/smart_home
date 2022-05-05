@@ -21,3 +21,4 @@ django-crispy-forms
 speedtest-cli
 djangorestframework==3.13.1
 matplotlib
+july
