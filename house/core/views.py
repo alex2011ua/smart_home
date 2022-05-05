@@ -15,7 +15,7 @@ from .raspberry import button, printer_off, printer_on, raspberry
 from .tasks import boiler_task_off, boiler_task_on, bot_task_11_hour
 from .Telegram import bot
 from .weather_rain import weather_now
-from .matplot import refresh
+from .matplot import refresh, calend
 
 logger = logging.getLogger("django")
 DEBUG = settings.PLACE
@@ -359,4 +359,5 @@ class RefreshTestDiagram(View):
     @staticmethod
     def get(request):
         refresh()
+        calend()
         return redirect(reverse_lazy("info"))
