@@ -104,6 +104,7 @@ def calendar_plot(
         print("The file does not exist")
 
     fig.savefig("static/calend.png")
+    plt.close()
     return axes
 
 
