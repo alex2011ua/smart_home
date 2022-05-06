@@ -34,7 +34,7 @@ from house.core.tasks import (
 
 from .core.models import Logs
 
-time_correct = 2
+time_correct = 3
 
 # запуск рестарта камер
 @cellery_app.on_after_configure.connect
@@ -115,7 +115,7 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 def setup_periodic_task_watering_analiz(sender, **kwargs):
     """анализ необходимости полива"""
     sender.add_periodic_task(
-        crontab(minute=3, hour=6-time_correct),  # +3
+        crontab(minute=3, hour=10-time_correct),  # +3
         bot_task_watering_analiz.s(),
         name='periodic_task_watering_analiz')
 
@@ -124,7 +124,7 @@ def setup_periodic_task_watering_analiz(sender, **kwargs):
 def setup_periodic_task_watering_start_if_need(sender, **kwargs):
     """включеие полива по рассписанию"""
     sender.add_periodic_task(
-        crontab(minute=11, hour=24-time_correct),
+        crontab(minute=50, hour=23-time_correct),
         poliv.s(),
         name='task_watering_start_if_need')
 
