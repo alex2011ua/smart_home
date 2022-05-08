@@ -16,10 +16,11 @@ RF24     radio(53, 49);                                         // Создаё�
 
 
 #define PIN_DHT22_TEPLICA  6  // Пин датчика температуры теплицы
-#define PIN_RELAY_VIN_KLAPAN  22  // Включение питания для клапанов
-#define PIN_RELAY_1_KLAPAN  23  // Управление первым клапаном
-#define PIN_RELAY_2_KLAPAN  24  // Управление вторым клапаном
-#define PIN_RELAY_3_KLAPAN  25  // Управление третьим клапаном
+#define PIN_RELAY_VIN_KLAPAN  21  // Включение питания для клапанов
+#define PIN_RELAY_1_KLAPAN  23  // Управление первым клапаном elki
+#define PIN_RELAY_2_KLAPAN  24  // Управление вторым клапаном pesochnica
+#define PIN_RELAY_3_KLAPAN  25  // Управление третьим клапаном Sad
+#define PIN_RELAY_4_KLAPAN  22  // Управление 4 клапаном 
 #define PIN_RELE_5v  26  // Управление реле питания датчиков 5 в
 
 
@@ -54,6 +55,8 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 #define POLIV_RELE_2_OFF      'f'
 #define POLIV_RELE_3_ON      'G'
 #define POLIV_RELE_3_OFF      'g'
+#define POLIV_RELE_4_ON      'M'
+#define POLIV_RELE_4_OFF      'm'
 
 #define SEND_PARAM       'p'   // опрос датчиков ардуино
 
@@ -98,12 +101,14 @@ void setup(){
    pinMode(PIN_RELAY_1_KLAPAN, OUTPUT); // Объявляем пин реле как выход
    pinMode(PIN_RELAY_2_KLAPAN, OUTPUT); // Объявляем пин реле как выход
    pinMode(PIN_RELAY_3_KLAPAN, OUTPUT); // Объявляем пин реле как выход
+   pinMode(PIN_RELAY_4_KLAPAN, OUTPUT); // Объявляем пин реле как выход
    pinMode(PIN_RELE_5v, OUTPUT); // Объявляем пин реле как выход
 
-   digitalWrite(PIN_RELAY_VIN_KLAPAN, HIGH); // Выключаем реле
+   digitalWrite(PIN_RELAY_VIN_KLAPAN, LOW); // Выключаем реле
    digitalWrite(PIN_RELAY_1_KLAPAN, HIGH); // Выключаем реле 1
    digitalWrite(PIN_RELAY_2_KLAPAN, HIGH); // Выключаем реле 2
    digitalWrite(PIN_RELAY_3_KLAPAN, HIGH); // Выключаем реле 3
+   digitalWrite(PIN_RELAY_4_KLAPAN, HIGH); // Выключаем реле 3
    digitalWrite(PIN_RELE_5v, LOW); // Выключаем реле питания датчиков 5 в
 
   pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
@@ -238,6 +243,11 @@ void loop(){
        Poliv_off(PIN_RELAY_2_KLAPAN);
     }
     if (val == POLIV_RELE_3_ON){
+       Poliv_on(PIN_RELAY_3_KLAPAN);
+    }
+    if (val == POLIV_RELE_3_OFF){
+       Poliv_off(PIN_RELAY_3_KLAPAN);
+    if (val == POLIV_RELE_4_ON){
        Poliv_on(PIN_RELAY_3_KLAPAN);
     }
     if (val == POLIV_RELE_3_OFF){

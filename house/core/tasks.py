@@ -263,7 +263,7 @@ def bot_task():
     temp = DHT_MQ.objects.all().order_by("-date_t_h")[0]
     MQ4 = temp.gaz_MQ4 or 0
     MQ135 = temp.gaz_MQ135 or 0
-    if (MQ4 > 100) or (MQ135 > 50):
+    if (MQ4 > 130) or (MQ135 > 60):
         gaz_analiz(MQ4, MQ135)
 
     button_analiz(DEBUG)
@@ -351,7 +351,7 @@ def bot_task_watering_analiz():
         bot.send_message(
             f"ВЫключен полив. Количество осадков: {sum_rain}.Время возможного полива {water_time}, порог включения {limit_rain}мм."
         )
-        poliv.value = 0
+        poliv.value = water_time
         poliv.label = "выключен"
     if sum_rain < limit_rain:
         bot.send_message(
