@@ -155,18 +155,18 @@ def clear_learned(request):
 
 def test(request):
     """для перехода на следующий уровень. не использовать."""
-    all = Words.objects.all()
-    for i in all:
-        if i.learned:
-            i.add_learned(request.user.id)
-        if i.heavy:
-            i.add_heavy(request.user.id)
-        if i.control:
-            i.add_control(request.user.id)
-
-    return render(request, "english/back.html")
-    words_l2 = Words.objects.filter(lesson__in=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
-    for word in words_l2:
+    # all = Words.objects.all()
+    # for i in all:
+    #     if i.learned:
+    #         i.add_learned(request.user.id)
+    #     if i.heavy:
+    #         i.add_heavy(request.user.id)
+    #     if i.control:
+    #         i.add_control(request.user.id)
+    #
+    # return render(request, "english/back.html")
+    words_l3 = Words.objects.filter(lesson__in=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+    for word in words_l3:
         english = word.english
         russian = word.russian
         Words.objects.create(
@@ -174,7 +174,7 @@ def test(request):
             russian=russian,
             irregular_verbs=word.irregular_verbs,
             phrasal_verbs=word.phrasal_verbs,
-            lesson=200,
+            lesson=300,
             info=str(word.lesson),
         )
         word.delete()
