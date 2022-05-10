@@ -1,3 +1,4 @@
+import datetime
 import os
 
 import july
@@ -14,7 +15,7 @@ from house.core.models import DHT_MQ, Params
 
 def refresh():
 
-    l = DHT_MQ.objects.order_by("-date_t_h").all()[:400]
+    l = DHT_MQ.objects.order_by("-date_t_h").all()[:300]
     dat = [item.date_t_h for item in l]
     temp_strit = [item.temp_street for item in l]
     temp_tepl = [item.temp_teplica for item in l]
@@ -44,7 +45,7 @@ def calendar_plot(
     cmap="july",
     value_label=False,
     date_label=False,
-    weeknum_label=True,
+    weeknum_label=False,
     month_label=True,
     value_format="int",
     title=True,
@@ -100,8 +101,8 @@ def calendar_plot(
     # if title:
     #     plt.suptitle(get_calendar_title(years), fontsize="x-large", y=1.03)
 
-    if os.path.exists("static/calend.png"):
-        os.remove("static/calend.png")
+    if os.path.exists("../../static/calend.png"):
+        os.remove("../../static/calend.png")
     else:
         print("The file does not exist")
 
@@ -113,11 +114,15 @@ def calendar_plot(
 def calend():
     dates = date_range("2022-05-01", "2022-09-30")
     poliv = Params.objects.filter(poliv__gt=10)
-    data = [0 for _ in range(len(dates))]
+    data = [9 for _ in range(len(dates))]
     for i in poliv:
         if i.date_t_h.date() in dates:
             ind = dates.index(i.date_t_h.date())
             data[ind] = i.poliv
+    today = datetime.date.today()
+    ind = dates.index(today)
+    data[ind] = 0
+
     calendar_plot(dates, data, date_label=True)
 
 

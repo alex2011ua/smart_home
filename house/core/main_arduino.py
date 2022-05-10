@@ -113,25 +113,13 @@ def rele_light_balkon(param):
     return context
 
 
-def rele_light_tree(param):
+def bassein(param):
     context = testing()
     if param == 1:
         arduino.write(b"B")
         rele = arduino.read()
     else:
         arduino.write(b"b")
-        rele = arduino.read()
-    context["status"].append(rele)
-    return context
-
-
-def rele_light_perim(param):
-    context = testing()
-    if param == 1:
-        arduino.write(b"C")
-        rele = arduino.read()
-    else:
-        arduino.write(b"c")
         rele = arduino.read()
     context["status"].append(rele)
     return context
@@ -149,10 +137,10 @@ def on_klapan(place):
     places = {
         "poliv_garaz": b"",
         "poliv_teplica": b"",
-        "poliv_elki": b"E",
+        "poliv_elki": b"F",
         "poliv_sad": b"G",
-        "poliv_pesochnica": b"F",
-        "poliv_strawberry": b"",
+        "poliv_pesochnica": b"E",
+        "poliv_strawberry": b"M",
     }
     context = testing()
     arduino.write(places[place])
@@ -162,10 +150,10 @@ def off_klapan(place):
     places = {
         "poliv_garaz": b"",
         "poliv_teplica": b"",
-        "poliv_elki": b"e",
-        "poliv_sad": b"g",
-        "poliv_pesochnica": b"f",
-        "poliv_strawberry": b"",
+        "poliv_elki": b"f",
+        "poliv_sad": b"G",
+        "poliv_pesochnica": b"e",
+        "poliv_strawberry": b"m",
     }
     context = testing()
     arduino.write(places[place])

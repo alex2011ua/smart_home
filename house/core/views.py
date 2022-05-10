@@ -9,7 +9,7 @@ from django.views import View
 
 from house.core.tasks import arduino_task, restart_cam_task, weather_task
 
-from .main_arduino import rele_light_balkon, rele_light_perim, rele_light_tree, reset
+from .main_arduino import rele_light_balkon, bassein, reset
 from .models import DHT_MQ, Logs, Setting, Weather
 from .raspberry import button, printer_off, printer_on, raspberry
 from .tasks import boiler_task_off, boiler_task_on, bot_task_11_hour
@@ -63,12 +63,10 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
         light_balkon, created = Setting.objects.get_or_create(
             controller_name="light_balkon", defaults={"label": "1", "value": 0}
         )
-        light_tree, created = Setting.objects.get_or_create(
+        bassein, created = Setting.objects.get_or_create(
             controller_name="light_tree", defaults={"label": "2", "value": 0}
         )
-        light_perim, created = Setting.objects.get_or_create(
-            controller_name="light_perim", defaults={"label": "3", "value": 0}
-        )
+
         poliv, created = Setting.objects.get_or_create(
             controller_name="poliv", defaults={"label": "Выключен", "value": 0}
         )
@@ -88,8 +86,7 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
         context["alarms"] = alarms
         context["poliv"] = poliv
         context["light_balkon"] = light_balkon
-        context["light_tree"] = light_tree
-        context["light_perim"] = light_perim
+        context["bassein"] = bassein
         context["boiler"] = boiler
         context["printer"] = printer
         context["raspberry"] = raspberry(DEBUG)  # state raspberry
@@ -241,27 +238,15 @@ class Rele(LoginRequiredMixin, PermissionRequiredMixin, View):
                 rele.value = 0
                 rele.save()
         if rele_id == 2:
-            rele = Setting.objects.get(controller_name="light_tree")
+            rele = Setting.objects.get(controller_name="bassein")
             if rele.value == 0:
-                rele_light_tree(1)
+                bassein(1)
                 rele.value = 1
                 rele.save()
             else:
-                rele_light_tree(0)
+                bassein(0)
                 rele.value = 0
                 rele.save()
-        # балкон
-        if rele_id == 3:
-            rele = Setting.objects.get(controller_name="light_perim")
-            if rele.value == 0:
-                rele_light_perim(1)
-                rele.value = 1
-                rele.save()
-            else:
-                rele_light_perim(0)
-                rele.value = 0
-                rele.save()
-        return redirect(reverse_lazy("form"))
 
 
 class Light(LoginRequiredMixin, PermissionRequiredMixin, View):

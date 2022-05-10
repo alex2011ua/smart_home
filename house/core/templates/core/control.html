@@ -36,11 +36,11 @@
             {% if poliv.label == 'выключен' %} <a href="{% url 'solnce' %}">  <button type="button" class="btn btn-secondary b" >Солнце</button></a> <br />
             {% else %} <a href="{% url 'solnce' %} ">  <button type="button" class="btn btn-success  b" >Солнце</button></a> <br />
             {% endif%}
-            {% if V24.label == "выключен" %} <a href="{% url 'zapusk_poliva' %}">  <button type="button" class="btn btn-dark b" >Запуск полива </button></a> <br />
-            {% else %} <a href="{% url 'V24' %} ">  <button type="button" class="btn btn-light b" >Закрыть воду </button></a> <br />
+            {% if bassein.value == 0 %} <a href="{% url 'rele' bassein.label %}">  <button type="button" class="btn btn-dark b" >Включить бассеин </button></a> <br />
+            {% else %} <a href="{% url 'rele' bassein.label %} ">  <button type="button" class="btn btn-light b" >Выключить бассеин </button></a> <br />
             {% endif%}
-            {% if light_perim.value == 0 %} <a href="{% url 'rele' light_perim.label %}">  <button type="button" class="btn btn-dark b" >Включить балкон </button></a> <br />
-            {% else %} <a href="{% url 'rele' light_perim.label %} ">  <button type="button" class="btn btn-light b" >Выключить балкон </button></a> <br />
+            {% if light_balkon.value == 0 %} <a href="{% url 'rele' light_balkon.label %}">  <button type="button" class="btn btn-dark b" >Включить балкон </button></a> <br />
+            {% else %} <a href="{% url 'rele' light_balkon.label %} ">  <button type="button" class="btn btn-light b" >Выключить балкон </button></a> <br />
             {% endif%}
             {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_index'  %}">  <button type="button" class="btn btn-secondary b" >Управление поливом</button></a> <br />
             {% else %} <a href="{% url 'poliv_index' %} ">  <button type="button" class="btn btn-success  b" >Управление поливом </button></a> <br />

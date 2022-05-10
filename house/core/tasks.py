@@ -18,9 +18,7 @@ from .main_arduino import (
     arduino_poliv,
     arduino_restart_5v,
     get_arduino_answer,
-    rele_light_balkon,
-    rele_light_perim,
-    rele_light_tree,
+    rele_light_balkon
 )
 from .matplot import refresh, calend
 from .models import DHT_MQ, Avto, Logs, Params, Setting, Weather
@@ -304,19 +302,8 @@ def bot_task_11_hour():
     light_balkon = Setting.objects.get(controller_name="light_balkon")
 
     if light_balkon.value == 1:
-        rele_light_balkon(0)
-        light_balkon.value = 0
-        light_balkon.save()
-        bot.send_message("Выключен резервная кнопка!")
+        bot.send_message("Выключен ,балкон!")
 
-    light_tree = Setting.objects.get(controller_name="light_tree")
-    if light_tree.value == 1:
-        rele_light_tree(0)
-        light_tree.value = 0
-        light_tree.save()
-        bot.send_message("Выключена иллюминация елки по рассписанию!")
-
-    light_perim = Setting.objects.get(controller_name="light_perim")
     open_controll = button(DEBUG)  # {'Garaz': True, 'Dor_street': False}
     if open_controll["Garaz"] is True or open_controll["Dor_street"] is True:
 
@@ -334,7 +321,7 @@ def bot_task_watering_analiz():
     sum_rain = 0
     corect = -1
     water_time = 30  # время полива
-    limit_rain = 10  # мм
+    limit_rain = 15  # мм
 
     for day in weather:
         if day.temp_max > 25:
