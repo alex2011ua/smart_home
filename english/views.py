@@ -221,13 +221,13 @@ def word_update(request, id):
         word.info = info
 
         if heavy:
-            word.add_heavy(request.user.id)
+            word.heavy = True
         else:
-            word.dell_heavy(request.user.id)
+            word.heavy = False
         if learned:
-            word.add_learned(request.user.id)
+            word.learned = True
         else:
-            word.dell_learned(request.user.id)
+            word.learned = False
         if phrasal:
             word.phrasal_verbs = True
         else:
