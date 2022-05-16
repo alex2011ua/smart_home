@@ -8,7 +8,7 @@ dvor.addEventListener('click', function(event) {
     console.log('Dvor');
     console.log(event.target);
     let data = {};
-    if (event.target.classList.contains('DHUM')) {
+    if (event.target.classList.contains('DHUM') | event.target.classList.contains('DHUM2') ) {
         data = {'off': event.target.dataset.on};
         console.log(data);
          $.ajax({
@@ -55,11 +55,11 @@ dvor.addEventListener('click', function(event) {
 
     if (event.target.dataset.hasOwnProperty('on')) {
         data = {'on': event.target.dataset.on};
-        console.log("hasOwnProperty(\'on\')");
+        console.log("hasOwnProperty(\'on%\')");
     };
     if (event.target.dataset.hasOwnProperty('off')) {
         data = {'off': event.target.dataset.off};
-        console.log("hasOwnProperty(\'off\')");
+        console.log("hasOwnProperty(\'off%\')");
     };
 
 

@@ -137,10 +137,11 @@ def on_klapan(place):
     places = {
         "poliv_garaz": b"",
         "poliv_teplica": b"",
-        "poliv_elki": b"F",
+        "poliv_elki": b"E",
         "poliv_sad": b"G",
         "poliv_pesochnica": b"E",
         "poliv_strawberry": b"M",
+        "poliv_trava": b"F",
     }
     context = testing()
     arduino.write(places[place])
@@ -150,10 +151,11 @@ def off_klapan(place):
     places = {
         "poliv_garaz": b"",
         "poliv_teplica": b"",
-        "poliv_elki": b"f",
-        "poliv_sad": b"G",
+        "poliv_elki": b"e",
+        "poliv_sad": b"g",
         "poliv_pesochnica": b"e",
         "poliv_strawberry": b"m",
+        "poliv_trava": b"f",
     }
     context = testing()
     arduino.write(places[place])
@@ -174,11 +176,14 @@ def arduino_poliv(minutes):
     V24.label = "включен"
     V24.save()
     on_klapan("poliv_pesochnica")
-    time.sleep(60 * minutes / 2 - 5)
-    on_klapan("poliv_elki")
+    time.sleep(60 * minutes / 4)
     off_klapan("poliv_pesochnica")
-    time.sleep(60 * minutes / 2 + 5)
-    off_klapan("poliv_elki")
+    on_klapan("poliv_trava")
+    time.sleep(60 * minutes / 4)
+    off_klapan("poliv_trava")
+    on_klapan("poliv_sad")
+    time.sleep(60 * minutes / 2)
+    off_klapan("poliv_sad")
     V24_arduino(0)
     V24.label = "выключен"
     V24.save()

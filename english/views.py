@@ -165,19 +165,20 @@ def test(request):
     #         i.add_control(request.user.id)
     #
     # return render(request, "english/back.html")
-    words_l3 = Words.objects.filter(lesson__in=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
-    for word in words_l3:
-        english = word.english
-        russian = word.russian
-        Words.objects.create(
-            english=english,
-            russian=russian,
-            irregular_verbs=word.irregular_verbs,
-            phrasal_verbs=word.phrasal_verbs,
-            lesson=300,
-            info=str(word.lesson),
-        )
-        word.delete()
+    # words_l3 = Words.objects.filter(lesson__in=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+    # for word in words_l3:
+    #     english = word.english
+    #     russian = word.russian
+    #     Words.objects.create(
+    #         english=english,
+    #         russian=russian,
+    #         irregular_verbs=word.irregular_verbs,
+    #         phrasal_verbs=word.phrasal_verbs,
+    #         lesson=300,
+    #         info=str(word.lesson),
+    #     )
+    #     word.delete()
+
     return render(request, "english/back.html")
 
 

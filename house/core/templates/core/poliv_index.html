@@ -53,11 +53,17 @@
         <img src="{% static 'img/elka.gif' %}" height="150" alt="elki.fif" class="need" data-on="poliv_elki" >
     </div>
 
+    <div id="trava" data-on="trava">
+        {% if poliv_all.poliv_trava.label == 'включен' %}
+            <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM2" data-on="poliv_trava">
+        {% endif %}
+        <img src="{% static 'img/trava.gif' %}" height="100" alt="sad.fif" class="need" data-on="poliv_trava">
+    </div>
     <div id="sad" data-on="sad">
         {% if poliv_all.poliv_sad.label == 'включен' %}
             <img src="{% static 'img/rain.gif' %}" height="50" alt="pesochnica.fif" class="DHUM" data-on="poliv_sad">
         {% endif %}
-        <img src="{% static 'img/sad.gif' %}" height="100" alt="sad.fif" class="need" data-on="poliv_sad">
+        <img src="{% static 'img/sad.gif' %}" height="150" alt="sad.fif" class="need" data-on="poliv_sad">
     </div>
 
     <div id="strawberry" data-on="strawberry">
@@ -88,9 +94,9 @@
     </div>
     {% csrf_token %}
     <button type="submit" formaction="ch_value_time" class="subscribe btn btn-warning btn-block shadow-sm"> Изменить! </button>
+    <a  href="{% url 'zapusk_poliva' %}">  <button type="button" class="btn btn-dark b" >Запуск полива </button></a>
 </form>
-<br />
-<a href="{% url 'zapusk_poliva' %}">  <button type="button" class="btn btn-dark b" >Запуск полива </button></a> <br />
+
 
 
 

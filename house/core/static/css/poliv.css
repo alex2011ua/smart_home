@@ -34,15 +34,22 @@
 #elki {
     position: absolute;
     top: 160px;
-    left: 120px;
+    left: 180px;
+    width: 120px;
+    height: 150px;
+
+}#sad {
+    position: absolute;
+    top: 160px;
+    left: 20px;
     width: 120px;
     height: 150px;
 
 }
-#sad {
+#trava {
         position: absolute;
     top: 320px;
-    left: 120px;
+    left: 30px;
     width: 120px;
     height: 150px;
     }
@@ -59,6 +66,14 @@
     top: -15px;
     left: -15px;
     width: 150px;
+    height: 150px;
+    z-index: 1;
+}
+.DHUM2 {
+    position: absolute;
+    top: -15px;
+    left: -55px;
+    width: 350px;
     height: 150px;
     z-index: 1;
 }

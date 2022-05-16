@@ -50,6 +50,7 @@ class WordsParamForm(forms.ModelForm):
             "level_1",
             "level_2",
             "level_3",
+            "level_4",
             "lesson_0",
             "phrasal_verbs",
             "irregular_verbs",

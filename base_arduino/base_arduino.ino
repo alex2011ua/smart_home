@@ -4,11 +4,11 @@
 #include <RF24.h>                                              // Подключаем библиотеку для работы с nRF24L01+.
 RF24     radio(53, 49);                                         // Создаём объект radio для работы с библиотекой RF24, указывая номера выводов модуля (CE, SS).
 // список пинов:
-#define PIN_RELAY1         2    // LIGHT_BALKON
+#define PIN_RELAY_BALKON   2    // LIGHT_BALKON
 #define DHTPIN             3    // dht 11 датчик температуры воды в котел
 #define DHT22PIN           4    // уличный dht 22
-#define PIN_RELAY2         5    // включаем балкон
-#define PIN_6          6    //
+#define PIN_RELAY2         5    //
+#define PIN_6              6    //
 #define PIN_DHT11_GAZ      7    //Температура воздуха возле вытяжки
 #define PIN_RELAY3         8    // LIGHT_TREE
     // ce                  9    // ce
@@ -17,11 +17,12 @@ RF24     radio(53, 49);                                         // Создаё�
 
 #define PIN_DHT22_TEPLICA  6  // Пин датчика температуры теплицы
 #define PIN_RELAY_BASSEIN  20  // Включение питания для клапанов
-#define PIN_RELAY_VIN_KLAPAN  21  // Включение питания для клапанов
-#define PIN_RELAY_4_KLAPAN  22  // Управление 4 клапаном
-#define PIN_RELAY_1_KLAPAN  23  // Управление первым клапаном elki
-#define PIN_RELAY_2_KLAPAN  24  // Управление вторым клапаном pesochnica
-#define PIN_RELAY_3_KLAPAN  25  // Управление третьим клапаном Sad
+#define PIN_RELAY_VIN_KLAPAN  19  // Включение питания для клапанов
+
+#define PIN_RELAY_1_KLAPAN  22  // Управление первым клапаном elki_pesochnica
+#define PIN_RELAY_2_KLAPAN  23  // Управление вторым клапаном trava
+#define PIN_RELAY_3_KLAPAN  24  // Управление третьим клапаном Sad
+#define PIN_RELAY_4_KLAPAN  25  // Управление 4 клапаном (raspbery)
 
 #define PIN_RELE_5v  26  // Управление реле питания датчиков 5 в
 
@@ -50,10 +51,10 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 // 1 - площадки
 #define POLIV_RELE_1_ON      'E'
 #define POLIV_RELE_1_OFF      'e'
-// 2 - Сад
+// 2 - trava
 #define POLIV_RELE_2_ON      'F'
 #define POLIV_RELE_2_OFF      'f'
-// 3 - Дом + пшик
+// 3 - sad
 #define POLIV_RELE_3_ON      'G'
 #define POLIV_RELE_3_OFF      'g'
 // 4 - Клубника (грядки)
@@ -94,7 +95,7 @@ void setup(){
   pinMode(buzzerPin, OUTPUT); //Set buzzerPin as output
 
 
-  delay(100); // ждем 0.5секунду
+  delay(100); // ждем 0.1секунду
   analogWrite(buzzerPin, 255);
   Serial.begin(9600);
 
@@ -115,12 +116,9 @@ void setup(){
    digitalWrite(PIN_RELAY_4_KLAPAN, HIGH); // Выключаем реле 4
    digitalWrite(PIN_RELE_5v, LOW); // Выключаем реле питания датчиков 5 в
 
-  pinMode(PIN_RELAY1, OUTPUT); // Объявляем пин реле как выход
-  pinMode(PIN_RELAY2, OUTPUT); // Объявляем пин реле как выход
-  pinMode(PIN_RELAY3, OUTPUT); // Объявляем пин реле как выход
-  digitalWrite(PIN_RELAY1, LOW); // Выключаем реле - посылаем высокий сигнал
-  digitalWrite(PIN_RELAY2, HIGH); // Выключаем реле - посылаем высокий сигнал
-  digitalWrite(PIN_RELAY3, LOW); // Выключаем реле - посылаем высокий сигнал
+  pinMode(PIN_RELAY_BALKON, OUTPUT); // Объявляем пин реле как выход
+  digitalWrite(PIN_RELAY_BALKON, LOW); // Выключаем реле - посылаем высокий сигнал
+
 
   pinMode(analogSignal_MQ135, INPUT); //установка режима пина MQ135
   pinMode(analogSignal_MQ4, INPUT); //установка режима пина MQ4
@@ -247,11 +245,12 @@ void loop(){
     }
     if (val == POLIV_RELE_3_OFF){
        Poliv_off(PIN_RELAY_3_KLAPAN);
-    if (val == POLIV_RELE_4_ON){
-       Poliv_on(PIN_RELAY_3_KLAPAN);
     }
-    if (val == POLIV_RELE_3_OFF){
-       Poliv_off(PIN_RELAY_3_KLAPAN);
+    if (val == POLIV_RELE_4_ON){
+       Poliv_on(PIN_RELAY_4_KLAPAN);
+    }
+    if (val == POLIV_RELE_4_OFF){
+       Poliv_off(PIN_RELAY_4_KLAPAN);
     }
     if (val == RELE_5v_ON){
        Poliv_on(PIN_RELE_5v);
@@ -270,31 +269,26 @@ void loop(){
         Poliv_off(PIN_RELAY_2_KLAPAN);
     }
   }
- }
 }
 
 void rele_light_balkon(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY2, LOW); // Отключаем реле - посылаем высокий уровень сигнала
-    digitalWrite(22, HIGH);
-
+    digitalWrite(PIN_RELAY_BALKON, HIGH); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY2, HIGH); // Включаем реле - посылаем низкий уровень сигнала
-    digitalWrite(22, LOW);
-
+    digitalWrite(PIN_RELAY_BALKON, LOW); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
    }
 }
 
 void rele_bassein(int status){
   if (status == 1){
-    digitalWrite(PIN_RELAY1, LOW); // Отключаем реле - посылаем высокий уровень сигнала
+    digitalWrite(PIN_RELAY_BASSEIN, LOW); // Отключаем реле - посылаем высокий уровень сигнала
     Serial.println("rele on");
   }
   if (status == 0){
-    digitalWrite(PIN_RELAY1, HIGH); // Включаем реле - посылаем низкий уровень сигнала
+    digitalWrite(PIN_RELAY_BASSEIN, HIGH); // Включаем реле - посылаем низкий уровень сигнала
     Serial.println("rele off");
    }
 }

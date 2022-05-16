@@ -8,7 +8,7 @@ $.ajaxSetup({
 
 let words_obj = 0;
 $.ajax({
-    url: '/english/api/words',
+    url: '/english/api/repeat_words',
     method: 'GET',
 
     async: false,

@@ -62,6 +62,7 @@ class WordParams(models.Model):
     level_1 = models.BooleanField(default=False)
     level_2 = models.BooleanField(default=False)
     level_3 = models.BooleanField(default=False)
+    level_4 = models.BooleanField(default=False)
 
     lesson_0 = models.BooleanField(default=False)
     phrasal_verbs = models.BooleanField(default=False)
@@ -106,6 +107,8 @@ class WordParams(models.Model):
         if params.level_2:
             p["lesson__in"].append(200)
         if params.level_3:
+            p["lesson__in"].append(300)
+        if params.level_4:
             p["lesson__in"].extend([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
         if params.irregular_verbs:
             p["irregular_verbs"] = True

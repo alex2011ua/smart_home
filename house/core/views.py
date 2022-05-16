@@ -64,7 +64,7 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
             controller_name="light_balkon", defaults={"label": "1", "value": 0}
         )
         bassein, created = Setting.objects.get_or_create(
-            controller_name="light_tree", defaults={"label": "2", "value": 0}
+            controller_name="bassein", defaults={"label": "2", "value": 0}
         )
 
         poliv, created = Setting.objects.get_or_create(
@@ -237,7 +237,7 @@ class Rele(LoginRequiredMixin, PermissionRequiredMixin, View):
                 rele_light_balkon(0)
                 rele.value = 0
                 rele.save()
-        if rele_id == 2:
+        elif rele_id == 2:
             rele = Setting.objects.get(controller_name="bassein")
             if rele.value == 0:
                 bassein(1)
@@ -247,6 +247,7 @@ class Rele(LoginRequiredMixin, PermissionRequiredMixin, View):
                 bassein(0)
                 rele.value = 0
                 rele.save()
+        return redirect(reverse_lazy("form"))
 
 
 class Light(LoginRequiredMixin, PermissionRequiredMixin, View):

@@ -7,7 +7,7 @@ from english.models import WordParams, Words
 class WordsAdmin(admin.ModelAdmin):
     list_display = ("lesson", "english", "russian", "repeat_learn", "repeat_in_progress", "heavy", "learned", "info")
 
-    list_filter = ("lesson", "heavy", "learned")
+    list_filter = ("lesson", "heavy", "learned", "repeat_in_progress", "repeat_learn", "phrasal_verbs", "irregular_verbs")
 
 
 @admin.register(WordParams)

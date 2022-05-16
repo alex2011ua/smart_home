@@ -33,6 +33,7 @@ class Poliv(View):
         if request.POST.get("on"):
             controller_name = request.POST["on"]
             on_poliv = Setting.objects.get(controller_name=controller_name)
+            print(controller_name)
             on_poliv.label = "включен"
             on_klapan(controller_name)
             on_poliv.save()
@@ -43,33 +44,17 @@ def get_status_poliv():
     V24, created = Setting.objects.get_or_create(
         controller_name="V24", defaults={"label": "Выключен", "value": 0}
     )
-    try:
-        pshik = Setting.objects.get(controller_name="pshik")
-    except ObjectDoesNotExist:
-        pshik = Setting.objects.create(controller_name="pshik", label="выключен", value=0)
 
-    try:
-        poliv_elki = Setting.objects.get(controller_name="poliv_elki")
-        poliv_garaz = Setting.objects.get(controller_name="poliv_garaz")
-        poliv_pesochnica = Setting.objects.get(controller_name="poliv_pesochnica")
-        poliv_teplica = Setting.objects.get(controller_name="poliv_teplica")
-        poliv_sad = Setting.objects.get(controller_name="poliv_sad")
-        poliv_strawberry = Setting.objects.get(controller_name="poliv_strawberry")
-    except ObjectDoesNotExist:
-        poliv_elki = Setting.objects.create(controller_name="poliv_elki", label="выключен", value=0)
-        poliv_garaz = Setting.objects.create(
-            controller_name="poliv_garaz", label="выключен", value=0
-        )
-        poliv_pesochnica = Setting.objects.create(
-            controller_name="poliv_pesochnica", label="выключен", value=0
-        )
-        poliv_teplica = Setting.objects.create(
-            controller_name="poliv_teplica", label="выключен", value=0
-        )
-        poliv_sad = Setting.objects.create(controller_name="poliv_sad", label="выключен", value=0)
-        poliv_strawberry = Setting.objects.create(
-            controller_name="poliv_strawberry", label="выключен", value=0
-        )
+    pshik = Setting.objects.get(controller_name="pshik")
+    poliv_elki = Setting.objects.get(controller_name="poliv_elki")
+    poliv_garaz = Setting.objects.get(controller_name="poliv_garaz")
+    poliv_pesochnica = Setting.objects.get(controller_name="poliv_pesochnica")
+    poliv_teplica = Setting.objects.get(controller_name="poliv_teplica")
+    poliv_sad = Setting.objects.get(controller_name="poliv_sad")
+    poliv_strawberry = Setting.objects.get(controller_name="poliv_strawberry")
+    poliv_trava, created = Setting.objects.get_or_create(
+        controller_name="poliv_trava", defaults={"label": "выключен", "value": 0}
+    )
     poliv_all = {}
 
     p = [
@@ -81,6 +66,7 @@ def get_status_poliv():
         poliv_teplica,
         poliv_sad,
         poliv_strawberry,
+        poliv_trava
     ]
     for item in p:
         poliv_all[item.controller_name] = item
