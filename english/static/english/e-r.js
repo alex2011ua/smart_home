@@ -74,7 +74,7 @@ function start() {
             $.ajax({
                 url: '/english/api/word/' + random_word.id + "/",
                 method: 'PATCH',
-                data: {'repeat_learn': random_word.repeat_learn-1},
+                data: {'repeat_learn': random_word.repeat_learn - 1},
                 success: function (text) {
                     console.log(text)
                 },
@@ -83,8 +83,7 @@ function start() {
                     alert(text);
                 },
             });
-        }
-        else{
+        } else {
             $.ajax({
                 url: '/english/api/word/' + random_word.id + "/",
                 method: 'PATCH',
@@ -114,7 +113,7 @@ function start() {
         $.ajax({
             url: '/english/api/word/' + random_word.id + "/",
             method: 'PATCH',
-            data: {'repeat_learn': random_word.repeat_learn+1},
+            data: {'repeat_learn': random_word.repeat_learn + 1},
             success: function (text) {
                 console.log(text);
                 console.log(random_word.repeat_learn);
@@ -128,7 +127,7 @@ function start() {
         document.getElementById("vvod").value = '';
         console.log("не верно");
         answer.style.display = 'block'
-        answer.innerText = random_word.english + " - " + random_word.russian;
+        answer.innerText = random_word.english + " - " + random_word.russian + "(" + random_word.id + ")";
         ok.style.display = 'block'
         ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
@@ -142,7 +141,7 @@ function start() {
             $.ajax({
                 url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
-                data: {'repeat_learn': to_del.repeat_learn-1},
+                data: {'repeat_learn': to_del.repeat_learn - 1},
                 success: function (text) {
                     console.log(text)
                 },
@@ -151,8 +150,7 @@ function start() {
                     alert(text);
                 },
             });
-        }
-        else{
+        } else {
             $.ajax({
                 url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
@@ -166,19 +164,68 @@ function start() {
                 },
             });
         }
-        var word_index_to_dell = words_obj.indexOf(to_del);
-        if (word_index_to_dell !== -1) {
-            words_obj.splice(word_index_to_dell, 1);
-        }
-        console.log('Хоть и не верно  - удаляю');
-        dellete_word_button.style.display = 'none';
-        count_words.innerHTML = words_obj.length;
     }
+    heavy.onclick = function () {
+        console.log(to_del);
+        $.ajax({
+            url: '/english/api/word/' + to_del.id + "/",
+            method: 'PATCH',
+            data: {'heavy': true},
+            success: function (text) {
+                console.log('__ok__');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+    }
+    not_heavy.onclick = function () {
+        console.log(to_del);
+        $.ajax({
+            url: '/english/api/word/' + to_del.id + "/",
+            method: 'PATCH',
+            data: {'heavy': false},
+            success: function (text) {
+                console.log('__ok__');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+    }
+    learned.onclick = function () {
+        console.log(to_del);
+        $.ajax({
+            url: '/english/api/word/' + to_del.id + "/",
+            method: 'PATCH',
+            data: {'learned': true},
+            success: function (text) {
+                console.log('__ok__');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+    }
+    var word_index_to_dell = words_obj.indexOf(to_del);
+    if (word_index_to_dell !== -1) {
+        words_obj.splice(word_index_to_dell, 1);
+    }
+    console.log('Хоть и не верно  - удаляю');
+    dellete_word_button.style.display = 'none';
+    count_words.innerHTML = words_obj.length;
+
     console.log('words_obj.length-', words_obj.length)
 
 
     random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
-    if (random_word == undefined){
+    if (random_word == undefined) {
         alert("Слова закончились, отдохни!!!");
     }
     document.getElementById("word").innerHTML = random_word.russian;

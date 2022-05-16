@@ -115,25 +115,15 @@ class WordParams(models.Model):
             p["lesson__in"].append(99)
         if params.phrasal_verbs:
             p["phrasal_verbs"] = True
+        if params.learned:
+            p['learned'] = False
+        if params.heavy:
+            p['heavy'] = True
+        print(p)
         return p
 
     @staticmethod
     def get_words(user_id):
-        params = WordParams.objects.get(user=user_id)
-        user = User.objects.get(pk=user_id)
         p = WordParams.params(user_id)
         all_words = Words.objects.filter(**p)
-        add_to = []
-        for item in all_words:
-            if params.control_state and user in item.control_state.all():
-                continue
-            if params.learned and user in item.learned_list.all():
-                continue
-            if params.heavy and user in item.heavy_list.all():
-                continue
-            item.learned = user in item.learned_list.all()
-            item.heavy = user in item.heavy_list.all()
-            item.control = user in item.control_list.all()
-            item.save()
-            add_to.append(item)
-        return add_to
+        return all_words

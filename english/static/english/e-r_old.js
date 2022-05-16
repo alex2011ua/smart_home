@@ -8,7 +8,7 @@ $.ajaxSetup({
 
 let words_obj = 0;
 $.ajax({
-    url: ''/english/api/r_e_words'',
+    url: '/english/api/r_e_words',
     method: 'POST',
     data: 'data',
     async: false,
@@ -106,6 +106,10 @@ function start() {
         });
     }
 
+    function learnedFunc() {
+        console.log("sdf")
+    }
+
     learned.onclick = learnedFunc;
 
     heavy.onclick = function () {
@@ -113,7 +117,7 @@ function start() {
         $.ajax({
             url: 'mod/',
             method: 'GET',
-            data: {'heavy': to_del},
+            data: {'heavy': true},
             success: function (text) {
                 console.log('__ok__');
             },
@@ -129,7 +133,7 @@ function start() {
         $.ajax({
             url: 'mod/',
             method: 'GET',
-            data: {'not_heavy': to_del},
+            data: {'heavy': false},
             success: function (text) {
                 console.log('__ok__');
             },
