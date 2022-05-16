@@ -20,8 +20,8 @@ RF24     radio(53, 49);                                         // Создаё�
 #define PIN_RELAY_VIN_KLAPAN  19  // Включение питания для клапанов
 
 #define PIN_RELAY_1_KLAPAN  22  // Управление первым клапаном elki_pesochnica
-#define PIN_RELAY_2_KLAPAN  23  // Управление вторым клапаном trava
-#define PIN_RELAY_3_KLAPAN  24  // Управление третьим клапаном Sad
+#define PIN_RELAY_2_KLAPAN  23  // Управление вторым клапаном sad
+#define PIN_RELAY_3_KLAPAN  24  // Управление третьим клапаном trava
 #define PIN_RELAY_4_KLAPAN  25  // Управление 4 клапаном (raspbery)
 
 #define PIN_RELE_5v  26  // Управление реле питания датчиков 5 в
@@ -51,10 +51,10 @@ const int analogSignal_muve_kitchen = A2; //подключение датчик�
 // 1 - площадки
 #define POLIV_RELE_1_ON      'E'
 #define POLIV_RELE_1_OFF      'e'
-// 2 - trava
+// 2 - sad
 #define POLIV_RELE_2_ON      'F'
 #define POLIV_RELE_2_OFF      'f'
-// 3 - sad
+// 3 - trava
 #define POLIV_RELE_3_ON      'G'
 #define POLIV_RELE_3_OFF      'g'
 // 4 - Клубника (грядки)

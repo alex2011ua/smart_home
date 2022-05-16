@@ -138,10 +138,10 @@ def on_klapan(place):
         "poliv_garaz": b"",
         "poliv_teplica": b"",
         "poliv_elki": b"E",
-        "poliv_sad": b"G",
+        "poliv_sad": b"F",
         "poliv_pesochnica": b"E",
         "poliv_strawberry": b"M",
-        "poliv_trava": b"F",
+        "poliv_trava": b"G",
     }
     context = testing()
     arduino.write(places[place])
@@ -152,10 +152,10 @@ def off_klapan(place):
         "poliv_garaz": b"",
         "poliv_teplica": b"",
         "poliv_elki": b"e",
-        "poliv_sad": b"g",
+        "poliv_sad": b"f",
         "poliv_pesochnica": b"e",
         "poliv_strawberry": b"m",
-        "poliv_trava": b"f",
+        "poliv_trava": b"g",
     }
     context = testing()
     arduino.write(places[place])
