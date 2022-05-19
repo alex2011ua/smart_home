@@ -56,6 +56,7 @@ var submit_button = document.getElementById("submit_button");    // счетчи
 var vvod = document.getElementById("vvod");    // счетчик слов
 var learned = document.getElementById('learned'); // кнопка для выученого слова
 var heavy = document.getElementById('heavy'); // кнопка для сложного слова
+var important = document.getElementById('important'); // кнопка для important слова
 var not_heavy = document.getElementById('not_heavy'); // кнопка для сложного слова
 count_words.innerHTML = words_obj.length;
 var word_index_to_dell = false;
@@ -116,6 +117,22 @@ function start() {
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
             data: {'heavy': true},
+            success: function (text) {
+                console.log('__ok__');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+    }
+    important.onclick = function () {
+        console.log(to_del);
+        $.ajax({
+            url: '/english/api/word/' + to_del.id + "/",
+            method: 'PATCH',
+            data: {'important': true},
             success: function (text) {
                 console.log('__ok__');
             },

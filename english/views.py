@@ -85,6 +85,7 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
                 content = file_.decode("utf-8").split("\n")
             for item in content:
                 try:
+                    item = item.strip()
                     item = item.replace("’", "'")
 
                     if ";" in item:
@@ -100,6 +101,8 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
 
                     if english.count(',') == 2:
                         irregular_verbs = True
+                    else:
+                        irregular_verbs = False
 
                     other_word = Words.objects.filter(
                         russian=russian,
