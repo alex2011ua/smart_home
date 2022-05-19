@@ -55,6 +55,7 @@ class WordsParamForm(forms.ModelForm):
             "phrasal_verbs",
             "irregular_verbs",
             "control_state",
+            "only_important_words",
         )
 
         labels = {
@@ -63,6 +64,7 @@ class WordsParamForm(forms.ModelForm):
             "lesson_0": "Слова без привязки к уроку",
             "phrasal_verbs": "Только слова для экзамена",
             "irregular_verbs": "Только неправильные глаголы",
+            "only_important_words": "только важные слова",
         }
 
 

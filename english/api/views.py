@@ -12,7 +12,7 @@ class WordRUD(generics.RetrieveUpdateDestroyAPIView):
 
 class RepeatWordListView(generics.ListAPIView):
     serializer_class = WordsSerializer
-    queryset = Words.objects.filter(repeat_in_progress=False).order_by("-repeat_learn", "?")[0:50]
+    queryset = Words.objects.filter(important=False).order_by("-repeat_learn", "?")[0:50]
 
 
 class REWordListView(generics.ListAPIView):

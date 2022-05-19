@@ -58,7 +58,7 @@ var learned = document.getElementById('learned'); // кнопка для выу�
 var heavy = document.getElementById('heavy'); // кнопка для сложного слова
 var not_heavy = document.getElementById('not_heavy'); // кнопка для сложного слова
 count_words.innerHTML = words_obj.length;
-
+var word_index_to_dell = false;
 let answer = document.getElementById("result");             // правильный ответ
 document.getElementById("word").innerHTML = random_word.russian;
 let ok = document.getElementById("ok");
@@ -68,35 +68,8 @@ function start() {
     let inp = document.getElementById("vvod").value.trim();
     let to_del = random_word;
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
-        console.log('верно - удаляю');
         answer.innerText = random_word.english + " - " + random_word.russian;
-        if (random_word.repeat_learn >= 1) {
-            $.ajax({
-                url: '/english/api/word/' + random_word.id + "/",
-                method: 'PATCH',
-                data: {'repeat_learn': random_word.repeat_learn - 1},
-                success: function (text) {
-                    console.log(text)
-                },
-                error: function (text) {
-                    console.log(text);
-                    alert(text);
-                },
-            });
-        } else {
-            $.ajax({
-                url: '/english/api/word/' + random_word.id + "/",
-                method: 'PATCH',
-                data: {'repeat_in_progress': true},
-                success: function (text) {
-                    console.log(text)
-                },
-                error: function (text) {
-                    console.log(text);
-                    alert(text);
-                },
-            });
-        }
+        dell_word();
 
         let word_index = words_obj.indexOf(random_word);
         if (word_index !== -1) {
@@ -132,38 +105,10 @@ function start() {
         ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
         dellete_word_button.style.display = 'inline';
-
     }
 
     dellete_word_button.onclick = function () {
-
-        if (random_word.repeat_learn >= 1) {
-            $.ajax({
-                url: '/english/api/word/' + to_del.id + "/",
-                method: 'PATCH',
-                data: {'repeat_learn': to_del.repeat_learn - 1},
-                success: function (text) {
-                    console.log(text)
-                },
-                error: function (text) {
-                    console.log(text);
-                    alert(text);
-                },
-            });
-        } else {
-            $.ajax({
-                url: '/english/api/word/' + to_del.id + "/",
-                method: 'PATCH',
-                data: {'repeat_in_progress': true},
-                success: function (text) {
-                    console.log(text)
-                },
-                error: function (text) {
-                    console.log(text);
-                    alert(text);
-                },
-            });
-        }
+        dell_word(1);
     }
     heavy.onclick = function () {
         console.log(to_del);
@@ -213,14 +158,13 @@ function start() {
             },
         });
     }
-    var word_index_to_dell = words_obj.indexOf(to_del);
+    word_index_to_dell = words_obj.indexOf(to_del);
     if (word_index_to_dell !== -1) {
         words_obj.splice(word_index_to_dell, 1);
     }
     console.log('Хоть и не верно  - удаляю');
     dellete_word_button.style.display = 'none';
     count_words.innerHTML = words_obj.length;
-
     console.log('words_obj.length-', words_obj.length)
 
 
@@ -230,6 +174,35 @@ function start() {
     }
     document.getElementById("word").innerHTML = random_word.russian;
     count_words.innerHTML = words_obj.length;
+    function dell_word(nnn = 0){
+        if (random_word.repeat_learn >= 1) {
+            $.ajax({
+                url: '/english/api/word/' + to_del.id + "/",
+                method: 'PATCH',
+                data: {'repeat_learn': to_del.repeat_learn - 1 - nnn},
+                success: function (text) {
+                    console.log(text)
+                },
+                error: function (text) {
+                    console.log(text);
+                    alert(text);
+                },
+            });
+        } else {
+            $.ajax({
+                url: '/english/api/word/' + to_del.id + "/",
+                method: 'PATCH',
+                data: {'learned': true},
+                success: function (text) {
+                    console.log(text)
+                },
+                error: function (text) {
+                    console.log(text);
+                    alert(text);
+                },
+            });
+        }
+    }
 }
 
 submit_button.onclick = function () {

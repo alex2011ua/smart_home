@@ -45,7 +45,11 @@
 <div class="col card">
     <label for="irregular" class="form-label">irregular</label>
     <input type="checkbox" class="form-control" name="irregular" {% if word.irregular_verbs  %} checked {% endif %} >
-   </div>
+</div>
+       <div class="col card">
+    <label for="important" class="form-label">important</label>
+    <input type="checkbox" class="form-control" name="important" {% if word.important  %} checked {% endif %} >
+</div>
    </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

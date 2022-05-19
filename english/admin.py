@@ -5,9 +5,9 @@ from english.models import WordParams, Words
 
 @admin.register(Words)
 class WordsAdmin(admin.ModelAdmin):
-    list_display = ("lesson", "english", "russian", "repeat_learn", "repeat_in_progress", "heavy", "learned", "info")
+    list_display = ("lesson", "english", "russian", "repeat_learn", "important", "heavy", "learned", "info")
 
-    list_filter = ("lesson", "heavy", "learned", "repeat_in_progress", "repeat_learn", "phrasal_verbs", "irregular_verbs")
+    list_filter = ("lesson", "heavy", "learned", "important", "repeat_learn", "phrasal_verbs", "irregular_verbs")
 
 
 @admin.register(WordParams)
@@ -36,6 +36,7 @@ class WordsAdmin(admin.ModelAdmin):
         "phrasal_verbs",
         "irregular_verbs",
         "control_state",
+
     )
 
     list_filter = ()

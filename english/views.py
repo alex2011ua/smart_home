@@ -98,6 +98,9 @@ class Settings(LoginRequiredMixin, PermissionRequiredMixin, View):
                     english = english.strip()
                     russian = russian.strip()
 
+                    if english.count(',') == 2:
+                        irregular_verbs = True
+
                     other_word = Words.objects.filter(
                         russian=russian,
                         lesson__in=(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
@@ -215,6 +218,7 @@ def word_update(request, id):
         lesson = request.POST.get("lesson")
         phrasal = request.POST.get("phrasal")
         irregular = request.POST.get("irregular")
+        important = request.POST.get("important")
         word = Words.objects.get(pk=id)
         word.english = english
         word.russian = russian
@@ -236,6 +240,11 @@ def word_update(request, id):
             word.irregular_verbs = True
         else:
             word.irregular_verbs = False
+        if important:
+            word.important = True
+        else:
+            word.important = False
+
         word.lesson = int(lesson)
         word.save()
         return render(request, "english/back.html")
@@ -425,12 +434,12 @@ class Repeat(View):
     @staticmethod
     def get(request):
         count_all = Words.objects.all().count() - 183  # count game words
-        count_learn = Words.objects.filter(repeat_in_progress=True).count() - 183
-        count_5 = Words.objects.filter(repeat_in_progress=False, repeat_learn__gt=4).count()
-        count_4 = Words.objects.filter(repeat_in_progress=False, repeat_learn=4).count()
-        count_3 = Words.objects.filter(repeat_in_progress=False, repeat_learn=3).count()
-        count_2 = Words.objects.filter(repeat_in_progress=False, repeat_learn=2).count()
-        count_1 = Words.objects.filter(repeat_in_progress=False, repeat_learn=1).count()
+        count_learn = Words.objects.filter(important=True).count() - 183
+        count_5 = Words.objects.filter(important=False, repeat_learn__gt=4).count()
+        count_4 = Words.objects.filter(important=False, repeat_learn=4).count()
+        count_3 = Words.objects.filter(important=False, repeat_learn=3).count()
+        count_2 = Words.objects.filter(important=False, repeat_learn=2).count()
+        count_1 = Words.objects.filter(important=False, repeat_learn=1).count()
 
         return render(request, "english/repeat.html", {
             "count": 20,

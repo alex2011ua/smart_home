@@ -19,6 +19,6 @@ class WordsSerializer(serializers.ModelSerializer):
             "phrasal_verbs",
             "irregular_verbs",
             "repeat_learn",
-            "repeat_in_progress",
+            "important",
             "info",
         )

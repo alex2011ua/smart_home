@@ -12,6 +12,7 @@
       <th scope="col">выучено</th>
       <th scope="col">Exam</th>
       <th scope="col">Irregular</th>
+      <th scope="col">Important</th>
       <th scope="col">del</th>
 
 
@@ -27,6 +28,7 @@
       <td>{% if word.learned %} <a class="learned" href="{% url 'english:update' word.id %}"   title="Learned">Learned</a> {% endif %} </td>
       <td>{% if word.phrasal_verbs %} <a class="phrasal" href="{% url 'english:update' word.id %}"   title="Phrasal">Exam</a> {% endif %} </td>
       <td>{% if word.irregular_verbs %} <a class="irregular" href="{% url 'english:update' word.id %}"   title="Irregular">Irregular</a> {% endif %} </td>
+      <td>{% if word.important %} <a class="irregular" href="{% url 'english:update' word.id %}"   title="important">Important</a> {% endif %} </td>
 
       <td>
         <a href="{% url 'english:update' word.id %}" class="btn text-secondary px-0">

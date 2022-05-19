@@ -30,8 +30,8 @@ class Words(models.Model):
     info = models.CharField(max_length=128, blank=True)
 
     # repeat
-    repeat_learn = models.IntegerField(default=3)
-    repeat_in_progress = models.BooleanField(default=False)
+    repeat_learn = models.IntegerField(default=3)  # count try's inputs
+    important = models.BooleanField(default=False)  # important word
 
     @staticmethod
     def serialize(st):
@@ -68,12 +68,12 @@ class WordParams(models.Model):
     phrasal_verbs = models.BooleanField(default=False)
     irregular_verbs = models.BooleanField(default=False)
     control_state = models.BooleanField(default=False)
+    only_important_words = models.BooleanField(default=False)
 
     @staticmethod
     def params(user_id):
         params = WordParams.objects.get(user=user_id)
         p = {"lesson__in": []}
-
         if params.lesson_0:
             p["lesson__in"].append(0)
         if params.lesson_1:
@@ -119,7 +119,8 @@ class WordParams(models.Model):
             p['learned'] = False
         if params.heavy:
             p['heavy'] = True
-        print(p)
+        if params.only_important_words:
+            p['important'] = True
         return p
 
     @staticmethod
