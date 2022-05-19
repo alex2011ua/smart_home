@@ -219,6 +219,7 @@ def word_update(request, id):
         heavy = request.POST.get("heavy")
         learned = request.POST.get("learned")
         lesson = request.POST.get("lesson")
+        repeat_learn = request.POST.get("repeat_learn")
         phrasal = request.POST.get("phrasal")
         irregular = request.POST.get("irregular")
         important = request.POST.get("important")
@@ -247,7 +248,7 @@ def word_update(request, id):
             word.important = True
         else:
             word.important = False
-
+        word.repeat_learn = int(repeat_learn)
         word.lesson = int(lesson)
         word.save()
         return render(request, "english/back.html")

@@ -69,7 +69,7 @@ function start() {
     let inp = document.getElementById("vvod").value.trim();
     let to_del = random_word;
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
-        answer.innerText = random_word.english + " - " + random_word.russian;
+        answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
         dell_word();
 
         let word_index = words_obj.indexOf(random_word);
@@ -99,9 +99,8 @@ function start() {
         });
 
         document.getElementById("vvod").value = '';
-        console.log("не верно");
         answer.style.display = 'block'
-        answer.innerText = random_word.english + " - " + random_word.russian + "(" + random_word.id + ")";
+        answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
         ok.style.display = 'block'
         ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
@@ -109,7 +108,15 @@ function start() {
     }
 
     dellete_word_button.onclick = function () {
-        dell_word(1);
+        dell_word();
+        console.log('Хоть и не верно  - удаляю');
+        word_index_to_dell = words_obj.indexOf(to_del);
+        if (word_index_to_dell !== -1) {
+            words_obj.splice(word_index_to_dell, 1);
+        }
+        dellete_word_button.style.display = 'none';
+        count_words.innerHTML = words_obj.length;
+
     }
     heavy.onclick = function () {
         console.log(to_del);
@@ -175,14 +182,6 @@ function start() {
             },
         });
     }
-    word_index_to_dell = words_obj.indexOf(to_del);
-    if (word_index_to_dell !== -1) {
-        words_obj.splice(word_index_to_dell, 1);
-    }
-    console.log('Хоть и не верно  - удаляю');
-    dellete_word_button.style.display = 'none';
-    count_words.innerHTML = words_obj.length;
-    console.log('words_obj.length-', words_obj.length)
 
 
     random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
@@ -191,12 +190,12 @@ function start() {
     }
     document.getElementById("word").innerHTML = random_word.russian;
     count_words.innerHTML = words_obj.length;
-    function dell_word(nnn = 0){
-        if (random_word.repeat_learn >= 1) {
+    function dell_word(){
+        if (random_word.repeat_learn > 0) {
             $.ajax({
                 url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
-                data: {'repeat_learn': to_del.repeat_learn - 1 - nnn},
+                data: {'repeat_learn': to_del.repeat_learn - 1},
                 success: function (text) {
                     console.log(text)
                 },
@@ -206,12 +205,13 @@ function start() {
                 },
             });
         } else {
+            alert("слово выучено!");
             $.ajax({
                 url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
                 data: {'learned': true},
                 success: function (text) {
-                    console.log(text)
+                    alert("слово выучено!");
                 },
                 error: function (text) {
                     console.log(text);

@@ -8,6 +8,7 @@
       <th scope="col">Урок</th>
       <th scope="col">english</th>
       <th scope="col">russian</th>
+      <th scope="col">repeats</th>
       <th scope="col">сложное</th>
       <th scope="col">выучено</th>
       <th scope="col">Exam</th>
@@ -24,6 +25,7 @@
       <td>{{word.lesson}}</td>
       <td>{{word.english}}</td>
       <td>{{word.russian}}</td>
+      <td>{{word.repeat_learn}}</td>
       <td>{% if word.heavy %} <a class="heavy" href="{% url 'english:update' word.id %}"   title="Heavy">Heavy</a> {% endif %} </td>
       <td>{% if word.learned %} <a class="learned" href="{% url 'english:update' word.id %}"   title="Learned">Learned</a> {% endif %} </td>
       <td>{% if word.phrasal_verbs %} <a class="phrasal" href="{% url 'english:update' word.id %}"   title="Phrasal">Exam</a> {% endif %} </td>

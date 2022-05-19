@@ -32,10 +32,17 @@
     <input type="checkbox" class="form-control" name="heavy" {% if word.heavy  %} checked {% endif %} >
      </div>
   </div>
-    <div class="mb-1">
+  <div class="row-cols-2">
+      <div class="mb-1">
     <label for="lesson" class="form-label">lesson</label>
     <input type="text" class="form-control" name="lesson" value="{{ word.lesson }}" >
   </div>
+      <div class="mb-1">
+    <label for="repeat_learn" class="form-label">repeat</label>
+    <input type="text" class="form-control" name="repeat_learn" value="{{ word.repeat_learn }}" >
+  </div>
+  </div>
+
 
    <div class="row">
          <div class="col card">
