@@ -78,17 +78,29 @@
 <form id="myForm" role="form" method="get" action="poliv_form"  >
 Управление поливом по рассписанию!
     <div class="row">
-
         <div class="col-sm-8">
-
             <div class="form-group"> <label><span class="hidden-xs">
                 {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a>
     {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>
     {% endif%}
-                        <h6>time</h6>
+                <h6>time</h6>
                     </span></label>
+
                 <div class="input-group"> <input type="number" value="{{ poliv.value }}" name="value" class="form-control" required >
                 </div>
+
+                <label><span class="hidden-xs">
+                <h6>limit</h6>
+
+                <div class="input-group"> <input type="number" value="{{ limit.value }}" name="limit_value" class="form-control" required >
+                </div>
+                     </span></label>
+                <label><span class="hidden-xs">
+                <h6>limit</h6>
+
+                <div class="input-group"> <input type="number" value="{{ start_water_time.value }}" name="start_water_time" class="form-control" required >
+                </div>
+                     </span></label>
             </div>
         </div>
     </div>
@@ -96,6 +108,7 @@
     <button type="submit" formaction="ch_value_time" class="subscribe btn btn-warning btn-block shadow-sm"> Изменить! </button>
     <a  href="{% url 'zapusk_poliva' %}">  <button type="button" class="btn btn-dark b" >Запуск полива </button></a>
 </form>
+{{ limit.value }}
 
 
 

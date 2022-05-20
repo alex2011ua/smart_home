@@ -14,7 +14,12 @@ class Poliv(View):
     def get(request):
         poliv_all = get_status_poliv()
         poliv = Setting.objects.get(controller_name="poliv")
-        context = {"poliv": poliv, "poliv_all": poliv_all}
+        limit, count = Setting.objects.get_or_create(controller_name="limit_rain",
+                                               defaults={"label": "limits of the rain(mm)", "value": 5})
+        start_water_time, count = Setting.objects.get_or_create(controller_name="start_water_time",
+                                               defaults={"label": "start_water_time (min)", "value": 40})
+
+        context = {"poliv": poliv, "poliv_all": poliv_all, "limit": limit, "start_water_time": start_water_time}
 
         return render(request, "core/poliv_index.html", context)
 
@@ -87,7 +92,12 @@ def ch_value_time(request):
     value_time = request.GET.get("value")
     poliv = Setting.objects.get(controller_name="poliv")
     poliv.value = value_time
-
+    limit = Setting.objects.get(controller_name='limit_rain')
+    limit.value = request.GET.get("limit_value")
+    start_water_time = Setting.objects.get(controller_name="start_water_time")
+    start_water_time.value = request.GET.get("start_water_time")
+    start_water_time.save()
+    limit.save()
     poliv.save()
     return redirect(reverse_lazy("poliv_index"))
 

@@ -100,7 +100,8 @@ function start() {
 
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
         if (control_state){
-            learned_f()
+            learned_f();
+            control_st();
         }
         answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
         dell_word();
@@ -118,10 +119,11 @@ function start() {
 
     } else {
         if (control_state) {
+            control_st();
             let word_index = words_obj.indexOf(random_word);
-        if (word_index !== -1) {
-            words_obj.splice(word_index, 1);
-        }
+            if (word_index !== -1) {
+                words_obj.splice(word_index, 1);
+            }
         }
         $.ajax({
             url: '/english/api/word/' + random_word.id + "/",
@@ -199,6 +201,21 @@ function start() {
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
             data: {'learned': true},
+            success: function (text) {
+                console.log('__ok__');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+    }
+    function control_st(){
+        $.ajax({
+            url: '/english/api/word/' + to_del.id + "/",
+            method: 'PATCH',
+            data: {'control': true},
             success: function (text) {
                 console.log('__ok__');
             },

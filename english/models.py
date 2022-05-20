@@ -121,6 +121,8 @@ class WordParams(models.Model):
             p['heavy'] = True
         if params.only_important_words:
             p['important'] = True
+        if params.control_state:
+            p['control'] = False
         return p
 
     @staticmethod
