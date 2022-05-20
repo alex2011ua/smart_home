@@ -57,7 +57,7 @@ var vvod = document.getElementById("vvod");    // счетчик слов
 var learned = document.getElementById('learned'); // кнопка для выученого слова
 var heavy = document.getElementById('heavy'); // кнопка для сложного слова
 var important = document.getElementById('important'); // кнопка для important слова
-var not_heavy = document.getElementById('not_heavy'); // кнопка для сложного слова
+
 count_words.innerHTML = words_obj.length;
 var word_index_to_dell = false;
 let answer = document.getElementById("result");             // правильный ответ
@@ -65,10 +65,43 @@ document.getElementById("word").innerHTML = random_word.russian;
 let ok = document.getElementById("ok");
 let err = document.getElementById("error");
 
+let logo = document.getElementById("logo")
+let control_state=true;
+if (logo.style.backgroundColor){
+    control_state = true
+}
+else{
+    control_state = false
+}
+
 function start() {
     let inp = document.getElementById("vvod").value.trim();
     let to_del = random_word;
+
+    heavy.classList.remove('btn-dark', 'btn-outline-dark')
+    if (to_del.heavy){
+        heavy.classList.add('btn-dark');
+    }else{
+        heavy.classList.add('btn-outline-dark');
+    }
+    learned.classList.remove('btn-success', 'btn-outline-success')
+    if (to_del.learned){
+        learned.classList.add('btn-success');
+    }else{
+        learned.classList.add('btn-outline-success');
+    }
+    important.classList.remove('btn-warning', 'btn-outline-warning')
+    if (to_del.important){
+        important.classList.add('btn-warning');
+    }else{
+        important.classList.add('btn-outline-warning');
+    }
+
+
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
+        if (control_state){
+            learned_f()
+        }
         answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
         dell_word();
 
@@ -84,6 +117,12 @@ function start() {
         answer.style.display = 'block';
 
     } else {
+        if (control_state) {
+            let word_index = words_obj.indexOf(random_word);
+        if (word_index !== -1) {
+            words_obj.splice(word_index, 1);
+        }
+        }
         $.ajax({
             url: '/english/api/word/' + random_word.id + "/",
             method: 'PATCH',
@@ -105,6 +144,7 @@ function start() {
         ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
         dellete_word_button.style.display = 'inline';
+
     }
 
     dellete_word_button.onclick = function () {
@@ -123,7 +163,7 @@ function start() {
         $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
-            data: {'heavy': true},
+            data: {'heavy': !to_del.heavy},
             success: function (text) {
                 console.log('__ok__');
             },
@@ -139,7 +179,7 @@ function start() {
         $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
-            data: {'important': true},
+            data: {'important': !to_del.important},
             success: function (text) {
                 console.log('__ok__');
             },
@@ -150,24 +190,11 @@ function start() {
             },
         });
     }
-    not_heavy.onclick = function () {
-        console.log(to_del);
-        $.ajax({
-            url: '/english/api/word/' + to_del.id + "/",
-            method: 'PATCH',
-            data: {'heavy': false},
-            success: function (text) {
-                console.log('__ok__');
-            },
-            error: function (text) {
-                console.log('__error__');
-                console.log(text);
-                alert('error');
-            },
-        });
-    }
+
     learned.onclick = function () {
-        console.log(to_del);
+        learned_f()
+    }
+    function learned_f(){
         $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
@@ -182,7 +209,6 @@ function start() {
             },
         });
     }
-
 
     random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
     if (random_word == undefined) {
@@ -221,6 +247,7 @@ function start() {
         }
     }
 }
+
 
 submit_button.onclick = function () {
     start();
