@@ -254,7 +254,7 @@ function start() {
                 method: 'PATCH',
                 data: {'learned': true},
                 success: function (text) {
-                    alert("слово выучено!");
+                    console.log(text);
                 },
                 error: function (text) {
                     console.log(text);

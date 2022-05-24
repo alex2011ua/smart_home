@@ -175,9 +175,15 @@ def arduino_poliv(minutes):
     V24_arduino(1)
     V24.label = "включен"
     V24.save()
-    on_klapan("poliv_pesochnica")
-    time.sleep(60 * minutes / 4)
-    off_klapan("poliv_pesochnica")
+    watering_pesochnica = Setting.objects.get(controller_name="watering_pesochnica")
+    watering_trava = Setting.objects.get(controller_name="watering_trava")
+    watering_sad = Setting.objects.get(controller_name="watering_sad")
+    watering_raspberry = Setting.objects.get(controller_name="watering_raspberry")
+    if watering_pesochnica.value:
+        on_klapan("poliv_pesochnica")
+        time.sleep(60 * minutes)
+        off_klapan("poliv_pesochnica")
+
     on_klapan("poliv_trava")
     time.sleep(60 * minutes / 4)
     off_klapan("poliv_trava")

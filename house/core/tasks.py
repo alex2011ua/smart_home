@@ -325,11 +325,11 @@ def bot_task_watering_analiz():
 
 
     for day in weather:
-        if day.temp_max > 25:
-            water_time += 2
+        if day.temp_max > 27:
+            water_time += 1
         if day.temp_max > 30:
-            water_time += 2
-        if day.temp_max > 32:
+            water_time += 1
+        if day.temp_max > 33:
             water_time += 1
         if (day.rain - corect) >= 0:
             sum_rain += day.rain - corect
