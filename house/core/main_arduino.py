@@ -183,13 +183,19 @@ def arduino_poliv(minutes):
         on_klapan("poliv_pesochnica")
         time.sleep(60 * minutes)
         off_klapan("poliv_pesochnica")
+    if watering_trava:
+        on_klapan("poliv_trava")
+        time.sleep(60 * minutes)
+        off_klapan("poliv_trava")
+    if watering_sad:
+        on_klapan("poliv_sad")
+        time.sleep(60 * minutes * 2)
+        off_klapan("poliv_sad")
+    if watering_raspberry:
+        on_klapan("poliv_strawberry")
+        time.sleep(60 * minutes * 2)
+        off_klapan("poliv_strawberry")
 
-    on_klapan("poliv_trava")
-    time.sleep(60 * minutes / 4)
-    off_klapan("poliv_trava")
-    on_klapan("poliv_sad")
-    time.sleep(60 * minutes / 2)
-    off_klapan("poliv_sad")
     V24_arduino(0)
     V24.label = "выключен"
     V24.save()
