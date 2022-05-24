@@ -104,13 +104,13 @@ function start() {
             control_st();
         }
         answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
-        dell_word();
+
 
         let word_index = words_obj.indexOf(random_word);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
         }
-
+        dell_word();
         document.getElementById("vvod").value = '';
         ok.style.display = 'none';
         err.style.display = 'block';
@@ -234,7 +234,7 @@ function start() {
     document.getElementById("word").innerHTML = random_word.russian;
     count_words.innerHTML = words_obj.length;
     function dell_word(){
-        if (random_word.repeat_learn > 0) {
+        if (to_del.repeat_learn > 0) {
             $.ajax({
                 url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',

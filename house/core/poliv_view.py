@@ -18,8 +18,28 @@ class Poliv(View):
                                                defaults={"label": "limits of the rain(mm)", "value": 5})
         start_water_time, count = Setting.objects.get_or_create(controller_name="start_water_time",
                                                defaults={"label": "start_water_time (min)", "value": 40})
+        watering_pesochnica, count = Setting.objects.get_or_create(controller_name="watering_pesochnica", defaults={
+            "label": "poliv pesochnici", "value": 0
+        })
+        watering_trava, count = Setting.objects.get_or_create(controller_name="watering_trava", defaults={
+            "label": "poliv trava", "value": 0
+        })
+        watering_sad, count = Setting.objects.get_or_create(controller_name="watering_sad", defaults={
+            "label": "poliv sad", "value": 0
+        })
+        watering_raspberry, count = Setting.objects.get_or_create(controller_name="watering_raspberry", defaults={
+            "label": "poliv raspberry", "value": 0
+        })
 
-        context = {"poliv": poliv, "poliv_all": poliv_all, "limit": limit, "start_water_time": start_water_time}
+        context = {"poliv": poliv,
+                   "poliv_all": poliv_all,
+                   "limit": limit,
+                   "start_water_time": start_water_time,
+                   "watering_pesochnica": watering_pesochnica,
+                   "watering_trava": watering_trava,
+                   "watering_sad": watering_sad,
+                   "watering_raspberry": watering_raspberry,
+                   }
 
         return render(request, "core/poliv_index.html", context)
 
@@ -92,13 +112,31 @@ def ch_value_time(request):
     value_time = request.GET.get("value")
     poliv = Setting.objects.get(controller_name="poliv")
     poliv.value = value_time
+    poliv.save()
     limit = Setting.objects.get(controller_name='limit_rain')
     limit.value = request.GET.get("limit_value")
+    limit.save()
     start_water_time = Setting.objects.get(controller_name="start_water_time")
     start_water_time.value = request.GET.get("start_water_time")
     start_water_time.save()
-    limit.save()
-    poliv.save()
+    watering_pesochnica = request.GET.get("watering_pesochnica")
+    watering_trava = request.GET.get("watering_trava")
+    watering_sad = request.GET.get("watering_sad")
+    watering_raspberry = request.GET.get("watering_raspberry")
+
+    pesochnica = Setting.objects.get(controller_name="watering_pesochnica")
+    pesochnica.value = 1 if watering_pesochnica == "on" else 0
+    pesochnica.save()
+    trava = Setting.objects.get(controller_name="watering_trava")
+    trava.value = 1 if watering_trava == "on" else 0
+    trava.save()
+    sad = Setting.objects.get(controller_name="watering_sad")
+    sad.value = 1 if watering_sad == "on" else 0
+    sad.save()
+    raspberry = Setting.objects.get(controller_name="watering_raspberry")
+    raspberry.value = 1 if watering_raspberry == "on" else 0
+    raspberry.save()
+
     return redirect(reverse_lazy("poliv_index"))
 
 
