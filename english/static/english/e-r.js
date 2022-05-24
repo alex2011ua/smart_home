@@ -248,7 +248,6 @@ function start() {
                 },
             });
         } else {
-            alert("слово выучено!");
             $.ajax({
                 url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
