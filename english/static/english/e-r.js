@@ -126,7 +126,8 @@ function start() {
                 words_obj.splice(word_index, 1);
             }
         }
-        $.ajax({
+        if (random_word.repeat_learn<7){
+                    $.ajax({
             url: '/english/api/word/' + random_word.id + "/",
             method: 'PATCH',
             data: {'repeat_learn': random_word.repeat_learn + 1},
@@ -139,6 +140,8 @@ function start() {
                 alert(text);
             },
         });
+        }
+
 
         document.getElementById("vvod").value = '';
         answer.style.display = 'block'
