@@ -99,18 +99,19 @@ function start() {
 
 
     if (inp.toLowerCase() === random_word.english.toLowerCase()) {
-        if (control_state){
-            learned_f();
-            control_st();
-        }
-        answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
 
+        answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
 
         let word_index = words_obj.indexOf(random_word);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
         }
-        dell_word();
+        if (control_state){
+            learned_f(random_word)
+            control_st();
+        }
+        dell_word(random_word);
+
         document.getElementById("vvod").value = '';
         ok.style.display = 'none';
         err.style.display = 'block';
@@ -192,40 +193,10 @@ function start() {
             },
         });
     }
-
     learned.onclick = function () {
         learned_f()
     }
-    function learned_f(){
-        $.ajax({
-            url: '/english/api/word/' + to_del.id + "/",
-            method: 'PATCH',
-            data: {'learned': true},
-            success: function (text) {
-                console.log('__ok__');
-            },
-            error: function (text) {
-                console.log('__error__');
-                console.log(text);
-                alert('error');
-            },
-        });
-    }
-    function control_st(){
-        $.ajax({
-            url: '/english/api/word/' + to_del.id + "/",
-            method: 'PATCH',
-            data: {'control': true},
-            success: function (text) {
-                console.log('__ok__');
-            },
-            error: function (text) {
-                console.log('__error__');
-                console.log(text);
-                alert('error');
-            },
-        });
-    }
+
 
     random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
     if (random_word == undefined) {
@@ -233,12 +204,12 @@ function start() {
     }
     document.getElementById("word").innerHTML = random_word.russian;
     count_words.innerHTML = words_obj.length;
-    function dell_word(){
-        if (to_del.repeat_learn > 0) {
+    function dell_word(word = to_del){
+        if (word.repeat_learn > 0) {
             $.ajax({
-                url: '/english/api/word/' + to_del.id + "/",
+                url: '/english/api/word/' + word.id + "/",
                 method: 'PATCH',
-                data: {'repeat_learn': to_del.repeat_learn - 1},
+                data: {'repeat_learn': word.repeat_learn - 1},
                 success: function (text) {
                     console.log(text)
                 },
@@ -249,7 +220,7 @@ function start() {
             });
         } else {
             $.ajax({
-                url: '/english/api/word/' + to_del.id + "/",
+                url: '/english/api/word/' + word.id + "/",
                 method: 'PATCH',
                 data: {'learned': true},
                 success: function (text) {
@@ -261,6 +232,59 @@ function start() {
                 },
             });
         }
+    }
+    function learned_f(word=to_del){
+        if (word.learned){
+            $.ajax({
+                url: '/english/api/word/' + word.id + "/",
+                method: 'PATCH',
+                data: {'learned': false},
+                success: function (text) {
+                    console.log('__ok__');
+                },
+                error: function (text) {
+                    console.log('__error__');
+                    console.log(text);
+                    alert('error');
+                },
+            });
+        }else {
+            $.ajax({
+                url: '/english/api/word/' + word.id + "/",
+                method: 'PATCH',
+                data: {'learned': true},
+                success: function (text) {
+                    console.log('__ok__');
+                },
+                error: function (text) {
+                    console.log('__error__');
+                    console.log(text);
+                    alert('error');
+                },
+            });
+        }
+        word.learned = !word.learned
+        learned.classList.remove('btn-success', 'btn-outline-success')
+        if (word.learned){
+        learned.classList.add('btn-success');
+    }else{
+        learned.classList.add('btn-outline-success');
+    }
+    }
+    function control_st(){
+        $.ajax({
+            url: '/english/api/word/' + random_word.id + "/",
+            method: 'PATCH',
+            data: {'control': true},
+            success: function (text) {
+                console.log('__ok__');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
     }
 }
 

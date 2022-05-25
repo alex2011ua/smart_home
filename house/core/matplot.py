@@ -114,7 +114,7 @@ def calendar_plot(
 def calend():
     dates = date_range("2022-05-01", "2022-09-30")
     poliv = Params.objects.filter(poliv__gt=10)
-    data = [9 for _ in range(len(dates))]
+    data = [5 for _ in range(len(dates))]
     for i in poliv:
         if i.date_t_h.date() in dates:
             ind = dates.index(i.date_t_h.date())

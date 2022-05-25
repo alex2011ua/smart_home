@@ -137,9 +137,7 @@ def clear_control(request):
     params.control_state = False
     params.save()
     all = WordParams.get_words(request.user.id)
-    for item in all:
-        item.dell_control(request.user.id)
-
+    all.update(control=False)
     return redirect("english:english_index")
 
 
@@ -154,8 +152,7 @@ def clear_learned(request):
     params.learned = False
     params.save()
     all = WordParams.get_words(request.user.id)
-    for item in all:
-        item.dell_learned(request.user.id)
+    all.update(learned=False)
     return redirect("english:english_index")
 
 
