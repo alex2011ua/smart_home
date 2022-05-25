@@ -162,11 +162,11 @@ function start() {
 
     }
     heavy.onclick = function () {
-        console.log(to_del);
+        to_del.heavy = !to_del.heavy
         $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
-            data: {'heavy': !to_del.heavy},
+            data: {'heavy': to_del.heavy},
             success: function (text) {
                 console.log('__ok__');
             },
@@ -176,13 +176,20 @@ function start() {
                 alert('error');
             },
         });
+
+        heavy.classList.remove('btn-dark', 'btn-outline-dark')
+        if (to_del.heavy){
+            heavy.classList.add('btn-dark');
+        }else{
+            heavy.classList.add('btn-outline-dark');
+        }
     }
     important.onclick = function () {
-        console.log(to_del);
+        to_del.important = !to_del.important
         $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
-            data: {'important': !to_del.important},
+            data: {'important': to_del.important},
             success: function (text) {
                 console.log('__ok__');
             },
@@ -192,6 +199,13 @@ function start() {
                 alert('error');
             },
         });
+
+        important.classList.remove('btn-warning', 'btn-outline-warning')
+        if (to_del.important){
+            important.classList.add('btn-warning');
+        }else{
+            important.classList.add('btn-outline-warning');
+        }
     }
     learned.onclick = function () {
         learned_f()
