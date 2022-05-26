@@ -179,28 +179,33 @@ def arduino_poliv(minutes):
     watering_trava = Setting.objects.get(controller_name="watering_trava")
     watering_sad = Setting.objects.get(controller_name="watering_sad")
     watering_raspberry = Setting.objects.get(controller_name="watering_raspberry")
+    sum_minutes = 0
     if watering_pesochnica.value:
         on_klapan("poliv_pesochnica")
         time.sleep(60 * minutes)
         off_klapan("poliv_pesochnica")
-    if watering_trava:
+        sum_minutes += minutes
+    if watering_trava.value:
         on_klapan("poliv_trava")
         time.sleep(60 * minutes)
         off_klapan("poliv_trava")
-    if watering_sad:
+        sum_minutes += minutes
+    if watering_sad.value:
         on_klapan("poliv_sad")
         time.sleep(60 * minutes * 2)
         off_klapan("poliv_sad")
-    if watering_raspberry:
+        sum_minutes += minutes
+    if watering_raspberry.value:
         on_klapan("poliv_strawberry")
         time.sleep(60 * minutes * 2)
         off_klapan("poliv_strawberry")
+        sum_minutes += minutes
 
     V24_arduino(0)
     V24.label = "выключен"
     V24.save()
     logger.warning("end poliv")
-    # todo
+    return sum_minutes
 
 
 def arduino_pshik(param):

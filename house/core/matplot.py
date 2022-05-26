@@ -114,14 +114,14 @@ def calendar_plot(
 def calend():
     dates = date_range("2022-05-01", "2022-09-30")
     poliv = Params.objects.filter(poliv__gt=10)
-    data = [5 for _ in range(len(dates))]
+    data = [0 for _ in range(len(dates))]
     for i in poliv:
         if i.date_t_h.date() in dates:
             ind = dates.index(i.date_t_h.date())
-            data[ind] = i.poliv
+            data[ind] += i.poliv
     today = datetime.date.today()
     ind = dates.index(today)
-    data[ind] = 0
+    data[ind] = -5
 
     calendar_plot(dates, data, date_label=True)
 

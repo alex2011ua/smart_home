@@ -79,46 +79,44 @@
 <form id="myForm" role="form" method="get" action="poliv_form"  >
 Управление поливом по рассписанию!
     <div class="row">
-        <div class="col-sm-8">
-            <div class="form-group"> <label><span class="hidden-xs">
+        <div class="col-sm">
+            <div class="form-group">
+                <label><span class="hidden-xs">
                 {% if poliv.label == 'выключен' %} <a href="{% url 'poliv_on_of'  %}">  <button type="button" class="btn btn-secondary b" >Включить полив</button></a>
-    {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>
-    {% endif%}
-                <h6>time</h6>
-                    </span></label>
-
+                {% else %} <a href="{% url 'poliv_on_of' %} ">  <button type="button" class="btn btn-success  b" >Выключить полив</button></a>
+                {% endif%}
+                </span></label>
+                <h6>Время сегодняшнего полива</h6>
                 <div class="input-group"> <input type="number" value="{{ poliv.value }}" name="value" class="form-control" required >
                 </div>
 
-                <label><span class="hidden-xs">
-                <h6>limit</h6>
 
-                <div class="input-group"> <input type="number" value="{{ limit.value }}" name="limit_value" class="form-control" required >
-                </div>
-                     </span></label>
-                <label>
-                    <span class="hidden-xs">
-                <h6>limit</h6>
+                    <h6>Лимит включения полива</h6>
+                    <div class="input-group"> <input type="number" value="{{ limit.value }}" name="limit_value" class="form-control" required >
+                    </div>
 
-                <div class="input-group"> <input type="number" value="{{ start_water_time.value }}" name="start_water_time" class="form-control" required >
-</div>
-                     </span></label>
+
+
+                    <h6>Стартовое время полива</h6>
+                    <div class="input-group"> <input type="number" value="{{ start_water_time.value }}" name="start_water_time" class="form-control" required >
+                    </div>
+
                     <!--                        checkers to select zone of watering-->
 
-<div class="row">
- <div class="form-check form-switch">
+<div class="row" style="text-align: left">
+ <div class="col-sm-6 form-check form-switch">
   <input class="form-check-input" name="watering_pesochnica" type="checkbox" role="switch" id="watering_pesochnica" {% if watering_pesochnica.value %} checked {% endif %}>
   <label class="form-check-label" for="watering_pesochnica">{{watering_pesochnica.label}}</label>
 </div>
- <div class="form-check form-switch">
+ <div class="col-sm-6 form-check form-switch">
   <input class="form-check-input" name="watering_trava" type="checkbox" role="switch" id="watering_trava" {% if watering_trava.value %} checked {% endif %}>
   <label class="form-check-label" for="watering_trava">{{watering_trava.label}}</label>
 </div>
-<div class="form-check form-switch">
+<div class="col-sm-6 form-check form-switch">
   <input class="form-check-input" name="watering_sad" type="checkbox" role="switch" id="watering_sad" {% if watering_sad.value %} checked {% endif %}>
   <label class="form-check-label" for="watering_sad">{{watering_sad.label}}</label>
 </div>
-<div class="form-check form-switch">
+<div class="col-sm-6 form-check form-switch">
   <input class="form-check-input" name="watering_raspberry" type="checkbox" role="switch" id="watering_raspberry" {% if watering_raspberry.value %} checked {% endif %}>
   <label class="form-check-label" for="watering_raspberry">{{watering_raspberry.label}}</label>
 </div>

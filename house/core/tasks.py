@@ -253,7 +253,6 @@ def boiler_task_off():
 @cellery_app.task()
 def bot_task():
     """запускается каждые 2 минуты"""
-    print("Start bot task")
     alarms = Setting.objects.get(controller_name="alarms")
     if alarms.value == 0:
         print("Stop bot task off(alarm off)")
@@ -261,12 +260,9 @@ def bot_task():
     temp = DHT_MQ.objects.all().order_by("-date_t_h")[0]
     MQ4 = temp.gaz_MQ4 or 0
     MQ135 = temp.gaz_MQ135 or 0
-    if (MQ4 > 130) or (MQ135 > 60):
+    if (MQ4 > 135) or (MQ135 > 75):
         gaz_analiz(MQ4, MQ135)
-
     button_analiz(DEBUG)
-
-    print("Stop bot task off")
 
 
 @cellery_app.task()
@@ -355,8 +351,8 @@ def poliv(force=None):
     """включениe полива"""
     poliv = Setting.objects.get(controller_name="poliv")
     if poliv.label == "включен" or force:
-        Params.objects.create(poliv=poliv.value, date_t_h=datetime.now())
-        arduino_poliv(poliv.value)
+        sum_minutes = arduino_poliv(poliv.value)
+        Params.objects.create(poliv=sum_minutes, date_t_h=datetime.now())
         bot.send_message(f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else "")
 
 
