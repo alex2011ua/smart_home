@@ -57,7 +57,6 @@ var vvod = document.getElementById("vvod");    // счетчик слов
 var learned = document.getElementById('learned'); // кнопка для выученого слова
 var heavy = document.getElementById('heavy'); // кнопка для сложного слова
 var important = document.getElementById('important'); // кнопка для important слова
-
 count_words.innerHTML = words_obj.length;
 var word_index_to_dell = false;
 let answer = document.getElementById("result");             // правильный ответ
@@ -77,7 +76,12 @@ else{
 function start() {
     let inp = document.getElementById("vvod").value.trim();
     let to_del = random_word;
-
+    random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
+    if (random_word == undefined) {
+        alert("Слова закончились, отдохни!!!");
+    }
+    document.getElementById("word").innerHTML = random_word.russian;
+    count_words.innerHTML = words_obj.length;
     heavy.classList.remove('btn-dark', 'btn-outline-dark')
     if (to_del.heavy){
         heavy.classList.add('btn-dark');
@@ -98,20 +102,20 @@ function start() {
     }
 
 
-    if (inp.toLowerCase() === random_word.english.toLowerCase()) {
+    if (inp.toLowerCase() === to_del.english.toLowerCase()) {
 
-        answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
+        answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
 
         let word_index = words_obj.indexOf(random_word);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
         }
         if (control_state){
-            learned_f(random_word)
+            learned_f()
             control_st();
         }
-        dell_word(random_word);
-
+        dell_word();
+        count_words.innerHTML = words_obj.length;
         document.getElementById("vvod").value = '';
         ok.style.display = 'none';
         err.style.display = 'block';
@@ -121,19 +125,19 @@ function start() {
     } else {
         if (control_state) {
             control_st();
-            let word_index = words_obj.indexOf(random_word);
+            let word_index = words_obj.indexOf(to_del);
             if (word_index !== -1) {
                 words_obj.splice(word_index, 1);
             }
         }
         if (random_word.repeat_learn<7){
                     $.ajax({
-            url: '/english/api/word/' + random_word.id + "/",
+            url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
-            data: {'repeat_learn': random_word.repeat_learn + 1},
+            data: {'repeat_learn': to_del.repeat_learn + 1},
             success: function (text) {
-                console.log(text);
-                console.log(random_word.repeat_learn);
+                console.log("ok - repeat  learn - "+ to_del.repeat_learn);
+
             },
             error: function (text) {
                 console.log(text);
@@ -145,11 +149,12 @@ function start() {
 
         document.getElementById("vvod").value = '';
         answer.style.display = 'block'
-        answer.innerText = random_word.english + " - " + random_word.russian + "//" + random_word.repeat_learn + "//";
+        answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
         ok.style.display = 'block'
         ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
         dellete_word_button.style.display = 'inline';
+        count_words.innerHTML = words_obj.length;
 
     }
 
@@ -215,18 +220,13 @@ function start() {
     }
 
 
-    random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
-    if (random_word == undefined) {
-        alert("Слова закончились, отдохни!!!");
-    }
-    document.getElementById("word").innerHTML = random_word.russian;
-    count_words.innerHTML = words_obj.length;
-    function dell_word(word = to_del){
-        if (word.repeat_learn > 0) {
+
+    function dell_word(){
+        if (to_del.repeat_learn > 0) {
             $.ajax({
-                url: '/english/api/word/' + word.id + "/",
+                url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
-                data: {'repeat_learn': word.repeat_learn - 1},
+                data: {'repeat_learn': to_del.repeat_learn - 1},
                 success: function (text) {
                     console.log(text)
                 },
@@ -237,7 +237,7 @@ function start() {
             });
         } else {
             $.ajax({
-                url: '/english/api/word/' + word.id + "/",
+                url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
                 data: {'learned': true},
                 success: function (text) {
@@ -250,14 +250,14 @@ function start() {
             });
         }
     }
-    function learned_f(word=to_del){
-        if (word.learned){
+    function learned_f(){
+        if (to_del.learned){
             $.ajax({
-                url: '/english/api/word/' + word.id + "/",
+                url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
                 data: {'learned': false},
                 success: function (text) {
-                    console.log('__ok__');
+                    console.log('__ok__ learned : false');
                 },
                 error: function (text) {
                     console.log('__error__');
@@ -267,7 +267,7 @@ function start() {
             });
         }else {
             $.ajax({
-                url: '/english/api/word/' + word.id + "/",
+                url: '/english/api/word/' + to_del.id + "/",
                 method: 'PATCH',
                 data: {'learned': true},
                 success: function (text) {
@@ -280,24 +280,27 @@ function start() {
                 },
             });
         }
-        word.learned = !word.learned
+        to_del.learned = !to_del.learned
         learned.classList.remove('btn-success', 'btn-outline-success')
-        if (word.learned){
+        if (to_del.learned){
         learned.classList.add('btn-success');
     }else{
         learned.classList.add('btn-outline-success');
     }
     }
     function control_st(){
+        console.log('control: staart');
+        console.log(to_del);
+
         $.ajax({
-            url: '/english/api/word/' + random_word.id + "/",
+            url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
             data: {'control': true},
             success: function (text) {
-                console.log('__ok__');
+                console.log('__ok__control: true');
             },
             error: function (text) {
-                console.log('__error__');
+                console.log('__error__control: true');
                 console.log(text);
                 alert('error');
             },
