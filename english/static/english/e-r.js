@@ -80,6 +80,12 @@ function start() {
     if (random_word == undefined) {
         alert("Слова закончились, отдохни!!!");
     }
+    if (random_word.id==to_del.id){
+        random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
+    }
+    if (random_word.id==to_del.id){
+        random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
+    }
     document.getElementById("word").innerHTML = random_word.russian;
     count_words.innerHTML = words_obj.length;
     heavy.classList.remove('btn-dark', 'btn-outline-dark')
