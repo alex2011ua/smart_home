@@ -97,7 +97,7 @@ def setup_periodic_task_bot(sender, **kwargs):
 # ежечасный мониторинг температуры теплицы
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_1_hour(sender, **kwargs):
-    sender.add_periodic_task(crontab(minute=6), bot_task_1_hour.s(), name="bot_task_hour")
+    sender.add_periodic_task(crontab(minute=46), bot_task_1_hour.s(), name="bot_task_hour")
 
 
 # мониторинг включенной илюминации

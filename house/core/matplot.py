@@ -94,7 +94,7 @@ def calendar_plot(
             cal_mode=True,
         )
 
-    for ax in axes.reshape(-1)[len(year_months) :]:
+    for ax in axes.reshape(-1)[len(year_months):]:
         ax.set_visible(False)
 
     plt.subplots_adjust(wspace=0.75, hspace=0.5)
