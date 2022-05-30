@@ -106,7 +106,7 @@ function start() {
 
         answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
 
-        let word_index = words_obj.indexOf(random_word);
+        let word_index = words_obj.indexOf(to_del);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
         }
@@ -130,7 +130,7 @@ function start() {
                 words_obj.splice(word_index, 1);
             }
         }
-        if (random_word.repeat_learn<7){
+        if (to_del.repeat_learn<7){
                     $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
