@@ -344,6 +344,7 @@ def bot_task_watering_analiz():
         poliv.value = water_time - sum_rain
         poliv.label = "включен"
     poliv.save()
+    calend()
 
 
 @cellery_app.task()
@@ -351,19 +352,24 @@ def poliv(force=None):
     """включениe полива"""
     poliv = Setting.objects.get(controller_name="poliv")
     if poliv.label == "включен" or force:
-        sum_minutes = arduino_poliv(poliv.value)
-        Params.objects.create(poliv=sum_minutes, date_t_h=datetime.now())
-        bot.send_message(f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else "")
-
-
-@cellery_app.task()
-def pshik(force=None):
-    """включениe режима пшик"""
-    pshik = Setting.objects.get(controller_name="pshik")
-    if poliv.label == "включен" or force:
-        Params.objects.create(poliv=pshik.value, date_t_h=datetime.now())
+        time_all_poliv = 2 * poliv.value * Setting.objects.get(controller_name="watering_raspberry").value + \
+                         2 * poliv.value * Setting.objects.get(controller_name="watering_sad").value + \
+                         poliv.value * Setting.objects.get(controller_name="watering_trava").value + \
+                         poliv.value * Setting.objects.get(controller_name="watering_pesochnica").value
+        Params.objects.create(poliv=time_all_poliv, date_t_h=datetime.now())
         arduino_poliv(poliv.value)
-        bot.send_message(f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else "")
+
+        bot.send_message(f"Полив завершен: {time_all_poliv} min." + "(принудительно)" if force else "")
+
+#
+# @cellery_app.task()
+# def pshik(force=None):
+#     """включениe режима пшик"""
+#     pshik = Setting.objects.get(controller_name="pshik")
+#     if poliv.label == "включен" or force:
+#         Params.objects.create(poliv=pshik.value, date_t_h=datetime.now())
+#         arduino_poliv(poliv.value)
+#         bot.send_message(f"Полив завершен: {poliv.value} min." + "(принудительно)" if force else "")
 
 
 @cellery_app.task()
@@ -390,7 +396,7 @@ def lights_off():
 @cellery_app.task()
 def report_10_am():
     """check new car and make plot calendar"""
-    calend()
+
     list_all_cars = check()
     list_new_car = []
     for car in list_all_cars:
