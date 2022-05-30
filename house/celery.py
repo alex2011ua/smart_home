@@ -56,7 +56,7 @@ def setup_periodic_tasks(sender, **kwargs):
 def setup_periodic_tasks_weather(sender, **kwargs):
     try:
         sender.add_periodic_task(
-            crontab(minute=2, hour=1 - time_correct),
+            crontab(minute=2, hour=7 - time_correct),
             weather_task.s(),
             name="Weather_task",
         )

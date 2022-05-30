@@ -44,7 +44,7 @@ def weather_now():  # погода на сегодня и завтра
         "wind_speed_next": d["daily"][0]["wind_speed"],
         "status_code": r.status_code,
     }
-    #  создаем спидок правительственных придупреждений
+    #  создаем спидок правительственных предупреждений
     if d.get("alerts"):
         context["alerts"] = []
         for item in d["alerts"]:
@@ -132,3 +132,22 @@ def rain_yesterday():
         "status_code": r.status_code,
     }
     return context
+
+if __name__ == "__main__":
+    loc_path = os.path.dirname(__file__)
+    loc_path = os.path.split(loc_path)
+
+    dotenv_path = os.path.join(loc_path[0], ".env")
+    from dotenv import load_dotenv
+    if os.path.exists(dotenv_path):
+        load_dotenv(dotenv_path)
+    APPID_Weather = os.environ.get("APPID_Weather")
+    payload = {
+        "lat": 50.40,
+        "lon": 30.31,
+        "appid": APPID_Weather,
+        "units": "metric",
+        "lang": "ru",
+    }
+    print(rain_yesterday())
+    print(weather_6_day())

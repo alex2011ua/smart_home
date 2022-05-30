@@ -64,7 +64,7 @@ def weather_task():
         six_day = weather_6_day()
         yesterday = rain_yesterday()
     except Exception as err:
-        log = Logs.objects.create(
+        Logs.objects.create(
             date_log=datetime.now(),
             status="Error",
             title_log="Task weather_task",
@@ -77,34 +77,20 @@ def weather_task():
             status="Error",
             title_log="Task weather_task",
             description_log=f'Код ответа прогноза - {six_day["status_code"]}, '
-            f'код ответа запроса "вчера" - {yesterday["status_code"]}',
+                            f'код ответа запроса "вчера" - {yesterday["status_code"]}',
         )
-    try:
-
-        Weather.objects.create(
-            date=six_day["tomorrow_date"],
-            rain=six_day["summ_rain_3_day"],
-            temp_min=six_day["min_temp"],
-            temp_max=six_day["max_temp"],
-            snow=six_day["summ_snow_3_day"],
-        )
-    except django.db.utils.IntegrityError:
-        r_tomorrow = Weather.objects.get(date=six_day["tomorrow_date"])
-        Logs.objects.create(
-            date_log=datetime.now(),
-            status="Error",
-            title_log="Task weather_task",
-            description_log="Ошибка записи в БД, " + str(r_tomorrow),
-        )
-    try:
-        r_yesterday = Weather.objects.get(date=yesterday["result_date"])
-    except ObjectDoesNotExist:
-        r_yesterday = Weather.objects.create(date=yesterday["result_date"])
+    r_yesterday, _ = Weather.objects.get_or_create(date=yesterday["result_date"])
     r_yesterday.rain = yesterday["sum_rain"]
     r_yesterday.snow = yesterday["sum_snow"]
     r_yesterday.temp_min = yesterday["min_temp"]
     r_yesterday.temp_max = yesterday["max_temp"]
     r_yesterday.save()
+    tomorrow, _ = Weather.objects.get_or_create(date=six_day["tomorrow_date"])
+    tomorrow.rain = six_day["summ_rain_3_day"]
+    tomorrow.temp_min = six_day["min_temp"]
+    tomorrow.temp_max = six_day["max_temp"]
+    tomorrow.snow = six_day["summ_snow_3_day"]
+    tomorrow.save()
 
     print("weather_task end")
 
@@ -302,7 +288,6 @@ def bot_task_11_hour():
 
     open_controll = button(DEBUG)  # {'Garaz': True, 'Dor_street': False}
     if open_controll["Garaz"] is True or open_controll["Dor_street"] is True:
-
         bot.send_message("Не закрыты дверь или гараж!")
         send_viber("Не закрыты дверь или гараж!")
 
@@ -318,7 +303,6 @@ def bot_task_watering_analiz():
     sum_rain = 0
     corect = -1
     water_time = Setting.objects.get(controller_name="start_water_time").value
-
 
     for day in weather:
         if day.temp_max > 27:
@@ -360,6 +344,7 @@ def poliv(force=None):
         arduino_poliv(poliv.value)
 
         bot.send_message(f"Полив завершен: {time_all_poliv} min." + "(принудительно)" if force else "")
+
 
 #
 # @cellery_app.task()
