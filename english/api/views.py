@@ -9,6 +9,11 @@ class WordRUD(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = WordsSerializer
     queryset = Words.objects.all()
 
+    # def patch(self, request, *args, **kwargs):
+    #     print(request)
+    #     print(request.POST)
+    #     super().patch(self, request, *args, **kwargs)
+
 
 class RepeatWordListView(generics.ListAPIView):
     serializer_class = WordsSerializer

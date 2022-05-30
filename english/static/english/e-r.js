@@ -129,7 +129,7 @@ function start() {
             if (word_index !== -1) {
                 words_obj.splice(word_index, 1);
             }
-        }
+        }else{
         if (to_del.repeat_learn<7){
                     $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
@@ -144,6 +144,7 @@ function start() {
                 alert(text);
             },
         });
+        }
         }
 
 
