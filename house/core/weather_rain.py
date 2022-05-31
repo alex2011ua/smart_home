@@ -67,7 +67,7 @@ def weather_6_day():
 
     summ_rain_3_day = 0.0
     summ_snow_3_day = 0.0
-    for i in d["daily"][0:3]:
+    for i in d["daily"][0:2]:
         if i.get("rain"):
             summ_rain_3_day += float(i["rain"])
         if i.get("snow"):
@@ -80,8 +80,8 @@ def weather_6_day():
             min_temp = i["temp"]["min"]
         if i["temp"]["max"] > max_temp:
             max_temp = i["temp"]["max"]
-    start_Date = date.today()  # год, месяц, число
-    tomorrow_date = start_Date + timedelta(days=1)
+
+    tomorrow_date = date.today()
     context = {
         "tomorrow_date": tomorrow_date,
         "summ_rain_3_day": summ_rain_3_day,
