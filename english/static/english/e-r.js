@@ -117,7 +117,6 @@ function start() {
             words_obj.splice(word_index, 1);
         }
         if (control_state){
-            learned_f()
             control_st();
         }
         dell_word();
@@ -243,18 +242,37 @@ function start() {
                 },
             });
         } else {
-            $.ajax({
-                url: '/english/api/word/' + to_del.id + "/",
-                method: 'PATCH',
-                data: {'learned': true},
-                success: function (text) {
-                    console.log(text);
-                },
-                error: function (text) {
-                    console.log(text);
-                    alert(text);
-                },
-            });
+            if (to_del.heavy){
+                to_del.heavy = !to_del.heavy
+                $.ajax({
+                    url: '/english/api/word/' + to_del.id + "/",
+                    method: 'PATCH',
+                    data: {'heavy': to_del.heavy,
+                            'repeat_learn': 3
+                    },
+                    success: function (text) {
+                        console.log('__ok__');
+                    },
+                    error: function (text) {
+                        console.log('__error__');
+                        console.log(text);
+                        alert('error');
+                    },
+                });
+            }else {
+                $.ajax({
+                    url: '/english/api/word/' + to_del.id + "/",
+                    method: 'PATCH',
+                    data: {'learned': true},
+                    success: function (text) {
+                        console.log(text);
+                    },
+                    error: function (text) {
+                        console.log(text);
+                        alert(text);
+                    },
+                });
+            }
         }
     }
     function learned_f(){
