@@ -30,6 +30,8 @@ from house.core.tasks import (
     report_10_am,
     restart_cam_task,
     weather_task,
+    start_filtering,
+    stop_filtering,
 )
 
 from .core.models import Logs
@@ -171,4 +173,20 @@ def setup_periodic_tasks_report_on_10(sender, **kwargs):
             date_log=datetime.datetime.now(),
             title_log="Celery",
             description_log=f"{err}- превышен лимит времени",
+        )
+
+
+#start pool filtering
+@cellery_app.on_after_configure.connect
+def setup_periodic_tasks_pool_filtering_start(sender, **kwargs):
+        sender.add_periodic_task(
+            crontab(minute=4, hour=1 - time_correct), start_filtering.s()
+        )
+
+
+#stop pool filtering
+@cellery_app.on_after_configure.connect
+def setup_periodic_tasks_pool_filtering_stop(sender, **kwargs):
+        sender.add_periodic_task(
+            crontab(minute=4, hour=6 - time_correct), stop_filtering.s()
         )

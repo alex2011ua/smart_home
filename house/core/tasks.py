@@ -18,7 +18,8 @@ from .main_arduino import (
     arduino_poliv,
     arduino_restart_5v,
     get_arduino_answer,
-    rele_light_balkon
+    rele_light_balkon,
+    bassein
 )
 from .matplot import refresh, calend
 from .models import DHT_MQ, Avto, Logs, Params, Setting, Weather
@@ -360,22 +361,25 @@ def poliv(force=None):
 @cellery_app.task()
 def lights_on():
     """включениe иллюминации балкона"""
-
-    rele = Setting.objects.get(controller_name="light_perim")
-    if rele.value == 0:
-        rele_light_perim(1)
-        rele.value = 1
-        rele.save()
+    flag = Setting.objects.get(controller_name="regular")
+    if flag.value:
+        rele = Setting.objects.get(controller_name="light_balkon")
+        if rele.value == 0:
+            rele_light_balkon(1)
+            rele.value = 1
+            rele.save()
 
 
 @cellery_app.task()
 def lights_off():
     """ВЫключениe иллюминации балкона"""
-    rele = Setting.objects.get(controller_name="light_perim")
-    if rele.value == 1:
-        rele_light_perim(0)
-        rele.value = 0
-        rele.save()
+    flag = Setting.objects.get(controller_name="regular")
+    if flag.value:
+        rele = Setting.objects.get(controller_name="light_balkon")
+        if rele.value == 1:
+            rele_light_balkon(0)
+            rele.value = 0
+            rele.save()
 
 
 @cellery_app.task()
@@ -397,3 +401,29 @@ def report_10_am():
         avto = Avto.objects.get(car_id=new_car)
         avto.link_car = link
         avto.save()
+
+
+@cellery_app.task()
+def start_filtering():
+    """start filtering pool"""
+    flag = Setting.objects.get(controller_name="regular")
+    if flag.value:
+        logger.warning("Start filtering")
+        rele = Setting.objects.get(controller_name="bassein")
+        if rele.value == 0:
+            rele.value = 1
+            rele.save()
+        bassein(1)
+
+
+@cellery_app.task()
+def stop_filtering():
+    """stop filtering pool"""
+    flag = Setting.objects.get(controller_name="regular")
+    if flag.value:
+        logger.warning("Stop filtering")
+        rele = Setting.objects.get(controller_name="bassein")
+        if rele.value == 1:
+            rele.value = 0
+            rele.save()
+        bassein(0)

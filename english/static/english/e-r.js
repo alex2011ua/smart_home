@@ -260,52 +260,26 @@ function start() {
                     },
                 });
             }else {
-                $.ajax({
-                    url: '/english/api/word/' + to_del.id + "/",
-                    method: 'PATCH',
-                    data: {'learned': true},
-                    success: function (text) {
-                        console.log(text);
-                    },
-                    error: function (text) {
-                        console.log(text);
-                        alert(text);
-                    },
-                });
+                learned_f()
             }
         }
     }
     function learned_f(){
-        if (to_del.learned){
-            $.ajax({
-                url: '/english/api/word/' + to_del.id + "/",
-                method: 'PATCH',
-                data: {'learned': false},
-                success: function (text) {
-                    console.log('__ok__ learned : false');
-                },
-                error: function (text) {
-                    console.log('__error__');
-                    console.log(text);
-                    alert('error');
-                },
-            });
-        }else {
-            $.ajax({
-                url: '/english/api/word/' + to_del.id + "/",
-                method: 'PATCH',
-                data: {'learned': true},
-                success: function (text) {
-                    console.log('__ok__');
-                },
-                error: function (text) {
-                    console.log('__error__');
-                    console.log(text);
-                    alert('error');
-                },
-            });
-        }
         to_del.learned = !to_del.learned
+        $.ajax({
+            url: '/english/api/word/' + to_del.id + "/",
+            method: 'PATCH',
+            data: {'learned': to_del.learned},
+            success: function (text) {
+                console.log('__ok__ learned : false');
+            },
+            error: function (text) {
+                console.log('__error__');
+                console.log(text);
+                alert('error');
+            },
+        });
+
         learned.classList.remove('btn-success', 'btn-outline-success')
         if (to_del.learned){
         learned.classList.add('btn-success');
