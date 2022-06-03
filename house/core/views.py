@@ -132,6 +132,7 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
             0:5
         ]
         context["logs"] = logs
+        context["day"] = "/static/calend{}.png".format(datetime.datetime.now().day)
 
         return render(request, "core/control.html", context)
 

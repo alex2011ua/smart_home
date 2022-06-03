@@ -105,7 +105,7 @@ def rain_yesterday():
     url = "https://api.openweathermap.org/data/2.5/onecall/timemachine"
     r = requests.get(url, params=payload)
     if r.status_code != 200:
-        return {"status_code", r.status_code}
+        return {"status_code": r.status_code}
     d = r.json()
 
     sum_rain = 0

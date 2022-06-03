@@ -80,6 +80,7 @@ def weather_task():
             description_log=f'Код ответа прогноза - {six_day["status_code"]}, '
                             f'код ответа запроса "вчера" - {yesterday["status_code"]}',
         )
+        return
     r_yesterday, _ = Weather.objects.get_or_create(date=yesterday["result_date"])
     r_yesterday.rain = yesterday["sum_rain"]
     r_yesterday.snow = yesterday["sum_snow"]

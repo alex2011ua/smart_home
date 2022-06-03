@@ -100,13 +100,14 @@ def calendar_plot(
     plt.subplots_adjust(wspace=0.75, hspace=0.5)
     # if title:
     #     plt.suptitle(get_calendar_title(years), fontsize="x-large", y=1.03)
-
-    if os.path.exists("../../static/calend.png"):
-        os.remove("../../static/calend.png")
+    today = datetime.datetime.now()
+    path_to_file = f"static/calend{today.day}.png"
+    if os.path.exists("../../"+path_to_file):
+        os.remove("../../"+path_to_file)
     else:
         print("The file does not exist")
 
-    fig.savefig("static/calend.png")
+    fig.savefig(path_to_file)
     plt.close()
     return axes
 
