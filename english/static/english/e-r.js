@@ -111,14 +111,14 @@ function start() {
     if (inp.toLowerCase() === to_del.english.toLowerCase()) {
 
         answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
-
+        if (control_state){
+            control_st();
+        }
         let word_index = words_obj.indexOf(to_del);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
         }
-        if (control_state){
-            control_st();
-        }
+
         dell_word();
         count_words.innerHTML = words_obj.length;
         document.getElementById("vvod").value = '';
