@@ -113,6 +113,8 @@ function start() {
         answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
         if (control_state){
             control_st();
+            learned_f();
+
         }
         let word_index = words_obj.indexOf(to_del);
         if (word_index !== -1) {
