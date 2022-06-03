@@ -271,7 +271,7 @@ def bot_task_1_hour():
         download = float(st.download()) // 1024 // 1024 // 8
         upload = float(st.upload()) // 1024 // 1024 // 8
         ping = st.results.ping
-        if download < 5 or upload < 5 or ping > 100:
+        if download < 7 or upload < 7 or ping > 130:
             bot.send_message(f"download:{download}, upload: {upload}, ping: {ping}")
     Params.objects.create(ping=ping, download=download, upload=upload, date_t_h=datetime.now())
 
