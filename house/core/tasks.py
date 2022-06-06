@@ -336,15 +336,16 @@ def bot_task_watering_analiz():
 @cellery_app.task()
 def poliv(force=None):
     """включениe полива"""
+    logger.warning("task start poliv")
     poliv = Setting.objects.get(controller_name="poliv")
     if poliv.label == "включен" or force:
-        time_all_poliv = 2 * poliv.value * Setting.objects.get(controller_name="watering_raspberry").value + \
+        time_all_poliv = poliv.value * Setting.objects.get(controller_name="watering_raspberry").value + \
                          2 * poliv.value * Setting.objects.get(controller_name="watering_sad").value + \
                          poliv.value * Setting.objects.get(controller_name="watering_trava").value + \
                          poliv.value * Setting.objects.get(controller_name="watering_pesochnica").value
         Params.objects.create(poliv=time_all_poliv, date_t_h=datetime.now())
         arduino_poliv(poliv.value)
-
+        logger.warning("task end poliv")
         bot.send_message(f"Полив завершен: {time_all_poliv} min." + "(принудительно)" if force else "")
 
 

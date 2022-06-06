@@ -181,21 +181,25 @@ def arduino_poliv(minutes):
     watering_raspberry = Setting.objects.get(controller_name="watering_raspberry")
 
     if watering_pesochnica.value:
+        logger.warning("start poliv watering_pesochnica")
         on_klapan("poliv_pesochnica")
         time.sleep(60 * minutes)
         off_klapan("poliv_pesochnica")
     if watering_trava.value:
+        logger.warning("start poliv watering_trava")
         on_klapan("poliv_trava")
         time.sleep(60 * minutes)
         off_klapan("poliv_trava")
+    if watering_raspberry.value:
+        logger.warning("start poliv watering_raspberry")
+        on_klapan("poliv_strawberry")
+        time.sleep(60 * minutes)
+        off_klapan("poliv_strawberry")
     if watering_sad.value:
+        logger.warning("start poliv watering_sad")
         on_klapan("poliv_sad")
         time.sleep(60 * minutes * 2)
         off_klapan("poliv_sad")
-    if watering_raspberry.value:
-        on_klapan("poliv_strawberry")
-        time.sleep(60 * minutes * 2)
-        off_klapan("poliv_strawberry")
 
     V24_arduino(0)
     V24.label = "выключен"
