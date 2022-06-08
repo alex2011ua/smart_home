@@ -36,8 +36,8 @@
             {% if poliv.label == 'выключен' %} <a href="{% url 'solnce' %}">  <button type="button" class="btn btn-secondary b" >Солнце</button></a> <br />
             {% else %} <a href="{% url 'solnce' %} ">  <button type="button" class="btn btn-success  b" >Солнце</button></a> <br />
             {% endif%}
-            {% if bassein.value == 0 %} <a href="{% url 'rele' bassein.label %}">  <button type="button" class="btn btn-dark b" >Включить бассеин </button></a> <br />
-            {% else %} <a href="{% url 'rele' bassein.label %} ">  <button type="button" class="btn btn-light b" >Выключить бассеин </button></a> <br />
+            {% if bassein.value == 0 %} <a href="{% url 'rele' bassein.label %}">  <button type="button" class="btn btn-outline-primary b" >Включить бассеин </button></a> <br />
+            {% else %} <a href="{% url 'rele' bassein.label %} ">  <button type="button" class="btn btn-primary b" >Выключить бассеин </button></a> <br />
             {% endif%}
             {% if light_balkon.value == 0 %} <a href="{% url 'rele' light_balkon.label %}">  <button type="button" class="btn btn-dark b" >Включить балкон </button></a> <br />
             {% else %} <a href="{% url 'rele' light_balkon.label %} ">  <button type="button" class="btn btn-light b" >Выключить балкон </button></a> <br />
@@ -64,8 +64,8 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
-            <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-primary b"  >Перезагрузка камер</button></a> <br />
-            <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-primary b" >Обновление датчиков </button></a> <br />
+            <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-secondary b"  >Перезагрузка камер</button></a> <br />
+            <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-secondary b" >Обновление датчиков </button></a> <br />
 
             {% if boiler.value == 0 %}<a href="{% url 'boiler'%} ">  <button type="button" class="btn btn-warning b" >Включение бойлера </button></a>
             {% else %} <a href="">  <button type="button" class="btn btn-danger b" >Бойлер включен </button></a>
