@@ -32,6 +32,7 @@ from house.core.tasks import (
     weather_task,
     start_filtering,
     stop_filtering,
+    recirculation,
 )
 
 from .core.models import Logs
@@ -189,4 +190,12 @@ def setup_periodic_tasks_pool_filtering_start(sender, **kwargs):
 def setup_periodic_tasks_pool_filtering_stop(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute=4, hour=3 - time_correct), stop_filtering.s()
+        )
+
+
+#recirculation pool cleaner
+@cellery_app.on_after_configure.connect
+def setup_periodic_tasks_pool_filtering_stop(sender, **kwargs):
+        sender.add_periodic_task(
+            crontab(minute=0, ), recirculation.s()
         )

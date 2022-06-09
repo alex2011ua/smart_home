@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import logging
+import time
 from datetime import datetime
 
 import django.db
@@ -429,3 +430,22 @@ def stop_filtering():
             rele.value = 0
             rele.save()
         bassein(0)
+
+
+@cellery_app.task()
+def recirculation():
+    """recirculation filtering pool"""
+    flag = Setting.objects.get(controller_name="regular")
+    if flag.value:
+        rec = Setting.objects.get(controller_name="recirculation")
+        if rec.value:
+            rele = Setting.objects.get(controller_name="bassein")
+            if rele.value == 0:
+                rele.value = 1
+                rele.save()
+            bassein(1)
+            time.sleep(60*10)
+            if rele.value == 1:
+                rele.value = 0
+                rele.save()
+            bassein(0)

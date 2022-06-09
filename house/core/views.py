@@ -76,8 +76,13 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
         solnce, created = Setting.objects.get_or_create(
             controller_name="solnce", defaults={"label": "Выключен", "value": 0}
         )
+        recirculation, created = Setting.objects.get_or_create(
+            controller_name="recirculation", defaults={"label": "Выключен", "value": 0}
+        )
+
 
         context["max_temp_teplica"] = max_temp_teplica
+        context["recirculation"] = recirculation
         context["min_temp_teplica"] = min_temp_teplica
         context["radio_room1"] = room1
         context["V24"] = V24
@@ -349,3 +354,11 @@ class RefreshTestDiagram(View):
         refresh()
         calend()
         return redirect(reverse_lazy("info"))
+
+class Recirculation(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = "is_staff"
+
+    @staticmethod
+    def get(request):
+
+        return redirect(reverse_lazy("form"))

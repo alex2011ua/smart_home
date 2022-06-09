@@ -27,6 +27,7 @@ from house.core.views import (
     RestartCam,
     Temp,
     RefreshTestDiagram,
+    Recirculation,
 )
 
 urlpatterns = [
@@ -36,6 +37,7 @@ urlpatterns = [
     path("temp/", Temp.as_view(), name="temp"),
     path("reset_arduino/", ResetArduino.as_view(), name="reset_arduino"),
     path("boiler/", Boiler.as_view(), name="boiler"),
+    path("recirculation/", Recirculation.as_view(), name="recirculation"),
     path("printer/", Printer.as_view(), name="printer"),
     path("light/", Light.as_view(), name="light"),
     re_path(r"^rele/([1-9])/$", Rele.as_view(), name="rele"),

@@ -64,7 +64,9 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 time_center">
-            <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-secondary b"  >Перезагрузка камер</button></a> <br />
+            {% if recirculation.value == 0 %} <a href="{% url 'recirculation' %}">  <button  type="button" class="btn btn-outline-primary b reciculation" >Включить циркуляцию </button></a>
+            {% else %} <a href="{% url 'recirculation' %} ">  <button  type="button" class="btn btn btn-primary b reciculation" >Выключить циркуляцию </button></a>
+            {% endif%} <br />
             <a href="{% url 'temp'%} ">  <button type="button" class="btn btn-secondary b" >Обновление датчиков </button></a> <br />
 
             {% if boiler.value == 0 %}<a href="{% url 'boiler'%} ">  <button type="button" class="btn btn-warning b" >Включение бойлера </button></a>
@@ -261,6 +263,7 @@
               <a href="{% url 'task'%} ">  <button type="button" class="btn badge-secondary footer_button" >task </button></a>
           <a href="{% url 'ping'%} ">  <button type="button" class="btn badge-secondary footer_button" >test internet </button></a>
           <a href="{% url 'avto'%} ">  <button type="button" class="btn badge-secondary footer_button" >Check avto </button></a>
+          <a href="{% url 'restart_cam'%} ">  <button type="button" class="btn btn-secondary b"  >Перезагрузка камер</button></a>
 
 
 
