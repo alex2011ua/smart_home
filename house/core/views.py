@@ -360,5 +360,11 @@ class Recirculation(LoginRequiredMixin, PermissionRequiredMixin, View):
 
     @staticmethod
     def get(request):
+        rec = Setting.objects.get(controller_name="recirculation")
+        if rec.value:
+            rec.value = 0
+        else:
+            rec.value = 1
+        rec.save()
 
         return redirect(reverse_lazy("form"))
