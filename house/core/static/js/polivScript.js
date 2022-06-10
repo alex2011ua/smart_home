@@ -4,6 +4,7 @@ $.ajaxSetup({
             'X-CSRFToken': csrftoken
         }
     });
+
 dvor.addEventListener('click', function(event) {
     console.log('Dvor');
     console.log(event.target);

@@ -24,7 +24,7 @@
 <div id="dvor">
 {% csrf_token %}
     <a class="" href="{% url 'form' %}"><img id="dom" src="{% static 'img/home.gif' %}" height="100"></a>
-
+    <img src="{% static 'img/rain.gif' %}" data-on="poliv_garaz" height="50" alt="pesochnica.fif" class="DHUM no-display">
     <div id="garaz" data-on="garaz">
         {% if poliv_all.poliv_garaz.label == 'включен' %}
             <img src="{% static 'img/rain.gif' %}" data-on="poliv_garaz" height="50" alt="pesochnica.fif" class="DHUM">
