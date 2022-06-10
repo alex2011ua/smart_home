@@ -143,7 +143,6 @@ def on_klapan(place):
         "poliv_strawberry": b"M",
         "poliv_trava": b"G",
     }
-    context = testing()
     arduino.write(places[place])
 
 
@@ -157,7 +156,6 @@ def off_klapan(place):
         "poliv_strawberry": b"m",
         "poliv_trava": b"g",
     }
-    context = testing()
     arduino.write(places[place])
 
 
