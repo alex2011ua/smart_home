@@ -172,13 +172,9 @@ void loop(){
   }
   if (pshik == 1){
         if (millis() - timer_pshik >= 65000) {// ищем разницу за 1 минут
-
-            Poliv_on(PIN_RELAY_1_KLAPAN);
-            Poliv_on(PIN_RELAY_2_KLAPAN);
+            Poliv_on(PIN_RELAY_3_KLAPAN);
             if (millis() - timer_pshik >= 75000) {
-
-                Poliv_off(PIN_RELAY_1_KLAPAN);
-                Poliv_off(PIN_RELAY_2_KLAPAN);
+                Poliv_off(PIN_RELAY_3_KLAPAN);
                 timer_pshik = millis();
             }
         }
