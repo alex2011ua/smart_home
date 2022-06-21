@@ -375,7 +375,7 @@ def show_log(request):
     context = {}
 
     #r = os.system("tail -n 300 ../../debul.log")
-    logger.warning(os.path)
+    logger.warning(os.getcwd())
     # with open("../../debug.log") as f:
     #     r = list(deque(f, 100))
     # context['logs'] = r
