@@ -443,9 +443,11 @@ def recirculation():
             if rele.value == 0:
                 rele.value = 1
                 rele.save()
+            logger.info("filter bassein start")
             bassein(1)
             time.sleep(60*10)
             if rele.value == 1:
                 rele.value = 0
                 rele.save()
             bassein(0)
+            logger.info("filter bassein stop")
