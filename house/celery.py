@@ -195,7 +195,7 @@ def setup_periodic_tasks_pool_filtering_stop(sender, **kwargs):
 
 #recirculation pool cleaner
 @cellery_app.on_after_configure.connect
-def setup_periodic_tasks_pool_filtering_stop(sender, **kwargs):
+def setup_periodic_tasks_pool_cleaner_stop(sender, **kwargs):
         sender.add_periodic_task(
-            crontab(minute=0, ), recirculation.s()
+            crontab(minute=1, ), recirculation.s()
         )

@@ -1,5 +1,6 @@
 import datetime
 import logging
+from collections import deque
 
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -368,3 +369,14 @@ class Recirculation(LoginRequiredMixin, PermissionRequiredMixin, View):
         rec.save()
 
         return redirect(reverse_lazy("form"))
+
+def show_log(request):
+    context = {}
+
+    #r = os.system("tail -n 300 ../../debul.log")
+
+    with open("../../debug.log") as f:
+        r = list(deque(f, 100))
+    context['logs'] = r
+
+    return render(request, "core/log.html", context)

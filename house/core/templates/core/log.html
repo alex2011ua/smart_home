@@ -1,0 +1,30 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}
+log
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block main %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in logs %}
+    <tr>
+      <th>{{item }}</th>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+{% block jivo %}  {% endblock %}
