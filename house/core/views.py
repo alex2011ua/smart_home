@@ -379,7 +379,7 @@ class ShowLog(LoginRequiredMixin, PermissionRequiredMixin, View):
     def get(request):
         context = {}
         with open("debug.log") as f:
-            r = list(deque(f, 100))
-        context['logs'] = r
+            r = list(deque(f, 300))
+        context['logs'] = r[::-1]
 
         return render(request, "core/log.html", context)
