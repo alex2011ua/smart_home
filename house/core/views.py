@@ -376,8 +376,8 @@ def show_log(request):
 
     #r = os.system("tail -n 300 ../../debul.log")
     logger.warning(os.path)
-    with open("../../debug.log") as f:
-        r = list(deque(f, 100))
-    context['logs'] = r
+    # with open("../../debug.log") as f:
+    #     r = list(deque(f, 100))
+    # context['logs'] = r
 
     return render(request, "core/log.html", context)
