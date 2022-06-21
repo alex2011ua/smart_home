@@ -8,6 +8,11 @@ from .main_arduino import V24_arduino, arduino_pshik, off_klapan, on_klapan
 from .models import Setting
 from .tasks import poliv
 
+import logging
+
+
+logger = logging.getLogger("django")
+
 
 class Poliv(View):
     @staticmethod
@@ -103,8 +108,10 @@ def poliv_on_of(request):
     if poliv.label == "включен":
         poliv.label = "выключен"
     else:
+
         poliv.label = "включен"
     poliv.save()
+    logger.info(poliv.label)
     return redirect(reverse_lazy("poliv_index"))
 
 
