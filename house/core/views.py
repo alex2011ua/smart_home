@@ -371,13 +371,15 @@ class Recirculation(LoginRequiredMixin, PermissionRequiredMixin, View):
 
         return redirect(reverse_lazy("form"))
 
-def show_log(request):
-    context = {}
 
-    #r = os.system("tail -n 300 ../../debul.log")
+class ShowLog(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = "is_staff"
 
-    with open("debug.log") as f:
-        r = list(deque(f, 100))
-    context['logs'] = r
+    @staticmethod
+    def get(request):
+        context = {}
+        with open("debug.log") as f:
+            r = list(deque(f, 100))
+        context['logs'] = r
 
-    return render(request, "core/log.html", context)
+        return render(request, "core/log.html", context)

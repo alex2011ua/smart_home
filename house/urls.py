@@ -28,7 +28,7 @@ from house.core.views import (
     Temp,
     RefreshTestDiagram,
     Recirculation,
-    show_log
+    ShowLog
 )
 
 urlpatterns = [
@@ -48,5 +48,5 @@ urlpatterns = [
     path("solnce/", include("house.core.solnce_urls")),
     path("info/", Info.as_view(), name="info"),
     path("info/refresh/", RefreshTestDiagram.as_view(), name="refresh"),
-    path("show_log/", show_log, name="show_log")
+    path("show_log/", ShowLog.as_view(), name="show_log")
 ]
