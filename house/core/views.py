@@ -1,5 +1,6 @@
 import datetime
 import logging
+import os
 from collections import deque
 
 from django.conf import settings
@@ -374,7 +375,7 @@ def show_log(request):
     context = {}
 
     #r = os.system("tail -n 300 ../../debul.log")
-
+    logger.warning(os.path)
     with open("../../debug.log") as f:
         r = list(deque(f, 100))
     context['logs'] = r
