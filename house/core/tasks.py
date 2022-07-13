@@ -64,7 +64,7 @@ def weather_task():
     print("weather_task start")
     try:
         six_day = weather_6_day()
-        yesterday = rain_yesterday()
+
     except Exception as err:
         Logs.objects.create(
             date_log=datetime.now(),
@@ -73,21 +73,7 @@ def weather_task():
             description_log="Ошибка openweathermap.org Exeption изменилось API" + str(err),
         )
         return None
-    if six_day["status_code"] != 200 or yesterday["status_code"] != 200:
-        Logs.objects.create(
-            date_log=datetime.now(),
-            status="Error",
-            title_log="Task weather_task",
-            description_log=f'Код ответа прогноза - {six_day["status_code"]}, '
-                            f'код ответа запроса "вчера" - {yesterday["status_code"]}',
-        )
-        return
-    r_yesterday, _ = Weather.objects.get_or_create(date=yesterday["result_date"])
-    r_yesterday.rain = yesterday["sum_rain"]
-    r_yesterday.snow = yesterday["sum_snow"]
-    r_yesterday.temp_min = yesterday["min_temp"]
-    r_yesterday.temp_max = yesterday["max_temp"]
-    r_yesterday.save()
+
     tomorrow, _ = Weather.objects.get_or_create(date=six_day["tomorrow_date"])
     tomorrow.rain = six_day["summ_rain_3_day"]
     tomorrow.temp_min = six_day["min_temp"]

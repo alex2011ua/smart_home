@@ -67,7 +67,7 @@ def weather_6_day():
 
     summ_rain_3_day = 0.0
     summ_snow_3_day = 0.0
-    for i in d["daily"][0:2]:
+    for i in d["daily"][0:1]:
         if i.get("rain"):
             summ_rain_3_day += float(i["rain"])
         if i.get("snow"):
@@ -101,7 +101,7 @@ def rain_yesterday():
     start_Date = date.today()  # год, месяц, число
     timestamp = time.mktime(start_Date.timetuple())
     payload["exclude"] = "current"
-    payload["dt"] = int(timestamp)
+    payload["dt"] =  int(timestamp)
     url = "https://api.openweathermap.org/data/2.5/onecall/timemachine"
     r = requests.get(url, params=payload)
     if r.status_code != 200:
