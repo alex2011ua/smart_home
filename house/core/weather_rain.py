@@ -49,7 +49,7 @@ def weather_now():  # погода на сегодня и завтра
         context["alerts"] = []
         for item in d["alerts"]:
             context["alerts"].append(item["description"])
-
+    print(__name__)
     return context
 
 
@@ -151,3 +151,4 @@ if __name__ == "__main__":
     }
     print(rain_yesterday())
     print(weather_6_day())
+    print(__name__)
