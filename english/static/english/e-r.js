@@ -112,11 +112,36 @@ function start() {
 
         answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
         if (control_state){
-            control_st();
-            setTimeout(500);
-            learned_f();
+            console.log('control: staart');
+            console.log('learned: staart');
+            console.log(to_del);
 
-        }
+            to_del.learned = !to_del.learned;
+        $.ajax({
+            url: '/english/api/word/' + to_del.id + "/",
+            method: 'PATCH',
+            data: {'control': true,
+                    'learned': to_del.learned,
+            },
+            success: function (text) {
+                console.log('__ok__control: true');
+            },
+            error: function (text) {
+                console.log('__error__control: true');
+                console.log(text);
+                alert('error');
+            },
+        });
+
+        learned.classList.remove('btn-success', 'btn-outline-success')
+        if (to_del.learned){
+        learned.classList.add('btn-success');
+    }else{
+        learned.classList.add('btn-outline-success');
+    }
+    };
+
+
         let word_index = words_obj.indexOf(to_del);
         if (word_index !== -1) {
             words_obj.splice(word_index, 1);
@@ -231,6 +256,7 @@ function start() {
 
 
     function dell_word(){
+
         if (to_del.repeat_learn > 0) {
             $.ajax({
                 url: '/english/api/word/' + to_del.id + "/",
@@ -293,7 +319,7 @@ function start() {
     }else{
         learned.classList.add('btn-outline-success');
     }
-    }
+    };
     function control_st(){
         console.log('control: staart');
         console.log(to_del);
