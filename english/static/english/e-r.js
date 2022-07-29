@@ -124,7 +124,7 @@ function start() {
                     'learned': to_del.learned,
             },
             success: function (text) {
-                console.log('__ok__control: true');
+                console.log('__ok__control: true'+text);
             },
             error: function (text) {
                 console.log('__error__control: true');
@@ -329,7 +329,7 @@ function start() {
             method: 'PATCH',
             data: {'control': true},
             success: function (text) {
-                console.log('__ok__control: true');
+                console.log('__ok__control: true'+ text);
             },
             error: function (text) {
                 console.log('__error__control: true');
