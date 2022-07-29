@@ -116,7 +116,7 @@ function start() {
             console.log('learned: staart');
             console.log(to_del);
 
-            to_del.learned = !to_del.learned;
+            to_del.learned = true;
         $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
