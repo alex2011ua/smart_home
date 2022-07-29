@@ -113,7 +113,7 @@ function start() {
         answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
         if (control_state){
             control_st();
-            sleep(500);
+            setTimeout(500);
             learned_f();
 
         }
