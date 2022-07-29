@@ -267,13 +267,17 @@ function start() {
         }
     }
     function learned_f(){
-        to_del.learned = !to_del.learned
+        console.log('learned: staart');
+        console.log(to_del);
+
+        to_del.learned = !to_del.learned;
+        console.log('learned:' + to_del.learned);
         $.ajax({
             url: '/english/api/word/' + to_del.id + "/",
             method: 'PATCH',
             data: {'learned': to_del.learned},
             success: function (text) {
-                console.log('__ok__ learned : false');
+                console.log('__ok__ learned : true');
             },
             error: function (text) {
                 console.log('__error__');
