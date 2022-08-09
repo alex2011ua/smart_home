@@ -323,7 +323,7 @@ def bot_task_watering_analiz():
 @cellery_app.task()
 def poliv(force=None):
     """включениe полива"""
-    logger.warning("task start poliv")
+    logger.warning("task start poliv if 'poliv' is on")
     poliv = Setting.objects.get(controller_name="poliv")
     if poliv.label == "включен" or force:
         time_all_poliv = poliv.value * Setting.objects.get(controller_name="watering_raspberry").value + \
