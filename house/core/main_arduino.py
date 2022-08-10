@@ -160,7 +160,7 @@ def off_klapan(place):
 
 
 def arduino_restart_5v():
-    logger.warning("restart 5v")
+    logger.ingo("restart 5v")
     arduino.write(b"h")
     time.sleep(1)
     arduino.write(b"H")
