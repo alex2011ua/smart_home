@@ -158,7 +158,8 @@ function start() {
             }
         }else{
             if (to_del.repeat_learn<7){
-                data.repeat_learn = to_del.repeat_learn + 1;
+                to_del.repeat_learn = to_del.repeat_learn + 1
+                data.repeat_learn = to_del.repeat_learn;
             }
         }
         document.getElementById("vvod").value = '';
