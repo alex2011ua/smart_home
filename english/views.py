@@ -305,7 +305,7 @@ class R_E(View):
     @staticmethod
     def get(request):
         params = WordParams.objects.get(user=request.user)
-        return render(request, "english/e-r.html", {"params": params})
+        return render(request, "english/r-e.html", {"params": params})
 
     @staticmethod
     def post(request):

@@ -55,7 +55,7 @@ var important = document.getElementById('important'); // кнопка для imp
 count_words.innerHTML = words_obj.length;
 var word_index_to_dell = false;
 let answer = document.getElementById("result");             // правильный ответ
-document.getElementById("word").innerHTML = random_word.english;
+document.getElementById("word").innerHTML = random_word.russian;
 let ok = document.getElementById("ok");
 let err = document.getElementById("error");
 
@@ -81,7 +81,7 @@ function start() {
     if (random_word.id==to_del.id){
         random_word = words_obj[Math.floor(Math.random() * words_obj.length)];
     }
-    document.getElementById("word").innerHTML = random_word.english;
+    document.getElementById("word").innerHTML = random_word.russian;
     count_words.innerHTML = words_obj.length;
     heavy.classList.remove('btn-dark', 'btn-outline-dark')
     if (to_del.heavy){
@@ -103,9 +103,9 @@ function start() {
     }
     let data = {}
 
-    if (inp.toLowerCase() === to_del.russian.toLowerCase()) { //right input
+    if (inp.toLowerCase() === to_del.english.toLowerCase()) { //right input
 
-        answer.innerText = to_del.russian + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
+        answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
         if (control_state) {
             data.learned = true;
             data.control = true;
@@ -164,7 +164,7 @@ function start() {
         }
         document.getElementById("vvod").value = '';
         answer.style.display = 'block'
-        answer.innerText = to_del.russian + " - " + to_del.english + "//" + to_del.repeat_learn + "//";
+        answer.innerText = to_del.english + " - " + to_del.russian + "//" + to_del.repeat_learn + "//";
         ok.style.display = 'block'
         ok.innerText = inp + " - не верно.";
         err.style.display = 'none';
