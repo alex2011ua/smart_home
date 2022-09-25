@@ -35,15 +35,15 @@ def get_list_car(params):
     payload = {
         "api_key": apy_key,
         "category_id": 1,
-        "s_yers": [2016],
-        "po_yers": [2017],
-        "price_ot": 11000,
+        "s_yers": [2012],
+        "po_yers": [2012],
+        "price_ot": 8000,
         "price_do": 13500,
         "type": [
-            # 1,  # бенз
+            1,  # бенз
             # 2,  # дизель
             # 4,  # газ
-            6,  # электро
+            #6,  # электро
         ],
         "gearbox": [
             1,  # механика
@@ -79,8 +79,8 @@ if __name__ == "__main__":
     apy_key = os.getenv("apy_key", os.environ.get("apy_key"))
 
     params = {
-        "marka_id": 55,
-        "model_id": 36565,
+        "marka_id": 84,
+        "model_id": 2692,
     }
 
     print(get_list_car(params=params))
@@ -88,9 +88,15 @@ if __name__ == "__main__":
 
 
 def check():
+    """
+    "marka_id": 55,  # nisan
+    "model_id": 36565,  # Leaf
+
+    """
+
     params = {
-        "marka_id": 55,  # nisan
-        "model_id": 36565,  # Leaf
+        "marka_id": 84,  # VW
+        "model_id": 2692,  # Tiguan
     }
     list_all_car = get_list_car(params=params)["list_cars"]
     return list_all_car

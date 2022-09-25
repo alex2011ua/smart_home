@@ -391,49 +391,49 @@ def report_10_am():
         avto.link_car = link
         avto.save()
 
-
-@cellery_app.task()
-def start_filtering():
-    """start filtering pool"""
-    flag = Setting.objects.get(controller_name="regular")
-    if flag.value:
-        logger.warning("Start filtering")
-        rele = Setting.objects.get(controller_name="bassein")
-        if rele.value == 0:
-            rele.value = 1
-            rele.save()
-        bassein(1)
-
-
-@cellery_app.task()
-def stop_filtering():
-    """stop filtering pool"""
-    flag = Setting.objects.get(controller_name="regular")
-    if flag.value:
-        logger.warning("Stop filtering")
-        rele = Setting.objects.get(controller_name="bassein")
-        if rele.value == 1:
-            rele.value = 0
-            rele.save()
-        bassein(0)
-
-
-@cellery_app.task()
-def recirculation():
-    """recirculation filtering pool"""
-    flag = Setting.objects.get(controller_name="regular")
-    if flag.value:
-        rec = Setting.objects.get(controller_name="recirculation")
-        if rec.value:
-            rele = Setting.objects.get(controller_name="bassein")
-            if rele.value == 0:
-                rele.value = 1
-                rele.save()
-            logger.info("filter bassein start")
-            bassein(1)
-            time.sleep(60*10)
-            if rele.value == 1:
-                rele.value = 0
-                rele.save()
-            bassein(0)
-            logger.info("filter bassein stop")
+#
+# @cellery_app.task()
+# def start_filtering():
+#     """start filtering pool"""
+#     flag = Setting.objects.get(controller_name="regular")
+#     if flag.value:
+#         logger.warning("Start filtering")
+#         rele = Setting.objects.get(controller_name="bassein")
+#         if rele.value == 0:
+#             rele.value = 1
+#             rele.save()
+#         bassein(1)
+#
+#
+# @cellery_app.task()
+# def stop_filtering():
+#     """stop filtering pool"""
+#     flag = Setting.objects.get(controller_name="regular")
+#     if flag.value:
+#         logger.warning("Stop filtering")
+#         rele = Setting.objects.get(controller_name="bassein")
+#         if rele.value == 1:
+#             rele.value = 0
+#             rele.save()
+#         bassein(0)
+#
+#
+# @cellery_app.task()
+# def recirculation():
+#     """recirculation filtering pool"""
+#     flag = Setting.objects.get(controller_name="regular")
+#     if flag.value:
+#         rec = Setting.objects.get(controller_name="recirculation")
+#         if rec.value:
+#             rele = Setting.objects.get(controller_name="bassein")
+#             if rele.value == 0:
+#                 rele.value = 1
+#                 rele.save()
+#             logger.info("filter bassein start")
+#             bassein(1)
+#             time.sleep(60*10)
+#             if rele.value == 1:
+#                 rele.value = 0
+#                 rele.save()
+#             bassein(0)
+#             logger.info("filter bassein stop")
