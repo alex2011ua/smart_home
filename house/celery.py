@@ -176,6 +176,7 @@ def setup_periodic_tasks_report_on_10(sender, **kwargs):
             description_log=f"{err}- превышен лимит времени",
         )
 
+'''
 
 #start pool filtering
 @cellery_app.on_after_configure.connect
@@ -199,3 +200,4 @@ def setup_periodic_tasks_pool_cleaner(sender, **kwargs):
         sender.add_periodic_task(
             crontab(minute=1, ), recirculation.s()
         )
+'''
