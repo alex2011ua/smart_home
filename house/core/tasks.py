@@ -80,7 +80,6 @@ def weather_task():
     tomorrow.temp_max = six_day["max_temp"]
     tomorrow.snow = six_day["summ_snow_3_day"]
     tomorrow.save()
-    calend()
     print("weather_task end")
 
 
@@ -317,6 +316,7 @@ def bot_task_watering_analiz():
         poliv.value = water_time - sum_rain
         poliv.label = "включен"
     poliv.save()
+    calend()
 
 
 

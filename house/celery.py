@@ -114,6 +114,7 @@ def setup_periodic_task_22_hour(sender, **kwargs):
 
 
 # раскоментировать весной
+'''
 @cellery_app.on_after_configure.connect()
 def setup_periodic_task_watering_analiz(sender, **kwargs):
     """анализ необходимости полива"""
@@ -130,7 +131,7 @@ def setup_periodic_task_watering_start_if_need(sender, **kwargs):
         crontab(minute=50, hour=23-time_correct),
         poliv.s(),
         name='task_watering_start_if_need')
-
+'''
 
 #  включение иллюминации по рассписанию
 # @cellery_app.on_after_configure.connect

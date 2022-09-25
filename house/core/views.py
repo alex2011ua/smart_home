@@ -140,6 +140,7 @@ class ControllerView(LoginRequiredMixin, PermissionRequiredMixin, View):
         ]
         context["logs"] = logs
         context["day"] = "/static/calend{}.png".format(datetime.datetime.now().day)
+        context["day"] = "/static/calend25.png" # delete on spring
 
         return render(request, "core/control.html", context)
 
